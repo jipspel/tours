@@ -1,10 +1,12 @@
 grammar Tours;
 
+@header{package tours.grammar;}
+
 program: body;
 
 /** Body of a program. */
 body
-    : variableDeclaration* block
+    : variableDeclaration* function*
     ;
 
 /** Variable declaration block. */
@@ -13,12 +15,16 @@ variableDeclaration
     ;
 
 /** Variable declaration. */
-variable :  type IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?
+variable : type IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?
+    ;
+
+function
+    : IDENTIFIER LPAR RPAR block
     ;
 
 /** Grouped sequence of statements. */
 block
-    : BEGIN statement (SEMI statement)* END
+    : LBRACE (statement SEMI)+ RBRACE
     ;
 
 /** Statement. */
@@ -121,7 +127,7 @@ fragment LETTER: [a-zA-Z];
 fragment DIGIT: [0-9];
 
 // Skipped token types
-COMMENT: LBRACE .*? RBRACE -> skip;
+COMMENT: SLASH SLASH ~[\r\n]* -> skip;
 WS: [ \t\r\n]+ -> skip;
 
 fragment A: [aA];

@@ -1,0 +1,361 @@
+// Generated from /Users/twancoenraad/Code/tours/tours/grammar/Tours.g4 by ANTLR 4.5
+package tours.grammar;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.antlr.v4.runtime.tree.ParseTreeListener;
+
+/**
+ * This interface defines a complete listener for a parse tree produced by
+ * {@link ToursParser}.
+ */
+public interface ToursListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void enterProgram(@NotNull ToursParser.ProgramContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void exitProgram(@NotNull ToursParser.ProgramContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#body}.
+	 * @param ctx the parse tree
+	 */
+	void enterBody(@NotNull ToursParser.BodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#body}.
+	 * @param ctx the parse tree
+	 */
+	void exitBody(@NotNull ToursParser.BodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#variableDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableDeclaration(@NotNull ToursParser.VariableDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#variableDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableDeclaration(@NotNull ToursParser.VariableDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable(@NotNull ToursParser.VariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable(@NotNull ToursParser.VariableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction(@NotNull ToursParser.FunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#function}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction(@NotNull ToursParser.FunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock(@NotNull ToursParser.BlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock(@NotNull ToursParser.BlockContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code assignStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignStatement(@NotNull ToursParser.AssignStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code assignStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignStatement(@NotNull ToursParser.AssignStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ifStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStatement(@NotNull ToursParser.IfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ifStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStatement(@NotNull ToursParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code whileStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code whileStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code blockStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlockStatement(@NotNull ToursParser.BlockStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code blockStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlockStatement(@NotNull ToursParser.BlockStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code inputStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterInputStatement(@NotNull ToursParser.InputStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code inputStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitInputStatement(@NotNull ToursParser.InputStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code printStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintStatement(@NotNull ToursParser.PrintStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code printStatement}
+	 * labeled alternative in {@link ToursParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintStatement(@NotNull ToursParser.PrintStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code identifierTarget}
+	 * labeled alternative in {@link ToursParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierTarget(@NotNull ToursParser.IdentifierTargetContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code identifierTarget}
+	 * labeled alternative in {@link ToursParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierTarget(@NotNull ToursParser.IdentifierTargetContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrefixExpression(@NotNull ToursParser.PrefixExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code prefixExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrefixExpression(@NotNull ToursParser.PrefixExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code compoundExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code compoundExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code compExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompExpression(@NotNull ToursParser.CompExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code compExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompExpression(@NotNull ToursParser.CompExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code trueExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrueExpr(@NotNull ToursParser.TrueExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code trueExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrueExpr(@NotNull ToursParser.TrueExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code multiplyExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code multiplyExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code plusExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code plusExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code falseExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterFalseExpr(@NotNull ToursParser.FalseExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code falseExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitFalseExpr(@NotNull ToursParser.FalseExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code booleanExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanExpression(@NotNull ToursParser.BooleanExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code booleanExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanExpression(@NotNull ToursParser.BooleanExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code parExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterParExpression(@NotNull ToursParser.ParExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code parExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitParExpression(@NotNull ToursParser.ParExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code numExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumExpr(@NotNull ToursParser.NumExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code numExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumExpr(@NotNull ToursParser.NumExprContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code identifierExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code identifierExpr}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#prefixOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrefixOperator(@NotNull ToursParser.PrefixOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#prefixOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrefixOperator(@NotNull ToursParser.PrefixOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#multiplyOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultiplyOperator(@NotNull ToursParser.MultiplyOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#multiplyOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultiplyOperator(@NotNull ToursParser.MultiplyOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#plusOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlusOperator(@NotNull ToursParser.PlusOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#plusOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlusOperator(@NotNull ToursParser.PlusOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#booleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#booleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#compareOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#compareOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code intType}
+	 * labeled alternative in {@link ToursParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntType(@NotNull ToursParser.IntTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code intType}
+	 * labeled alternative in {@link ToursParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntType(@NotNull ToursParser.IntTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code boolType}
+	 * labeled alternative in {@link ToursParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolType(@NotNull ToursParser.BoolTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boolType}
+	 * labeled alternative in {@link ToursParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolType(@NotNull ToursParser.BoolTypeContext ctx);
+}
