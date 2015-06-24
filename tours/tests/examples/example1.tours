@@ -1,1 +1,2 @@
+integer x, y;
 main() { x = 35; }
