@@ -1,5 +1,6 @@
 package tours.tests;
 
+
 import org.antlr.v4.runtime.*;
 import org.junit.Test;
 import tours.grammar.ToursErrorListener;
@@ -15,14 +16,35 @@ import static java.nio.file.Paths.get;
 import static org.junit.Assert.assertEquals;
 
 public class GrammarTest {
+
     @Test
-    public void test() {
-        assertEquals(0, parseToursFile("tours/tests/examples/example1.tours").size());
-        assertEquals(1, parseToursFile("tours/tests/examples/example2.tours").size());
+    public void testErrorListSize() {
+        List<String> errorList;
+
+        errorList = parseToursFile("tours/tests/examples/example1.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("tours/tests/examples/example2.tours");
+        assertEquals(1, errorList.size());
+        assertEquals("line 1:13 no viable alternative at input '}'", errorList.get(0));
+
+        errorList = parseToursFile("tours/tests/examples/example3.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("tours/tests/examples/example4.tours");
+        assertEquals(1, errorList.size());
+        assertEquals("line 6:4 missing ';' at 'while'", errorList.get(0));
+
+        errorList = parseToursFile("tours/tests/examples/example5.tours");
+        assertEquals(2, errorList.size());
+        assertEquals("line 10:14 missing '(' at 'x'", errorList.get(0));
+        assertEquals("line 10:15 mismatched input ';' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ')', '/', '*'}", errorList.get(1));
+
     }
 
     private List<String> parseToursFile(String filename) {
         String file;
+
         try {
             file = new String(readAllBytes(get(filename)));
         } catch (IOException e) {
