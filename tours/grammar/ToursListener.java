@@ -1,4 +1,4 @@
-// Generated from /Users/twancoenraad/Code/tours/tours/grammar/Tours.g4 by ANTLR 4.5
+// Generated from C:/Users/Jip/Documents/tours/tours/grammar\Tours.g4 by ANTLR 4.5
 package tours.grammar;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -105,17 +105,17 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code blockStatement}
+	 * Enter a parse tree produced by the {@code forSTatement}
 	 * labeled alternative in {@link ToursParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlockStatement(@NotNull ToursParser.BlockStatementContext ctx);
+	void enterForSTatement(@NotNull ToursParser.ForSTatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code blockStatement}
+	 * Exit a parse tree produced by the {@code forSTatement}
 	 * labeled alternative in {@link ToursParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlockStatement(@NotNull ToursParser.BlockStatementContext ctx);
+	void exitForSTatement(@NotNull ToursParser.ForSTatementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code inputStatement}
 	 * labeled alternative in {@link ToursParser#statement}.
@@ -336,26 +336,38 @@ public interface ToursListener extends ParseTreeListener {
 	void exitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code intType}
-	 * labeled alternative in {@link ToursParser#type}.
+	 * labeled alternative in {@link ToursParser#variableType}.
 	 * @param ctx the parse tree
 	 */
 	void enterIntType(@NotNull ToursParser.IntTypeContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code intType}
-	 * labeled alternative in {@link ToursParser#type}.
+	 * labeled alternative in {@link ToursParser#variableType}.
 	 * @param ctx the parse tree
 	 */
 	void exitIntType(@NotNull ToursParser.IntTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code boolType}
-	 * labeled alternative in {@link ToursParser#type}.
+	 * labeled alternative in {@link ToursParser#variableType}.
 	 * @param ctx the parse tree
 	 */
 	void enterBoolType(@NotNull ToursParser.BoolTypeContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code boolType}
-	 * labeled alternative in {@link ToursParser#type}.
+	 * labeled alternative in {@link ToursParser#variableType}.
 	 * @param ctx the parse tree
 	 */
 	void exitBoolType(@NotNull ToursParser.BoolTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code charType}
+	 * labeled alternative in {@link ToursParser#variableType}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharType(@NotNull ToursParser.CharTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code charType}
+	 * labeled alternative in {@link ToursParser#variableType}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharType(@NotNull ToursParser.CharTypeContext ctx);
 }

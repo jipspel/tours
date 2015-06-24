@@ -6,7 +6,7 @@ program: body;
 
 /** Body of a program. */
 body
-    : variableDeclaration* function*
+    : (variableDeclaration | function)*
     ;
 
 /** Variable declaration block. */
@@ -15,7 +15,7 @@ variableDeclaration
     ;
 
 /** Variable declaration. */
-variable : type IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?
+variable : variableType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?
     ;
 
 function
@@ -24,16 +24,16 @@ function
 
 /** Grouped sequence of statements. */
 block
-    : LBRACE (statement SEMI)+ RBRACE
+    : LBRACE ( (statement | variable) SEMI )+ RBRACE
     ;
 
 /** Statement. */
-statement: identifier ASSIGNMENT expression             #assignStatement
-    | IF expression THEN statement (ELSE statement)?    #ifStatement
-    | WHILE expression DO statement                     #whileStatement
-    | block                                             #blockStatement
-    | INPUT LPAR identifier RPAR                        #inputStatement
-    | PRINT LPAR expression RPAR                        #printStatement
+statement: identifier ASSIGNMENT expression                                         #assignStatement
+    | IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
+    | WHILE LPAR expression RPAR block                                              #whileStatement
+    | FOR LPAR (variable | statement) SEMI expression SEMI statement RPAR block    #forSTatement
+    | INPUT LPAR identifier RPAR                                                    #inputStatement
+    | PRINT LPAR expression RPAR                                                    #printStatement
     ;
 
 /** Target of an assignment. */
@@ -70,32 +70,33 @@ booleanOperator: AND | OR;
 /** Comparison operator. */
 compareOperator: LE | LT | GE | GT | EQ | NE;
 
-/** Data type. */
-type: INTEGER  #intType
-    | BOOLEAN  #boolType
-    ;
+/** Variable data type. */
+variableType: INTEGER   #intType
+            | BOOLEAN   #boolType
+            | CHARACTER #charType
+            ;
 
 // Keywords
-AND:     A N D;
-BEGIN:   B E G I N ;
-BOOLEAN: B O O L E A N ;
-INTEGER: I N T E G E R ;
-DO:      D O ;
-ELSE:    E L S E ;
-END:     E N D ;
-EXIT:    E X I T ;
-FALSE:   F A L S E ;
-FUNC:    F U N C T I O N ;
-IF:      I F ;
-INPUT:   I N P U T ;
-THEN:    T H E N ;
-NOT:     N O T ;
-OR:      O R ;
-PRINT:   P R I N T ;
-PROC:    P R O C E D U R E ;
-PROGRAM: P R O G R A M ;
-TRUE:    T R U E ;
-WHILE:   W H I L E ;
+AND:        A N D;
+BEGIN:      B E G I N ;
+BOOLEAN:    B O O L E A N ;
+CHARACTER:  C H A R A C T H E R ;
+ELSE:       E L S E ;
+END:        E N D ;
+EXIT:       E X I T ;
+FALSE:      F A L S E ;
+FOR:        F O R ;
+FUNC:       F U N C T I O N ;
+IF:         I F ;
+INPUT:      I N P U T ;
+INTEGER:    I N T E G E R ;
+NOT:        N O T ;
+OR:         O R ;
+PRINT:      P R I N T ;
+PROC:       P R O C E D U R E ;
+PROGRAM:    P R O G R A M ;
+TRUE:       T R U E ;
+WHILE:      W H I L E ;
 
 ASSIGNMENT:    '=';
 COLON:  ':';
@@ -110,7 +111,7 @@ LBRACE: '{';
 LPAR:   '(';
 LT:     '<';
 MINUS:  '-';
-NE:     '<>';
+NE:     '!=';
 PLUS:   '+';
 RBRACE: '}';
 RPAR:   ')';

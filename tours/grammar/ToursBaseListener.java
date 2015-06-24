@@ -1,4 +1,4 @@
-// Generated from /Users/twancoenraad/Code/tours/tours/grammar/Tours.g4 by ANTLR 4.5
+// Generated from C:/Users/Jip/Documents/tours/tours/grammar\Tours.g4 by ANTLR 4.5
 package tours.grammar;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -125,13 +125,13 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlockStatement(@NotNull ToursParser.BlockStatementContext ctx) { }
+	@Override public void enterForSTatement(@NotNull ToursParser.ForSTatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlockStatement(@NotNull ToursParser.BlockStatementContext ctx) { }
+	@Override public void exitForSTatement(@NotNull ToursParser.ForSTatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -384,6 +384,18 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBoolType(@NotNull ToursParser.BoolTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCharType(@NotNull ToursParser.CharTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCharType(@NotNull ToursParser.CharTypeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
