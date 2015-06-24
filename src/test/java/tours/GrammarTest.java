@@ -1,5 +1,4 @@
-package tours.tests;
-
+package tours;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -9,7 +8,6 @@ import tours.grammar.ToursLexer;
 import tours.grammar.ToursParser;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.nio.file.Files.readAllBytes;
@@ -19,55 +17,50 @@ import static org.junit.Assert.assertEquals;
 public class GrammarTest {
 
     @Test
-    public void testTree() {
+    public void testTree() throws IOException {
         String result6 = "(program (body (variableDeclaration (variable (variableType integer) x , y) ;)))";
-        assertEquals(result6, getParseTree("tours/tests/examples/example6.tours"));
+        assertEquals(result6, getParseTree("src/test/java/tours/examples/example6.tours"));
 
         String result7 = "(program (body (function main ( ) (block { (statement (identifier x) = (expression 35)) ; }))))";
-        assertEquals(result7, getParseTree("tours/tests/examples/example7.tours"));
+        assertEquals(result7, getParseTree("src/test/java/tours/examples/example7.tours"));
 
         String result8 = "(program (body (function main ( ) (block { (statement if ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (identifier x) = (expression 35)) ; })) ; }))))";
-        assertEquals(result8, getParseTree("tours/tests/examples/example8.tours"));
+        assertEquals(result8, getParseTree("src/test/java/tours/examples/example8.tours"));
 
         String result9 = "(program (body (function main ( ) (block { (statement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (identifier x) = (expression (expression x) (plusOperator +) (expression 1))) ; })) ; }))))";
-        assertEquals(result9, getParseTree("tours/tests/examples/example9.tours"));
+        assertEquals(result9, getParseTree("src/test/java/tours/examples/example9.tours"));
 
         String result10 = "(program (body (function main ( ) (block { (statement for ( (statement (identifier x) = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (identifier x) = (expression (expression x) (plusOperator +) (expression 1))) ) (block { (statement (identifier i) = (expression 35)) ; })) ; }))))";
-        assertEquals(result10, getParseTree("tours/tests/examples/example10.tours"));
+        assertEquals(result10, getParseTree("src/test/java/tours/examples/example10.tours"));
     }
 
     @Test
-    public void testErrorListSize() {
+    public void testErrorListSize() throws IOException {
         List<String> errorList;
 
-        errorList = parseToursFile("tours/tests/examples/example1.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/example1.tours");
         assertEquals(0, errorList.size());
 
-        errorList = parseToursFile("tours/tests/examples/example2.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/example2.tours");
         assertEquals(1, errorList.size());
         assertEquals("line 1:13 no viable alternative at input '}'", errorList.get(0));
 
-        errorList = parseToursFile("tours/tests/examples/example3.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/example3.tours");
         assertEquals(0, errorList.size());
 
-        errorList = parseToursFile("tours/tests/examples/example4.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/example4.tours");
         assertEquals(1, errorList.size());
         assertEquals("line 6:4 missing ';' at 'while'", errorList.get(0));
 
-        errorList = parseToursFile("tours/tests/examples/example5.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/example5.tours");
         assertEquals(2, errorList.size());
         assertEquals("line 10:14 missing '(' at 'x'", errorList.get(0));
         assertEquals("line 10:15 mismatched input ';' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ')', '/', '*'}", errorList.get(1));
 
     }
 
-    private List<String> parseToursFile(String filename) {
+    private List<String> parseToursFile(String filename) throws IOException {
         String file = read(filename);
-        if (file == "") {
-            List<String> errorList = new ArrayList<>();
-            errorList.add("Failed to load file %s".format(filename));
-            return errorList;
-        }
 
         CharStream chars = new ANTLRInputStream(file);
 
@@ -83,12 +76,8 @@ public class GrammarTest {
         return errorListener.getErrorList();
     }
 
-    private String getParseTree(String filename){
+    private String getParseTree(String filename) throws IOException {
         String file = read(filename);
-
-        if (file == "") {
-            return "Failed to load file %s".format(filename);
-        }
 
         // Convert the input text to a character stream
         CharStream stream = new ANTLRInputStream(file);
@@ -104,13 +93,7 @@ public class GrammarTest {
         return tree.toStringTree(parser);
     }
 
-    private String read(String filename) {
-        String file;
-        try {
-            file = new String(readAllBytes(get(filename)));
-        } catch (IOException e) {
-            file = "";
-        }
-        return file;
+    private String read(String filename) throws IOException {
+        return new String(readAllBytes(get(filename)));
     }
 }
