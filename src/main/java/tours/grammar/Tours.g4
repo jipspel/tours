@@ -37,26 +37,27 @@ statement: IDENTIFIER ASSIGNMENT expression SEMI                                
     ;
 
 /** Expression.*/
-expression:     prefixOperator expression                                       #prefixExpression
+expression:     LPAR expression RPAR                                            #parExpression
+              | prefixOperator expression                                       #prefixExpression
               | expression multiplyOperator expression                          #multiplyExpression
               | expression plusOperator expression                              #plusExpression
-              | expression booleanOperator expression                           #booleanExpression
-              | expression compareOperator expression                           #compExpression
-              | LPAR expression RPAR                                            #parExpression
+              | expression compareOperator expression                           #compareExpression
+              | expression AND expression                                       #booleanAndExpression
+              | expression OR expression                                        #booleanOrExpression
               | LBRACE (expression SEMI | statement)* expression RBRACE         #compoundExpression
               | IDENTIFIER                                                      #identifierExpr
-              | CHAR                                                            #charExpr
-              | STR                                                             #strExpr
-              | NUM                                                             #numExpr
+              | CHAR                                                            #characterExpr
+              | STR                                                             #stringExpr
+              | INT                                                             #integerExpr
               | TRUE                                                            #trueExpr
               | FALSE                                                           #falseExpr
               ;
 
 /** Prefix operator. */
-prefixOperator: MINUS | NOT;
+prefixOperator: MINUS | NOT | PLUS;
 
 /** Multiplicative operator. */
-multiplyOperator: STAR | SLASH;
+multiplyOperator: STAR | SLASH | MODULO;
 
 /** Additive operator. */
 plusOperator: PLUS | MINUS;
@@ -110,6 +111,7 @@ LBRACE: '{';
 LPAR:   '(';
 LT:     '<';
 MINUS:  '-';
+MODULO: '%';
 NE:     '!=';
 PLUS:   '+';
 RBRACE: '}';
@@ -121,7 +123,7 @@ SQUOTE: '\'';
 
 // Content-bearing token types
 IDENTIFIER: LETTER (LETTER | DIGIT)*;
-NUM: DIGIT (DIGIT)*;
+INT: DIGIT (DIGIT)*;
 STR: DQUOTE .*? DQUOTE;
 CHAR: SQUOTE . SQUOTE;
 

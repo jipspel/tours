@@ -71,7 +71,7 @@ public class GrammarTest {
     public void testMissingSemicolon() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/invalid/missing_semicolon.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 5:4 mismatched input '}' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ';', '/', '*'}", errorList.get(0));
+        assertEquals("line 5:4 mismatched input '}' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '%', '!=', '+', ';', '/', '*'}", errorList.get(0));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class GrammarTest {
         errorList = parseToursFile("src/test/java/tours/examples/invalid/missing_parenthesis.tours");
         assertEquals(2, errorList.size());
         assertEquals("line 4:14 missing '(' at 'x'", errorList.get(0));
-        assertEquals("line 4:15 mismatched input ';' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ')', '/', '*'}", errorList.get(1));
+        assertEquals("line 4:15 mismatched input ';' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '%', '!=', '+', ')', '/', '*'}", errorList.get(1));
     }
 
     private List<String> parseToursFile(String filename) throws IOException {

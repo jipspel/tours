@@ -161,25 +161,13 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStrExpr(@NotNull ToursParser.StrExprContext ctx) { }
+	@Override public void enterIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStrExpr(@NotNull ToursParser.StrExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterCharExpr(@NotNull ToursParser.CharExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitCharExpr(@NotNull ToursParser.CharExprContext ctx) { }
+	@Override public void exitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -197,6 +185,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -209,25 +209,25 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBooleanExpression(@NotNull ToursParser.BooleanExpressionContext ctx) { }
+	@Override public void enterStringExpr(@NotNull ToursParser.StringExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBooleanExpression(@NotNull ToursParser.BooleanExpressionContext ctx) { }
+	@Override public void exitStringExpr(@NotNull ToursParser.StringExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumExpr(@NotNull ToursParser.NumExprContext ctx) { }
+	@Override public void enterCompareExpression(@NotNull ToursParser.CompareExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNumExpr(@NotNull ToursParser.NumExprContext ctx) { }
+	@Override public void exitCompareExpression(@NotNull ToursParser.CompareExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -257,13 +257,13 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCompExpression(@NotNull ToursParser.CompExpressionContext ctx) { }
+	@Override public void enterCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCompExpression(@NotNull ToursParser.CompExpressionContext ctx) { }
+	@Override public void exitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -312,6 +312,18 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
