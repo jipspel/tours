@@ -24,16 +24,16 @@ function
 
 /** Grouped sequence of statements. */
 block
-    : LBRACE ( (statement | variable) SEMI )+ RBRACE
+    : LBRACE ( (statement | variable SEMI))+ RBRACE
     ;
 
 /** Statement. */
-statement: identifier ASSIGNMENT expression                                         #assignStatement
+statement: identifier ASSIGNMENT expression SEMI                                    #assignStatement
     | IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
     | WHILE LPAR expression RPAR block                                              #whileStatement
-    | FOR LPAR (variable | statement) SEMI expression SEMI statement RPAR block    #forSTatement
-    | INPUT LPAR identifier RPAR                                                    #inputStatement
-    | PRINT LPAR expression RPAR                                                    #printStatement
+    | FOR LPAR (variable SEMI | statement) expression SEMI statement RPAR block     #forSTatement
+    | INPUT LPAR identifier RPAR SEMI                                               #inputStatement
+    | PRINT LPAR expression RPAR SEMI                                               #printStatement
     ;
 
 /** Target of an assignment. */
@@ -48,7 +48,7 @@ expression:     prefixOperator expression                                       
               | expression booleanOperator expression                           #booleanExpression
               | expression compareOperator expression                           #compExpression
               | LPAR expression RPAR                                            #parExpression
-              | LBRACE (expression SEMI | statement SEMI)* expression RBRACE    #compoundExpression
+              | LBRACE (expression SEMI | statement)* expression RBRACE         #compoundExpression
               | IDENTIFIER                                                      #identifierExpr
               | NUM                                                             #numExpr
               | TRUE                                                            #trueExpr
