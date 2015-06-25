@@ -1,3 +1,5 @@
 # Tours
 
+An imperative language for compiler construction. Compiles to Java bytecode.
+
 [![Build Status](https://travis-ci.org/jipspel/tours.svg?branch=master)](https://travis-ci.org/jipspel/tours)
