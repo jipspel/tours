@@ -1,2 +1,11 @@
-integer x, y;
-main() { x = 35; }
+integer x;
+boolean y;
+character z;
+string a;
+
+main() {
+    x = 35;
+    y = false;
+    z = 'a';
+    a = "hello";
+}

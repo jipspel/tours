@@ -1,1 +1,6 @@
-main() { integer x = 35; }
+main() {
+    integer x = 35;
+    boolean y = false;
+    character z = 'a';
+    string a = "hello";
+}

@@ -50,6 +50,8 @@ expression:     prefixOperator expression                                       
               | LPAR expression RPAR                                            #parExpression
               | LBRACE (expression SEMI | statement)* expression RBRACE         #compoundExpression
               | IDENTIFIER                                                      #identifierExpr
+              | CHAR                                                            #charExpr
+              | STR                                                             #strExpr
               | NUM                                                             #numExpr
               | TRUE                                                            #trueExpr
               | FALSE                                                           #falseExpr
@@ -74,6 +76,7 @@ compareOperator: LE | LT | GE | GT | EQ | NE;
 variableType: INTEGER   #intType
             | BOOLEAN   #boolType
             | CHARACTER #charType
+            | STRING    #strType
             ;
 
 // Keywords
@@ -95,6 +98,7 @@ OR:         O R ;
 PRINT:      P R I N T ;
 PROC:       P R O C E D U R E ;
 PROGRAM:    P R O G R A M ;
+STRING:     S T R I N G ;
 TRUE:       T R U E ;
 WHILE:      W H I L E ;
 
@@ -118,11 +122,13 @@ RPAR:   ')';
 SEMI:   ';';
 SLASH:  '/';
 STAR:   '*';
+SQUOTE: '\'';
 
 // Content-bearing token types
 IDENTIFIER: LETTER (LETTER | DIGIT)*;
 NUM: DIGIT (DIGIT)*;
 STR: DQUOTE .*? DQUOTE;
+CHAR: SQUOTE . SQUOTE;
 
 fragment LETTER: [a-zA-Z];
 fragment DIGIT: [0-9];

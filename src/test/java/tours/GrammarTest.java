@@ -39,10 +39,10 @@ public class GrammarTest {
         errorList = parseToursFile("src/test/java/tours/examples/variable_declaration.tours");
         assertEquals(0, errorList.size());
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ;) (function main ( ) (block { (statement (identifier x) = (expression 35) ;) }))))",
+        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x) ; (variable (variableType boolean) y) ; (variable (variableType character) z) ; (variable (variableType string) a) ;) (function main ( ) (block { (statement (identifier x) = (expression 35) ;) (statement (identifier y) = (expression false) ;) (statement (identifier z) = (expression 'a') ;) (statement (identifier a) = (expression \"hello\") ;) }))))",
                 getParseTree("src/test/java/tours/examples/assignment.tours"));
 
-        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x = (expression 35)) ; }))))",
+        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x = (expression 35)) ; (variable (variableType boolean) y = (expression false)) ; (variable (variableType character) z = (expression 'a')) ; (variable (variableType string) a = (expression \"hello\")) ; }))))",
                 getParseTree("src/test/java/tours/examples/assignment_one_line.tours"));
 
         assertEquals("(program (body (function main ( ) (block { (statement for ( (variable (variableType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (identifier x) = (expression (expression x) (plusOperator +) (expression 1)) ;) ) (block { (statement (identifier i) = (expression 35) ;) })) }))))",
@@ -55,7 +55,7 @@ public class GrammarTest {
                 getParseTree("src/test/java/tours/examples/statement_while.tours"));
 
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ; (variable (variableType character) z) ; (variable (variableType boolean) a) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ; (variable (variableType character) z) ; (variable (variableType boolean) a) ; (variable (variableType string) b) ;)))",
                 getParseTree("src/test/java/tours/examples/variable_declaration.tours"));
 
     }
