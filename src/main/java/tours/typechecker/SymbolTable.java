@@ -32,7 +32,13 @@ public class SymbolTable {
     }
 
     public boolean contains(String id) {
-        return symbolList.peek().containsKey(id);
+        for (int i = getLevel(); i >= 0; i--) {
+            if (symbolList.get(i).containsKey(id)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public int getType(String id) {
@@ -42,5 +48,9 @@ public class SymbolTable {
             }
         }
         return -1;
+    }
+
+    public boolean containsInScope(String id) {
+        return symbolList.peek().containsKey(id);
     }
 }
