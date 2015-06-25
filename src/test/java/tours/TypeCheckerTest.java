@@ -25,6 +25,21 @@ public class TypeCheckerTest {
     }
 
     @Test
+    public void testForStatement() throws IOException {
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/statement_for.tours");
+    }
+
+    @Test
+    public void testWhileStatement() throws IOException {
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/statement_while.tours");
+    }
+
+    @Test
+    public void testIfStatement() throws IOException {
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/statement_if.tours");
+    }
+
+    @Test
     public void testAssignments() throws IOException {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/assignments.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/assignments_one_line.tours");
@@ -38,6 +53,48 @@ public class TypeCheckerTest {
         errors.add("Error on line 4, pos 16");
         errors.add("Error on line 5, pos 13");
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/mismatching_type.tours");
+    }
+
+    @Test
+    public void testInvalidForStatement() throws IOException {
+        List<String> errors = new ArrayList<>();
+        errors.add("Error on line 5, pos 9");
+        errors.add("Error on line 9, pos 9");
+        errors.add("Error on line 13, pos 16");
+        errors.add("Error on line 17, pos 16");
+        errors.add("Error on line 21, pos 16");
+        errors.add("Error on line 26, pos 16");
+        errors.add("Error on line 31, pos 16");
+
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/invalid_statements_for.tours");
+    }
+
+    @Test
+    public void testInvalidIfStatement() throws IOException {
+        List<String> errors = new ArrayList<>();
+        errors.add("Error on line 6, pos 7");
+        errors.add("Error on line 10, pos 7");
+        errors.add("Error on line 14, pos 7");
+        errors.add("Error on line 18, pos 7");
+        errors.add("Error on line 22, pos 7");
+        errors.add("Error on line 26, pos 7");
+        errors.add("Error on line 30, pos 7");
+        errors.add("Error on line 34, pos 7");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/invalid_statements_if.tours");
+    }
+
+    @Test
+    public void testInvalidWhileStatement() throws IOException {
+        List<String> errors = new ArrayList<>();
+        errors.add("Error on line 6, pos 10");
+        errors.add("Error on line 10, pos 10");
+        errors.add("Error on line 14, pos 10");
+        errors.add("Error on line 18, pos 10");
+        errors.add("Error on line 22, pos 10");
+        errors.add("Error on line 26, pos 10");
+        errors.add("Error on line 30, pos 10");
+        errors.add("Error on line 34, pos 10");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/invalid_statements_while.tours");
     }
 
     private void testTypeCheckerErrors(List<String> expected, String filename) throws IOException {
