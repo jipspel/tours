@@ -31,7 +31,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitVariable(@NotNull ToursParser.VariableContext ctx) {
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             String id = identifier.getText();
-            if (symbolTable.contains(id)) {
+            if (symbolTable.containsInScope(id)) {
                 errors.add(String.format("Error on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
             } else {
                 symbolTable.add(id, ctx.variableType().getStart().getType());
@@ -64,13 +64,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void enterIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
-        symbolTable.openScope();
-    }
-
-    @Override
     public void exitIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
-        symbolTable.closeScope();
         if (symbolTable.getType(ctx.expression().getText()) != ToursParser.BOOLEAN) {
             errors.add(String.format("Error on line %s, pos %s", ctx.LPAR().getSymbol().getLine(), ctx.LPAR().getSymbol().getCharPositionInLine()));
         }
@@ -78,23 +72,22 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void enterWhileStatement(@NotNull ToursParser.WhileStatementContext ctx) {
-        symbolTable.openScope();
-    }
-
-    @Override
     public void exitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx) {
-        symbolTable.closeScope();
-    }
-
-    @Override
-    public void enterForStatement(@NotNull ToursParser.ForStatementContext ctx) {
-        symbolTable.openScope();
+        if (symbolTable.getType(ctx.expression().getText()) != ToursParser.BOOLEAN) {
+            errors.add(String.format("Error on line %s, pos %s", ctx.LPAR().getSymbol().getLine(), ctx.LPAR().getSymbol().getCharPositionInLine()));
+        }
     }
 
     @Override
     public void exitForStatement(@NotNull ToursParser.ForStatementContext ctx) {
-        symbolTable.closeScope();
+        // Checking if initialisation is valid
+        if (ctx.statement().size() > 1 && !(ctx.statement(0) instanceof ToursParser.AssignStatementContext)) {
+            errors.add(String.format("Error on line %s, pos %s", ctx.statement(0).getStart().getLine(), ctx.statement(0).getStart().getCharPositionInLine()));
+        }
+
+        if (symbolTable.getType(ctx.expression().getText()) != ToursParser.BOOLEAN) {
+            errors.add(String.format("Error on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
+        }
     }
 
 
@@ -117,7 +110,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx) {
         if (symbolTable.getType(ctx.expression(0).getText()) != ToursParser.INTEGER ||
                 symbolTable.getType(ctx.expression(1).getText()) != ToursParser.INTEGER) {
-            errors.add(String.format("Error on line %s, pos %s", 34, 36));
+            errors.add(String.format("Error on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
         } else {
             symbolTable.add(ctx.getText(), ToursParser.INTEGER);
         }
@@ -127,7 +120,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) {
         if (symbolTable.getType(ctx.expression(0).getText()) != ToursParser.BOOLEAN ||
                 symbolTable.getType(ctx.expression(1).getText()) != ToursParser.BOOLEAN) {
-            errors.add(String.format("Error on line %s, pos %s", 34, 36));
+            errors.add(String.format("Error on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
         } else {
             symbolTable.add(ctx.getText(), ToursParser.BOOLEAN);
         }
@@ -137,7 +130,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) {
         if (symbolTable.getType(ctx.expression(0).getText()) != ToursParser.BOOLEAN ||
                 symbolTable.getType(ctx.expression(1).getText()) != ToursParser.BOOLEAN) {
-            errors.add(String.format("Error on line %s, pos %s", 34, 36));
+            errors.add(String.format("Error on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
         } else {
             symbolTable.add(ctx.getText(), ToursParser.BOOLEAN);
         }
@@ -152,14 +145,14 @@ public class TypeChecker extends ToursBaseListener {
     public void exitPrefixExpression(@NotNull ToursParser.PrefixExpressionContext ctx) {
         if (ctx.prefixOperator().MINUS() != null || ctx.prefixOperator().PLUS() != null) {
             if (symbolTable.getType(ctx.expression().getText()) != ToursParser.INTEGER) {
-                errors.add(String.format("Error on line %s, pos %s", 34, 36));
+                errors.add(String.format("Error on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
             } else {
                 symbolTable.add(ctx.getText(), ToursParser.INTEGER);
             }
         } else {
             assert(ctx.prefixOperator().NOT() != null);
             if (symbolTable.getType(ctx.expression().getText()) != ToursParser.BOOLEAN) {
-                errors.add(String.format("Error on line %s, pos %s", 34, 36));
+                errors.add(String.format("Error on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
             } else {
                 symbolTable.add(ctx.getText(), ToursParser.BOOLEAN);
             }
@@ -182,14 +175,14 @@ public class TypeChecker extends ToursBaseListener {
                 ctx.compareOperator().LE() != null || ctx.compareOperator().LT() != null) {
             if (symbolTable.getType(ctx.expression(0).getText()) != ToursParser.INTEGER ||
                     symbolTable.getType(ctx.expression(1).getText()) != ToursParser.INTEGER) {
-                errors.add(String.format("Error on line %s, pos %s", 34, 36));
+                errors.add(String.format("Error on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
             } else {
                 symbolTable.add(ctx.getText(), ToursParser.BOOLEAN);
             }
         } else {
             assert(ctx.compareOperator().EQ() != null || ctx.compareOperator().NE() != null);
             if (symbolTable.getType(ctx.expression(0).getText()) != symbolTable.getType(ctx.expression(1).getText())) {
-                errors.add(String.format("Error on line %s, pos %s", 34, 36));
+                errors.add(String.format("Error on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
             } else {
                 symbolTable.add(ctx.getText(), ToursParser.BOOLEAN);
             }
@@ -200,7 +193,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) {
         if (symbolTable.getType(ctx.expression(0).getText()) != ToursParser.INTEGER ||
                 symbolTable.getType(ctx.expression(1).getText()) != ToursParser.INTEGER) {
-            errors.add(String.format("Error on line %s, pos %s", 34, 36));
+            errors.add(String.format("Error on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
         } else {
             symbolTable.add(ctx.getText(), ToursParser.INTEGER);
         }
