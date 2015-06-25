@@ -80,7 +80,7 @@ variableType: INTEGER   #intType
 AND:        A N D;
 BEGIN:      B E G I N ;
 BOOLEAN:    B O O L E A N ;
-CHARACTER:  C H A R A C T H E R ;
+CHARACTER:  C H A R A C T E R ;
 ELSE:       E L S E ;
 END:        E N D ;
 EXIT:       E X I T ;
