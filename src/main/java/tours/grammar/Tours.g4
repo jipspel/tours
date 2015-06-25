@@ -76,7 +76,6 @@ variableType: INTEGER   #intType
             ;
 
 // Keywords
-AND:        A N D;
 BEGIN:      B E G I N ;
 BOOLEAN:    B O O L E A N ;
 CHARACTER:  C H A R A C T E R ;
@@ -90,7 +89,6 @@ IF:         I F ;
 INPUT:      I N P U T ;
 INTEGER:    I N T E G E R ;
 NOT:        N O T ;
-OR:         O R ;
 PRINT:      P R I N T ;
 PROC:       P R O C E D U R E ;
 PROGRAM:    P R O G R A M ;
@@ -99,27 +97,29 @@ TRUE:       T R U E ;
 WHILE:      W H I L E ;
 
 ASSIGNMENT:    '=';
-COLON:  ':';
-COMMA:  ',';
-DOT:    '.';
-DQUOTE: '"';
-EQ:     '=';
-GE:     '>=';
-GT:     '>';
-LE:     '<=';
-LBRACE: '{';
-LPAR:   '(';
-LT:     '<';
-MINUS:  '-';
-MODULO: '%';
-NE:     '!=';
-PLUS:   '+';
-RBRACE: '}';
-RPAR:   ')';
-SEMI:   ';';
-SLASH:  '/';
-STAR:   '*';
-SQUOTE: '\'';
+AND:           '&&';
+COLON:         ':';
+COMMA:         ',';
+DOT:           '.';
+DQUOTE:        '"';
+EQ:            '==';
+GE:            '>=';
+GT:            '>';
+LE:            '<=';
+LBRACE:        '{';
+LPAR:          '(';
+LT:            '<';
+MINUS:         '-';
+MODULO:        '%';
+NE:            '!=';
+OR:            '||';
+PLUS:          '+';
+RBRACE:        '}';
+RPAR:          ')';
+SEMI:          ';';
+SLASH:         '/';
+STAR:          '*';
+SQUOTE:        '\'';
 
 // Content-bearing token types
 IDENTIFIER: LETTER (LETTER | DIGIT)*;
