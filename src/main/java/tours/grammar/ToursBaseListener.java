@@ -1,4 +1,4 @@
-// Generated from C:/Users/Jip/Documents/tours/tours/grammar\Tours.g4 by ANTLR 4.5
+// Generated from C:/Users/Jip/Documents/tours/src/main/java/tours/grammar\Tours.g4 by ANTLR 4.5
 package tours.grammar;
 
 import org.antlr.v4.runtime.ParserRuleContext;
