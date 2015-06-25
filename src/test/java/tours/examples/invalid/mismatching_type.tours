@@ -1,0 +1,6 @@
+main () {
+    integer x = 'a';
+    boolean y = 1;
+    character z = "hello";
+    string a = true;
+}

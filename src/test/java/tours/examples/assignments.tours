@@ -1,0 +1,23 @@
+integer x;
+boolean y;
+character z;
+string a;
+
+main() {
+    x = 35;
+    y = false;
+    z = 'a';
+    a = "hello";
+
+    x = - 3;
+    x = 3 + 3;
+    x = 3 - 3;
+    x = 3 * 3;
+    x = 3 / 3;
+    x = 3 % 3;
+
+    y = !false;
+    y = true && true;
+    y = 1 == 1;
+    y = 2 > 1;
+}
