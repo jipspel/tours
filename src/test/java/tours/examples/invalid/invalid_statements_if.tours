@@ -1,0 +1,38 @@
+main() {
+    integer x;
+    character y;
+    string z;
+
+    if (-x) {
+        x = 35;
+    }
+
+    if ((x)) {
+        x = 35;
+    }
+
+    if (x + 35) {
+        x = 35;
+    }
+
+    if (y) {
+        x = 35;
+    }
+
+    if ('a') {
+        x = 35;
+    }
+
+    if (1) {
+        x = 35;
+    }
+
+    if ("aa") {
+        x = 35;
+    }
+
+    if (x * x) {
+        x = 35;
+    }
+}
+
