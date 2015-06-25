@@ -125,13 +125,13 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterForSTatement(@NotNull ToursParser.ForSTatementContext ctx) { }
+	@Override public void enterForStatement(@NotNull ToursParser.ForStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitForSTatement(@NotNull ToursParser.ForSTatementContext ctx) { }
+	@Override public void exitForStatement(@NotNull ToursParser.ForStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -105,17 +105,17 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code forSTatement}
+	 * Enter a parse tree produced by the {@code forStatement}
 	 * labeled alternative in {@link ToursParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterForSTatement(@NotNull ToursParser.ForSTatementContext ctx);
+	void enterForStatement(@NotNull ToursParser.ForStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code forSTatement}
+	 * Exit a parse tree produced by the {@code forStatement}
 	 * labeled alternative in {@link ToursParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitForSTatement(@NotNull ToursParser.ForSTatementContext ctx);
+	void exitForStatement(@NotNull ToursParser.ForStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code inputStatement}
 	 * labeled alternative in {@link ToursParser#statement}.

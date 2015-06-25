@@ -31,7 +31,7 @@ block
 statement: IDENTIFIER ASSIGNMENT expression SEMI                                    #assignStatement
     | IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
     | WHILE LPAR expression RPAR block                                              #whileStatement
-    | FOR LPAR (variable SEMI | statement) expression SEMI statement RPAR block     #forSTatement
+    | FOR LPAR (variable SEMI | statement) expression SEMI statement RPAR block     #forStatement
     | INPUT LPAR IDENTIFIER RPAR SEMI                                               #inputStatement
     | PRINT LPAR expression RPAR SEMI                                               #printStatement
     ;

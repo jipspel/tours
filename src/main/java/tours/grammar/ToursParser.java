@@ -589,31 +589,7 @@ public class ToursParser extends Parser {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitAssignStatement(this);
 		}
 	}
-	public static class IfStatementContext extends StatementContext {
-		public TerminalNode IF() { return getToken(ToursParser.IF, 0); }
-		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
-		public List<BlockContext> block() {
-			return getRuleContexts(BlockContext.class);
-		}
-		public BlockContext block(int i) {
-			return getRuleContext(BlockContext.class,i);
-		}
-		public TerminalNode ELSE() { return getToken(ToursParser.ELSE, 0); }
-		public IfStatementContext(StatementContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIfStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIfStatement(this);
-		}
-	}
-	public static class ForSTatementContext extends StatementContext {
+	public static class ForStatementContext extends StatementContext {
 		public TerminalNode FOR() { return getToken(ToursParser.FOR, 0); }
 		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
 		public ExpressionContext expression() {
@@ -636,14 +612,38 @@ public class ToursParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public ForSTatementContext(StatementContext ctx) { copyFrom(ctx); }
+		public ForStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterForSTatement(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterForStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitForSTatement(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitForStatement(this);
+		}
+	}
+	public static class IfStatementContext extends StatementContext {
+		public TerminalNode IF() { return getToken(ToursParser.IF, 0); }
+		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
+		public List<BlockContext> block() {
+			return getRuleContexts(BlockContext.class);
+		}
+		public BlockContext block(int i) {
+			return getRuleContext(BlockContext.class,i);
+		}
+		public TerminalNode ELSE() { return getToken(ToursParser.ELSE, 0); }
+		public IfStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIfStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIfStatement(this);
 		}
 	}
 
@@ -712,7 +712,7 @@ public class ToursParser extends Parser {
 				}
 				break;
 			case FOR:
-				_localctx = new ForSTatementContext(_localctx);
+				_localctx = new ForStatementContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(95); 
