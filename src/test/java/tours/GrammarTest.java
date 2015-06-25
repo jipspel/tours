@@ -16,8 +16,16 @@ import static org.junit.Assert.assertEquals;
 
 public class GrammarTest {
 
+    List<String> errorList;
+
     @Test
-    public void testTree() throws IOException {
+    public void testValidExamples() throws IOException {
+        errorList = parseToursFile("src/test/java/tours/examples/example1.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/example3.tours");
+        assertEquals(0, errorList.size());
+
         String result6 = "(program (body (variableDeclaration (variable (variableType integer) x , y) ;)))";
         assertEquals(result6, getParseTree("src/test/java/tours/examples/example6.tours"));
 
@@ -35,28 +43,25 @@ public class GrammarTest {
     }
 
     @Test
-    public void testErrorListSize() throws IOException {
-        List<String> errorList;
-
-        errorList = parseToursFile("src/test/java/tours/examples/example1.tours");
-        assertEquals(0, errorList.size());
-
+    public void testMissingAssignment() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/example2.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 1:13 no viable alternative at input '}'", errorList.get(0));
+        assertEquals("line 1:13 no viable alternative at input ';'", errorList.get(0));
+    }
 
-        errorList = parseToursFile("src/test/java/tours/examples/example3.tours");
-        assertEquals(0, errorList.size());
-
+    @Test
+    public void testMissingSemicolon() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/example4.tours");
         assertEquals(1, errorList.size());
         assertEquals("line 6:4 missing ';' at 'while'", errorList.get(0));
+    }
 
+    @Test
+    public void missingParenthesis() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/example5.tours");
         assertEquals(2, errorList.size());
         assertEquals("line 10:14 missing '(' at 'x'", errorList.get(0));
         assertEquals("line 10:15 mismatched input ';' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ')', '/', '*'}", errorList.get(1));
-
     }
 
     private List<String> parseToursFile(String filename) throws IOException {
@@ -79,15 +84,10 @@ public class GrammarTest {
     private String getParseTree(String filename) throws IOException {
         String file = read(filename);
 
-        // Convert the input text to a character stream
         CharStream stream = new ANTLRInputStream(file);
-        // Build a lexer on top of the character stream
         Lexer lexer = new ToursLexer(stream);
-        // Extract a token stream from the lexer
         TokenStream tokens = new CommonTokenStream(lexer);
-        // Build a parser instance on top of the token stream
         ToursParser parser = new ToursParser(tokens);
-        // Get the parse tree by calling the start rule
         ParseTree tree = parser.program();
 
         return tree.toStringTree(parser);
