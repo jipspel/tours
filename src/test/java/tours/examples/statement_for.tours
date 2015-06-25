@@ -1,0 +1,5 @@
+main() {
+    for (integer x = 1; x < 35; x = x + 1;) {
+        i = 35;
+    }
+}

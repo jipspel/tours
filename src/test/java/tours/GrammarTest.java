@@ -20,48 +20,66 @@ public class GrammarTest {
 
     @Test
     public void testValidExamples() throws IOException {
-        errorList = parseToursFile("src/test/java/tours/examples/example1.tours");
+
+        errorList = parseToursFile("src/test/java/tours/examples/assignment.tours");
         assertEquals(0, errorList.size());
 
-        errorList = parseToursFile("src/test/java/tours/examples/example3.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/assignment_one_line.tours");
         assertEquals(0, errorList.size());
 
-        String result6 = "(program (body (variableDeclaration (variable (variableType integer) x , y) ;)))";
-        assertEquals(result6, getParseTree("src/test/java/tours/examples/example6.tours"));
+        errorList = parseToursFile("src/test/java/tours/examples/statement_for.tours");
+        assertEquals(0, errorList.size());
 
-        String result7 = "(program (body (function main ( ) (block { (statement (identifier x) = (expression 35)) ; }))))";
-        assertEquals(result7, getParseTree("src/test/java/tours/examples/example7.tours"));
+        errorList = parseToursFile("src/test/java/tours/examples/statement_if.tours");
+        assertEquals(0, errorList.size());
 
-        String result8 = "(program (body (function main ( ) (block { (statement if ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (identifier x) = (expression 35)) ; })) ; }))))";
-        assertEquals(result8, getParseTree("src/test/java/tours/examples/example8.tours"));
+        errorList = parseToursFile("src/test/java/tours/examples/statement_while.tours");
+        assertEquals(0, errorList.size());
 
-        String result9 = "(program (body (function main ( ) (block { (statement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (identifier x) = (expression (expression x) (plusOperator +) (expression 1))) ; })) ; }))))";
-        assertEquals(result9, getParseTree("src/test/java/tours/examples/example9.tours"));
+        errorList = parseToursFile("src/test/java/tours/examples/variable_declaration.tours");
+        assertEquals(0, errorList.size());
 
-        String result10 = "(program (body (function main ( ) (block { (statement for ( (statement (identifier x) = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (identifier x) = (expression (expression x) (plusOperator +) (expression 1))) ) (block { (statement (identifier i) = (expression 35)) ; })) ; }))))";
-        assertEquals(result10, getParseTree("src/test/java/tours/examples/example10.tours"));
+        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ;) (function main ( ) (block { (statement (identifier x) = (expression 35) ;) }))))",
+                getParseTree("src/test/java/tours/examples/assignment.tours"));
+
+        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x = (expression 35)) ; }))))",
+                getParseTree("src/test/java/tours/examples/assignment_one_line.tours"));
+
+        assertEquals("(program (body (function main ( ) (block { (statement for ( (variable (variableType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (identifier x) = (expression (expression x) (plusOperator +) (expression 1)) ;) ) (block { (statement (identifier i) = (expression 35) ;) })) }))))",
+                getParseTree("src/test/java/tours/examples/statement_for.tours"));
+
+        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x) ; (statement if ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (identifier x) = (expression 35) ;) })) }))))",
+                getParseTree("src/test/java/tours/examples/statement_if.tours"));
+
+        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x) ; (statement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (identifier x) = (expression (expression x) (plusOperator +) (expression 1)) ;) })) }))))",
+                getParseTree("src/test/java/tours/examples/statement_while.tours"));
+
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ; (variable (variableType character) z) ; (variable (variableType boolean) a) ;)))",
+                getParseTree("src/test/java/tours/examples/variable_declaration.tours"));
+
     }
 
     @Test
     public void testMissingAssignment() throws IOException {
-        errorList = parseToursFile("src/test/java/tours/examples/example2.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/invalid/missing_assignment.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 1:13 no viable alternative at input ';'", errorList.get(0));
+        assertEquals("line 1:21 no viable alternative at input ';'", errorList.get(0));
     }
 
     @Test
     public void testMissingSemicolon() throws IOException {
-        errorList = parseToursFile("src/test/java/tours/examples/example4.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/invalid/missing_semicolon.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 6:4 missing ';' at 'while'", errorList.get(0));
+        assertEquals("line 5:4 mismatched input '}' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ';', '/', '*'}", errorList.get(0));
     }
 
     @Test
     public void missingParenthesis() throws IOException {
-        errorList = parseToursFile("src/test/java/tours/examples/example5.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/invalid/missing_parenthesis.tours");
         assertEquals(2, errorList.size());
-        assertEquals("line 10:14 missing '(' at 'x'", errorList.get(0));
-        assertEquals("line 10:15 mismatched input ';' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ')', '/', '*'}", errorList.get(1));
+        assertEquals("line 4:14 missing '(' at 'x'", errorList.get(0));
+        assertEquals("line 4:15 mismatched input ';' expecting {AND, OR, EQ, '>=', '>', '<=', '<', '-', '!=', '+', ')', '/', '*'}", errorList.get(1));
     }
 
     private List<String> parseToursFile(String filename) throws IOException {
