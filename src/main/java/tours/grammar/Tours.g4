@@ -28,17 +28,12 @@ block
     ;
 
 /** Statement. */
-statement: identifier ASSIGNMENT expression SEMI                                    #assignStatement
+statement: IDENTIFIER ASSIGNMENT expression SEMI                                    #assignStatement
     | IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
     | WHILE LPAR expression RPAR block                                              #whileStatement
     | FOR LPAR (variable SEMI | statement) expression SEMI statement RPAR block     #forSTatement
-    | INPUT LPAR identifier RPAR SEMI                                               #inputStatement
+    | INPUT LPAR IDENTIFIER RPAR SEMI                                               #inputStatement
     | PRINT LPAR expression RPAR SEMI                                               #printStatement
-    ;
-
-/** Target of an assignment. */
-identifier
-    : IDENTIFIER       #identifierTarget
     ;
 
 /** Expression.*/
