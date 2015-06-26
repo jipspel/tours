@@ -29,17 +29,19 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitVariable(@NotNull ToursParser.VariableContext ctx) {
+        // declarations
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             String id = identifier.getText();
-            if (symbolTable.containsInScope(id)) {
+            if (symbolTable.containsInCurrentScope(id)) {
                 errors.add(String.format("Error on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
             } else {
                 symbolTable.add(id, ctx.variableType().getStart().getType());
             }
+        }
 
-            if (ctx.expression() != null && ctx.variableType().getStart().getType() != symbolTable.getType(ctx.expression().getText())) {
-                errors.add(String.format("Error on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
-            }
+        // assignment
+        if (ctx.expression() != null && ctx.variableType().getStart().getType() != symbolTable.getType(ctx.expression().getText())) {
+            errors.add(String.format("Error on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
     }
 
@@ -55,10 +57,10 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
-        String symbol0 = ctx.IDENTIFIER().getText();
-        String symbol1 = ctx.expression().getText();
+        String identifier = ctx.IDENTIFIER().getText();
+        String expression = ctx.expression().getText();
 
-        if (symbolTable.getType(symbol0) != symbolTable.getType(symbol1)) {
+        if (symbolTable.getType(identifier) != symbolTable.getType(expression)) {
             errors.add(String.format("Error on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
     }

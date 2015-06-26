@@ -31,6 +31,10 @@ public class SymbolTable {
         symbolList.peek().put(id, type);
     }
 
+    public boolean containsInCurrentScope(String id) {
+        return symbolList.peek().containsKey(id);
+    }
+
     public boolean contains(String id) {
         for (int i = getLevel(); i >= 0; i--) {
             if (symbolList.get(i).containsKey(id)) {
@@ -48,9 +52,5 @@ public class SymbolTable {
             }
         }
         return -1;
-    }
-
-    public boolean containsInScope(String id) {
-        return symbolList.peek().containsKey(id);
     }
 }
