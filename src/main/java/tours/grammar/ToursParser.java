@@ -117,6 +117,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitProgram(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitProgram(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -174,6 +179,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBody(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBody(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -253,6 +263,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitVariableDeclaration(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitVariableDeclaration(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VariableDeclarationContext variableDeclaration() throws RecognitionException {
@@ -325,6 +340,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitVariable(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitVariable(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VariableContext variable() throws RecognitionException {
@@ -396,6 +416,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitVariableAssignment(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitVariableAssignment(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VariableAssignmentContext variableAssignment() throws RecognitionException {
@@ -441,6 +466,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitFunction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitFunction(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -507,6 +537,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBlock(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBlock(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -620,6 +655,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitPrintStatement(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitPrintStatement(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class InputStatementContext extends StatementContext {
 		public TerminalNode INPUT() { return getToken(ToursParser.INPUT, 0); }
@@ -635,6 +675,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitInputStatement(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitInputStatement(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class AssignStatementContext extends StatementContext {
 		public VariableAssignmentContext variableAssignment() {
@@ -648,6 +693,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitAssignStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitAssignStatement(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -738,6 +788,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitWhileStatement(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitWhileStatement(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ForStatementContext extends ConditionalStatementContext {
 		public TerminalNode FOR() { return getToken(ToursParser.FOR, 0); }
@@ -771,6 +826,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitForStatement(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitForStatement(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class IfStatementContext extends ConditionalStatementContext {
 		public TerminalNode IF() { return getToken(ToursParser.IF, 0); }
@@ -794,6 +854,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIfStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIfStatement(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -928,6 +993,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntegerExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntegerExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class TrueExprContext extends ExpressionContext {
 		public TerminalNode TRUE() { return getToken(ToursParser.TRUE, 0); }
@@ -939,6 +1009,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitTrueExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitTrueExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class BooleanOrExpressionContext extends ExpressionContext {
@@ -957,6 +1032,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBooleanOrExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBooleanOrExpression(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class MultiplyExpressionContext extends ExpressionContext {
@@ -978,6 +1058,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitMultiplyExpression(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitMultiplyExpression(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class StringExprContext extends ExpressionContext {
 		public TerminalNode STR() { return getToken(ToursParser.STR, 0); }
@@ -989,6 +1074,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStringExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStringExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class CompareExpressionContext extends ExpressionContext {
@@ -1010,6 +1100,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCompareExpression(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCompareExpression(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PrefixExpressionContext extends ExpressionContext {
 		public PrefixOperatorContext prefixOperator() {
@@ -1026,6 +1121,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitPrefixExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitPrefixExpression(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class CompoundExpressionContext extends ExpressionContext {
@@ -1056,6 +1156,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCompoundExpression(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCompoundExpression(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class CharacterExprContext extends ExpressionContext {
 		public TerminalNode CHAR() { return getToken(ToursParser.CHAR, 0); }
@@ -1067,6 +1172,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharacterExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharacterExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class PlusExpressionContext extends ExpressionContext {
@@ -1088,6 +1198,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitPlusExpression(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitPlusExpression(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class FalseExprContext extends ExpressionContext {
 		public TerminalNode FALSE() { return getToken(ToursParser.FALSE, 0); }
@@ -1099,6 +1214,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitFalseExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitFalseExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ParExpressionContext extends ExpressionContext {
@@ -1116,6 +1236,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitParExpression(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitParExpression(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class IdentifierExprContext extends ExpressionContext {
 		public TerminalNode IDENTIFIER() { return getToken(ToursParser.IDENTIFIER, 0); }
@@ -1127,6 +1252,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIdentifierExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIdentifierExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class BooleanAndExpressionContext extends ExpressionContext {
@@ -1145,6 +1275,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBooleanAndExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBooleanAndExpression(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1398,6 +1533,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitPrefixOperator(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitPrefixOperator(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PrefixOperatorContext prefixOperator() throws RecognitionException {
@@ -1442,6 +1582,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitMultiplyOperator(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitMultiplyOperator(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final MultiplyOperatorContext multiplyOperator() throws RecognitionException {
@@ -1485,6 +1630,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitPlusOperator(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitPlusOperator(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PlusOperatorContext plusOperator() throws RecognitionException {
@@ -1527,6 +1677,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBooleanOperator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBooleanOperator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1574,6 +1729,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCompareOperator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCompareOperator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1625,6 +1785,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharType(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharType(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class StrTypeContext extends VariableTypeContext {
 		public TerminalNode STRING() { return getToken(ToursParser.STRING, 0); }
@@ -1636,6 +1801,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStrType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStrType(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class IntTypeContext extends VariableTypeContext {
@@ -1649,6 +1819,11 @@ public class ToursParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntType(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntType(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class BoolTypeContext extends VariableTypeContext {
 		public TerminalNode BOOLEAN() { return getToken(ToursParser.BOOLEAN, 0); }
@@ -1660,6 +1835,11 @@ public class ToursParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBoolType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBoolType(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
