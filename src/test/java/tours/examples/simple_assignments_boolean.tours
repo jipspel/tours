@@ -1,6 +1,3 @@
 boolean x;
-
-main() {
-   x = false;
-   boolean y = true;
-}
+x=false;
+boolean y = true;

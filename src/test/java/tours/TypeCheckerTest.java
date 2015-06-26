@@ -42,7 +42,10 @@ public class TypeCheckerTest {
     @Test
     public void testAssignments() throws IOException {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/assignments.tours");
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/assignments_one_line.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_boolean.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_character.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_integer.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_string.tours");
     }
 
     @Test

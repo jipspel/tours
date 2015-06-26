@@ -54,7 +54,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitAssignStatement(@NotNull ToursParser.AssignStatementContext ctx) {
+    public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
         String symbol0 = ctx.IDENTIFIER().getText();
         String symbol1 = ctx.expression().getText();
 

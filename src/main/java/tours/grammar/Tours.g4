@@ -6,7 +6,7 @@ program: body;
 
 /** Body of a program. */
 body
-    : (variableDeclaration | function)*
+    : (variableDeclaration | variableAssignment SEMI | function)*
     ;
 
 /** Variable declaration block. */
@@ -16,6 +16,11 @@ variableDeclaration
 
 /** Variable declaration. */
 variable : variableType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?
+    ;
+
+/** Variable assignment */
+variableAssignment
+    : IDENTIFIER ASSIGNMENT expression
     ;
 
 function
@@ -28,9 +33,9 @@ block
     ;
 
 /** Statement. */
-statement: IDENTIFIER ASSIGNMENT expression                                     #assignStatement
-         | INPUT LPAR IDENTIFIER RPAR                                                #inputStatement
-         | PRINT LPAR expression RPAR                                                #printStatement
+statement: variableAssignment           #assignStatement
+         | INPUT LPAR IDENTIFIER RPAR   #inputStatement
+         | PRINT LPAR expression RPAR   #printStatement
          ;
 
 /** Coditional statement. */

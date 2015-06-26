@@ -1,6 +1,3 @@
 character x;
-
-main() {
-    x = 'a';
-    character y = 'a';
-}
+x = 'a';
+character y = 'a';

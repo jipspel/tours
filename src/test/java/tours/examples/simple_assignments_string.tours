@@ -1,6 +1,3 @@
 string x;
-
-main() {
-    x = "Hello";
-    string y = "Hello";
-}
+x = "Hello";
+string y = "Hello";
