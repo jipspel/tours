@@ -21,38 +21,56 @@ public class GrammarTest {
     @Test
     public void testValidExamples() throws IOException {
 
-        errorList = parseToursFile("src/test/java/tours/examples/assignments.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/simple_assignments_boolean.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/simple_assignments_character.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/simple_assignments_integer.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/simple_assignments_string.tours");
         assertEquals(0, errorList.size());
 
         errorList = parseToursFile("src/test/java/tours/examples/assignments_one_line.tours");
         assertEquals(0, errorList.size());
 
-        errorList = parseToursFile("src/test/java/tours/examples/statement_for.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/simple_statement_for.tours");
         assertEquals(0, errorList.size());
 
-        errorList = parseToursFile("src/test/java/tours/examples/statement_if.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/simple_statement_if.tours");
         assertEquals(0, errorList.size());
 
-        errorList = parseToursFile("src/test/java/tours/examples/statement_while.tours");
+        errorList = parseToursFile("src/test/java/tours/examples/simple_statement_while.tours");
         assertEquals(0, errorList.size());
 
         errorList = parseToursFile("src/test/java/tours/examples/variable_declaration.tours");
         assertEquals(0, errorList.size());
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x) ; (variable (variableType boolean) y) ; (variable (variableType character) z) ; (variable (variableType string) a) ;) (function main ( ) (block { (statement x = (expression 35) ;) (statement y = (expression false) ;) (statement z = (expression 'a') ;) (statement a = (expression \"hello\") ;) (statement x = (expression (prefixOperator -) (expression 3)) ;) (statement x = (expression (expression 3) (plusOperator +) (expression 3)) ;) (statement x = (expression (expression 3) (plusOperator -) (expression 3)) ;) (statement x = (expression (expression 3) (multiplyOperator *) (expression 3)) ;) (statement x = (expression (expression 3) (multiplyOperator /) (expression 3)) ;) (statement x = (expression (expression 3) (multiplyOperator %) (expression 3)) ;) (statement y = (expression (prefixOperator !) (expression false)) ;) (statement y = (expression (expression true) && (expression true)) ;) (statement y = (expression (expression 1) (compareOperator ==) (expression 1)) ;) (statement y = (expression (expression 2) (compareOperator >) (expression 1)) ;) }))))",
-                getParseTree("src/test/java/tours/examples/assignments.tours"));
+        assertEquals("(program (body (variableDeclaration (variable (variableType boolean) x) ;) (function main ( ) (block { (statement x = (expression false)) ; (variable (variableType boolean) y = (expression true)) ; }))))",
+                getParseTree("src/test/java/tours/examples/simple_assignments_boolean.tours"));
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType character) x) ;) (function main ( ) (block { (statement x = (expression 'a')) ; (variable (variableType character) y = (expression 'a')) ; }))))",
+                getParseTree("src/test/java/tours/examples/simple_assignments_character.tours"));
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x) ;) (function main ( ) (block { (statement x = (expression 35)) ; (variable (variableType integer) y = (expression 35)) ; }))))",
+                getParseTree("src/test/java/tours/examples/simple_assignments_integer.tours"));
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType string) x) ;) (function main ( ) (block { (statement x = (expression \"Hello\")) ; (variable (variableType string) y = (expression \"Hello\")) ; }))))",
+                getParseTree("src/test/java/tours/examples/simple_assignments_string.tours"));
 
         assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x = (expression 35)) ; (variable (variableType boolean) y = (expression false)) ; (variable (variableType character) z = (expression 'a')) ; (variable (variableType string) a = (expression \"hello\")) ; }))))",
                 getParseTree("src/test/java/tours/examples/assignments_one_line.tours"));
 
-        assertEquals("(program (body (function main ( ) (block { (statement for ( (variable (variableType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement x = (expression (expression x) (plusOperator +) (expression 1)) ;) ) (block { (variable (variableType integer) i = (expression 35)) ; })) (variable (variableType integer) y) ; (statement for ( (statement y = (expression 1) ;) (expression (expression y) (compareOperator <) (expression 10)) ; (statement y = (expression (expression y) (plusOperator +) (expression 1)) ;) ) (block { (variable (variableType integer) j = (expression 10)) ; })) }))))",
-                getParseTree("src/test/java/tours/examples/statement_for.tours"));
+        assertEquals("(program (body (function main ( ) (block { (conditionalStatement for ( (variable (variableType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement x = (expression (expression x) (plusOperator +) (expression 1))) ) (block { (variable (variableType integer) i = (expression 35)) ; })) }))))",
+                getParseTree("src/test/java/tours/examples/simple_statement_for.tours"));
 
-        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x) ; (statement if ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement x = (expression 35) ;) })) (statement if ( (expression (expression (expression x) (compareOperator !=) (expression 35)) || (expression (expression x) (compareOperator ==) (expression 35))) ) (block { (statement x = (expression 35) ;) })) (statement if ( (expression (expression (expression x) (compareOperator !=) (expression 35)) && (expression (expression x) (compareOperator ==) (expression 35))) ) (block { (statement x = (expression 35) ;) })) (statement if ( (expression true) ) (block { (statement x = (expression 35) ;) })) (statement if ( (expression false) ) (block { (statement x = (expression 35) ;) })) }))))",
-                getParseTree("src/test/java/tours/examples/statement_if.tours"));
+        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x) ; (conditionalStatement if ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement x = (expression 35)) ; })) }))))",
+                getParseTree("src/test/java/tours/examples/simple_statement_if.tours"));
 
-        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) x) ; (statement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement x = (expression (expression x) (plusOperator +) (expression 1)) ;) })) }))))",
-                getParseTree("src/test/java/tours/examples/statement_while.tours"));
+        assertEquals("(program (body (function main ( ) (block { (conditionalStatement while ( (expression true) ) (block { (statement x = (expression (expression x) (plusOperator +) (expression 1))) ; })) }))))",
+                getParseTree("src/test/java/tours/examples/simple_statement_while.tours"));
 
 
         assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ; (variable (variableType character) z) ; (variable (variableType boolean) a) ; (variable (variableType string) b) ;)))",

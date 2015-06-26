@@ -58,13 +58,11 @@ public class TypeCheckerTest {
     @Test
     public void testInvalidForStatement() throws IOException {
         List<String> errors = new ArrayList<>();
-        errors.add("Error on line 5, pos 9");
-        errors.add("Error on line 9, pos 9");
-        errors.add("Error on line 13, pos 16");
-        errors.add("Error on line 17, pos 16");
-        errors.add("Error on line 21, pos 16");
-        errors.add("Error on line 26, pos 16");
-        errors.add("Error on line 31, pos 16");
+        errors.add("Error on line 5, pos 16");
+        errors.add("Error on line 10, pos 16");
+        errors.add("Error on line 15, pos 16");
+        errors.add("Error on line 20, pos 16");
+        errors.add("Error on line 25, pos 16");
 
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/invalid_statements_for.tours");
     }

@@ -26,13 +26,14 @@ public class ToursParser extends Parser {
 		COMMENT=48, WS=49;
 	public static final int
 		RULE_program = 0, RULE_body = 1, RULE_variableDeclaration = 2, RULE_variable = 3, 
-		RULE_function = 4, RULE_block = 5, RULE_statement = 6, RULE_expression = 7, 
-		RULE_prefixOperator = 8, RULE_multiplyOperator = 9, RULE_plusOperator = 10, 
-		RULE_booleanOperator = 11, RULE_compareOperator = 12, RULE_variableType = 13;
+		RULE_function = 4, RULE_block = 5, RULE_statement = 6, RULE_conditionalStatement = 7, 
+		RULE_expression = 8, RULE_prefixOperator = 9, RULE_multiplyOperator = 10, 
+		RULE_plusOperator = 11, RULE_booleanOperator = 12, RULE_compareOperator = 13, 
+		RULE_variableType = 14;
 	public static final String[] ruleNames = {
 		"program", "body", "variableDeclaration", "variable", "function", "block", 
-		"statement", "expression", "prefixOperator", "multiplyOperator", "plusOperator", 
-		"booleanOperator", "compareOperator", "variableType"
+		"statement", "conditionalStatement", "expression", "prefixOperator", "multiplyOperator", 
+		"plusOperator", "booleanOperator", "compareOperator", "variableType"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -123,7 +124,7 @@ public class ToursParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(28); 
+			setState(30); 
 			body();
 			}
 		}
@@ -172,25 +173,25 @@ public class ToursParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34);
+			setState(36);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << CHARACTER) | (1L << INTEGER) | (1L << STRING) | (1L << IDENTIFIER))) != 0)) {
 				{
-				setState(32);
+				setState(34);
 				switch (_input.LA(1)) {
 				case BOOLEAN:
 				case CHARACTER:
 				case INTEGER:
 				case STRING:
 					{
-					setState(30); 
+					setState(32); 
 					variableDeclaration();
 					}
 					break;
 				case IDENTIFIER:
 					{
-					setState(31); 
+					setState(33); 
 					function();
 					}
 					break;
@@ -198,7 +199,7 @@ public class ToursParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(36);
+				setState(38);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -247,7 +248,7 @@ public class ToursParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40); 
+			setState(42); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -255,9 +256,9 @@ public class ToursParser extends Parser {
 				case 1:
 					{
 					{
-					setState(37); 
+					setState(39); 
 					variable();
-					setState(38); 
+					setState(40); 
 					match(SEMI);
 					}
 					}
@@ -265,7 +266,7 @@ public class ToursParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(42); 
+				setState(44); 
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
@@ -319,33 +320,33 @@ public class ToursParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(44); 
+			setState(46); 
 			variableType();
-			setState(45); 
+			setState(47); 
 			match(IDENTIFIER);
-			setState(50);
+			setState(52);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(46); 
+				setState(48); 
 				match(COMMA);
-				setState(47); 
+				setState(49); 
 				match(IDENTIFIER);
 				}
 				}
-				setState(52);
+				setState(54);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(55);
+			setState(57);
 			_la = _input.LA(1);
 			if (_la==ASSIGNMENT) {
 				{
-				setState(53); 
+				setState(55); 
 				match(ASSIGNMENT);
-				setState(54); 
+				setState(56); 
 				expression(0);
 				}
 			}
@@ -390,13 +391,13 @@ public class ToursParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(57); 
-			match(IDENTIFIER);
-			setState(58); 
-			match(LPAR);
 			setState(59); 
-			match(RPAR);
+			match(IDENTIFIER);
 			setState(60); 
+			match(LPAR);
+			setState(61); 
+			match(RPAR);
+			setState(62); 
 			block();
 			}
 		}
@@ -414,6 +415,16 @@ public class ToursParser extends Parser {
 	public static class BlockContext extends ParserRuleContext {
 		public TerminalNode LBRACE() { return getToken(ToursParser.LBRACE, 0); }
 		public TerminalNode RBRACE() { return getToken(ToursParser.RBRACE, 0); }
+		public List<ConditionalStatementContext> conditionalStatement() {
+			return getRuleContexts(ConditionalStatementContext.class);
+		}
+		public ConditionalStatementContext conditionalStatement(int i) {
+			return getRuleContext(ConditionalStatementContext.class,i);
+		}
+		public List<TerminalNode> SEMI() { return getTokens(ToursParser.SEMI); }
+		public TerminalNode SEMI(int i) {
+			return getToken(ToursParser.SEMI, i);
+		}
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
 		}
@@ -425,10 +436,6 @@ public class ToursParser extends Parser {
 		}
 		public VariableContext variable(int i) {
 			return getRuleContext(VariableContext.class,i);
-		}
-		public List<TerminalNode> SEMI() { return getTokens(ToursParser.SEMI); }
-		public TerminalNode SEMI(int i) {
-			return getToken(ToursParser.SEMI, i);
 		}
 		public BlockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -451,48 +458,68 @@ public class ToursParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62); 
+			setState(64); 
 			match(LBRACE);
-			setState(69); 
+			setState(74);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			do {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << CHARACTER) | (1L << FOR) | (1L << IF) | (1L << INPUT) | (1L << INTEGER) | (1L << PRINT) | (1L << STRING) | (1L << WHILE) | (1L << IDENTIFIER))) != 0)) {
 				{
-				{
-				setState(67);
+				setState(72);
 				switch (_input.LA(1)) {
-				case FOR:
-				case IF:
-				case INPUT:
-				case PRINT:
-				case WHILE:
-				case IDENTIFIER:
-					{
-					setState(63); 
-					statement();
-					}
-					break;
 				case BOOLEAN:
 				case CHARACTER:
+				case INPUT:
 				case INTEGER:
+				case PRINT:
 				case STRING:
+				case IDENTIFIER:
 					{
-					setState(64); 
-					variable();
-					setState(65); 
+					{
+					setState(67);
+					switch (_input.LA(1)) {
+					case INPUT:
+					case PRINT:
+					case IDENTIFIER:
+						{
+						setState(65); 
+						statement();
+						}
+						break;
+					case BOOLEAN:
+					case CHARACTER:
+					case INTEGER:
+					case STRING:
+						{
+						setState(66); 
+						variable();
+						}
+						break;
+					default:
+						throw new NoViableAltException(this);
+					}
+					setState(69); 
 					match(SEMI);
+					}
+					}
+					break;
+				case FOR:
+				case IF:
+				case WHILE:
+					{
+					setState(71); 
+					conditionalStatement();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				}
-				}
-				setState(71); 
+				setState(76);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOLEAN) | (1L << CHARACTER) | (1L << FOR) | (1L << IF) | (1L << INPUT) | (1L << INTEGER) | (1L << PRINT) | (1L << STRING) | (1L << WHILE) | (1L << IDENTIFIER))) != 0) );
-			setState(73); 
+			}
+			setState(77); 
 			match(RBRACE);
 			}
 		}
@@ -518,26 +545,6 @@ public class ToursParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class WhileStatementContext extends StatementContext {
-		public TerminalNode WHILE() { return getToken(ToursParser.WHILE, 0); }
-		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
-		}
-		public WhileStatementContext(StatementContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterWhileStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitWhileStatement(this);
-		}
-	}
 	public static class PrintStatementContext extends StatementContext {
 		public TerminalNode PRINT() { return getToken(ToursParser.PRINT, 0); }
 		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
@@ -545,7 +552,6 @@ public class ToursParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
-		public TerminalNode SEMI() { return getToken(ToursParser.SEMI, 0); }
 		public PrintStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -561,7 +567,6 @@ public class ToursParser extends Parser {
 		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(ToursParser.IDENTIFIER, 0); }
 		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
-		public TerminalNode SEMI() { return getToken(ToursParser.SEMI, 0); }
 		public InputStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -578,7 +583,6 @@ public class ToursParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(ToursParser.SEMI, 0); }
 		public AssignStatementContext(StatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -589,15 +593,108 @@ public class ToursParser extends Parser {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitAssignStatement(this);
 		}
 	}
-	public static class ForStatementContext extends StatementContext {
-		public TerminalNode FOR() { return getToken(ToursParser.FOR, 0); }
+
+	public final StatementContext statement() throws RecognitionException {
+		StatementContext _localctx = new StatementContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_statement);
+		try {
+			setState(91);
+			switch (_input.LA(1)) {
+			case IDENTIFIER:
+				_localctx = new AssignStatementContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(79); 
+				match(IDENTIFIER);
+				setState(80); 
+				match(ASSIGNMENT);
+				setState(81); 
+				expression(0);
+				}
+				break;
+			case INPUT:
+				_localctx = new InputStatementContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(82); 
+				match(INPUT);
+				setState(83); 
+				match(LPAR);
+				setState(84); 
+				match(IDENTIFIER);
+				setState(85); 
+				match(RPAR);
+				}
+				break;
+			case PRINT:
+				_localctx = new PrintStatementContext(_localctx);
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(86); 
+				match(PRINT);
+				setState(87); 
+				match(LPAR);
+				setState(88); 
+				expression(0);
+				setState(89); 
+				match(RPAR);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ConditionalStatementContext extends ParserRuleContext {
+		public ConditionalStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_conditionalStatement; }
+	 
+		public ConditionalStatementContext() { }
+		public void copyFrom(ConditionalStatementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class WhileStatementContext extends ConditionalStatementContext {
+		public TerminalNode WHILE() { return getToken(ToursParser.WHILE, 0); }
 		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
+		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public WhileStatementContext(ConditionalStatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterWhileStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitWhileStatement(this);
+		}
+	}
+	public static class ForStatementContext extends ConditionalStatementContext {
+		public TerminalNode FOR() { return getToken(ToursParser.FOR, 0); }
+		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
 		public List<TerminalNode> SEMI() { return getTokens(ToursParser.SEMI); }
 		public TerminalNode SEMI(int i) {
 			return getToken(ToursParser.SEMI, i);
+		}
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
 		}
 		public List<StatementContext> statement() {
 			return getRuleContexts(StatementContext.class);
@@ -612,7 +709,7 @@ public class ToursParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public ForStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		public ForStatementContext(ConditionalStatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterForStatement(this);
@@ -622,7 +719,7 @@ public class ToursParser extends Parser {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitForStatement(this);
 		}
 	}
-	public static class IfStatementContext extends StatementContext {
+	public static class IfStatementContext extends ConditionalStatementContext {
 		public TerminalNode IF() { return getToken(ToursParser.IF, 0); }
 		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
 		public ExpressionContext expression() {
@@ -636,7 +733,7 @@ public class ToursParser extends Parser {
 			return getRuleContext(BlockContext.class,i);
 		}
 		public TerminalNode ELSE() { return getToken(ToursParser.ELSE, 0); }
-		public IfStatementContext(StatementContext ctx) { copyFrom(ctx); }
+		public IfStatementContext(ConditionalStatementContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIfStatement(this);
@@ -647,48 +744,34 @@ public class ToursParser extends Parser {
 		}
 	}
 
-	public final StatementContext statement() throws RecognitionException {
-		StatementContext _localctx = new StatementContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_statement);
+	public final ConditionalStatementContext conditionalStatement() throws RecognitionException {
+		ConditionalStatementContext _localctx = new ConditionalStatementContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_conditionalStatement);
 		int _la;
 		try {
-			setState(120);
+			setState(121);
 			switch (_input.LA(1)) {
-			case IDENTIFIER:
-				_localctx = new AssignStatementContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(75); 
-				match(IDENTIFIER);
-				setState(76); 
-				match(ASSIGNMENT);
-				setState(77); 
-				expression(0);
-				setState(78); 
-				match(SEMI);
-				}
-				break;
 			case IF:
 				_localctx = new IfStatementContext(_localctx);
-				enterOuterAlt(_localctx, 2);
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(80); 
+				setState(93); 
 				match(IF);
-				setState(81); 
+				setState(94); 
 				match(LPAR);
-				setState(82); 
+				setState(95); 
 				expression(0);
-				setState(83); 
+				setState(96); 
 				match(RPAR);
-				setState(84); 
+				setState(97); 
 				block();
-				setState(87);
+				setState(100);
 				_la = _input.LA(1);
 				if (_la==ELSE) {
 					{
-					setState(85); 
+					setState(98); 
 					match(ELSE);
-					setState(86); 
+					setState(99); 
 					block();
 					}
 				}
@@ -697,97 +780,62 @@ public class ToursParser extends Parser {
 				break;
 			case WHILE:
 				_localctx = new WhileStatementContext(_localctx);
-				enterOuterAlt(_localctx, 3);
+				enterOuterAlt(_localctx, 2);
 				{
-				setState(89); 
+				setState(102); 
 				match(WHILE);
-				setState(90); 
+				setState(103); 
 				match(LPAR);
-				setState(91); 
+				setState(104); 
 				expression(0);
-				setState(92); 
+				setState(105); 
 				match(RPAR);
-				setState(93); 
+				setState(106); 
 				block();
 				}
 				break;
 			case FOR:
 				_localctx = new ForStatementContext(_localctx);
-				enterOuterAlt(_localctx, 4);
+				enterOuterAlt(_localctx, 3);
 				{
-				setState(95); 
+				setState(108); 
 				match(FOR);
-				setState(96); 
+				setState(109); 
 				match(LPAR);
-				setState(101);
+				setState(112);
 				switch (_input.LA(1)) {
 				case BOOLEAN:
 				case CHARACTER:
 				case INTEGER:
 				case STRING:
 					{
-					setState(97); 
+					setState(110); 
 					variable();
-					setState(98); 
-					match(SEMI);
 					}
 					break;
-				case FOR:
-				case IF:
 				case INPUT:
 				case PRINT:
-				case WHILE:
 				case IDENTIFIER:
 					{
-					setState(100); 
+					setState(111); 
 					statement();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(103); 
-				expression(0);
-				setState(104); 
-				match(SEMI);
-				setState(105); 
-				statement();
-				setState(106); 
-				match(RPAR);
-				setState(107); 
-				block();
-				}
-				break;
-			case INPUT:
-				_localctx = new InputStatementContext(_localctx);
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(109); 
-				match(INPUT);
-				setState(110); 
-				match(LPAR);
-				setState(111); 
-				match(IDENTIFIER);
-				setState(112); 
-				match(RPAR);
-				setState(113); 
-				match(SEMI);
-				}
-				break;
-			case PRINT:
-				_localctx = new PrintStatementContext(_localctx);
-				enterOuterAlt(_localctx, 6);
-				{
 				setState(114); 
-				match(PRINT);
-				setState(115); 
-				match(LPAR);
-				setState(116); 
-				expression(0);
-				setState(117); 
-				match(RPAR);
-				setState(118); 
 				match(SEMI);
+				setState(115); 
+				expression(0);
+				setState(116); 
+				match(SEMI);
+				setState(117); 
+				statement();
+				setState(118); 
+				match(RPAR);
+				setState(119); 
+				block();
 				}
 				break;
 			default:
@@ -1056,13 +1104,13 @@ public class ToursParser extends Parser {
 		int _parentState = getState();
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 14;
-		enterRecursionRule(_localctx, 14, RULE_expression, _p);
+		int _startState = 16;
+		enterRecursionRule(_localctx, 16, RULE_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(149);
+			setState(150);
 			switch (_input.LA(1)) {
 			case MINUS:
 			case NOT:
@@ -1072,9 +1120,9 @@ public class ToursParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(123); 
-				prefixOperator();
 				setState(124); 
+				prefixOperator();
+				setState(125); 
 				expression(13);
 				}
 				break;
@@ -1083,11 +1131,11 @@ public class ToursParser extends Parser {
 				_localctx = new ParExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(126); 
-				match(LPAR);
 				setState(127); 
-				expression(0);
+				match(LPAR);
 				setState(128); 
+				expression(0);
+				setState(129); 
 				match(RPAR);
 				}
 				break;
@@ -1096,40 +1144,40 @@ public class ToursParser extends Parser {
 				_localctx = new CompoundExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(130); 
+				setState(131); 
 				match(LBRACE);
-				setState(137);
+				setState(138);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
-						setState(135);
-						switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+						setState(136);
+						switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 						case 1:
 							{
-							setState(131); 
-							expression(0);
 							setState(132); 
+							expression(0);
+							setState(133); 
 							match(SEMI);
 							}
 							break;
 						case 2:
 							{
-							setState(134); 
+							setState(135); 
 							statement();
 							}
 							break;
 						}
 						} 
 					}
-					setState(139);
+					setState(140);
 					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+					_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
 				}
-				setState(140); 
-				expression(0);
 				setState(141); 
+				expression(0);
+				setState(142); 
 				match(RBRACE);
 				}
 				break;
@@ -1138,7 +1186,7 @@ public class ToursParser extends Parser {
 				_localctx = new IdentifierExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(143); 
+				setState(144); 
 				match(IDENTIFIER);
 				}
 				break;
@@ -1147,7 +1195,7 @@ public class ToursParser extends Parser {
 				_localctx = new CharacterExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(144); 
+				setState(145); 
 				match(CHAR);
 				}
 				break;
@@ -1156,7 +1204,7 @@ public class ToursParser extends Parser {
 				_localctx = new StringExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(145); 
+				setState(146); 
 				match(STR);
 				}
 				break;
@@ -1165,7 +1213,7 @@ public class ToursParser extends Parser {
 				_localctx = new IntegerExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(146); 
+				setState(147); 
 				match(INT);
 				}
 				break;
@@ -1174,7 +1222,7 @@ public class ToursParser extends Parser {
 				_localctx = new TrueExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(147); 
+				setState(148); 
 				match(TRUE);
 				}
 				break;
@@ -1183,7 +1231,7 @@ public class ToursParser extends Parser {
 				_localctx = new FalseExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(148); 
+				setState(149); 
 				match(FALSE);
 				}
 				break;
@@ -1191,25 +1239,25 @@ public class ToursParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(171);
+			setState(172);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,16,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(169);
-					switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
+					setState(170);
+					switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
 					case 1:
 						{
 						_localctx = new MultiplyExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(151);
+						setState(152);
 						if (!(precpred(_ctx, 12))) throw new FailedPredicateException(this, "precpred(_ctx, 12)");
-						setState(152); 
-						multiplyOperator();
 						setState(153); 
+						multiplyOperator();
+						setState(154); 
 						expression(13);
 						}
 						break;
@@ -1217,11 +1265,11 @@ public class ToursParser extends Parser {
 						{
 						_localctx = new PlusExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(155);
+						setState(156);
 						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
-						setState(156); 
-						plusOperator();
 						setState(157); 
+						plusOperator();
+						setState(158); 
 						expression(12);
 						}
 						break;
@@ -1229,11 +1277,11 @@ public class ToursParser extends Parser {
 						{
 						_localctx = new CompareExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(159);
+						setState(160);
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
-						setState(160); 
-						compareOperator();
 						setState(161); 
+						compareOperator();
+						setState(162); 
 						expression(11);
 						}
 						break;
@@ -1241,11 +1289,11 @@ public class ToursParser extends Parser {
 						{
 						_localctx = new BooleanAndExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(163);
+						setState(164);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(164); 
-						match(AND);
 						setState(165); 
+						match(AND);
+						setState(166); 
 						expression(10);
 						}
 						break;
@@ -1253,20 +1301,20 @@ public class ToursParser extends Parser {
 						{
 						_localctx = new BooleanOrExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(166);
+						setState(167);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(167); 
-						match(OR);
 						setState(168); 
+						match(OR);
+						setState(169); 
 						expression(9);
 						}
 						break;
 					}
 					} 
 				}
-				setState(173);
+				setState(174);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,16,_ctx);
 			}
 			}
 		}
@@ -1301,12 +1349,12 @@ public class ToursParser extends Parser {
 
 	public final PrefixOperatorContext prefixOperator() throws RecognitionException {
 		PrefixOperatorContext _localctx = new PrefixOperatorContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_prefixOperator);
+		enterRule(_localctx, 18, RULE_prefixOperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(174);
+			setState(175);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << NOT) | (1L << PLUS))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1345,12 +1393,12 @@ public class ToursParser extends Parser {
 
 	public final MultiplyOperatorContext multiplyOperator() throws RecognitionException {
 		MultiplyOperatorContext _localctx = new MultiplyOperatorContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_multiplyOperator);
+		enterRule(_localctx, 20, RULE_multiplyOperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(176);
+			setState(177);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MODULO) | (1L << SLASH) | (1L << STAR))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1388,12 +1436,12 @@ public class ToursParser extends Parser {
 
 	public final PlusOperatorContext plusOperator() throws RecognitionException {
 		PlusOperatorContext _localctx = new PlusOperatorContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_plusOperator);
+		enterRule(_localctx, 22, RULE_plusOperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(178);
+			setState(179);
 			_la = _input.LA(1);
 			if ( !(_la==MINUS || _la==PLUS) ) {
 			_errHandler.recoverInline(this);
@@ -1431,12 +1479,12 @@ public class ToursParser extends Parser {
 
 	public final BooleanOperatorContext booleanOperator() throws RecognitionException {
 		BooleanOperatorContext _localctx = new BooleanOperatorContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_booleanOperator);
+		enterRule(_localctx, 24, RULE_booleanOperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(180);
+			setState(181);
 			_la = _input.LA(1);
 			if ( !(_la==AND || _la==OR) ) {
 			_errHandler.recoverInline(this);
@@ -1478,12 +1526,12 @@ public class ToursParser extends Parser {
 
 	public final CompareOperatorContext compareOperator() throws RecognitionException {
 		CompareOperatorContext _localctx = new CompareOperatorContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_compareOperator);
+		enterRule(_localctx, 26, RULE_compareOperator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(182);
+			setState(183);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << GE) | (1L << GT) | (1L << LE) | (1L << LT) | (1L << NE))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1564,15 +1612,15 @@ public class ToursParser extends Parser {
 
 	public final VariableTypeContext variableType() throws RecognitionException {
 		VariableTypeContext _localctx = new VariableTypeContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_variableType);
+		enterRule(_localctx, 28, RULE_variableType);
 		try {
-			setState(188);
+			setState(189);
 			switch (_input.LA(1)) {
 			case INTEGER:
 				_localctx = new IntTypeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(184); 
+				setState(185); 
 				match(INTEGER);
 				}
 				break;
@@ -1580,7 +1628,7 @@ public class ToursParser extends Parser {
 				_localctx = new BoolTypeContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(185); 
+				setState(186); 
 				match(BOOLEAN);
 				}
 				break;
@@ -1588,7 +1636,7 @@ public class ToursParser extends Parser {
 				_localctx = new CharTypeContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(186); 
+				setState(187); 
 				match(CHARACTER);
 				}
 				break;
@@ -1596,7 +1644,7 @@ public class ToursParser extends Parser {
 				_localctx = new StrTypeContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(187); 
+				setState(188); 
 				match(STRING);
 				}
 				break;
@@ -1617,7 +1665,7 @@ public class ToursParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 7: 
+		case 8: 
 			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
@@ -1639,65 +1687,65 @@ public class ToursParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\63\u00c1\4\2\t\2"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\63\u00c2\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
-		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2\3\3\3\3\7\3#\n\3\f\3"+
-		"\16\3&\13\3\3\4\3\4\3\4\6\4+\n\4\r\4\16\4,\3\5\3\5\3\5\3\5\7\5\63\n\5"+
-		"\f\5\16\5\66\13\5\3\5\3\5\5\5:\n\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7"+
-		"\3\7\5\7F\n\7\6\7H\n\7\r\7\16\7I\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3"+
-		"\b\3\b\3\b\3\b\3\b\5\bZ\n\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3"+
-		"\b\3\b\5\bh\n\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3"+
-		"\b\3\b\3\b\3\b\5\b{\n\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3"+
-		"\t\3\t\7\t\u008a\n\t\f\t\16\t\u008d\13\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3"+
-		"\t\3\t\5\t\u0098\n\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3"+
-		"\t\3\t\3\t\3\t\3\t\3\t\7\t\u00ac\n\t\f\t\16\t\u00af\13\t\3\n\3\n\3\13"+
-		"\3\13\3\f\3\f\3\r\3\r\3\16\3\16\3\17\3\17\3\17\3\17\5\17\u00bf\n\17\3"+
-		"\17\2\3\20\20\2\4\6\b\n\f\16\20\22\24\26\30\32\34\2\7\5\2\"\"%%\'\'\4"+
-		"\2##+,\4\2\"\"\'\'\4\2\26\26&&\5\2\33\36!!$$\u00d2\2\36\3\2\2\2\4$\3\2"+
-		"\2\2\6*\3\2\2\2\b.\3\2\2\2\n;\3\2\2\2\f@\3\2\2\2\16z\3\2\2\2\20\u0097"+
-		"\3\2\2\2\22\u00b0\3\2\2\2\24\u00b2\3\2\2\2\26\u00b4\3\2\2\2\30\u00b6\3"+
-		"\2\2\2\32\u00b8\3\2\2\2\34\u00be\3\2\2\2\36\37\5\4\3\2\37\3\3\2\2\2 #"+
-		"\5\6\4\2!#\5\n\6\2\" \3\2\2\2\"!\3\2\2\2#&\3\2\2\2$\"\3\2\2\2$%\3\2\2"+
-		"\2%\5\3\2\2\2&$\3\2\2\2\'(\5\b\5\2()\7*\2\2)+\3\2\2\2*\'\3\2\2\2+,\3\2"+
-		"\2\2,*\3\2\2\2,-\3\2\2\2-\7\3\2\2\2./\5\34\17\2/\64\7.\2\2\60\61\7\30"+
-		"\2\2\61\63\7.\2\2\62\60\3\2\2\2\63\66\3\2\2\2\64\62\3\2\2\2\64\65\3\2"+
-		"\2\2\659\3\2\2\2\66\64\3\2\2\2\678\7\25\2\28:\5\20\t\29\67\3\2\2\29:\3"+
-		"\2\2\2:\t\3\2\2\2;<\7.\2\2<=\7 \2\2=>\7)\2\2>?\5\f\7\2?\13\3\2\2\2@G\7"+
-		"\37\2\2AF\5\16\b\2BC\5\b\5\2CD\7*\2\2DF\3\2\2\2EA\3\2\2\2EB\3\2\2\2FH"+
-		"\3\2\2\2GE\3\2\2\2HI\3\2\2\2IG\3\2\2\2IJ\3\2\2\2JK\3\2\2\2KL\7(\2\2L\r"+
-		"\3\2\2\2MN\7.\2\2NO\7\25\2\2OP\5\20\t\2PQ\7*\2\2Q{\3\2\2\2RS\7\f\2\2S"+
-		"T\7 \2\2TU\5\20\t\2UV\7)\2\2VY\5\f\7\2WX\7\6\2\2XZ\5\f\7\2YW\3\2\2\2Y"+
-		"Z\3\2\2\2Z{\3\2\2\2[\\\7\24\2\2\\]\7 \2\2]^\5\20\t\2^_\7)\2\2_`\5\f\7"+
-		"\2`{\3\2\2\2ab\7\n\2\2bg\7 \2\2cd\5\b\5\2de\7*\2\2eh\3\2\2\2fh\5\16\b"+
-		"\2gc\3\2\2\2gf\3\2\2\2hi\3\2\2\2ij\5\20\t\2jk\7*\2\2kl\5\16\b\2lm\7)\2"+
-		"\2mn\5\f\7\2n{\3\2\2\2op\7\r\2\2pq\7 \2\2qr\7.\2\2rs\7)\2\2s{\7*\2\2t"+
-		"u\7\17\2\2uv\7 \2\2vw\5\20\t\2wx\7)\2\2xy\7*\2\2y{\3\2\2\2zM\3\2\2\2z"+
-		"R\3\2\2\2z[\3\2\2\2za\3\2\2\2zo\3\2\2\2zt\3\2\2\2{\17\3\2\2\2|}\b\t\1"+
-		"\2}~\5\22\n\2~\177\5\20\t\17\177\u0098\3\2\2\2\u0080\u0081\7 \2\2\u0081"+
-		"\u0082\5\20\t\2\u0082\u0083\7)\2\2\u0083\u0098\3\2\2\2\u0084\u008b\7\37"+
-		"\2\2\u0085\u0086\5\20\t\2\u0086\u0087\7*\2\2\u0087\u008a\3\2\2\2\u0088"+
-		"\u008a\5\16\b\2\u0089\u0085\3\2\2\2\u0089\u0088\3\2\2\2\u008a\u008d\3"+
-		"\2\2\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2\u008c\u008e\3\2\2\2\u008d"+
-		"\u008b\3\2\2\2\u008e\u008f\5\20\t\2\u008f\u0090\7(\2\2\u0090\u0098\3\2"+
-		"\2\2\u0091\u0098\7.\2\2\u0092\u0098\7\61\2\2\u0093\u0098\7\60\2\2\u0094"+
-		"\u0098\7/\2\2\u0095\u0098\7\23\2\2\u0096\u0098\7\t\2\2\u0097|\3\2\2\2"+
-		"\u0097\u0080\3\2\2\2\u0097\u0084\3\2\2\2\u0097\u0091\3\2\2\2\u0097\u0092"+
-		"\3\2\2\2\u0097\u0093\3\2\2\2\u0097\u0094\3\2\2\2\u0097\u0095\3\2\2\2\u0097"+
-		"\u0096\3\2\2\2\u0098\u00ad\3\2\2\2\u0099\u009a\f\16\2\2\u009a\u009b\5"+
-		"\24\13\2\u009b\u009c\5\20\t\17\u009c\u00ac\3\2\2\2\u009d\u009e\f\r\2\2"+
-		"\u009e\u009f\5\26\f\2\u009f\u00a0\5\20\t\16\u00a0\u00ac\3\2\2\2\u00a1"+
-		"\u00a2\f\f\2\2\u00a2\u00a3\5\32\16\2\u00a3\u00a4\5\20\t\r\u00a4\u00ac"+
-		"\3\2\2\2\u00a5\u00a6\f\13\2\2\u00a6\u00a7\7\26\2\2\u00a7\u00ac\5\20\t"+
-		"\f\u00a8\u00a9\f\n\2\2\u00a9\u00aa\7&\2\2\u00aa\u00ac\5\20\t\13\u00ab"+
-		"\u0099\3\2\2\2\u00ab\u009d\3\2\2\2\u00ab\u00a1\3\2\2\2\u00ab\u00a5\3\2"+
-		"\2\2\u00ab\u00a8\3\2\2\2\u00ac\u00af\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ad"+
-		"\u00ae\3\2\2\2\u00ae\21\3\2\2\2\u00af\u00ad\3\2\2\2\u00b0\u00b1\t\2\2"+
-		"\2\u00b1\23\3\2\2\2\u00b2\u00b3\t\3\2\2\u00b3\25\3\2\2\2\u00b4\u00b5\t"+
-		"\4\2\2\u00b5\27\3\2\2\2\u00b6\u00b7\t\5\2\2\u00b7\31\3\2\2\2\u00b8\u00b9"+
-		"\t\6\2\2\u00b9\33\3\2\2\2\u00ba\u00bf\7\16\2\2\u00bb\u00bf\7\4\2\2\u00bc"+
-		"\u00bf\7\5\2\2\u00bd\u00bf\7\22\2\2\u00be\u00ba\3\2\2\2\u00be\u00bb\3"+
-		"\2\2\2\u00be\u00bc\3\2\2\2\u00be\u00bd\3\2\2\2\u00bf\35\3\2\2\2\22\"$"+
-		",\649EIYgz\u0089\u008b\u0097\u00ab\u00ad\u00be";
+		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\3\2\3\2\3\3\3\3\7"+
+		"\3%\n\3\f\3\16\3(\13\3\3\4\3\4\3\4\6\4-\n\4\r\4\16\4.\3\5\3\5\3\5\3\5"+
+		"\7\5\65\n\5\f\5\16\58\13\5\3\5\3\5\5\5<\n\5\3\6\3\6\3\6\3\6\3\6\3\7\3"+
+		"\7\3\7\5\7F\n\7\3\7\3\7\3\7\7\7K\n\7\f\7\16\7N\13\7\3\7\3\7\3\b\3\b\3"+
+		"\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b^\n\b\3\t\3\t\3\t\3\t\3\t\3"+
+		"\t\3\t\5\tg\n\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\t\5\ts\n\t\3\t\3"+
+		"\t\3\t\3\t\3\t\3\t\3\t\5\t|\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3"+
+		"\n\3\n\3\n\3\n\7\n\u008b\n\n\f\n\16\n\u008e\13\n\3\n\3\n\3\n\3\n\3\n\3"+
+		"\n\3\n\3\n\3\n\5\n\u0099\n\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3"+
+		"\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\7\n\u00ad\n\n\f\n\16\n\u00b0\13\n\3\13"+
+		"\3\13\3\f\3\f\3\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20\3\20\3\20\5\20\u00c0"+
+		"\n\20\3\20\2\3\22\21\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36\2\7\5\2\""+
+		"\"%%\'\'\4\2##+,\4\2\"\"\'\'\4\2\26\26&&\5\2\33\36!!$$\u00d2\2 \3\2\2"+
+		"\2\4&\3\2\2\2\6,\3\2\2\2\b\60\3\2\2\2\n=\3\2\2\2\fB\3\2\2\2\16]\3\2\2"+
+		"\2\20{\3\2\2\2\22\u0098\3\2\2\2\24\u00b1\3\2\2\2\26\u00b3\3\2\2\2\30\u00b5"+
+		"\3\2\2\2\32\u00b7\3\2\2\2\34\u00b9\3\2\2\2\36\u00bf\3\2\2\2 !\5\4\3\2"+
+		"!\3\3\2\2\2\"%\5\6\4\2#%\5\n\6\2$\"\3\2\2\2$#\3\2\2\2%(\3\2\2\2&$\3\2"+
+		"\2\2&\'\3\2\2\2\'\5\3\2\2\2(&\3\2\2\2)*\5\b\5\2*+\7*\2\2+-\3\2\2\2,)\3"+
+		"\2\2\2-.\3\2\2\2.,\3\2\2\2./\3\2\2\2/\7\3\2\2\2\60\61\5\36\20\2\61\66"+
+		"\7.\2\2\62\63\7\30\2\2\63\65\7.\2\2\64\62\3\2\2\2\658\3\2\2\2\66\64\3"+
+		"\2\2\2\66\67\3\2\2\2\67;\3\2\2\28\66\3\2\2\29:\7\25\2\2:<\5\22\n\2;9\3"+
+		"\2\2\2;<\3\2\2\2<\t\3\2\2\2=>\7.\2\2>?\7 \2\2?@\7)\2\2@A\5\f\7\2A\13\3"+
+		"\2\2\2BL\7\37\2\2CF\5\16\b\2DF\5\b\5\2EC\3\2\2\2ED\3\2\2\2FG\3\2\2\2G"+
+		"H\7*\2\2HK\3\2\2\2IK\5\20\t\2JE\3\2\2\2JI\3\2\2\2KN\3\2\2\2LJ\3\2\2\2"+
+		"LM\3\2\2\2MO\3\2\2\2NL\3\2\2\2OP\7(\2\2P\r\3\2\2\2QR\7.\2\2RS\7\25\2\2"+
+		"S^\5\22\n\2TU\7\r\2\2UV\7 \2\2VW\7.\2\2W^\7)\2\2XY\7\17\2\2YZ\7 \2\2Z"+
+		"[\5\22\n\2[\\\7)\2\2\\^\3\2\2\2]Q\3\2\2\2]T\3\2\2\2]X\3\2\2\2^\17\3\2"+
+		"\2\2_`\7\f\2\2`a\7 \2\2ab\5\22\n\2bc\7)\2\2cf\5\f\7\2de\7\6\2\2eg\5\f"+
+		"\7\2fd\3\2\2\2fg\3\2\2\2g|\3\2\2\2hi\7\24\2\2ij\7 \2\2jk\5\22\n\2kl\7"+
+		")\2\2lm\5\f\7\2m|\3\2\2\2no\7\n\2\2or\7 \2\2ps\5\b\5\2qs\5\16\b\2rp\3"+
+		"\2\2\2rq\3\2\2\2st\3\2\2\2tu\7*\2\2uv\5\22\n\2vw\7*\2\2wx\5\16\b\2xy\7"+
+		")\2\2yz\5\f\7\2z|\3\2\2\2{_\3\2\2\2{h\3\2\2\2{n\3\2\2\2|\21\3\2\2\2}~"+
+		"\b\n\1\2~\177\5\24\13\2\177\u0080\5\22\n\17\u0080\u0099\3\2\2\2\u0081"+
+		"\u0082\7 \2\2\u0082\u0083\5\22\n\2\u0083\u0084\7)\2\2\u0084\u0099\3\2"+
+		"\2\2\u0085\u008c\7\37\2\2\u0086\u0087\5\22\n\2\u0087\u0088\7*\2\2\u0088"+
+		"\u008b\3\2\2\2\u0089\u008b\5\16\b\2\u008a\u0086\3\2\2\2\u008a\u0089\3"+
+		"\2\2\2\u008b\u008e\3\2\2\2\u008c\u008a\3\2\2\2\u008c\u008d\3\2\2\2\u008d"+
+		"\u008f\3\2\2\2\u008e\u008c\3\2\2\2\u008f\u0090\5\22\n\2\u0090\u0091\7"+
+		"(\2\2\u0091\u0099\3\2\2\2\u0092\u0099\7.\2\2\u0093\u0099\7\61\2\2\u0094"+
+		"\u0099\7\60\2\2\u0095\u0099\7/\2\2\u0096\u0099\7\23\2\2\u0097\u0099\7"+
+		"\t\2\2\u0098}\3\2\2\2\u0098\u0081\3\2\2\2\u0098\u0085\3\2\2\2\u0098\u0092"+
+		"\3\2\2\2\u0098\u0093\3\2\2\2\u0098\u0094\3\2\2\2\u0098\u0095\3\2\2\2\u0098"+
+		"\u0096\3\2\2\2\u0098\u0097\3\2\2\2\u0099\u00ae\3\2\2\2\u009a\u009b\f\16"+
+		"\2\2\u009b\u009c\5\26\f\2\u009c\u009d\5\22\n\17\u009d\u00ad\3\2\2\2\u009e"+
+		"\u009f\f\r\2\2\u009f\u00a0\5\30\r\2\u00a0\u00a1\5\22\n\16\u00a1\u00ad"+
+		"\3\2\2\2\u00a2\u00a3\f\f\2\2\u00a3\u00a4\5\34\17\2\u00a4\u00a5\5\22\n"+
+		"\r\u00a5\u00ad\3\2\2\2\u00a6\u00a7\f\13\2\2\u00a7\u00a8\7\26\2\2\u00a8"+
+		"\u00ad\5\22\n\f\u00a9\u00aa\f\n\2\2\u00aa\u00ab\7&\2\2\u00ab\u00ad\5\22"+
+		"\n\13\u00ac\u009a\3\2\2\2\u00ac\u009e\3\2\2\2\u00ac\u00a2\3\2\2\2\u00ac"+
+		"\u00a6\3\2\2\2\u00ac\u00a9\3\2\2\2\u00ad\u00b0\3\2\2\2\u00ae\u00ac\3\2"+
+		"\2\2\u00ae\u00af\3\2\2\2\u00af\23\3\2\2\2\u00b0\u00ae\3\2\2\2\u00b1\u00b2"+
+		"\t\2\2\2\u00b2\25\3\2\2\2\u00b3\u00b4\t\3\2\2\u00b4\27\3\2\2\2\u00b5\u00b6"+
+		"\t\4\2\2\u00b6\31\3\2\2\2\u00b7\u00b8\t\5\2\2\u00b8\33\3\2\2\2\u00b9\u00ba"+
+		"\t\6\2\2\u00ba\35\3\2\2\2\u00bb\u00c0\7\16\2\2\u00bc\u00c0\7\4\2\2\u00bd"+
+		"\u00c0\7\5\2\2\u00be\u00c0\7\22\2\2\u00bf\u00bb\3\2\2\2\u00bf\u00bc\3"+
+		"\2\2\2\u00bf\u00bd\3\2\2\2\u00bf\u00be\3\2\2\2\u00c0\37\3\2\2\2\24$&."+
+		"\66;EJL]fr{\u008a\u008c\u0098\u00ac\u00ae\u00bf";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

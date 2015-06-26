@@ -1,0 +1,6 @@
+boolean x;
+
+main() {
+   x = false;
+   boolean y = true;
+}

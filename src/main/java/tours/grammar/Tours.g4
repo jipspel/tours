@@ -24,17 +24,20 @@ function
 
 /** Grouped sequence of statements. */
 block
-    : LBRACE ( (statement | variable SEMI))+ RBRACE
+    : LBRACE (((statement | variable ) SEMI) | conditionalStatement)* RBRACE
     ;
 
 /** Statement. */
-statement: IDENTIFIER ASSIGNMENT expression SEMI                                    #assignStatement
-    | IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
-    | WHILE LPAR expression RPAR block                                              #whileStatement
-    | FOR LPAR (variable SEMI | statement) expression SEMI statement RPAR block     #forStatement
-    | INPUT LPAR IDENTIFIER RPAR SEMI                                               #inputStatement
-    | PRINT LPAR expression RPAR SEMI                                               #printStatement
-    ;
+statement: IDENTIFIER ASSIGNMENT expression                                     #assignStatement
+         | INPUT LPAR IDENTIFIER RPAR                                                #inputStatement
+         | PRINT LPAR expression RPAR                                                #printStatement
+         ;
+
+/** Coditional statement. */
+conditionalStatement: IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
+                    | WHILE LPAR expression RPAR block                                              #whileStatement
+                    | FOR LPAR (variable | statement) SEMI expression SEMI statement RPAR block  #forStatement
+                    ;
 
 /** Expression.*/
 expression:     LPAR expression RPAR                                            #parExpression

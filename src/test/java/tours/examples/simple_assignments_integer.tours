@@ -1,0 +1,6 @@
+integer x;
+
+main() {
+    x = 35;
+    integer y = 35;
+}

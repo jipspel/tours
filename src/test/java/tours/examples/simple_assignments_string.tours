@@ -1,0 +1,6 @@
+string x;
+
+main() {
+    x = "Hello";
+    string y = "Hello";
+}

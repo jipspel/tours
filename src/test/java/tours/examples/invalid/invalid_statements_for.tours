@@ -1,34 +1,28 @@
 main() {
     integer x;
     integer i;
-    // Invalid initialisation
-    for (print(x); x < 35; x = x + 1;) {
-        i = 35;
-    }
-    // Invalid initialisation
-    for (input(x); x < 35; x = x + 1;) {
-        i = 35;
-    }
-    // invalid condition
-    for (x = 1; -x; x = x + 1;) {
-        i = 35;
-    }
-    // invalid condition
-    for (x = 1; x + x; x = x + 1;) {
-        i = 35;
-    }
-    // invalid condition
-    for (x = 1; x * x; x = x + 1;) {
+       // invalid condition
+    for (x = 1; -x; x = x + 1) {
         i = 35;
     }
 
     // invalid condition
-    for (x = 1; 35; x = x + 1;) {
+    for (x = 1; x + x; x = x + 1) {
         i = 35;
     }
 
     // invalid condition
-    for (x = 1; "Hello"; x = x + 1;) {
+    for (x = 1; x * x; x = x + 1) {
+        i = 35;
+    }
+
+    // invalid condition
+    for (x = 1; 35; x = x + 1) {
+        i = 35;
+    }
+
+    // invalid condition
+    for (x = 1; "Hello"; x = x + 1) {
         i = 35;
     }
 }

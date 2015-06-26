@@ -79,15 +79,16 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitForStatement(@NotNull ToursParser.ForStatementContext ctx) {
-        // Checking if initialisation is valid
-        if (ctx.statement().size() > 1 && !(ctx.statement(0) instanceof ToursParser.AssignStatementContext)) {
-            errors.add(String.format("Error on line %s, pos %s", ctx.statement(0).getStart().getLine(), ctx.statement(0).getStart().getCharPositionInLine()));
-        }
+    public void enterForStatement(@NotNull ToursParser.ForStatementContext ctx) {
+        symbolTable.openScope();
+    }
 
+    @Override
+    public void exitForStatement(@NotNull ToursParser.ForStatementContext ctx) {
         if (symbolTable.getType(ctx.expression().getText()) != ToursParser.BOOLEAN) {
             errors.add(String.format("Error on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         }
+        symbolTable.closeScope();
     }
 
 

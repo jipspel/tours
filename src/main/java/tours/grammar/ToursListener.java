@@ -81,42 +81,6 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitAssignStatement(@NotNull ToursParser.AssignStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link ToursParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterIfStatement(@NotNull ToursParser.IfStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link ToursParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitIfStatement(@NotNull ToursParser.IfStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code whileStatement}
-	 * labeled alternative in {@link ToursParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code whileStatement}
-	 * labeled alternative in {@link ToursParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link ToursParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterForStatement(@NotNull ToursParser.ForStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link ToursParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitForStatement(@NotNull ToursParser.ForStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code inputStatement}
 	 * labeled alternative in {@link ToursParser#statement}.
 	 * @param ctx the parse tree
@@ -140,6 +104,42 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrintStatement(@NotNull ToursParser.PrintStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ifStatement}
+	 * labeled alternative in {@link ToursParser#conditionalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStatement(@NotNull ToursParser.IfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ifStatement}
+	 * labeled alternative in {@link ToursParser#conditionalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStatement(@NotNull ToursParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code whileStatement}
+	 * labeled alternative in {@link ToursParser#conditionalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code whileStatement}
+	 * labeled alternative in {@link ToursParser#conditionalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code forStatement}
+	 * labeled alternative in {@link ToursParser#conditionalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterForStatement(@NotNull ToursParser.ForStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code forStatement}
+	 * labeled alternative in {@link ToursParser#conditionalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitForStatement(@NotNull ToursParser.ForStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code integerExpr}
 	 * labeled alternative in {@link ToursParser#expression}.
