@@ -7,6 +7,8 @@ repositories {
 dependencies {
     compile 'org.antlr:antlr4-runtime:4.5'
     compile 'org.antlr:stringtemplate:4.0.2'
-    testCompile 'commons-io:commons-io:2.4'
+
+    compile 'commons-io:commons-io:2.4'
+
     testCompile 'junit:junit:4.12'
 }

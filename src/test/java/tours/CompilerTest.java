@@ -27,7 +27,7 @@ public class CompilerTest {
 
     @Test
     public void testHelloWorld() throws IOException, InterruptedException {
-        assertEquals("Hello World\n", compileAndRun("src/test/java/tours/examples/HelloWorld.tours"));
+        assertEquals("Hello World\n", compileAndRun("src/test/java/tours/examples/hello_world.tours"));
     }
 
     private String compileAndRun(String filename) throws IOException, InterruptedException {
