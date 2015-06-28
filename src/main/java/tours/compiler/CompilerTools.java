@@ -1,6 +1,9 @@
 package tours.compiler;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.*;
+import java.nio.charset.Charset;
 
 public class CompilerTools {
     public static String toByteCode(String text) {
@@ -25,21 +28,6 @@ public class CompilerTools {
         processBuilder.command("java", "-classpath", workingDirectory, klass);
         Process process = processBuilder.start();
         process.waitFor();
-        return readInputStream(process.getInputStream()) + readInputStream(process.getErrorStream());
-    }
-
-    public static String readInputStream(InputStream inputStream) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line + System.getProperty("line.separator"));
-            }
-        } finally {
-            br.close();
-        }
-        return sb.toString();
+        return IOUtils.toString(process.getErrorStream(), Charset.defaultCharset()) + IOUtils.toString(process.getInputStream(), Charset.defaultCharset());
     }
 }
