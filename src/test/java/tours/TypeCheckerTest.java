@@ -6,7 +6,6 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
 import tours.grammar.ToursLexer;
 import tours.grammar.ToursParser;
-import tours.typechecker.SymbolTable;
 import tours.typechecker.TypeChecker;
 
 import java.io.IOException;
@@ -104,14 +103,6 @@ public class TypeCheckerTest {
         TypeChecker typeChecker = new TypeChecker();
         walker.walk(typeChecker, tree);
         assertEquals(expected, typeChecker.getErrors());
-    }
-
-    private SymbolTable getSymbolTable(String filename) throws IOException {
-        ParseTree tree = parseTours(filename);
-        ParseTreeWalker walker = new ParseTreeWalker();
-        TypeChecker typeChecker = new TypeChecker();
-        walker.walk(typeChecker, tree);
-        return typeChecker.getSymbolTable();
     }
 
     private ParseTree parseTours(String filename) throws IOException {
