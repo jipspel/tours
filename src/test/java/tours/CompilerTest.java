@@ -26,12 +26,16 @@ public class CompilerTest {
     }
 
     @Test
-    public void test() throws IOException, InterruptedException {
-        String text = new String(readAllBytes(get("src/test/java/tours/examples/HelloWorld.tours")));
+    public void testHelloWorld() throws IOException, InterruptedException {
+        assertEquals("Hello World\n", compileAndRun("src/test/java/tours/examples/HelloWorld.tours"));
+    }
+
+    private String compileAndRun(String filename) throws IOException, InterruptedException {
+        String text = new String(readAllBytes(get(filename)));
 
         CompilerTools.toByteCode(text, "tmp/output.j");
         CompilerTools.compileByteCodeToClassFile("tmp/output.j", "tmp");
 
-        assertEquals("Hello World\n", CompilerTools.runClassFile("Tours", "tmp"));
+        return CompilerTools.runClassFile("Tours", "tmp");
     }
 }
