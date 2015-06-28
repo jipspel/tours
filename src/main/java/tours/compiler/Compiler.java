@@ -20,6 +20,11 @@ import static java.nio.file.Paths.get;
 public class Compiler extends ToursBaseVisitor<ST> {
 
     private final STGroup stGroup = new STGroupDir("src/main/java/tours/compiler/templates/");
+    private String className;
+
+    public Compiler(String className) {
+        this.className = className;
+    }
 
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -27,17 +32,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
             System.exit(0);
         }
 
-        String compileFilename = String.format("%s.j", args[0].substring(0, args[0].lastIndexOf('.')));
-
+        String text = null;
         try {
-            Compiler compiler = new Compiler();
-            ST st = compiler.process(new String(readAllBytes(get(args[0]))));
-
-            System.out.println(st.render());
+            text = new String(readAllBytes(get(args[0])));
         } catch (IOException e) {
-            System.err.println("Read error on : "+ args[0]);
-            System.exit(0);
+            System.err.println("Error reading file: "+ args[0]);
         }
+
+        System.out.println(CompilerTools.toByteCode(text));
     }
 
     public ST process(String text) {
@@ -52,6 +54,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitProgram(@NotNull ToursParser.ProgramContext ctx) {
         ST st = stGroup.getInstanceOf("program");
+        st.add("class", className);
         st.add("stack_limit", 35);
         st.add("body", visit(ctx.body()).render());
         return st;

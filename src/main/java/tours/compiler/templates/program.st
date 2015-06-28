@@ -1,5 +1,5 @@
-program(stack_limit, body) ::= <<
-.class public HelloWorld
+program(class, stack_limit, body) ::= <<
+.class public <class>
 .super java/lang/Object
 
 .method public \<init>()V
