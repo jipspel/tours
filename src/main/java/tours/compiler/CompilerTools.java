@@ -25,7 +25,7 @@ public class CompilerTools {
         processBuilder.command("java", "-classpath", workingDirectory, klass);
         Process process = processBuilder.start();
         process.waitFor();
-        return readInputStream(process.getInputStream());
+        return readInputStream(process.getInputStream()) + readInputStream(process.getErrorStream());
     }
 
     public static String readInputStream(InputStream inputStream) throws IOException {
@@ -33,7 +33,7 @@ public class CompilerTools {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(inputStream));
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line + System.getProperty("line.separator"));
             }
