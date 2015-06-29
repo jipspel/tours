@@ -27,20 +27,20 @@ public class CompilerTest {
 
     @Test
     public void testHelloWorld() throws IOException, InterruptedException {
-        assertEquals("Hello World\r\n", compileAndRun("src/test/java/tours/examples/hello_world.tours"));
+        assertEquals("Hello World\n", compileAndRun("src/test/java/tours/examples/hello_world.tours"));
     }
 
     @Test
     public void testAssignment() throws IOException, InterruptedException {
-        assertEquals("true\r\nfalse\r\n", compileAndRun("src/test/java/tours/examples/simple_assignments_boolean_with_print.tours"));
-        assertEquals("a\r\nb\r\n", compileAndRun("src/test/java/tours/examples/simple_assignments_character_with_print.tours"));
-        assertEquals("35\r\n36\r\n", compileAndRun("src/test/java/tours/examples/simple_assignment_integer_with_print.tours"));
-        assertEquals("35\r\n36\r\n", compileAndRun("src/test/java/tours/examples/simple_assignments_string_with_print.tours"));
+        assertEquals("true\nfalse\n", compileAndRun("src/test/java/tours/examples/simple_assignments_boolean_with_print.tours"));
+        assertEquals("a\nb\n", compileAndRun("src/test/java/tours/examples/simple_assignments_character_with_print.tours"));
+        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_assignment_integer_with_print.tours"));
+        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_assignments_string_with_print.tours"));
     }
 
     @Test
     public void testArithmeticExpressions() throws IOException, InterruptedException {
-        assertEquals("35\r\n36\r\n", compileAndRun("src/test/java/tours/examples/arithmetic_expressions.tours"));
+        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/arithmetic_expressions.tours"));
     }
 
     private String compileAndRun(String filename) throws IOException, InterruptedException {
