@@ -196,8 +196,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) {
-        ST st = stGroup.getInstanceOf("bipush");
+        types.put(ctx.getText(), Type.INTEGER);
 
+        ST st = stGroup.getInstanceOf("bipush");
         st.add("text", ctx.getText());
 
         return st;
@@ -211,12 +212,19 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) {
+        types.put(ctx.getText(), Type.BOOLEAN);
         return concatenate(ctx);
     }
 
     @Override
     public ST visitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx) {
-        return concatenate(ctx);
+        types.put(ctx.getText(), Type.INTEGER);
+
+        ST st = ctx.multiplyOperator().STAR() != null ? stGroup.getInstanceOf("imul") :
+                ctx.multiplyOperator().SLASH() != null ? stGroup.getInstanceOf("idiv")
+                        : stGroup.getInstanceOf("irem");
+        st.add("block", concatenate(ctx));
+        return st;
     }
 
     @Override
@@ -256,7 +264,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) {
-        ST st = ctx.plusOperator().MINUS() == null ? stGroup.getInstanceOf("add") : stGroup.getInstanceOf("sub");
+        types.put(ctx.getText(), Type.INTEGER);
+
+        ST st = ctx.plusOperator().MINUS() == null ? stGroup.getInstanceOf("iadd") : stGroup.getInstanceOf("isub");
         st.add("block", concatenate(ctx));
         return st;
     }

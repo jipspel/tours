@@ -40,7 +40,7 @@ public class CompilerTest {
 
     @Test
     public void testArithmeticExpressions() throws IOException, InterruptedException {
-        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/arithmetic_expressions.tours"));
+        assertEquals("35\n36\n70\n35\n35\n", compileAndRun("src/test/java/tours/examples/arithmetic_expressions.tours"));
     }
 
     private String compileAndRun(String filename) throws IOException, InterruptedException {

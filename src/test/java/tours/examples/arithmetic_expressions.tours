@@ -4,4 +4,11 @@ main() {
     print(x);
     x = 35+36-37+38-37+1;
     print(x);
+
+    x = 2*35;
+    print(x);
+    x = 70/2;
+    print(x);
+
+    print(71 % 36);
 }
