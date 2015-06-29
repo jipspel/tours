@@ -310,48 +310,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
         return concatenate(ctx);
     }
 
-    @Override
-    public ST visitPrefixOperator(@NotNull ToursParser.PrefixOperatorContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
-    public ST visitMultiplyOperator(@NotNull ToursParser.MultiplyOperatorContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
-    public ST visitPlusOperator(@NotNull ToursParser.PlusOperatorContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
     public ST visitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx) {
         return concatenate(ctx);
     }
 
     @Override
     public ST visitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
-    public ST visitIntType(@NotNull ToursParser.IntTypeContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
-    public ST visitBoolType(@NotNull ToursParser.BoolTypeContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
-    public ST visitCharType(@NotNull ToursParser.CharTypeContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
-    public ST visitStrType(@NotNull ToursParser.StrTypeContext ctx) {
         return concatenate(ctx);
     }
 }
