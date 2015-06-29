@@ -256,7 +256,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) {
-        return concatenate(ctx);
+        ST st = ctx.plusOperator().MINUS() == null ? stGroup.getInstanceOf("add") : stGroup.getInstanceOf("sub");
+        st.add("block", concatenate(ctx));
+        return st;
     }
 
     @Override

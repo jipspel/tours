@@ -1,0 +1,5 @@
+add(block) ::=
+<<
+<block>
+iadd
+>>
