@@ -8,6 +8,7 @@ import tours.compiler.CompilerTools;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,11 +33,7 @@ public class CompilerTest {
         for (String line : expectedOutput) {
             expectedOutputString += line + System.getProperty("line.separator");
         }
-        try {
-            assertEquals(expectedOutputString, compileAndRun(filename));
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        assertEquals(expectedOutputString, compileAndRun(filename));
     }
 
     @Test
@@ -45,7 +42,7 @@ public class CompilerTest {
     }
 
     @Test
-    public void testAssignment() throws IOException, InterruptedException {
+    public void testAssignment() {
         assertEqualsOutput(Arrays.asList("true", "false", "false"), "src/test/java/tours/examples/simple_assignments_boolean_with_print.tours");
         assertEqualsOutput(Arrays.asList("a", "b", "c"), "src/test/java/tours/examples/simple_assignments_character_with_print.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/simple_assignments_integer_with_print.tours");
@@ -53,25 +50,25 @@ public class CompilerTest {
     }
 
     @Test
-    public void testArithmeticExpressions() throws IOException, InterruptedException {
+    public void testArithmeticExpressions() {
         assertEqualsOutput(Arrays.asList("35", "36", "70", "35", "35"), "src/test/java/tours/examples/arithmetic_expressions.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "35"), "src/test/java/tours/examples/arithmetic_expressions_order.tours");
     }
 
     @Test
-    public void testPrefixExpressions() throws IOException, InterruptedException {
+    public void testPrefixExpressions() {
         assertEqualsOutput(Arrays.asList("35", "-36", "false", "true"), "src/test/java/tours/examples/prefix_expressions.tours");
     }
 
     @Test
-    public void testBooleanExpressions() throws IOException, InterruptedException {
+    public void testBooleanExpressions() {
         assertEqualsOutput(Arrays.asList("true", "false", "false", "false", "true", "true", "true", "false"),
                 "src/test/java/tours/examples/boolean_expressions.tours");
         assertEqualsOutput(Arrays.asList("true", "true", "false"), "src/test/java/tours/examples/boolean_expressions_order.tours");
     }
 
     @Test
-    public void testCompareExpressions() throws IOException, InterruptedException {
+    public void testCompareExpressions() {
         assertEqualsOutput(Arrays.asList("true", "false", "false",
                 "true", "true", "false",
                 "false", "false", "true",
@@ -83,17 +80,21 @@ public class CompilerTest {
     }
 
     @Test
-    public void testPrinting() throws IOException, InterruptedException {
+    public void testPrinting() {
         assertEqualsOutput(Arrays.asList("true", "false", "35", "36", "a", "b", "35", "36", "5", "35"),
                 "src/test/java/tours/examples/printing_assignments.tours");
     }
 
-    private String compileAndRun(String filename) throws IOException, InterruptedException {
-        String text = new String(readAllBytes(get(filename)));
-
-        CompilerTools.toByteCode(text, "./tmp/output.j");
-        CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
-
-        return CompilerTools.runClassFile("Tours", "./tmp");
+    private String compileAndRun(String filename) {
+        try {
+            String text = new String(readAllBytes(get(filename)));
+            CompilerTools.toByteCode(text, "./tmp/output.j");
+            CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
+            return CompilerTools.runClassFile("Tours", "./tmp");
+        } catch (NoSuchMethodException | InvocationTargetException | IOException | IllegalAccessException | ClassNotFoundException e) {
+            System.out.println("Error compiling and running: " + filename);
+            e.printStackTrace();
+        }
+        return null;
     }
 }

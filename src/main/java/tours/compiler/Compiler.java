@@ -14,6 +14,7 @@ import tours.grammar.ToursParser;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         types = new HashMap<>();
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         if (args.length == 0) {
             System.err.println("Usage: filename.tours [--execute]");
             System.exit(0);
@@ -57,11 +58,18 @@ public class Compiler extends ToursBaseVisitor<ST> {
         if (args.length == 2 && args[1].equals("--execute")) {
             new File("tmp/").mkdir();
 
-            CompilerTools.toByteCode(text, "./tmp/output.j");
-            CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
-            System.out.println(CompilerTools.runClassFile("Tours", "./tmp"));
+            String filename = "./tmp/output.j";
+            String workingDirectory = "./tmp";
+            try {
+                CompilerTools.toByteCode(text, filename);
+                CompilerTools.compileByteCodeToClassFile(filename, workingDirectory);
+                System.out.println(CompilerTools.runClassFile("Tours", workingDirectory));
 
-            FileUtils.deleteDirectory(new File("./tmp/"));
+                FileUtils.deleteDirectory(new File(workingDirectory));
+            } catch (NoSuchMethodException | InvocationTargetException | IOException | IllegalAccessException | ClassNotFoundException e) {
+                System.out.println("Error compiling and running: " + filename);
+                e.printStackTrace();
+            }
         }
     }
 
