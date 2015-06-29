@@ -1,0 +1,4 @@
+constant(text) ::=
+<<
+ldc <text>
+>>
