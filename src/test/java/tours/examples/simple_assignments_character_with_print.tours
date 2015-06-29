@@ -3,4 +3,5 @@ main() {
     character y = 'b';
     print(x);
     print(y);
+    print('c');
 }

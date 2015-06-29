@@ -1,6 +1,8 @@
 main() {
     boolean x = true;
-    boolean y = false;
+    boolean y;
+    y = false;
     print(x);
     print(y);
+    print(false);
 }
