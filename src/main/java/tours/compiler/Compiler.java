@@ -111,12 +111,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     public ST visitVariable(@NotNull ToursParser.VariableContext ctx, String type) {
         ST st = stGroup.getInstanceOf("concatenator");
+
         List<String> stList = new ArrayList<>();
         if (ctx.expression() == null) {
             stList.add(stGroup.getInstanceOf(String.format("load_%s_0", type)).render());
         } else {
             stList.add(visit(ctx.expression()).render());
         }
+
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             identifiers.add(identifier.getText());
             types.put(identifier.getText(), new Type(ctx.variableType().getText()));
@@ -124,20 +126,20 @@ public class Compiler extends ToursBaseVisitor<ST> {
             stVariable.add("identifier_number", identifiers.indexOf(identifier.getText()));
             stList.add(stVariable.render());
         }
+
         stList.add(stGroup.getInstanceOf("pop").render());
         st.add("blocks", stList);
+
         return st;
     }
 
     @Override
     public ST visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
-        return visitVariableAssignment(ctx, types.get(ctx.IDENTIFIER().getText()).toString());
-    }
+        ST st = stGroup.getInstanceOf(String.format("assignment_%s", types.get(ctx.IDENTIFIER().getText()).toString()));
 
-    public ST visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx, String type) {
-        ST st = stGroup.getInstanceOf(String.format("assignment_%s", type));
         st.add("identifier_number", identifiers.indexOf(ctx.IDENTIFIER().getText()));
         st.add("expression", visit(ctx.expression()).render());
+
         return st;
     }
 
@@ -164,9 +166,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitPrintStatement(@NotNull ToursParser.PrintStatementContext ctx) {
         String block = visit(ctx.expression()).render();
+
         ST st = stGroup.getInstanceOf(String.format("print_%s", types.get(ctx.expression().getText()).toString()));
 
         st.add("block", block);
+
         return st;
     }
 
@@ -188,7 +192,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) {
         ST st = stGroup.getInstanceOf("constant");
+
         st.add("text", ctx.getText());
+
         return st;
     }
 
@@ -210,8 +216,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitStringExpr(@NotNull ToursParser.StringExprContext ctx) {
         ST st = stGroup.getInstanceOf("constant");
+
         st.add("text", ctx.getText());
         types.put(ctx.getText(), Type.STRING);
+
         return st;
     }
 
@@ -258,6 +266,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx, String type) {
         ST st = stGroup.getInstanceOf(String.format("load_%s_identifier", type));
         st.add("identifier_number", identifiers.indexOf(ctx.getText()));
+        
         return st;
     }
 
