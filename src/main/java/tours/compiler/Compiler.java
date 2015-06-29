@@ -72,6 +72,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
         return visit(tree);
     }
 
+    public String getTypeClass(String type) {
+        return type.equals(Type.STRING.toString()) ? Type.STRING.toString() : Type.INTEGER.toString();
+    }
+
     @Override
     public ST visitProgram(@NotNull ToursParser.ProgramContext ctx) {
         ST st = stGroup.getInstanceOf("program");
@@ -106,23 +110,24 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitVariable(@NotNull ToursParser.VariableContext ctx) {
-        return visitVariable(ctx, ctx.variableType().getText().toLowerCase());
-    }
-
-    public ST visitVariable(@NotNull ToursParser.VariableContext ctx, String type) {
         ST st = stGroup.getInstanceOf("concatenator");
-
+        String type = ctx.variableType().getText().toLowerCase();
+        String typeClass;
         List<String> stList = new ArrayList<>();
+
         if (ctx.expression() == null) {
-            stList.add(stGroup.getInstanceOf(String.format("load_%s_0", type)).render());
+            typeClass = type.equals(Type.STRING.toString()) ? "null" : "integer_0";
+            stList.add(stGroup.getInstanceOf(String.format("load_%s", typeClass)).render());
         } else {
             stList.add(visit(ctx.expression()).render());
         }
 
+        typeClass = getTypeClass(type);
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             identifiers.add(identifier.getText());
             types.put(identifier.getText(), new Type(ctx.variableType().getText()));
-            ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", type));
+
+            ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", typeClass));
             stVariable.add("identifier_number", identifiers.indexOf(identifier.getText()));
             stList.add(stVariable.render());
         }
@@ -135,7 +140,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
-        ST st = stGroup.getInstanceOf(String.format("assignment_%s", types.get(ctx.IDENTIFIER().getText()).toString()));
+        ST st = stGroup.getInstanceOf(String.format("assignment_%s", getTypeClass(types.get(ctx.IDENTIFIER().getText()).toString())));
 
         st.add("identifier_number", identifiers.indexOf(ctx.IDENTIFIER().getText()));
         st.add("expression", visit(ctx.expression()).render());
@@ -191,7 +196,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) {
-        ST st = stGroup.getInstanceOf("constant");
+        ST st = stGroup.getInstanceOf("bipush");
 
         st.add("text", ctx.getText());
 
@@ -200,11 +205,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitTrueExpr(@NotNull ToursParser.TrueExprContext ctx) {
-        ST st = stGroup.getInstanceOf("constant_true");
-
         types.put(ctx.getText(), Type.BOOLEAN);
-
-        return st;
+        return stGroup.getInstanceOf("load_integer_1");
     }
 
     @Override
@@ -219,7 +221,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitStringExpr(@NotNull ToursParser.StringExprContext ctx) {
-        ST st = stGroup.getInstanceOf("constant");
+        ST st = stGroup.getInstanceOf("load_constant");
 
         st.add("text", ctx.getText());
         types.put(ctx.getText(), Type.STRING);
@@ -244,7 +246,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) {
-        ST st = stGroup.getInstanceOf("constant_character");
+        ST st = stGroup.getInstanceOf("bipush");
 
         st.add("text", (int) ctx.getText().charAt(1));
         types.put(ctx.getText(), Type.CHARACTER);
@@ -260,7 +262,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitFalseExpr(@NotNull ToursParser.FalseExprContext ctx) {
         types.put(ctx.getText(), Type.BOOLEAN);
-        return stGroup.getInstanceOf("constant_false");
+        return stGroup.getInstanceOf("load_integer_0");
     }
 
     @Override
@@ -270,11 +272,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) {
-        return visitIdentifierExpr(ctx, types.get(ctx.IDENTIFIER().getText()).toString());
-    }
+        String type = types.get(ctx.IDENTIFIER().getText()).toString();
+        ST st = stGroup.getInstanceOf(String.format("load_identifier_%s", getTypeClass(type)));
 
-    public ST visitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx, String type) {
-        ST st = stGroup.getInstanceOf(String.format("load_%s_identifier", type));
         st.add("identifier_number", identifiers.indexOf(ctx.getText()));
 
         return st;

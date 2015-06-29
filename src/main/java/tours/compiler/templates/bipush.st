@@ -1,0 +1,4 @@
+bipush(text) ::=
+<<
+bipush <text>
+>>
