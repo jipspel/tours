@@ -13,6 +13,7 @@ public class Type {
         this.type = type;
     }
     public Type(String type) {
+        type = type.toLowerCase();
         switch (type) {
             case "boolean" :
                 this.type = BOOLEAN.getType();
