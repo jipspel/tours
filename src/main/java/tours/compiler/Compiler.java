@@ -108,11 +108,15 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitVariable(@NotNull ToursParser.VariableContext ctx) {
         ST st = stGroup.getInstanceOf("concatenator");
         List<String> stList = new ArrayList<>();
-        stList.add(visit(ctx.expression()).render());
+        if (ctx.expression() == null) {
+            stList.add(stGroup.getInstanceOf("load_integer_0").render());
+        } else {
+            stList.add(visit(ctx.expression()).render());
+        }
         for (TerminalNode identifier: ctx.IDENTIFIER()) {
             identifiers.add(identifier.getText());
             types.put(identifier.getText(), new Type(ctx.variableType().getText()));
-            ST stVariable = stGroup.getInstanceOf("variable_integer_assignment");
+            ST stVariable = stGroup.getInstanceOf("variable_integer");
             stVariable.add("identifier_number", identifiers.indexOf(identifier.getText()));
             stList.add(stVariable.render());
         }
@@ -123,7 +127,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
-        return concatenate(ctx);
+        ST st = stGroup.getInstanceOf("assignment_integer");
+        st.add("identifier_number", identifiers.indexOf(ctx.IDENTIFIER().getText()));
+        st.add("expression", visit(ctx.expression()).render());
+        return st;
     }
 
     @Override
@@ -138,7 +145,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitAssignStatement(@NotNull ToursParser.AssignStatementContext ctx) {
-        return concatenate(ctx);
+        return visit(ctx.variableAssignment());
     }
 
     @Override

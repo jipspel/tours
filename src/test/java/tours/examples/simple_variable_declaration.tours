@@ -1,4 +1,7 @@
 main() {
     integer x = 35;
+    integer y;
+    y = 36;
     print(x);
+    print(y);
 }
