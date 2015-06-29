@@ -93,7 +93,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitVariableDeclaration(@NotNull ToursParser.VariableDeclarationContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
@@ -103,12 +103,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitFunction(@NotNull ToursParser.FunctionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
@@ -118,12 +118,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitAssignStatement(@NotNull ToursParser.AssignStatementContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitInputStatement(@NotNull ToursParser.InputStatementContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
@@ -135,17 +135,17 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitForStatement(@NotNull ToursParser.ForStatementContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
@@ -155,17 +155,17 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitTrueExpr(@NotNull ToursParser.TrueExprContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
@@ -175,37 +175,37 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitCompareExpression(@NotNull ToursParser.CompareExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitPrefixExpression(@NotNull ToursParser.PrefixExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitFalseExpr(@NotNull ToursParser.FalseExprContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitParExpression(@NotNull ToursParser.ParExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
@@ -215,51 +215,51 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitPrefixOperator(@NotNull ToursParser.PrefixOperatorContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitMultiplyOperator(@NotNull ToursParser.MultiplyOperatorContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitPlusOperator(@NotNull ToursParser.PlusOperatorContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitIntType(@NotNull ToursParser.IntTypeContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitBoolType(@NotNull ToursParser.BoolTypeContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitCharType(@NotNull ToursParser.CharTypeContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 
     @Override
     public ST visitStrType(@NotNull ToursParser.StrTypeContext ctx) {
-        return visitChildren(ctx);
+        return concatenate(ctx);
     }
 }
