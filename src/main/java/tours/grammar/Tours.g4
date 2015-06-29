@@ -34,7 +34,7 @@ block
 
 /** Statement. */
 statement: variableAssignment                               #assignStatement
-         | INPUT LPAR IDENTIFIER RPAR                       #inputStatement
+         | INPUT LPAR IDENTIFIER (COMMA IDENTIFIER)* RPAR   #inputStatement
          | PRINT LPAR expression (COMMA expression)* RPAR   #printStatement
          ;
 
