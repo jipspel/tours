@@ -44,6 +44,11 @@ public class CompilerTest {
         assertEquals("35\n36\n35\n", compileAndRun("src/test/java/tours/examples/arithmetic_expressions_order.tours"));
     }
 
+    @Test
+    public void testPrefixExpressions() throws IOException, InterruptedException {
+        assertEquals("35\n-36\nfalse\ntrue\n", compileAndRun("src/test/java/tours/examples/prefix_expressions.tours"));
+    }
+
     private String compileAndRun(String filename) throws IOException, InterruptedException {
         String text = new String(readAllBytes(get(filename)));
 

@@ -1,0 +1,6 @@
+main() {
+    print(+35);
+    print(-36);
+    print(!true);
+    print(!false);
+}

@@ -1,0 +1,5 @@
+ineg(block) ::=
+<<
+<block>
+ineg
+>>

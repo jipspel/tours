@@ -244,7 +244,20 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitPrefixExpression(@NotNull ToursParser.PrefixExpressionContext ctx) {
-        return concatenate(ctx);
+        if (ctx.prefixOperator().MINUS() != null) {
+            types.put(ctx.getText(), Type.INTEGER);
+            ST st = stGroup.getInstanceOf("ineg");
+            st.add("block", concatenate(ctx));
+            return st;
+        } else if (ctx.prefixOperator().PLUS() != null) {
+            types.put(ctx.getText(), Type.INTEGER);
+            return visit(ctx.expression());
+        } else {
+            types.put(ctx.getText(), Type.BOOLEAN);
+            ST st = stGroup.getInstanceOf("not");
+            st.add("block", concatenate(ctx));
+            return st;
+        }
     }
 
     @Override
