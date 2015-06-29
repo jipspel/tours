@@ -1,0 +1,8 @@
+main() {
+    print(true, false);
+    print("35", "36");
+    print('a', 'b');
+    print(35, 36);
+    integer x = print(5) + 30;
+    print(x);
+}

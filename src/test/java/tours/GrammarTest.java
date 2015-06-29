@@ -87,11 +87,11 @@ public class GrammarTest {
     }
 
     @Test
-    public void missingParenthesis() throws IOException {
+    public void testMissingParenthesis() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/invalid/missing_parenthesis.tours");
         assertEquals(2, errorList.size());
         assertEquals("line 4:14 missing '(' at 'x'", errorList.get(0));
-        assertEquals("line 4:15 mismatched input ';' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ')', '/', '*'}", errorList.get(1));
+        assertEquals("line 4:15 mismatched input ';' expecting {'&&', ',', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ')', '/', '*'}", errorList.get(1));
     }
 
     private List<String> parseToursFile(String filename) throws IOException {

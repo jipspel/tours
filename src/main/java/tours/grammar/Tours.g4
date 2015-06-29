@@ -33,15 +33,15 @@ block
     ;
 
 /** Statement. */
-statement: variableAssignment           #assignStatement
-         | INPUT LPAR IDENTIFIER RPAR   #inputStatement
-         | PRINT LPAR expression RPAR   #printStatement
+statement: variableAssignment                               #assignStatement
+         | INPUT LPAR IDENTIFIER RPAR                       #inputStatement
+         | PRINT LPAR expression (COMMA expression)* RPAR   #printStatement
          ;
 
 /** Coditional statement. */
 conditionalStatement: IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
                     | WHILE LPAR expression RPAR block                                              #whileStatement
-                    | FOR LPAR (variable | statement) SEMI expression SEMI statement RPAR block  #forStatement
+                    | FOR LPAR (variable | statement) SEMI expression SEMI statement RPAR block     #forStatement
                     ;
 
 /** Expression.*/
@@ -53,6 +53,7 @@ expression:     LPAR expression RPAR                                            
               | expression AND expression                                       #booleanAndExpression
               | expression OR expression                                        #booleanOrExpression
               | LBRACE (expression SEMI | statement)* expression RBRACE         #compoundExpression
+              | PRINT LPAR expression RPAR                                      #printExpression
               | IDENTIFIER                                                      #identifierExpr
               | CHAR                                                            #characterExpr
               | STR                                                             #stringExpr

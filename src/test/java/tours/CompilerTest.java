@@ -82,6 +82,12 @@ public class CompilerTest {
                 "true", "true", "true"), "src/test/java/tours/examples/compare_expressions.tours");
     }
 
+    @Test
+    public void testPrinting() throws IOException, InterruptedException {
+        assertEqualsOutput(Arrays.asList("true", "false", "35", "36", "a", "b", "35", "36", "5", "35"),
+                "src/test/java/tours/examples/printing_assignments.tours");
+    }
+
     private String compileAndRun(String filename) throws IOException, InterruptedException {
         String text = new String(readAllBytes(get(filename)));
 

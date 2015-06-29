@@ -172,12 +172,27 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitPrintStatement(@NotNull ToursParser.PrintStatementContext ctx) {
+        ST st = stGroup.getInstanceOf("concatenator");
+        List<String> expressions = new ArrayList<>();
+
+        for (ToursParser.ExpressionContext expression : ctx.expression()) {
+            String block = visit(expression).render();
+            ST stExpression = stGroup.getInstanceOf(String.format("print_%s", types.get(expression.getText()).toString()));
+            stExpression.add("block", block);
+            expressions.add(stExpression.render());
+        }
+
+        st.add("blocks", expressions);
+
+        return st;
+    }
+
+    @Override
+    public ST visitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
+        ST st;
         String block = visit(ctx.expression()).render();
-
-        ST st = stGroup.getInstanceOf(String.format("print_%s", types.get(ctx.expression().getText()).toString()));
-
+        st = stGroup.getInstanceOf(String.format("print_%s_dup", types.get(ctx.expression().getText()).toString()));
         st.add("block", block);
-
         return st;
     }
 

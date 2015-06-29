@@ -110,6 +110,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTrueExpr(@NotNull ToursParser.TrueExprContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code printExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code booleanOrExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
