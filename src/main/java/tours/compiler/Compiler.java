@@ -200,7 +200,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitTrueExpr(@NotNull ToursParser.TrueExprContext ctx) {
-        return concatenate(ctx);
+        ST st = stGroup.getInstanceOf("constant_true");
+
+        types.put(ctx.getText(), Type.BOOLEAN);
+
+        return st;
     }
 
     @Override
@@ -240,7 +244,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) {
-        return concatenate(ctx);
+        ST st = stGroup.getInstanceOf("constant_character");
+
+        st.add("text", (int) ctx.getText().charAt(1));
+        types.put(ctx.getText(), Type.CHARACTER);
+
+        return st;
     }
 
     @Override
@@ -250,7 +259,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitFalseExpr(@NotNull ToursParser.FalseExprContext ctx) {
-        return concatenate(ctx);
+        types.put(ctx.getText(), Type.BOOLEAN);
+        return stGroup.getInstanceOf("constant_false");
     }
 
     @Override
@@ -266,7 +276,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx, String type) {
         ST st = stGroup.getInstanceOf(String.format("load_%s_identifier", type));
         st.add("identifier_number", identifiers.indexOf(ctx.getText()));
-        
+
         return st;
     }
 

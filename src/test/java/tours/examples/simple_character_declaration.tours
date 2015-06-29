@@ -1,0 +1,6 @@
+main() {
+    character x = 'a';
+    character y = 'b';
+    print(x);
+    print(y);
+}
