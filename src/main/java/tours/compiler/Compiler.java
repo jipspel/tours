@@ -3,6 +3,7 @@ package tours.compiler;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.apache.commons.io.FileUtils;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupDir;
@@ -10,6 +11,7 @@ import tours.grammar.ToursBaseVisitor;
 import tours.grammar.ToursLexer;
 import tours.grammar.ToursParser;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +28,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
         this.className = className;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
         if (args.length == 0) {
-            System.err.println("Usage: filename.tours");
+            System.err.println("Usage: filename.tours [--execute]");
             System.exit(0);
         }
 
@@ -39,7 +41,19 @@ public class Compiler extends ToursBaseVisitor<ST> {
             System.err.println("Error reading file: "+ args[0]);
         }
 
+        System.out.println("<<<");
         System.out.println(CompilerTools.toByteCode(text));
+        System.out.println(">>>");
+
+        if (args.length == 2 && args[1].equals("--execute")) {
+            new File("tmp/").mkdir();
+
+            CompilerTools.toByteCode(text, "tmp/output.j");
+            CompilerTools.compileByteCodeToClassFile("tmp/output.j", "tmp");
+            System.out.println(CompilerTools.runClassFile("Tours", "tmp"));
+
+            FileUtils.deleteDirectory(new File("tmp/"));
+        }
     }
 
     public ST process(String text) {
