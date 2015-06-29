@@ -164,12 +164,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitPrintStatement(@NotNull ToursParser.PrintStatementContext ctx) {
         String block = visit(ctx.expression()).render();
-        ST st = null;
-        if (types.get(ctx.expression().getText()).equals(Type.STRING)) {
-            st = stGroup.getInstanceOf("print_string");
-        } else if (types.get(ctx.expression().getText()).equals(Type.INTEGER)){
-            st = stGroup.getInstanceOf("print_integer");
-        }
+        ST st = stGroup.getInstanceOf(String.format("print_%s", types.get(ctx.expression().getText()).toString()));
+
         st.add("block", block);
         return st;
     }
