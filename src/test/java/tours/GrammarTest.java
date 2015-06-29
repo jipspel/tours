@@ -74,7 +74,7 @@ public class GrammarTest {
     public void testMissingAssignment() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/missing_assignment.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 1:21 no viable alternative at input ';'", errorList.get(0));
+        assertEquals("line 2:16 no viable alternative at input ';'", errorList.get(0));
     }
 
     @Test
