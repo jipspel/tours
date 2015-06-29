@@ -49,6 +49,13 @@ public class CompilerTest {
         assertEquals("35\n-36\nfalse\ntrue\n", compileAndRun("src/test/java/tours/examples/prefix_expressions.tours"));
     }
 
+    @Test
+    public void testBooleanExpressions() throws IOException, InterruptedException {
+        assertEquals("true\nfalse\nfalse\nfalse\n" +
+                "true\ntrue\ntrue\nfalse\n", compileAndRun("src/test/java/tours/examples/boolean_expressions.tours"));
+        assertEquals("true\ntrue\nfalse\n", compileAndRun("src/test/java/tours/examples/boolean_expressions_order.tours"));
+    }
+
     private String compileAndRun(String filename) throws IOException, InterruptedException {
         String text = new String(readAllBytes(get(filename)));
 

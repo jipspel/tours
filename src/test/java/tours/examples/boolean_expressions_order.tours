@@ -1,0 +1,5 @@
+main() {
+    print(true && true || false);   // true
+    print(true || false && true);   // true
+    print(true && false || true && false ); // false
+}

@@ -1,0 +1,5 @@
+iand(block) ::=
+<<
+<block>
+iand
+>>

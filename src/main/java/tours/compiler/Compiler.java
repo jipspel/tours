@@ -213,7 +213,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) {
         types.put(ctx.getText(), Type.BOOLEAN);
-        return concatenate(ctx);
+
+        ST st = stGroup.getInstanceOf("ior");
+        st.add("block", concatenate(ctx));
+        return st;
     }
 
     @Override
@@ -307,7 +310,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) {
-        return concatenate(ctx);
+        types.put(ctx.getText(), Type.BOOLEAN);
+
+        ST st = stGroup.getInstanceOf("iand");
+        st.add("block", concatenate(ctx));
+        return st;
     }
 
     public ST visitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx) {

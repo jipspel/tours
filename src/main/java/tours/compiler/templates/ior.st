@@ -1,0 +1,5 @@
+ior(block) ::=
+<<
+<block>
+ior
+>>
