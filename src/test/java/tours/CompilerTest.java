@@ -32,7 +32,8 @@ public class CompilerTest {
 
     @Test
     public void testAssignment() throws IOException, InterruptedException {
-        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_variable_declaration.tours"));
+        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_integer_declaration.tours"));
+        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_string_declaration.tours"));
     }
 
     private String compileAndRun(String filename) throws IOException, InterruptedException {

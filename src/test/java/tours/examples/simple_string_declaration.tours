@@ -1,0 +1,7 @@
+main() {
+    String x = "35";
+    String y;
+    y = "36";
+    print(x);
+    print(y);
+}

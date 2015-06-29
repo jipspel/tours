@@ -1,6 +1,6 @@
-print_integer(text_command) ::=
+print_integer(block) ::=
 <<
 getstatic java/lang/System/out Ljava/io/PrintStream;
-<text_command>
+<block>
 invokevirtual java/io/PrintStream/println(I)V
 >>

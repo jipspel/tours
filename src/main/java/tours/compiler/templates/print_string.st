@@ -1,6 +1,6 @@
-print_string(text_command) ::=
+print_string(block) ::=
 <<
 getstatic java/lang/System/out Ljava/io/PrintStream;
-<text_command>
+<block>
 invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
 >>

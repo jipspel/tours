@@ -38,9 +38,21 @@ public class Type {
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Type) {
-            return this.getType() == ((Type) object).getType();
+        return object instanceof Type && this.getType() == ((Type) object).getType();
+    }
+
+    @Override
+    public String toString() {
+        if (type == Type.BOOLEAN.getType()) {
+            return "boolean";
+        } else if (type == Type.CHARACTER.getType()) {
+            return "character";
+        } else if (type == Type.INTEGER.getType()) {
+            return "integer";
+        } else if (type == Type.STRING.getType()) {
+            return "string";
+        } else {
+            throw new UnsupportedOperationException("Type: " + type + " was undefined");
         }
-        return false;
     }
 }
