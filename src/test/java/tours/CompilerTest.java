@@ -32,10 +32,10 @@ public class CompilerTest {
 
     @Test
     public void testAssignment() throws IOException, InterruptedException {
-        assertEquals("true\nfalse\n", compileAndRun("src/test/java/tours/examples/simple_boolean_declaration.tours"));
-        assertEquals("a\nb\n", compileAndRun("src/test/java/tours/examples/simple_character_declaration.tours"));
-        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_integer_declaration.tours"));
-        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_string_declaration.tours"));
+        assertEquals("true\nfalse\n", compileAndRun("src/test/java/tours/examples/simple_assignments_boolean_with_print.tours"));
+        assertEquals("a\nb\n", compileAndRun("src/test/java/tours/examples/simple_assignments_character_with_print.tours"));
+        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_assignment_integer_with_print.tours"));
+        assertEquals("35\n36\n", compileAndRun("src/test/java/tours/examples/simple_assignments_string_with_print.tours"));
     }
 
     private String compileAndRun(String filename) throws IOException, InterruptedException {
