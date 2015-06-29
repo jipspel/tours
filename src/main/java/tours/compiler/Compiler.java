@@ -57,11 +57,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
         if (args.length == 2 && args[1].equals("--execute")) {
             new File("tmp/").mkdir();
 
-            CompilerTools.toByteCode(text, "tmp/output.j");
-            CompilerTools.compileByteCodeToClassFile("tmp/output.j", "tmp");
-            System.out.println(CompilerTools.runClassFile("Tours", "tmp"));
+            CompilerTools.toByteCode(text, "./tmp/output.j");
+            CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
+            System.out.println(CompilerTools.runClassFile("Tours", "./tmp"));
 
-            FileUtils.deleteDirectory(new File("tmp/"));
+            FileUtils.deleteDirectory(new File("./tmp/"));
         }
     }
 

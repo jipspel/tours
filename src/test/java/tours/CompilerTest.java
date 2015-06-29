@@ -27,11 +27,6 @@ public class CompilerTest {
         FileUtils.deleteDirectory(new File("tmp/"));
     }
 
-    @Test
-    public void testHelloWorld() {
-        assertEqualsOutput(Arrays.asList("Hello World"), "src/test/java/tours/examples/hello_world.tours");
-    }
-
     private void assertEqualsOutput(List<String> expectedOutput, String filename) {
         String expectedOutputString = "";
         for (String line : expectedOutput) {
@@ -42,6 +37,11 @@ public class CompilerTest {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testHelloWorld() {
+        assertEqualsOutput(Arrays.asList("Hello World"), "src/test/java/tours/examples/hello_world.tours");
     }
 
     @Test
@@ -91,9 +91,9 @@ public class CompilerTest {
     private String compileAndRun(String filename) throws IOException, InterruptedException {
         String text = new String(readAllBytes(get(filename)));
 
-        CompilerTools.toByteCode(text, "tmp/output.j");
-        CompilerTools.compileByteCodeToClassFile("tmp/output.j", "tmp");
+        CompilerTools.toByteCode(text, "./tmp/output.j");
+        CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
 
-        return CompilerTools.runClassFile("Tours", "tmp");
+        return CompilerTools.runClassFile("Tours", "./tmp");
     }
 }
