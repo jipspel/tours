@@ -329,6 +329,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInputExpression(@NotNull ToursParser.InputExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) { }
 	/**
 	 * {@inheritDoc}

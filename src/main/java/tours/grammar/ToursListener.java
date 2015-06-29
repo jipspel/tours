@@ -307,6 +307,18 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitParExpression(@NotNull ToursParser.ParExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code inputExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterInputExpression(@NotNull ToursParser.InputExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code inputExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitInputExpression(@NotNull ToursParser.InputExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code identifierExpr}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree

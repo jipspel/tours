@@ -179,6 +179,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
+    public ST visitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) {
+        return concatenate(ctx);
+    }
+
+    @Override
     public ST visitPrintStatement(@NotNull ToursParser.PrintStatementContext ctx) {
         ST st = stGroup.getInstanceOf("concatenator");
         List<String> expressions = new ArrayList<>();
