@@ -10,6 +10,7 @@ import tours.typechecker.TypeChecker;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.file.Files.readAllBytes;
@@ -20,81 +21,95 @@ public class TypeCheckerTest {
 
     @Test
     public void testVariableDeclarations() throws IOException {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/variable_declaration.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/variable_declaration.tours");
     }
 
     @Test
     public void testForStatement() throws IOException {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/statement_for.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/statement_for.tours");
     }
 
     @Test
     public void testWhileStatement() throws IOException {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/statement_while.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/statement_while.tours");
     }
 
     @Test
     public void testIfStatement() throws IOException {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/statement_if.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/statement_if.tours");
     }
 
     @Test
     public void testAssignments() throws IOException {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/assignments.tours");
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_boolean.tours");
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_character.tours");
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_integer.tours");
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/simple_assignments_string.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_boolean.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_character.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_integer.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_string.tours");
     }
 
     @Test
     public void testMismatchingTypes() throws IOException {
-        List<String> errors = new ArrayList<>();
-        errors.add("Error on line 2, pos 14");
-        errors.add("Error on line 3, pos 14");
-        errors.add("Error on line 4, pos 16");
-        errors.add("Error on line 5, pos 13");
-        testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/mismatching_type.tours");
+        List<String> errors = Arrays.asList(
+                "Error on line 2, pos 14",
+                "Error on line 3, pos 14",
+                "Error on line 4, pos 16",
+                "Error on line 5, pos 13"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type.tours");
+    }
+
+    @Test
+    public void testAlreadyDefinedVariables() throws IOException {
+        List<String> errors = Arrays.asList("Error on line 3, pos 12");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/already_defined_variables.tours");
+    }
+
+    @Test
+    public void testNotDefinedVariables() throws IOException {
+        List<String> errors = Arrays.asList("Error on line 2, pos 6");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables.tours");
     }
 
     @Test
     public void testInvalidForStatement() throws IOException {
-        List<String> errors = new ArrayList<>();
-        errors.add("Error on line 5, pos 16");
-        errors.add("Error on line 10, pos 16");
-        errors.add("Error on line 15, pos 16");
-        errors.add("Error on line 20, pos 16");
-        errors.add("Error on line 25, pos 16");
-
-        testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/invalid_statements_for.tours");
+        List<String> errors = Arrays.asList("Error on line 4, pos 16",
+                "Error on line 8, pos 16",
+                "Error on line 12, pos 16",
+                "Error on line 16, pos 16",
+                "Error on line 20, pos 16"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_for.tours");
     }
 
     @Test
     public void testInvalidIfStatement() throws IOException {
-        List<String> errors = new ArrayList<>();
-        errors.add("Error on line 6, pos 7");
-        errors.add("Error on line 10, pos 7");
-        errors.add("Error on line 14, pos 7");
-        errors.add("Error on line 18, pos 7");
-        errors.add("Error on line 22, pos 7");
-        errors.add("Error on line 26, pos 7");
-        errors.add("Error on line 30, pos 7");
-        errors.add("Error on line 34, pos 7");
-        testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/invalid_statements_if.tours");
+        List<String> errors = Arrays.asList(
+                "Error on line 6, pos 7",
+                "Error on line 10, pos 7",
+                "Error on line 14, pos 7",
+                "Error on line 18, pos 7",
+                "Error on line 22, pos 7",
+                "Error on line 26, pos 7",
+                "Error on line 30, pos 7",
+                "Error on line 34, pos 7"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_if.tours");
     }
 
     @Test
     public void testInvalidWhileStatement() throws IOException {
-        List<String> errors = new ArrayList<>();
-        errors.add("Error on line 6, pos 10");
-        errors.add("Error on line 10, pos 10");
-        errors.add("Error on line 14, pos 10");
-        errors.add("Error on line 18, pos 10");
-        errors.add("Error on line 22, pos 10");
-        errors.add("Error on line 26, pos 10");
-        errors.add("Error on line 30, pos 10");
-        errors.add("Error on line 34, pos 10");
-        testTypeCheckerErrors(errors, "src/test/java/tours/examples/invalid/invalid_statements_while.tours");
+        List<String> errors = Arrays.asList(
+                "Error on line 6, pos 10",
+                "Error on line 10, pos 10",
+                "Error on line 14, pos 10",
+                "Error on line 18, pos 10",
+                "Error on line 22, pos 10",
+                "Error on line 26, pos 10",
+                "Error on line 30, pos 10",
+                "Error on line 34, pos 10"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_while.tours");
     }
 
     private void testTypeCheckerErrors(List<String> expected, String filename) throws IOException {

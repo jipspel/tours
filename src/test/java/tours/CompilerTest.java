@@ -38,33 +38,33 @@ public class CompilerTest {
 
     @Test
     public void testHelloWorld() {
-        assertEqualsOutput(Arrays.asList("Hello World"), "src/test/java/tours/examples/hello_world.tours");
+        assertEqualsOutput(Arrays.asList("Hello World"), "src/test/java/tours/examples/compiler/hello_world.tours");
     }
 
     @Test
     public void testAssignment() {
-        assertEqualsOutput(Arrays.asList("true", "false", "false"), "src/test/java/tours/examples/simple_assignments_boolean_with_print.tours");
-        assertEqualsOutput(Arrays.asList("a", "b", "c"), "src/test/java/tours/examples/simple_assignments_character_with_print.tours");
-        assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/simple_assignments_integer_with_print.tours");
-        assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/simple_assignments_string_with_print.tours");
+        assertEqualsOutput(Arrays.asList("true", "false", "false"), "src/test/java/tours/examples/compiler/assignments_boolean.tours");
+        assertEqualsOutput(Arrays.asList("a", "b", "c"), "src/test/java/tours/examples/compiler/assignments_character.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_integer.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_string.tours");
     }
 
     @Test
     public void testArithmeticExpressions() {
-        assertEqualsOutput(Arrays.asList("35", "36", "70", "35", "35"), "src/test/java/tours/examples/arithmetic_expressions.tours");
-        assertEqualsOutput(Arrays.asList("35", "36", "35"), "src/test/java/tours/examples/arithmetic_expressions_order.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "70", "35", "35"), "src/test/java/tours/examples/compiler/arithmetic_expressions.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "35"), "src/test/java/tours/examples/compiler/arithmetic_expressions_order.tours");
     }
 
     @Test
     public void testPrefixExpressions() {
-        assertEqualsOutput(Arrays.asList("35", "-36", "false", "true"), "src/test/java/tours/examples/prefix_expressions.tours");
+        assertEqualsOutput(Arrays.asList("35", "-36", "false", "true"), "src/test/java/tours/examples/compiler/prefix_expressions.tours");
     }
 
     @Test
     public void testBooleanExpressions() {
         assertEqualsOutput(Arrays.asList("true", "false", "false", "false", "true", "true", "true", "false"),
-                "src/test/java/tours/examples/boolean_expressions.tours");
-        assertEqualsOutput(Arrays.asList("true", "true", "false"), "src/test/java/tours/examples/boolean_expressions_order.tours");
+                "src/test/java/tours/examples/compiler/boolean_expressions.tours");
+        assertEqualsOutput(Arrays.asList("true", "true", "false"), "src/test/java/tours/examples/compiler/boolean_expressions_order.tours");
     }
 
     @Test
@@ -76,13 +76,13 @@ public class CompilerTest {
                 "true", "true", "true",
                 "false", "false", "false",
                 "false", "false", "false",
-                "true", "true", "true"), "src/test/java/tours/examples/compare_expressions.tours");
+                "true", "true", "true"), "src/test/java/tours/examples/compiler/compare_expressions.tours");
     }
 
     @Test
     public void testPrinting() {
         assertEqualsOutput(Arrays.asList("true", "false", "35", "36", "a", "b", "35", "36", "5", "35"),
-                "src/test/java/tours/examples/printing_assignments.tours");
+                "src/test/java/tours/examples/compiler/printing_assignments.tours");
     }
 
     private String compileAndRun(String filename) {

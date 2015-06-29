@@ -1,0 +1,10 @@
+main() {
+    integer x = 35;
+    integer y = 35;
+
+    if (x == 35) {
+        x = x + 1;
+    } else {
+        y = 36;
+    }
+}

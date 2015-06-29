@@ -1,9 +1,0 @@
-main() {
-    for (integer x = 1; x < 35; x = x + 1) {
-        integer i = 35;
-    }
-    integer y;
-    for (y = 1; y < 10; y = y + 1) {
-        integer j = 10;
-    }
-}

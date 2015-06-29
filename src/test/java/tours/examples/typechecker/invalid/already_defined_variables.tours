@@ -1,0 +1,4 @@
+main () {
+    integer x = 35;
+    integer x = 36;
+}

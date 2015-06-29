@@ -1,6 +1,0 @@
-main() {
-    integer x;
-    if (x != 35) {
-        x = 35;
-    }
-}
