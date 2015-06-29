@@ -189,9 +189,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
-        ST st;
         String block = visit(ctx.expression()).render();
-        st = stGroup.getInstanceOf(String.format("print_%s_dup", types.get(ctx.expression().getText()).toString()));
+        ST st = stGroup.getInstanceOf(String.format("print_%s_dup", types.get(ctx.expression().getText()).toString()));
         st.add("block", block);
         return st;
     }
