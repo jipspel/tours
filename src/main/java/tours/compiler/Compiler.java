@@ -26,11 +26,13 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     private final STGroup stGroup = new STGroupDir("src/main/java/tours/compiler/templates/");
     private String className;
+    private int labelCount;
     private List<String> identifiers;
     private Map<String, Type> types;
 
     public Compiler(String className) {
         this.className = className;
+        labelCount =0;
         identifiers = new ArrayList<>();
         types = new HashMap<>();
     }
@@ -232,17 +234,37 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitStringExpr(@NotNull ToursParser.StringExprContext ctx) {
-        ST st = stGroup.getInstanceOf("load_constant");
-
-        st.add("text", ctx.getText());
         types.put(ctx.getText(), Type.STRING);
+
+        ST st = stGroup.getInstanceOf("load_constant");
+        st.add("text", ctx.getText());
 
         return st;
     }
 
     @Override
     public ST visitCompareExpression(@NotNull ToursParser.CompareExpressionContext ctx) {
-        return concatenate(ctx);
+        types.put(ctx.getText(), Type.BOOLEAN);
+
+        String block = concatenate(ctx).render();
+        labelCount++;
+        ST st = null;
+        if (ctx.compareOperator().LE() != null) {
+            st = stGroup.getInstanceOf("le");
+        } else if (ctx.compareOperator().LT() != null) {
+            st = stGroup.getInstanceOf("lt");
+        } else if (ctx.compareOperator().GE() != null) {
+            st = stGroup.getInstanceOf("ge");
+        } else if (ctx.compareOperator().GT() != null) {
+            st = stGroup.getInstanceOf("gt");
+        } else if (ctx.compareOperator().EQ() != null) {
+            st = stGroup.getInstanceOf("eq");
+        } else if (ctx.compareOperator().NE() != null) {
+            st = stGroup.getInstanceOf("ne");
+        }
+        st.add("block", block);
+        st.add("label_number", labelCount);
+        return st;
     }
 
     @Override

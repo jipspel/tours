@@ -56,6 +56,18 @@ public class CompilerTest {
         assertEquals("true\ntrue\nfalse\n", compileAndRun("src/test/java/tours/examples/boolean_expressions_order.tours"));
     }
 
+    @Test
+    public void testCompareExpressions() throws IOException, InterruptedException {
+        assertEquals("true\nfalse\nfalse\n" +
+                "true\ntrue\nfalse\n" +
+                "false\nfalse\ntrue\n" +
+                "false\ntrue\ntrue\n" +
+                "true\ntrue\ntrue\n" +
+                "false\nfalse\nfalse\n" +
+                "false\nfalse\nfalse\n" +
+                "true\ntrue\ntrue\n", compileAndRun("src/test/java/tours/examples/compare_expressions.tours"));
+    }
+
     private String compileAndRun(String filename) throws IOException, InterruptedException {
         String text = new String(readAllBytes(get(filename)));
 
