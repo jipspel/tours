@@ -163,7 +163,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitBlock(@NotNull ToursParser.BlockContext ctx) {
-        return concatenate(ctx);
+        symbolTable.openScope();
+        ST st = concatenate(ctx);
+        symbolTable.closeScope();
+        return st;
     }
 
     @Override
@@ -275,6 +278,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitForStatement(@NotNull ToursParser.ForStatementContext ctx) {
+        symbolTable.openScope();
+
         ST st = stGroup.getInstanceOf("for");
         labelCount++;
         st.add("label_number", labelCount);
@@ -285,6 +290,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("termination", visit(ctx.expression()).render());
         st.add("increment", visit(ctx.statement(ctx.statement().size() - 1)).render());
         st.add("block_for", visit(ctx.block()).render());
+
+        symbolTable.closeScope();
 
         return st;
     }
@@ -380,6 +387,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
+        symbolTable.openScope();
+
         ST st = stGroup.getInstanceOf("concatenator");
         List<String> blocks = new ArrayList<>();
         for (int i = 0; i < ctx.getChildCount() - 1; i++) {
@@ -396,6 +405,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             blocks.set(blocks.size() - 1, lastBlock.substring(0, lastBlock.lastIndexOf("pop")));
         }
         st.add("blocks", blocks);
+
+        symbolTable.closeScope();
 
         return st;
     }

@@ -1,0 +1,9 @@
+main() {
+    integer x = 35;
+    integer y = {
+        integer x = 36;
+        print(x);
+    };
+
+    print(x);
+}
