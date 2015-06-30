@@ -240,7 +240,22 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
-        return concatenate(ctx);
+        labelCount++;
+
+        ST st;
+        if (ctx.ELSE() == null) {
+            st = stGroup.getInstanceOf("if");
+            st.add("block_if", visit(ctx.block(0)).render());
+        } else {
+            st = stGroup.getInstanceOf("if_else");
+            st.add("block_if", visit(ctx.block(0)).render());
+            st.add("block_else", visit(ctx.block(1)).render());
+        }
+        st.add("expression", visit(ctx.expression()).render());
+        st.add("label_number", labelCount);
+        return st;
+
+
     }
 
     @Override
@@ -304,7 +319,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
         types.put(ctx.getText(), Type.BOOLEAN);
 
         String block = concatenate(ctx).render();
-        labelCount++;
         ST st = null;
         if (ctx.compareOperator().LE() != null) {
             st = stGroup.getInstanceOf("le");
@@ -319,6 +333,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         } else if (ctx.compareOperator().NE() != null) {
             st = stGroup.getInstanceOf("ne");
         }
+        labelCount++;
         st.add("block", block);
         st.add("label_number", labelCount);
         return st;

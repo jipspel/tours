@@ -84,7 +84,7 @@ public class CompilerTest {
     }
 
     @Test
-    public void testPrinting() {
+    public void testPrint() {
         assertEqualsOutput(Arrays.asList("true", "false", "35", "36", "a", "b", "35", "36", "5", "35"),
                 "src/test/java/tours/examples/compiler/printing_assignments.tours");
     }
@@ -94,6 +94,14 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList("35", "35"),
                 "src/test/java/tours/examples/compiler/input_statements.tours",
                 Arrays.asList("35"));
+    }
+
+    @Test
+    public void testIf() {
+        assertEqualsOutput(Arrays.asList(
+                        "Vanaf hier wordt alles beter!",
+                        "Too bad!"),
+                "src/test/java/tours/examples/compiler/if_else.tours");
     }
 
     private String compileAndRun(String filename, List<String> input) {
