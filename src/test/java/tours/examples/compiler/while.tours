@@ -1,0 +1,8 @@
+main() {
+    integer x = 32;
+
+    while (x < 35) {
+        print("Vanaf hier wordt alles beter!", x);
+        x = x + 1;
+    }
+}

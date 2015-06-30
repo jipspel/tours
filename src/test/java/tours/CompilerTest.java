@@ -104,6 +104,27 @@ public class CompilerTest {
                 "src/test/java/tours/examples/compiler/if_else.tours");
     }
 
+    @Test
+    public void testWhile() {
+        assertEqualsOutput(Arrays.asList(
+                        "Vanaf hier wordt alles beter!",
+                        "32",
+                        "Vanaf hier wordt alles beter!",
+                        "33",
+                        "Vanaf hier wordt alles beter!",
+                        "34"),
+                "src/test/java/tours/examples/compiler/while.tours");
+    }
+
+    @Test
+    public void testFor() {
+        assertEqualsOutput(Arrays.asList(
+                        "35",
+                        "25",
+                        "15"),
+                "src/test/java/tours/examples/compiler/for.tours");
+    }
+
     private String compileAndRun(String filename, List<String> input) {
         try {
             String text = new String(readAllBytes(get(filename)));

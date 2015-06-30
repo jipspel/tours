@@ -260,12 +260,28 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx) {
-        return concatenate(ctx);
+        ST st = stGroup.getInstanceOf("while");
+        st.add("expression", visit(ctx.expression()).render());
+        st.add("block_while", visit(ctx.block()).render());
+        st.add("label_number", labelCount);
+
+        return st;
     }
 
     @Override
     public ST visitForStatement(@NotNull ToursParser.ForStatementContext ctx) {
-        return concatenate(ctx);
+        ST st = stGroup.getInstanceOf("for");
+        labelCount++;
+        st.add("label_number", labelCount);
+
+        st.add("initialization", (ctx.variable() != null) ? visit(ctx.variable()).render() :
+                (ctx.statement().size() == 2) ?
+                        visit(ctx.statement(0)).render() : "");
+        st.add("termination", visit(ctx.expression()).render());
+        st.add("increment", visit(ctx.statement(ctx.statement().size() - 1)).render());
+        st.add("block_for", visit(ctx.block()).render());
+
+        return st;
     }
 
     @Override
