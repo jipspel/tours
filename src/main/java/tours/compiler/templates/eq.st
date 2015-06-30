@@ -1,10 +1,10 @@
 eq(block, label_number) ::=
 <<
 <block>
-if_icmpeq LBL<label_number>_1
+if_icmpeq eq_<label_number>_1
 iconst_0
-goto LBL<label_number>_2
-LBL<label_number>_1:
+goto eq_<label_number>_2
+eq_<label_number>_1:
 iconst_1
-LBL<label_number>_2:
+eq_<label_number>_2:
 >>

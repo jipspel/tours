@@ -1,10 +1,10 @@
 le(block, label_number) ::=
 <<
 <block>
-if_icmple LBL<label_number>_1
+if_icmple le_<label_number>_1
 iconst_0
-goto LBL<label_number>_2
-LBL<label_number>_1:
+goto le_<label_number>_2
+le_<label_number>_1:
 iconst_1
-LBL<label_number>_2:
+le_<label_number>_2:
 >>

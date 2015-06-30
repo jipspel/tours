@@ -1,10 +1,10 @@
 ge(block, label_number) ::=
 <<
 <block>
-if_icmpge LBL<label_number>_1
+if_icmpge ge_<label_number>_1
 iconst_0
-goto LBL<label_number>_2
-LBL<label_number>_1:
+goto ge_<label_number>_2
+ge_<label_number>_1:
 iconst_1
-LBL<label_number>_2:
+ge_<label_number>_2:
 >>

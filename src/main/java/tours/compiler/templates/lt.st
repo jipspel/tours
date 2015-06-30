@@ -1,10 +1,10 @@
 lt(block, label_number) ::=
 <<
 <block>
-if_icmplt LBL<label_number>_1
+if_icmplt lt_<label_number>_1
 iconst_0
-goto LBL<label_number>_2
-LBL<label_number>_1:
+goto lt_<label_number>_2
+lt_<label_number>_1:
 iconst_1
-LBL<label_number>_2:
+lt_<label_number>_2:
 >>

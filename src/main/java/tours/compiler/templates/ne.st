@@ -1,10 +1,10 @@
 ne(block, label_number) ::=
 <<
 <block>
-if_icmpne LBL<label_number>_1
+if_icmpne ne_<label_number>_1
 iconst_0
-goto LBL<label_number>_2
-LBL<label_number>_1:
+goto ne_<label_number>_2
+ne_<label_number>_1:
 iconst_1
-LBL<label_number>_2:
+ne_<label_number>_2:
 >>
