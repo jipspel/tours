@@ -29,11 +29,19 @@ public class CompilerTest {
     }
 
     private void assertEqualsOutput(List<String> expectedOutput, String filename) {
+        assertEqualsOutput(expectedOutput, filename, null);
+    }
+
+    private void assertEqualsOutput(List<String> expectedOutput, String filename, List<String> input) {
         String expectedOutputString = "";
         for (String line : expectedOutput) {
             expectedOutputString += line + System.getProperty("line.separator");
         }
-        assertEquals(expectedOutputString, compileAndRun(filename));
+        if (input != null) {
+            assertEquals(expectedOutputString, compileAndRun(filename, input));
+        } else {
+            assertEquals(expectedOutputString, compileAndRun(filename));
+        }
     }
 
     @Test
@@ -85,16 +93,27 @@ public class CompilerTest {
                 "src/test/java/tours/examples/compiler/printing_assignments.tours");
     }
 
-    private String compileAndRun(String filename) {
+    @Test
+    public void testInput() {
+        assertEqualsOutput(Arrays.asList("35", "35"),
+                "src/test/java/tours/examples/compiler/input_statements.tours",
+                Arrays.asList("35"));
+    }
+
+    private String compileAndRun(String filename, List<String> input) {
         try {
             String text = new String(readAllBytes(get(filename)));
             CompilerTools.toByteCode(text, "./tmp/output.j");
             CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
-            return CompilerTools.runClassFile("Tours", "./tmp");
+            return CompilerTools.runClassFile("Tours", "./tmp", input);
         } catch (NoSuchMethodException | InvocationTargetException | IOException | IllegalAccessException | ClassNotFoundException e) {
             System.out.println("Error compiling and running: " + filename);
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String compileAndRun(String filename) {
+        return compileAndRun(filename, null);
     }
 }

@@ -1,14 +1,5 @@
 main() {
-    boolean b1, b2;
-    character c1, c2;
-    integer i1, i2;
     string s1, s2;
-    input(b1, b2);
-    print(b1, b2);
-    input(c1, c2);
-    print(c1, c2);
-    input(i1, i2);
-    print(i1, i2);
     input(s1, s2);
     print(s1, s2);
 }
