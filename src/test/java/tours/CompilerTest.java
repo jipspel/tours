@@ -139,7 +139,10 @@ public class CompilerTest {
     public void testScopes() {
         assertEqualsOutput(Arrays.asList(
                         "36",
-                        "35"),
+                        "35",
+                        "0",
+                        "3",
+                        "1"),
                 "src/test/java/tours/examples/compiler/scopes.tours");
     }
 
