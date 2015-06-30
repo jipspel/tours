@@ -54,10 +54,9 @@ public class LexicalTest {
     @Test
     public void testIfElse() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/lexical_errors/if_else.tours");
-        assertEquals(3, errorList.size());
+        assertEquals(2, errorList.size());
         assertEquals("line 5:13 missing '=' at '{'", errorList.get(0));
-        assertEquals("line 6:14 mismatched input ';' expecting {FALSE, INPUT, PRINT, TRUE, '&&', '==', '>=', '>', '<=', '{', '(', '<', '-', '%', '!=', '!', '||', '+', '/', '*', IDENTIFIER, INT, STR, CHAR}", errorList.get(1));
-        assertEquals("line 8:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, INTEGER, STRING, IDENTIFIER}", errorList.get(2));
+        assertEquals("line 8:0 mismatched input '}' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ';', '/', '*'}", errorList.get(1));
     }
 
     @Test
