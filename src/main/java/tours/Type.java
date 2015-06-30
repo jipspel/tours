@@ -1,4 +1,4 @@
-package tours.compiler;
+package tours;
 
 import tours.grammar.ToursParser;
 
