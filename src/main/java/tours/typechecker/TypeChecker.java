@@ -14,7 +14,7 @@ public class TypeChecker extends ToursBaseListener {
 
     public TypeChecker() {
         symbolTable = new SymbolTable();
-        errors = new ArrayList();
+        errors = new ArrayList<>();
     }
 
     @Override
@@ -36,6 +36,7 @@ public class TypeChecker extends ToursBaseListener {
                 errors.add(String.format("Error on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
             } else {
                 symbolTable.add(id, ctx.variableType().getStart().getType());
+                symbolTable.add(ctx.getText(), ctx.variableType().getStart().getType());
             }
         }
 
@@ -63,10 +64,17 @@ public class TypeChecker extends ToursBaseListener {
         if (symbolTable.getType(identifier) != symbolTable.getType(expression)) {
             errors.add(String.format("Error on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
+        symbolTable.add(ctx.getText(), symbolTable.getType(identifier));
     }
 
-    @Override public void exitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
+    @Override
+    public void exitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
         symbolTable.add(ctx.getText(), symbolTable.getType(ctx.expression().getText()));
+    }
+
+    @Override
+    public void exitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) {
+        symbolTable.add(ctx.getText(), symbolTable.getType(ctx.IDENTIFIER().getText()));
     }
 
     @Override
@@ -173,7 +181,9 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
+        int type = symbolTable.getType(ctx.getChild(ctx.getChildCount() - 3).getText());
         symbolTable.closeScope();
+        symbolTable.add(ctx.getText(), type);
     }
 
     @Override

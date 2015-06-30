@@ -125,6 +125,15 @@ public class CompilerTest {
                 "src/test/java/tours/examples/compiler/for.tours");
     }
 
+    @Test
+    public void testCompound() {
+        assertEqualsOutput(Arrays.asList(
+                        "30",
+                        "35",
+                        "36"),
+                "src/test/java/tours/examples/compiler/compound.tours");
+    }
+
     private String compileAndRun(String filename, List<String> input) {
         try {
             String text = new String(readAllBytes(get(filename)));

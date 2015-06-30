@@ -46,6 +46,7 @@ public class TypeCheckerTest {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_character.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_integer.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_string.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_compound.tours");
     }
 
     @Test

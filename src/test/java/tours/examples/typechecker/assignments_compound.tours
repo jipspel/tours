@@ -2,4 +2,7 @@ main() {
     integer i;
     i = { integer x = 35; };
     integer j = { integer y = 36; };
+
+    j = { 5 * 5; };
+    j = { i = 3; };
 }

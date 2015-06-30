@@ -375,7 +375,20 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
-        return concatenate(ctx);
+        ST st = stGroup.getInstanceOf("concatenator");
+        List<String> blocks = new ArrayList<>();
+        for (int i = 0; i < ctx.getChildCount()-1; i++) {
+            if (visit(ctx.getChild(i)) != null) {
+                blocks.add(visit(ctx.getChild(i)).render());
+            }
+        }
+        String lastBlock = blocks.get(blocks.size() - 1);
+        if (lastBlock.endsWith("pop")) {
+            blocks.add(blocks.size() - 1, lastBlock.substring(0, lastBlock.lastIndexOf("pop")));
+        }
+        st.add("blocks", blocks);
+
+        return st;
     }
 
     @Override

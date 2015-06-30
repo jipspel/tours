@@ -50,7 +50,7 @@ public class GrammarTest {
         assertEquals("(program (body (variableDeclaration (variable (variableType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (variableType boolean) y = (expression true)) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_boolean.tours"));
 
-        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) i) ; (statement (variableAssignment i = (expression (block { (variable (variableType integer) x = (expression 35)) ; })))) ; (variable (variableType integer) j = (expression (block { (variable (variableType integer) y = (expression 36)) ; }))) ; }))))",
+        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) i) ; (statement (variableAssignment i = (expression { (variable (variableType integer) x = (expression 35)) ; }))) ; (variable (variableType integer) j = (expression { (variable (variableType integer) y = (expression 36)) ; })) ; (statement (variableAssignment j = (expression { (expression (expression 5) (multiplyOperator *) (expression 5)) ; }))) ; (statement (variableAssignment j = (expression { (statement (variableAssignment i = (expression 3))) ; }))) ; }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_compound.tours"));
 
         assertEquals("(program (body (variableDeclaration (variable (variableType character) x) ;) (variableAssignment x = (expression 'a')) ; (variableDeclaration (variable (variableType character) y = (expression 'a')) ;)))",

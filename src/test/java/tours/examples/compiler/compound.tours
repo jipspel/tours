@@ -1,0 +1,13 @@
+main() {
+    integer x = {
+        integer y = 30;
+        print(y);
+        integer z = 5;
+        integer a = y + z;
+    };
+
+    print(x);
+
+    x = { 5 + 31; };
+    print(x);
+}
