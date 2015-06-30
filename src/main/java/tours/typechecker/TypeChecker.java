@@ -65,6 +65,10 @@ public class TypeChecker extends ToursBaseListener {
         }
     }
 
+    @Override public void exitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
+        symbolTable.add(ctx.getText(), symbolTable.getType(ctx.expression().getText()));
+    }
+
     @Override
     public void exitIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
         if (symbolTable.getType(ctx.expression().getText()) != ToursParser.BOOLEAN) {

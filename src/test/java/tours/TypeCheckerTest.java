@@ -52,9 +52,13 @@ public class TypeCheckerTest {
     public void testMismatchingTypes() throws IOException {
         List<String> errors = Arrays.asList(
                 "Error on line 2, pos 14",
-                "Error on line 3, pos 14",
-                "Error on line 4, pos 16",
-                "Error on line 5, pos 13"
+                "Error on line 3, pos 16",
+                "Error on line 4, pos 14",
+                "Error on line 5, pos 13",
+                "Error on line 7, pos 14",
+                "Error on line 8, pos 16",
+                "Error on line 9, pos 14",
+                "Error on line 10, pos 13"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type.tours");
     }

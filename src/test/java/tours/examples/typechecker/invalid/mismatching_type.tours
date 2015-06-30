@@ -1,6 +1,11 @@
 main () {
-    integer x = 'a';
-    boolean y = 1;
-    character z = "hello";
-    string a = true;
+    boolean q = 1;
+    character r = "hello";
+    integer p = 'a';
+    string s = true;
+
+    boolean t = print(1);
+    character u = print("hello");
+    integer v = print('a');
+    string w = print(true);
 }
