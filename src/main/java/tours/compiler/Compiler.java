@@ -24,7 +24,6 @@ import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
 
 public class Compiler extends ToursBaseVisitor<ST> {
-
     private final STGroup stGroup = new STGroupDir("src/main/java/tours/compiler/templates/");
     private String className;
     private int labelCount;
@@ -175,12 +174,40 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitInputStatement(@NotNull ToursParser.InputStatementContext ctx) {
-        return concatenate(ctx);
+        List<String> stList = new ArrayList<>();
+        ST st = stGroup.getInstanceOf(String.format("read_%s", types.get(ctx.IDENTIFIER(0).getText()).toString()));
+        if (! identifiers.contains("reader")) {
+            identifiers.add("reader");
+        }
+        st.add("reader_number", identifiers.indexOf("reader"));
+
+        for (TerminalNode identifier : ctx.IDENTIFIER()) {
+            ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", getTypeClass(types.get(identifier.getText()).toString())));
+            stVariable.add("identifier_number", identifiers.indexOf(identifier.getText()));
+
+            stList.add(stVariable.render());
+        }
+
+        stList.add(stGroup.getInstanceOf("pop").render());
+        st.add("blocks", stList);
+        return st;
     }
 
     @Override
     public ST visitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) {
-        return concatenate(ctx);
+        TerminalNode identifier = ctx.IDENTIFIER();
+        ST st = stGroup.getInstanceOf(String.format("read_%s", types.get(identifier.getText()).toString()));
+        ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", getTypeClass(types.get(identifier.getText()).toString())));
+        stVariable.add("identifier_number", identifiers.indexOf(identifier.getText()));
+
+        if (!identifiers.contains("reader")) {
+            identifiers.add("reader");
+        }
+
+        st.add("reader_number", identifiers.indexOf("reader"));
+        st.add("blocks", stVariable.render());
+
+        return st;
     }
 
     @Override

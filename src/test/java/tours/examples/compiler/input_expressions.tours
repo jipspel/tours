@@ -1,0 +1,18 @@
+main() {
+    boolean b1, b2;
+    character c1, c2;
+    integer i1, i2;
+    string s1, s2;
+
+    b2 = true || input(b1);
+    print(b1, b2);
+
+    c2 = input(c1);
+    print(c1, c2);
+
+    i2 = input(i1) +5;
+    print(i1, i2);
+
+    s2 = input(s1);
+    print(s1, s2);
+}
