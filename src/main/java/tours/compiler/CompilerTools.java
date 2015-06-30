@@ -29,7 +29,7 @@ public class CompilerTools {
         if (input != null) {
             String inputLine = "";
             for (String line : input) {
-                inputLine += line;
+                inputLine += line + System.getProperty("line.separator");
             }
             ByteArrayInputStream bais = new ByteArrayInputStream(inputLine.getBytes());
             System.setIn(bais);

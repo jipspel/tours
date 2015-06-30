@@ -37,11 +37,7 @@ public class CompilerTest {
         for (String line : expectedOutput) {
             expectedOutputString += line + System.getProperty("line.separator");
         }
-        if (input != null) {
-            assertEquals(expectedOutputString, compileAndRun(filename, input));
-        } else {
-            assertEquals(expectedOutputString, compileAndRun(filename));
-        }
+        assertEquals(expectedOutputString, compileAndRun(filename, input));
     }
 
     @Test
