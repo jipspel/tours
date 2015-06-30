@@ -190,8 +190,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         for (ToursParser.ExpressionContext expression : ctx.expression()) {
             String block = visit(expression).render();
-            ST stExpression = stGroup.getInstanceOf(String.format("print_%s", types.get(expression.getText()).toString()));
+            ST stExpression = stGroup.getInstanceOf("print");
             stExpression.add("block", block);
+            stExpression.add("type", types.get(expression.getText()).getJavaObjectType());
             expressions.add(stExpression.render());
         }
 
@@ -203,8 +204,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
         String block = visit(ctx.expression()).render();
-        ST st = stGroup.getInstanceOf(String.format("print_%s_dup", types.get(ctx.expression().getText()).toString()));
+        ST st = stGroup.getInstanceOf("print_dup");
         st.add("block", block);
+        st.add("type",  types.get(ctx.expression().getText()).getJavaObjectType());
+
         return st;
     }
 

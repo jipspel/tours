@@ -7,6 +7,11 @@ public class Type {
     public static final Type CHARACTER = new Type(ToursParser.CHARACTER);
     public static final Type INTEGER = new Type(ToursParser.INTEGER);
     public static final Type STRING = new Type(ToursParser.STRING);
+    public static final String BOOLEANJAVA = "Z";
+    public static final String CHARACTERJAVA = "C";
+    public static final String INTEGERJAVA = "I";
+    public static final String STRINGJAVA = "Ljava/lang/String;";
+
     private final int type;
 
     public Type(int type) {
@@ -51,6 +56,20 @@ public class Type {
             return "integer";
         } else if (type == Type.STRING.getType()) {
             return "string";
+        } else {
+            throw new UnsupportedOperationException("Type: " + type + " was undefined");
+        }
+    }
+
+    public String getJavaObjectType() {
+        if (type == Type.BOOLEAN.getType()) {
+            return BOOLEANJAVA;
+        } else if (type == Type.CHARACTER.getType()) {
+            return CHARACTERJAVA;
+        } else if (type == Type.INTEGER.getType()) {
+            return INTEGERJAVA;
+        } else if (type == Type.STRING.getType()) {
+            return STRINGJAVA;
         } else {
             throw new UnsupportedOperationException("Type: " + type + " was undefined");
         }
