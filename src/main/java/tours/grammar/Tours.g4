@@ -52,7 +52,7 @@ expression:     LPAR expression RPAR                                            
               | expression compareOperator expression                           #compareExpression
               | expression AND expression                                       #booleanAndExpression
               | expression OR expression                                        #booleanOrExpression
-              | LBRACE (expression SEMI | statement)* expression RBRACE         #compoundExpression
+              | block                                                           #compoundExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
               | IDENTIFIER                                                      #identifierExpr

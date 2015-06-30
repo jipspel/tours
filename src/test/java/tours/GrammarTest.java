@@ -20,8 +20,10 @@ public class GrammarTest {
 
     @Test
     public void testValidExamples() throws IOException {
-
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_boolean.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_compound.tours");
         assertEquals(0, errorList.size());
 
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_character.tours");
@@ -47,6 +49,9 @@ public class GrammarTest {
 
         assertEquals("(program (body (variableDeclaration (variable (variableType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (variableType boolean) y = (expression true)) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_boolean.tours"));
+
+        assertEquals("(program (body (function main ( ) (block { (variable (variableType integer) i) ; (statement (variableAssignment i = (expression (block { (variable (variableType integer) x = (expression 35)) ; })))) ; (variable (variableType integer) j = (expression (block { (variable (variableType integer) y = (expression 36)) ; }))) ; }))))",
+                getParseTree("src/test/java/tours/examples/typechecker/assignments_compound.tours"));
 
         assertEquals("(program (body (variableDeclaration (variable (variableType character) x) ;) (variableAssignment x = (expression 'a')) ; (variableDeclaration (variable (variableType character) y = (expression 'a')) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_character.tours"));
