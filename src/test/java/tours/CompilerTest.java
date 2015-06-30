@@ -130,7 +130,8 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList(
                         "30",
                         "35",
-                        "36"),
+                        "36",
+                        "37"),
                 "src/test/java/tours/examples/compiler/compound.tours");
     }
 

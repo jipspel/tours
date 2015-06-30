@@ -99,8 +99,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st = stGroup.getInstanceOf("concatenator");
         List<String> blocks = new ArrayList<>();
         for (int i = 0; i < ctx.getChildCount(); i++) {
-            if (visit(ctx.getChild(i)) != null) {
-                blocks.add(visit(ctx.getChild(i)).render());
+            ST child = visit(ctx.getChild(i));
+            if (child != null) {
+                blocks.add(child.render());
             }
         }
         st.add("blocks", blocks);
@@ -217,10 +218,21 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         for (ToursParser.ExpressionContext expression : ctx.expression()) {
             String block = visit(expression).render();
-            ST stExpression = stGroup.getInstanceOf("print");
+            ST stExpression;
+            if (ctx.expression().size() > 1) {
+                stExpression = stGroup.getInstanceOf("print");
+            } else {
+                stExpression = stGroup.getInstanceOf("print_dup");
+            }
             stExpression.add("block", block);
             stExpression.add("type", types.get(expression.getText()).getJavaObjectType());
             expressions.add(stExpression.render());
+        }
+
+        // for compound expressions, this pop will be removed, thus `dup` will remain
+        // and the print statement can be assigned to a certain identifier
+        if (ctx.expression().size() == 1) {
+            expressions.add(stGroup.getInstanceOf("pop").render());
         }
 
         st.add("blocks", expressions);
@@ -240,7 +252,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
-        labelCount++;
 
         ST st;
         if (ctx.ELSE() == null) {
@@ -251,6 +262,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             st.add("block_if", visit(ctx.block(0)).render());
             st.add("block_else", visit(ctx.block(1)).render());
         }
+        labelCount++;
+
         st.add("expression", visit(ctx.expression()).render());
         st.add("label_number", labelCount);
         return st;
@@ -377,14 +390,18 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
         ST st = stGroup.getInstanceOf("concatenator");
         List<String> blocks = new ArrayList<>();
-        for (int i = 0; i < ctx.getChildCount()-1; i++) {
-            if (visit(ctx.getChild(i)) != null) {
-                blocks.add(visit(ctx.getChild(i)).render());
+        for (int i = 0; i < ctx.getChildCount() - 1; i++) {
+            ST child = visit(ctx.getChild(i));
+            if (child != null) {
+                blocks.add(child.render());
             }
         }
+
+        // for assignments the `pop` instruction is deleted
+        // to return the last value as result
         String lastBlock = blocks.get(blocks.size() - 1);
         if (lastBlock.endsWith("pop")) {
-            blocks.add(blocks.size() - 1, lastBlock.substring(0, lastBlock.lastIndexOf("pop")));
+            blocks.set(blocks.size() - 1, lastBlock.substring(0, lastBlock.lastIndexOf("pop")));
         }
         st.add("blocks", blocks);
 
