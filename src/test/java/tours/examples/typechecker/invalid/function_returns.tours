@@ -1,0 +1,12 @@
+func void awesome_print(string text) {
+    return print(text);
+}
+
+func integer next_number(integer i) {
+    i = i + 1;
+}
+
+func integer next_number(integer i) {
+    return i + 1;
+    return i + 1;
+}

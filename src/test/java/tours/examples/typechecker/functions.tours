@@ -1,0 +1,7 @@
+func void awesome_print(string text) {
+    print("awesome", text);
+}
+
+func integer next_number(integer i) {
+    return print(i+1);
+}

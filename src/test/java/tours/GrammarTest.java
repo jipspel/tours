@@ -35,6 +35,9 @@ public class GrammarTest {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_string.tours");
         assertEquals(0, errorList.size());
 
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/functions.tours");
+        assertEquals(0, errorList.size());
+
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/statement_for.tours");
         assertEquals(0, errorList.size());
 
@@ -61,6 +64,9 @@ public class GrammarTest {
 
         assertEquals("(program (body (variableDeclaration (variable (variableType string) x) ;) (variableAssignment x = (expression \"Hello\")) ; (variableDeclaration (variable (variableType string) y = (expression \"Hello\")) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_string.tours"));
+
+        assertEquals("(program (body (function func void awesome_print ( (variableType string) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (function func (variableType integer) next_number ( (variableType integer) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; }))))",
+                getParseTree("src/test/java/tours/examples/typechecker/functions.tours"));
 
         assertEquals("(program (body (function func void main ( ) (block { (variable (variableType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (variableType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (block { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/statement_for_single.tours"));
@@ -95,6 +101,18 @@ public class GrammarTest {
         assertEquals(2, errorList.size());
         assertEquals("line 4:14 missing '(' at 'x'", errorList.get(0));
         assertEquals("line 4:15 mismatched input ';' expecting {'&&', ',', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ')', '/', '*'}", errorList.get(1));
+    }
+
+    @Test
+    public void testInvalidFunctionReturns() throws IOException {
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/function_returns.tours");
+        assertEquals(5, errorList.size());
+        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, CHARACTER, FOR, IF, INPUT, INTEGER, PRINT, STRING, WHILE, '}', IDENTIFIER}", errorList.get(0));
+        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, CHARACTER, FOR, IF, INPUT, INTEGER, PRINT, RETURN, STRING, WHILE, IDENTIFIER}", errorList.get(1));
+        assertEquals("line 11:4 mismatched input 'return' expecting '}'", errorList.get(2));
+        assertEquals("line 11:13 missing '=' at '+'", errorList.get(3));
+        assertEquals("line 12:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}", errorList.get(4));
+
     }
 
     private List<String> parseToursFile(String filename) throws IOException {
