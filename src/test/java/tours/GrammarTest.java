@@ -18,8 +18,9 @@ public class GrammarTest {
 
     List<String> errorList;
 
+
     @Test
-    public void testValidExamples() throws IOException {
+    public void testValidAssignments() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_boolean.tours");
         assertEquals(0, errorList.size());
 
@@ -33,21 +34,6 @@ public class GrammarTest {
         assertEquals(0, errorList.size());
 
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_string.tours");
-        assertEquals(0, errorList.size());
-
-        errorList = parseToursFile("src/test/java/tours/examples/typechecker/functions.tours");
-        assertEquals(0, errorList.size());
-
-        errorList = parseToursFile("src/test/java/tours/examples/typechecker/statement_for.tours");
-        assertEquals(0, errorList.size());
-
-        errorList = parseToursFile("src/test/java/tours/examples/typechecker/statement_if.tours");
-        assertEquals(0, errorList.size());
-
-        errorList = parseToursFile("src/test/java/tours/examples/typechecker/statement_while.tours");
-        assertEquals(0, errorList.size());
-
-        errorList = parseToursFile("src/test/java/tours/examples/typechecker/variable_declaration.tours");
         assertEquals(0, errorList.size());
 
         assertEquals("(program (body (variableDeclaration (variable (variableType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (variableType boolean) y = (expression true)) ;)))",
@@ -64,6 +50,51 @@ public class GrammarTest {
 
         assertEquals("(program (body (variableDeclaration (variable (variableType string) x) ;) (variableAssignment x = (expression \"Hello\")) ; (variableDeclaration (variable (variableType string) y = (expression \"Hello\")) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_string.tours"));
+    }
+
+    @Test
+    public void testValidArrayAssignments() throws IOException {
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_array_boolean.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_array_character.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_array_integer.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_array_string.tours");
+        assertEquals(0, errorList.size());
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (variableType boolean) y = (expression true)) ;)))",
+                getParseTree("src/test/java/tours/examples/typechecker/assignments_boolean.tours"));
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType character) x) ;) (variableAssignment x = (expression 'a')) ; (variableDeclaration (variable (variableType character) y = (expression 'a')) ;)))",
+                getParseTree("src/test/java/tours/examples/typechecker/assignments_character.tours"));
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x) ;) (variableAssignment x = (expression 35)) ; (variableDeclaration (variable (variableType integer) y = (expression 35)) ;)))",
+                getParseTree("src/test/java/tours/examples/typechecker/assignments_integer.tours"));
+
+        assertEquals("(program (body (variableDeclaration (variable (variableType string) x) ;) (variableAssignment x = (expression \"Hello\")) ; (variableDeclaration (variable (variableType string) y = (expression \"Hello\")) ;)))",
+                getParseTree("src/test/java/tours/examples/typechecker/assignments_string.tours"));
+    }
+
+    @Test
+    public void testValidExamples() throws IOException {
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/functions.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/statement_for.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/statement_if.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/statement_while.tours");
+        assertEquals(0, errorList.size());
+
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/variable_declaration.tours");
+        assertEquals(0, errorList.size());
 
         assertEquals("(program (body (function func void awesome_print ( (variableType string) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (function func (variableType integer) next_number ( (variableType integer) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/functions.tours"));
@@ -80,6 +111,7 @@ public class GrammarTest {
         assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ; (variable (variableType character) z) ; (variable (variableType boolean) a) ; (variable (variableType string) b) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/variable_declaration.tours"));
     }
+
 
     @Test
     public void testMissingAssignment() throws IOException {

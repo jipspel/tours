@@ -1,0 +1,3 @@
+string[] x = string[5];
+x[1] = 5;
+string[] y = {"aa", "bb", "cc"};
