@@ -63,29 +63,15 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitVariableArray(@NotNull ToursParser.VariableArrayContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code variableAssignmentPrimitive}
-	 * labeled alternative in {@link ToursParser#variableAssignment}.
+	 * Enter a parse tree produced by {@link ToursParser#variableAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx);
+	void enterVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code variableAssignmentPrimitive}
-	 * labeled alternative in {@link ToursParser#variableAssignment}.
+	 * Exit a parse tree produced by {@link ToursParser#variableAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code variableAssignmentArray}
-	 * labeled alternative in {@link ToursParser#variableAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterVariableAssignmentArray(@NotNull ToursParser.VariableAssignmentArrayContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code variableAssignmentArray}
-	 * labeled alternative in {@link ToursParser#variableAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitVariableAssignmentArray(@NotNull ToursParser.VariableAssignmentArrayContext ctx);
+	void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code voidFunction}
 	 * labeled alternative in {@link ToursParser#function}.

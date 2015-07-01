@@ -166,7 +166,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx) {
+    public ST visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
         ST st = stGroup.getInstanceOf(String.format("assignment_%s", getTypeClass(symbolTable.getType(ctx.IDENTIFIER().getText()).toString())));
 
         st.add("identifier_number", symbolTable.getIdentifier(ctx.IDENTIFIER().getText()));

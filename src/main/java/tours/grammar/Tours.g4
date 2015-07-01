@@ -22,8 +22,7 @@ variable
 
 /** Variable assignment */
 variableAssignment
-    : IDENTIFIER ASSIGNMENT expression                      #variableAssignmentPrimitive
-    | IDENTIFIER LBLOCK INT RBLOCK ASSIGNMENT expression    #variableAssignmentArray
+    : IDENTIFIER (LBLOCK INT RBLOCK)? ASSIGNMENT expression
     ;
 
 /** Function
@@ -31,7 +30,8 @@ variableAssignment
  */
 function
     : FUNC VOID IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR block                #voidFunction
-    | FUNC variableType IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock  #returnFunction
+    | FUNC variableType (LBLOCK RBLOCK)? IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock  #returnFunction
+
     ;
 
 /** Grouped sequence of statements. */
@@ -74,7 +74,7 @@ expression:     LPAR expression RPAR                                            
                     ((statement | variable | expression) SEMI) RBRACE           #compoundExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
-              | IDENTIFIER LBLOCK INT RBLOCK                                  #arrayExpression
+              | IDENTIFIER LBLOCK INT RBLOCK                                    #arrayExpression
               | IDENTIFIER LPAR ((expression COMMA)* expression)? RPAR          #functionExpression
               | IDENTIFIER                                                      #identifierExpr
               | CHAR                                                            #characterExpr

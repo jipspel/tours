@@ -77,25 +77,13 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx) { }
+	@Override public void enterVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterVariableAssignmentArray(@NotNull ToursParser.VariableAssignmentArrayContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitVariableAssignmentArray(@NotNull ToursParser.VariableAssignmentArrayContext ctx) { }
+	@Override public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -53,14 +53,7 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitVariableAssignmentArray(@NotNull ToursParser.VariableAssignmentArrayContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

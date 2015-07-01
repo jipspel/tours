@@ -49,7 +49,26 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx) {
+    public void exitVariableArray(@NotNull ToursParser.VariableArrayContext ctx) {
+        // declarations
+        for (TerminalNode identifier : ctx.IDENTIFIER()) {
+            String id = identifier.getText();
+            if (symbolTable.containsInCurrentScope(id)) {
+                errors.add(String.format("Error <variable already defined> on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
+            } else {
+                symbolTable.addVariable(id, new Type(ctx.variableType().getStart().getType()));
+                symbolTable.addVariable(ctx.getText(), new Type(ctx.variableType().getStart().getType()));
+            }
+        }
+
+        // assignment
+        if (!(new Type(ctx.variableType().getStart().getType())).equals(symbolTable.getType(ctx.arrayAssignment().getText()))) {
+            errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
+        }
+    }
+
+    @Override
+    public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
         String identifier = ctx.IDENTIFIER().getText();
         String expression = ctx.expression().getText();
 
@@ -60,6 +79,7 @@ public class TypeChecker extends ToursBaseListener {
         }
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(identifier));
     }
+
 
     @Override
     public void enterVoidFunction(@NotNull ToursParser.VoidFunctionContext ctx) {
