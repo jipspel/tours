@@ -71,7 +71,7 @@ expression:     LPAR expression RPAR                                            
                     ((statement | variable | expression) SEMI) RBRACE           #compoundExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
-              | IDENTIFIER LPAR ((expression SEMI)* expression)? RPAR           #functionExpression
+              | IDENTIFIER LPAR ((expression COMMA)* expression)? RPAR           #functionExpression
               | IDENTIFIER                                                      #identifierExpr
               | CHAR                                                            #characterExpr
               | STR                                                             #stringExpr
