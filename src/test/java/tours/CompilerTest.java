@@ -138,8 +138,9 @@ public class CompilerTest {
     @Test
     public void testScopes() {
         assertEqualsOutput(Arrays.asList(
-                        "36",
                         "35",
+                        "36",
+                        "37",
                         "0",
                         "3",
                         "1"),
