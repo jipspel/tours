@@ -15,12 +15,15 @@ variableDeclaration
     ;
 
 /** Variable declaration. */
-variable : variableType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?
+variable
+    : variableType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?                      #variablePrimitive
+    | variableType LBLOCK RBLOCK IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT arrayAssignment)    #variableArray
     ;
 
 /** Variable assignment */
 variableAssignment
     : IDENTIFIER ASSIGNMENT expression
+    | IDENTIFIER LBLOCK INT RBLOCK ASSIGNMENT expression
     ;
 
 /** Function
@@ -71,7 +74,8 @@ expression:     LPAR expression RPAR                                            
                     ((statement | variable | expression) SEMI) RBRACE           #compoundExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
-              | IDENTIFIER LPAR ((expression COMMA)* expression)? RPAR           #functionExpression
+              | IDENTIFIER LBLOCK INT RBLOCK                                  #arrayExpression
+              | IDENTIFIER LPAR ((expression COMMA)* expression)? RPAR          #functionExpression
               | IDENTIFIER                                                      #identifierExpr
               | CHAR                                                            #characterExpr
               | STR                                                             #stringExpr
@@ -79,6 +83,11 @@ expression:     LPAR expression RPAR                                            
               | TRUE                                                            #trueExpr
               | FALSE                                                           #falseExpr
               ;
+
+arrayAssignment
+  : IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?   #arrayExpressionInitialisation
+  | variableType LBLOCK INT RBLOCK                          #arrayExpressionNew
+  ;
 
 /** Prefix operator. */
 prefixOperator: MINUS | NOT | PLUS;
@@ -133,6 +142,7 @@ EQ:            '==';
 GE:            '>=';
 GT:            '>';
 LE:            '<=';
+LBLOCK:        '[';
 LBRACE:        '{';
 LPAR:          '(';
 LT:            '<';
@@ -142,6 +152,7 @@ NE:            '!=';
 NOT:           '!';
 OR:            '||';
 PLUS:          '+';
+RBLOCK:        ']';
 RBRACE:        '}';
 RPAR:          ')';
 SEMI:          ';';

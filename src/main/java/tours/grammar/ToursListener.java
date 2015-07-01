@@ -39,15 +39,29 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitVariableDeclaration(@NotNull ToursParser.VariableDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ToursParser#variable}.
+	 * Enter a parse tree produced by the {@code variablePrimitive}
+	 * labeled alternative in {@link ToursParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariable(@NotNull ToursParser.VariableContext ctx);
+	void enterVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ToursParser#variable}.
+	 * Exit a parse tree produced by the {@code variablePrimitive}
+	 * labeled alternative in {@link ToursParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariable(@NotNull ToursParser.VariableContext ctx);
+	void exitVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code variableArray}
+	 * labeled alternative in {@link ToursParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableArray(@NotNull ToursParser.VariableArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code variableArray}
+	 * labeled alternative in {@link ToursParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableArray(@NotNull ToursParser.VariableArrayContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ToursParser#variableAssignment}.
 	 * @param ctx the parse tree
@@ -184,6 +198,18 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturnStatement(@NotNull ToursParser.ReturnStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arrayExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code integerExpr}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -388,6 +414,30 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arrayExpressionInitialisation}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayExpressionInitialisation}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arrayExpressionNew}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayExpressionNew}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ToursParser#prefixOperator}.
 	 * @param ctx the parse tree

@@ -53,13 +53,25 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable(@NotNull ToursParser.VariableContext ctx) { }
+	@Override public void enterVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariable(@NotNull ToursParser.VariableContext ctx) { }
+	@Override public void exitVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariableArray(@NotNull ToursParser.VariableArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariableArray(@NotNull ToursParser.VariableArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -204,6 +216,18 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturnStatement(@NotNull ToursParser.ReturnStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -408,6 +432,30 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -30,11 +30,19 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableDeclaration(@NotNull ToursParser.VariableDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ToursParser#variable}.
+	 * Visit a parse tree produced by the {@code variablePrimitive}
+	 * labeled alternative in {@link ToursParser#variable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariable(@NotNull ToursParser.VariableContext ctx);
+	T visitVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code variableArray}
+	 * labeled alternative in {@link ToursParser#variable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariableArray(@NotNull ToursParser.VariableArrayContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ToursParser#variableAssignment}.
 	 * @param ctx the parse tree
@@ -115,6 +123,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReturnStatement(@NotNull ToursParser.ReturnStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arrayExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code integerExpr}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -234,6 +249,20 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arrayExpressionInitialisation}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code arrayExpressionNew}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ToursParser#prefixOperator}.
 	 * @param ctx the parse tree

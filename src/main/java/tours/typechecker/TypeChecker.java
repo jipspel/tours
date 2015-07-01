@@ -30,7 +30,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitVariable(@NotNull ToursParser.VariableContext ctx) {
+    public void exitVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx) {
         // declarations
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             String id = identifier.getText();

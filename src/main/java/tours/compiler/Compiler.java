@@ -137,7 +137,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitVariable(@NotNull ToursParser.VariableContext ctx) {
+    public ST visitVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx) {
         ST st = stGroup.getInstanceOf("concatenator");
         String type = ctx.variableType().getText().toLowerCase();
         String typeClass;
