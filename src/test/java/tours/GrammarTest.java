@@ -85,33 +85,42 @@ public class GrammarTest {
     public void testMissingAssignment() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/missing_assignment.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 2:16 no viable alternative at input ';'", errorList.get(0));
+        assertEquals("line 2:16 no viable alternative at input ';'",
+                errorList.get(0));
     }
 
     @Test
     public void testMissingSemicolon() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/missing_semicolon.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 5:4 mismatched input '}' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ';', '/', '*'}", errorList.get(0));
+        assertEquals("line 5:4 mismatched input '}' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ';', '/', '*'}",
+                errorList.get(0));
     }
 
     @Test
     public void testMissingParenthesis() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/missing_parenthesis.tours");
         assertEquals(2, errorList.size());
-        assertEquals("line 4:14 missing '(' at 'x'", errorList.get(0));
-        assertEquals("line 4:15 mismatched input ';' expecting {'&&', ',', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ')', '/', '*'}", errorList.get(1));
+        assertEquals("line 4:14 missing '(' at 'x'",
+                errorList.get(0));
+        assertEquals("line 4:15 mismatched input ';' expecting {'&&', ',', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ')', '/', '*'}",
+                errorList.get(1));
     }
 
     @Test
     public void testInvalidFunctionReturns() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/function_returns.tours");
         assertEquals(5, errorList.size());
-        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, CHARACTER, FOR, IF, INPUT, INTEGER, PRINT, STRING, WHILE, '}', IDENTIFIER}", errorList.get(0));
-        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, CHARACTER, FOR, IF, INPUT, INTEGER, PRINT, RETURN, STRING, WHILE, IDENTIFIER}", errorList.get(1));
-        assertEquals("line 11:4 mismatched input 'return' expecting '}'", errorList.get(2));
-        assertEquals("line 11:13 missing '=' at '+'", errorList.get(3));
-        assertEquals("line 12:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}", errorList.get(4));
+        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, CHARACTER, FALSE, FOR, IF, INPUT, INTEGER, PRINT, STRING, TRUE, WHILE, '{', '(', '-', '!', '+', '}', IDENTIFIER, INT, STR, CHAR}",
+                errorList.get(0));
+        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, CHARACTER, FALSE, FOR, IF, INPUT, INTEGER, PRINT, RETURN, STRING, TRUE, WHILE, '{', '(', '-', '!', '+', IDENTIFIER, INT, STR, CHAR}",
+                errorList.get(1));
+        assertEquals("line 11:4 mismatched input 'return' expecting '}'",
+                errorList.get(2));
+        assertEquals("line 11:13 missing '=' at '+'",
+                errorList.get(3));
+        assertEquals("line 12:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}",
+                errorList.get(4));
 
     }
 

@@ -33,12 +33,12 @@ function
 
 /** Grouped sequence of statements. */
 block
-    : LBRACE (((statement | variable ) SEMI) | conditionalStatement)* RBRACE
+    : LBRACE (((statement | variable | expression) SEMI) | conditionalStatement)* RBRACE
     ;
 
 /** Grouped sequence of statements. */
 returnBlock
-    : LBRACE (((statement | variable ) SEMI) | conditionalStatement)* returnStatement SEMI RBRACE
+    : LBRACE (((statement | variable | expression) SEMI) | conditionalStatement)* returnStatement SEMI RBRACE
     ;
 
 /** Statement. */
@@ -50,7 +50,7 @@ statement: variableAssignment                               #assignStatement
 /** Coditional statement. */
 conditionalStatement: IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
                     | WHILE LPAR expression RPAR block                                              #whileStatement
-                    | FOR LPAR (variable | statement)? SEMI expression SEMI statement RPAR block     #forStatement
+                    | FOR LPAR (variable | statement)? SEMI expression SEMI statement RPAR block    #forStatement
                     ;
 
 /** Return statement. */
@@ -66,11 +66,13 @@ expression:     LPAR expression RPAR                                            
               | expression compareOperator expression                           #compareExpression
               | expression AND expression                                       #booleanAndExpression
               | expression OR expression                                        #booleanOrExpression
-              | LBRACE ((statement | variable | expression) SEMI)+ RBRACE       #compoundExpression
+              | LBRACE
+                    ((statement | variable | expression) SEMI | conditionalStatement)*
+                    ((statement | variable | expression) SEMI) RBRACE           #compoundExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
-              | IDENTIFIER                                                      #identifierExpr
               | IDENTIFIER LPAR ((expression SEMI)* expression)? RPAR           #functionExpression
+              | IDENTIFIER                                                      #identifierExpr
               | CHAR                                                            #characterExpr
               | STR                                                             #stringExpr
               | INT                                                             #integerExpr
