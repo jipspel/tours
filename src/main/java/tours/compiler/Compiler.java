@@ -157,11 +157,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitFunction(@NotNull ToursParser.FunctionContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
     public ST visitBlock(@NotNull ToursParser.BlockContext ctx) {
         symbolTable.openScope();
         ST st = concatenate(ctx);
