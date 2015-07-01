@@ -3,7 +3,7 @@ boolean y;
 character z;
 string a;
 
-main() {
+func void main() {
     x = 35;
     y = false;
     z = 'a';

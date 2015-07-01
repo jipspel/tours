@@ -1,4 +1,4 @@
-main() {
+func void main() {
     character x = 'a';
     character y = 'b';
     print(x);

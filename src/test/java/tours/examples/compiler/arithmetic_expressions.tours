@@ -1,4 +1,4 @@
-main() {
+func void main() {
     integer x;
     x = 36 - 1;
     print(x);
