@@ -100,11 +100,13 @@ public class GrammarTest {
     @Test
     public void testMissingParenthesis() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/missing_parenthesis.tours");
-        assertEquals(2, errorList.size());
-        assertEquals("line 4:14 missing '(' at 'x'",
+        assertEquals(3, errorList.size());
+        assertEquals("line 4:14 no viable alternative at input 'printx'",
                 errorList.get(0));
-        assertEquals("line 4:15 mismatched input ';' expecting {'&&', ',', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ')', '/', '*'}",
+        assertEquals("line 4:15 mismatched input ';' expecting '='",
                 errorList.get(1));
+        assertEquals("line 5:4 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}",
+                errorList.get(2));
     }
 
     @Test
