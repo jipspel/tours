@@ -42,17 +42,31 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ToursParser#function}.
+	 * Visit a parse tree produced by the {@code voidFunction}
+	 * labeled alternative in {@link ToursParser#function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction(@NotNull ToursParser.FunctionContext ctx);
+	T visitVoidFunction(@NotNull ToursParser.VoidFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code returnFunction}
+	 * labeled alternative in {@link ToursParser#function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ToursParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBlock(@NotNull ToursParser.BlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ToursParser#returnBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnBlock(@NotNull ToursParser.ReturnBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code assignStatement}
 	 * labeled alternative in {@link ToursParser#statement}.
@@ -96,6 +110,12 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForStatement(@NotNull ToursParser.ForStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ToursParser#returnStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnStatement(@NotNull ToursParser.ReturnStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code integerExpr}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -130,6 +150,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code functionExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code stringExpr}
 	 * labeled alternative in {@link ToursParser#expression}.

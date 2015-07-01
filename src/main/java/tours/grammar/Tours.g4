@@ -23,13 +23,22 @@ variableAssignment
     : IDENTIFIER ASSIGNMENT expression
     ;
 
+/** Function
+ *  type name(arguments)
+ */
 function
-    : IDENTIFIER LPAR RPAR block
+    : FUNC VOID IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR block                #voidFunction
+    | FUNC variableType IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock  #returnFunction
     ;
 
 /** Grouped sequence of statements. */
 block
     : LBRACE (((statement | variable ) SEMI) | conditionalStatement)* RBRACE
+    ;
+
+/** Grouped sequence of statements. */
+returnBlock
+    : LBRACE (((statement | variable ) SEMI) | conditionalStatement)* returnStatement SEMI RBRACE
     ;
 
 /** Statement. */
@@ -44,6 +53,11 @@ conditionalStatement: IF LPAR expression RPAR block (ELSE block)?               
                     | FOR LPAR (variable | statement)? SEMI expression SEMI statement RPAR block     #forStatement
                     ;
 
+/** Return statement. */
+returnStatement
+    : RETURN expression
+    ;
+
 /** Expression.*/
 expression:     LPAR expression RPAR                                            #parExpression
               | prefixOperator expression                                       #prefixExpression
@@ -56,6 +70,7 @@ expression:     LPAR expression RPAR                                            
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
               | IDENTIFIER                                                      #identifierExpr
+              | IDENTIFIER LPAR ((expression SEMI)* expression)? RPAR           #functionExpression
               | CHAR                                                            #characterExpr
               | STR                                                             #stringExpr
               | INT                                                             #integerExpr
@@ -94,15 +109,16 @@ END:        E N D ;
 EXIT:       E X I T ;
 FALSE:      F A L S E ;
 FOR:        F O R ;
-FUNC:       F U N C T I O N ;
+FUNC:       F U N C ;
 IF:         I F ;
 INPUT:      I N P U T ;
 INTEGER:    I N T E G E R ;
 PRINT:      P R I N T ;
-PROC:       P R O C E D U R E ;
 PROGRAM:    P R O G R A M ;
+RETURN:     R E T U R N ;
 STRING:     S T R I N G ;
 TRUE:       T R U E ;
+VOID:       V O I D;
 WHILE:      W H I L E ;
 
 ASSIGNMENT:    '=';
@@ -130,9 +146,10 @@ SEMI:          ';';
 SLASH:         '/';
 STAR:          '*';
 SQUOTE:        '\'';
+UNDERSCORE:    '_';
 
 // Content-bearing token types
-IDENTIFIER: LETTER (LETTER | DIGIT)*;
+IDENTIFIER: LETTER (LETTER | DIGIT | UNDERSCORE)*;
 INT: DIGIT (DIGIT)*;
 STR: DQUOTE .*? DQUOTE;
 CHAR: SQUOTE . SQUOTE;
