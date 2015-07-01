@@ -49,7 +49,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
+    public void exitVariableAssignmentPrimitive(@NotNull ToursParser.VariableAssignmentPrimitiveContext ctx) {
         String identifier = ctx.IDENTIFIER().getText();
         String expression = ctx.expression().getText();
 

@@ -22,8 +22,8 @@ variable
 
 /** Variable assignment */
 variableAssignment
-    : IDENTIFIER ASSIGNMENT expression
-    | IDENTIFIER LBLOCK INT RBLOCK ASSIGNMENT expression
+    : IDENTIFIER ASSIGNMENT expression                      #variableAssignmentPrimitive
+    | IDENTIFIER LBLOCK INT RBLOCK ASSIGNMENT expression    #variableAssignmentArray
     ;
 
 /** Function
@@ -85,8 +85,8 @@ expression:     LPAR expression RPAR                                            
               ;
 
 arrayAssignment
-  : IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?   #arrayExpressionInitialisation
-  | variableType LBLOCK INT RBLOCK                          #arrayExpressionNew
+  : LBRACE expression (COMMA expression)* RBRACE    #arrayExpressionInitialisation
+  | variableType LBLOCK INT RBLOCK                  #arrayExpressionNew
   ;
 
 /** Prefix operator. */
