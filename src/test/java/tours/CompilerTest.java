@@ -154,15 +154,21 @@ public class CompilerTest {
     }
 
     @Test
-    public void testReturnFunctionOneArgument() {
+    public void testReturningOneNumber() {
         assertEqualsOutput(Arrays.asList("35"),
                 "src/test/java/tours/examples/compiler/function_return_next_number.tours");
     }
 
     @Test
-    public void testReturnFunctionTwoArguments() {
+    public void testReturnAddingTwoNumbers() {
         assertEqualsOutput(Arrays.asList("About to add: ", "33", "2", "Sum: ", "35"),
                 "src/test/java/tours/examples/compiler/function_return_add_numbers.tours");
+    }
+
+    @Test
+    public void testFibonacci() {
+        assertEqualsOutput(Arrays.asList("8"),
+                "src/test/java/tours/examples/compiler/function_fibonacci.tours");
     }
 
     private String compileAndRun(String filename, List<String> input) {

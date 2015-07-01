@@ -1,0 +1,13 @@
+func integer fibonacci(integer i) {
+    integer result;
+    if (i < 2) {
+        result = i;
+    } else {
+        result = fibonacci(i - 1) + fibonacci(i - 2);
+    }
+    return result;
+}
+
+func void main() {
+    print(fibonacci(6));
+}

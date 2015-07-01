@@ -252,6 +252,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) {
+        symbolTable.addType(ctx.getText(), symbolTable.getType(ctx.IDENTIFIER().getText()));
+
         ST st = stGroup.getInstanceOf("concatenator");
         String identifier = ctx.IDENTIFIER().getText();
 
