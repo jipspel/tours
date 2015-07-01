@@ -133,7 +133,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         typeClass = getTypeClass(type);
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
-            symbolTable.add(identifier.getText(), new Type(ctx.variableType().getText()));
+            symbolTable.addVariable(identifier.getText(), new Type(ctx.variableType().getText()));
 
             ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", typeClass));
             stVariable.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));

@@ -1,11 +1,12 @@
 package tours;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 public class SymbolTable {
-    private Stack<Map<String, Variable>> symbolList;
+    private Stack<Map<String, Symbol>> symbolList;
     private int identifierCount;
 
     public SymbolTable() {
@@ -29,12 +30,16 @@ public class SymbolTable {
         symbolList.pop();
     }
 
-    public void add(String id, Type type) {
+    public void addVariable(String id, Type type) {
         symbolList.peek().put(id, new Variable(type, identifierCount++));
     }
 
     public void addType(String id, Type type) {
         symbolList.peek().put(id, new Variable(type, -1));
+    }
+
+    public void addFunction(String id, Type type, List<Type> arguments) {
+        symbolList.peek().put(id, new Function(type, arguments));
     }
 
     public boolean containsInCurrentScope(String id) {
@@ -63,14 +68,30 @@ public class SymbolTable {
     public int getIdentifier(String id) {
         for (int i = getLevel(); i >= 0; i--) {
             if (symbolList.get(i).containsKey(id)) {
-                return symbolList.get(i).get(id).getIdentifier();
+                return ((Variable) symbolList.get(i).get(id)).getIdentifier();
             }
         }
         return -1;
     }
 
-    public class Variable {
-        private final Type type;
+    public List<Type> getArgumentTypes(String id) {
+        for (int i = getLevel(); i >= 0; i--) {
+            if (symbolList.get(i).containsKey(id)) {
+                return ((Function) symbolList.get(i).get(id)).getArgumentTypes();
+            }
+        }
+        return null;
+    }
+
+    public abstract class Symbol {
+        protected Type type = null;
+
+        public Type getType() {
+            return type;
+        }
+    }
+
+    public class Variable extends Symbol {
         private final int identifier;
 
         public Variable(Type type, int identifier) {
@@ -78,12 +99,21 @@ public class SymbolTable {
             this.identifier = identifier;
         }
 
-        public Type getType() {
-            return type;
-        }
-
         public int getIdentifier() {
             return identifier;
+        }
+    }
+
+    public class Function extends Symbol {
+        private final List<Type> argumentTypes;
+
+        public Function(Type type, List<Type> argumentTypes) {
+            this.type = type;
+            this.argumentTypes = argumentTypes;
+        }
+
+        public List<Type> getArgumentTypes() {
+            return argumentTypes;
         }
     }
 }

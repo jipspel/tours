@@ -7,10 +7,13 @@ public class Type {
     public static final Type CHARACTER = new Type(ToursParser.CHARACTER);
     public static final Type INTEGER = new Type(ToursParser.INTEGER);
     public static final Type STRING = new Type(ToursParser.STRING);
+    public static final Type VOID = new Type(ToursParser.VOID);
+
     public static final String BOOLEANJAVA = "Z";
     public static final String CHARACTERJAVA = "C";
     public static final String INTEGERJAVA = "I";
     public static final String STRINGJAVA = "Ljava/lang/String;";
+    public static final String VOIDJAVA = "V";
 
     private final int type;
 
@@ -31,6 +34,9 @@ public class Type {
                 break;
             case "string" :
                 this.type = STRING.getType();
+                break;
+            case "void" :
+                this.type = VOID.getType();
                 break;
             default :
                 throw new UnsupportedOperationException("Type: " + type + " was undefined");
@@ -56,6 +62,8 @@ public class Type {
             return "integer";
         } else if (type == Type.STRING.getType()) {
             return "string";
+        } else if (type == Type.VOID.getType()) {
+            return "void";
         } else {
             throw new UnsupportedOperationException("Type: " + type + " was undefined");
         }
@@ -70,6 +78,8 @@ public class Type {
             return INTEGERJAVA;
         } else if (type == Type.STRING.getType()) {
             return STRINGJAVA;
+        } else if (type == Type.VOID.getType()) {
+            return VOIDJAVA;
         } else {
             throw new UnsupportedOperationException("Type: " + type + " was undefined");
         }
