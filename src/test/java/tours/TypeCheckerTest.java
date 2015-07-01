@@ -52,37 +52,38 @@ public class TypeCheckerTest {
     @Test
     public void testMismatchingTypes() throws IOException {
         List<String> errors = Arrays.asList(
-                "Error on line 2, pos 14",
-                "Error on line 3, pos 16",
-                "Error on line 4, pos 14",
-                "Error on line 5, pos 13",
-                "Error on line 7, pos 14",
-                "Error on line 8, pos 16",
-                "Error on line 9, pos 14",
-                "Error on line 10, pos 13"
+                "Error <mismatching types> on line 2, pos 14",
+                "Error <mismatching types> on line 3, pos 16",
+                "Error <mismatching types> on line 4, pos 14",
+                "Error <mismatching types> on line 5, pos 13",
+                "Error <mismatching types> on line 7, pos 14",
+                "Error <mismatching types> on line 8, pos 16",
+                "Error <mismatching types> on line 9, pos 14",
+                "Error <mismatching types> on line 10, pos 13"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type.tours");
     }
 
     @Test
     public void testAlreadyDefinedVariables() throws IOException {
-        List<String> errors = Arrays.asList("Error on line 3, pos 12");
+        List<String> errors = Arrays.asList("Error <variable already defined> on line 3, pos 12");
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/already_defined_variables.tours");
     }
 
     @Test
     public void testNotDefinedVariables() throws IOException {
-        List<String> errors = Arrays.asList("Error on line 2, pos 6");
+        List<String> errors = Arrays.asList("Error <variable not defined> on line 2, pos 6");
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables.tours");
     }
 
     @Test
     public void testInvalidForStatement() throws IOException {
-        List<String> errors = Arrays.asList("Error on line 4, pos 16",
-                "Error on line 8, pos 16",
-                "Error on line 12, pos 16",
-                "Error on line 16, pos 16",
-                "Error on line 20, pos 16"
+        List<String> errors = Arrays.asList(
+                "Error <expected boolean> on line 4, pos 16",
+                "Error <expected boolean> on line 8, pos 16",
+                "Error <expected boolean> on line 12, pos 16",
+                "Error <expected boolean> on line 16, pos 16",
+                "Error <expected boolean> on line 20, pos 16"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_for.tours");
     }
@@ -90,14 +91,14 @@ public class TypeCheckerTest {
     @Test
     public void testInvalidIfStatement() throws IOException {
         List<String> errors = Arrays.asList(
-                "Error on line 6, pos 7",
-                "Error on line 10, pos 7",
-                "Error on line 14, pos 7",
-                "Error on line 18, pos 7",
-                "Error on line 22, pos 7",
-                "Error on line 26, pos 7",
-                "Error on line 30, pos 7",
-                "Error on line 34, pos 7"
+                "Error <expected boolean> on line 6, pos 7",
+                "Error <expected boolean> on line 10, pos 7",
+                "Error <expected boolean> on line 14, pos 7",
+                "Error <expected boolean> on line 18, pos 7",
+                "Error <expected boolean> on line 22, pos 7",
+                "Error <expected boolean> on line 26, pos 7",
+                "Error <expected boolean> on line 30, pos 7",
+                "Error <expected boolean> on line 34, pos 7"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_if.tours");
     }
@@ -105,16 +106,34 @@ public class TypeCheckerTest {
     @Test
     public void testInvalidWhileStatement() throws IOException {
         List<String> errors = Arrays.asList(
-                "Error on line 6, pos 10",
-                "Error on line 10, pos 10",
-                "Error on line 14, pos 10",
-                "Error on line 18, pos 10",
-                "Error on line 22, pos 10",
-                "Error on line 26, pos 10",
-                "Error on line 30, pos 10",
-                "Error on line 34, pos 10"
+                "Error <expected boolean> on line 6, pos 10",
+                "Error <expected boolean> on line 10, pos 10",
+                "Error <expected boolean> on line 14, pos 10",
+                "Error <expected boolean> on line 18, pos 10",
+                "Error <expected boolean> on line 22, pos 10",
+                "Error <expected boolean> on line 26, pos 10",
+                "Error <expected boolean> on line 30, pos 10",
+                "Error <expected boolean> on line 34, pos 10"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_while.tours");
+    }
+
+    @Test
+    public void testMismatchingFunctionAssignments() throws IOException {
+        List<String> errors = Arrays.asList(
+                "Error <mismatching types> on line 9, pos 13",
+                "Error <mismatching types> on line 10, pos 14");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_function_assignments.tours");
+    }
+
+    @Test
+    public void testMismatchingFunctionReturnType() throws IOException {
+        List<String> errors = Arrays.asList(
+                "Error <mismatching types> on line 1, pos 27",
+                "Error <mismatching types> on line 5, pos 29",
+                "Error <mismatching types> on line 9, pos 26",
+                "Error <mismatching types> on line 13, pos 25");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_function_return_type.tours");
     }
 
     private void testTypeCheckerErrors(List<String> expected, String filename) throws IOException {

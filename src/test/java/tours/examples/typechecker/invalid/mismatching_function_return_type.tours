@@ -1,0 +1,15 @@
+func boolean random_bool() {
+    return 'a';
+}
+
+func character random_char() {
+    return false;
+}
+
+func integer random_int() {
+    return "blaat";
+}
+
+func string random_str() {
+    return 1;
+}
