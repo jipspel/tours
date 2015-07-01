@@ -203,9 +203,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
             st.add("return_type", returnType.getJavaObjectType());
             st.add("function_name", ctx.IDENTIFIER(0).getText());
 
-            List<String> x = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
-            st.add("argument_types", x);
-            st.add("block", visit(ctx.block()).render());
+            List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
+            st.add("argument_types", arguments);
+            st.add("block", Arrays.asList(visit(ctx.block()).render(), stGroup.getInstanceOf("return").render()));
         }
 
         symbolTable.closeScope();
@@ -240,7 +240,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
             st.add("stack_limit", 35);
             st.add("return_type", returnType.getJavaObjectType());
             st.add("function_name", ctx.IDENTIFIER(0).getText());
-            st.add("argument_types", argumentTypes);
+
+            List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
+            st.add("argument_types", arguments);
             st.add("block", visit(ctx.returnBlock()).render());
         }
 
@@ -414,7 +416,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitReturnStatement(@NotNull ToursParser.ReturnStatementContext ctx) {
-        return visit(ctx.expression());
+        ST st = stGroup.getInstanceOf("concatenator");
+
+        String expression = visit(ctx.expression()).render();
+        String templateFile = symbolTable.getType(ctx.expression().getText()).equals(Type.STRING) ? "areturn" : "ireturn";
+
+        st.add("blocks", Arrays.asList(expression, stGroup.getInstanceOf(templateFile).render()));
+
+        return st;
     }
 
     @Override
@@ -534,10 +543,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) {
-        ST st = stGroup.getInstanceOf("bipush");
-
-        st.add("text", (int) ctx.getText().charAt(1));
         symbolTable.addType(ctx.getText(), Type.CHARACTER);
+
+        ST st = stGroup.getInstanceOf("bipush");
+        st.add("text", (int) ctx.getText().charAt(1));
 
         return st;
     }
@@ -559,6 +568,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitParExpression(@NotNull ToursParser.ParExpressionContext ctx) {
+        symbolTable.addType(ctx.getText(), symbolTable.getType(ctx.expression().getText()));
+
         return concatenate(ctx);
     }
 

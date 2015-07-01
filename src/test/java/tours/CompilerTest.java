@@ -150,7 +150,19 @@ public class CompilerTest {
     @Test
     public void testVoidFunction() {
         assertEqualsOutput(Arrays.asList("Hello World!"),
-                "src/test/java/tours/examples/compiler/function.tours");
+                "src/test/java/tours/examples/compiler/function_void_hello_world.tours");
+    }
+
+    @Test
+    public void testReturnFunctionOneArgument() {
+        assertEqualsOutput(Arrays.asList("35"),
+                "src/test/java/tours/examples/compiler/function_return_next_number.tours");
+    }
+
+    @Test
+    public void testReturnFunctionTwoArguments() {
+        assertEqualsOutput(Arrays.asList("About to add: ", "33", "2", "Sum: ", "35"),
+                "src/test/java/tours/examples/compiler/function_return_add_numbers.tours");
     }
 
     private String compileAndRun(String filename, List<String> input) {

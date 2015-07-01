@@ -1,0 +1,8 @@
+func integer next_number(integer i) {
+    return i + 1;
+}
+
+func void main() {
+    integer x = next_number(34);
+    print(x);
+}
