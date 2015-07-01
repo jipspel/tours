@@ -1,6 +1,7 @@
 package tours.typechecker;
 
 import org.antlr.v4.runtime.misc.NotNull;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import tours.SymbolTable;
 import tours.Type;
@@ -17,6 +18,16 @@ public class TypeChecker extends ToursBaseListener {
     public TypeChecker() {
         symbolTable = new SymbolTable();
         errors = new ArrayList<>();
+    }
+
+    private ParseTree getNextElement(List<ParseTree> ctx, ParseTree current) {
+        int i;
+        for (i = 0; i < ctx.size(); i++) {
+            if (current == ctx.get(i)) {
+                break;
+            }
+        }
+        return ctx.get(i++);
     }
 
     @Override
@@ -37,13 +48,13 @@ public class TypeChecker extends ToursBaseListener {
             if (symbolTable.containsInCurrentScope(id)) {
                 errors.add(String.format("Error <variable already defined> on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
             } else {
-                symbolTable.addVariable(id, new Type(ctx.variableType().getStart().getType()));
-                symbolTable.addVariable(ctx.getText(), new Type(ctx.variableType().getStart().getType()));
+                symbolTable.addVariable(id, new Type(ctx.variableType().getStart().getType(), false));
+                symbolTable.addVariable(ctx.getText(), new Type(ctx.variableType().getStart().getType(), false));
             }
         }
 
         // assignment
-        if (ctx.expression() != null && !(new Type(ctx.variableType().getStart().getType())).equals(symbolTable.getType(ctx.expression().getText()))) {
+        if (ctx.expression() != null && !(new Type(ctx.variableType().getStart().getType(), false)).equals(symbolTable.getType(ctx.expression().getText()))) {
             errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
     }
@@ -56,13 +67,13 @@ public class TypeChecker extends ToursBaseListener {
             if (symbolTable.containsInCurrentScope(id)) {
                 errors.add(String.format("Error <variable already defined> on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
             } else {
-                symbolTable.addVariable(id, new Type(ctx.variableType().getStart().getType()));
-                symbolTable.addVariable(ctx.getText(), new Type(ctx.variableType().getStart().getType()));
+                symbolTable.addVariable(id, new Type(ctx.variableType().getStart().getType(), true));
+                symbolTable.addVariable(ctx.getText(), new Type(ctx.variableType().getStart().getType(), true));
             }
         }
 
         // assignment
-        if (!(new Type(ctx.variableType().getStart().getType())).equals(symbolTable.getType(ctx.arrayAssignment().getText()))) {
+        if (!(new Type(ctx.variableType().getStart().getType(), true)).equals(symbolTable.getType(ctx.arrayAssignment().getText()))) {
             errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
     }
@@ -71,13 +82,20 @@ public class TypeChecker extends ToursBaseListener {
     public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
         String identifier = ctx.IDENTIFIER().getText();
         String expression = ctx.expression().getText();
+        Type type = symbolTable.getType(identifier);
 
-        if (symbolTable.getType(identifier) == null ) {
+        // if it is an array, remove the array part in the type of type[i]
+        if (ctx.LBLOCK() != null) {
+            type = new Type(type.getType(), false);
+        }
+
+        if (type == null ) {
             errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
-        } else if (!symbolTable.getType(identifier).equals(symbolTable.getType(expression))) {
+        } else if (!type.equals(symbolTable.getType(expression))) {
             errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
-        symbolTable.addVariable(ctx.getText(), symbolTable.getType(identifier));
+
+        symbolTable.addVariable(ctx.getText(), type);
     }
 
 
@@ -87,7 +105,8 @@ public class TypeChecker extends ToursBaseListener {
         List<Type> argumentTypes = new ArrayList<>();
 
         for (int i = 0; i < ctx.variableType().size(); i++) {
-            Type type = new Type(ctx.variableType(i).getStart().getType());
+            ToursParser.VariableTypeContext variableType = ctx.variableType(i);
+            Type type = new Type(variableType.getStart().getType(), getNextElement(ctx.children, variableType).equals(ToursParser.LBLOCK));
             argumentTypes.add(type);
             symbolTable.addVariable(ctx.IDENTIFIER(i + 1).getText(), type);
         }
@@ -109,11 +128,14 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void enterReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
-        Type returnType = new Type(ctx.variableType(0).getStart().getType());
+        Type returnType = new Type(ctx.variableType(0).getStart().getType(),  
+                getNextElement(ctx.children, ctx.variableType(0)).equals(ToursParser.LBLOCK));
         List<Type> argumentTypes = new ArrayList<>();
     // TODO argumenten die meegegeven worden moeten in de nieuwe scope vallen
         for (int i = 1; i < ctx.variableType().size(); i++) {
-            Type type = new Type(ctx.variableType(i).getStart().getType());
+            ToursParser.VariableTypeContext variableType = ctx.variableType(i);
+            Type type = new Type(variableType.getStart().getType(),
+                    getNextElement(ctx.children, variableType).equals(ToursParser.LBLOCK));
             argumentTypes.add(type);
             symbolTable.addVariable(ctx.IDENTIFIER(i).getText(), type);
         }
@@ -227,6 +249,24 @@ public class TypeChecker extends ToursBaseListener {
         } else {
             symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
         }
+    }
+
+    @Override
+    public void exitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx) {
+        Type expressionType = symbolTable.getType(ctx.expression(0).getText());
+
+        for(int i = 1; i < ctx.expression().size(); i++) {
+            if (!symbolTable.getType(ctx.expression(i).getText()).equals(expressionType)) {
+                errors.add(String.format("Error <mismatching array types> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
+            }
+        }
+
+        symbolTable.addType(ctx.getText(), new Type(expressionType.getType(), true));
+    }
+
+    @Override
+    public void exitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx) {
+        symbolTable.addType(ctx.getText(), new Type(ctx.variableType().getText(), true));
     }
 
     @Override

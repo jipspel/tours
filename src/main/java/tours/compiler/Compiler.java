@@ -152,7 +152,31 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         typeClass = getTypeClass(type);
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
-            symbolTable.addVariable(identifier.getText(), new Type(ctx.variableType().getText()));
+            symbolTable.addVariable(identifier.getText(), new Type(ctx.variableType().getText(), false));
+
+            ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", typeClass));
+            stVariable.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));
+            stList.add(stVariable.render());
+        }
+
+        stList.add(stGroup.getInstanceOf("pop").render());
+        st.add("blocks", stList);
+
+        return st;
+    }
+
+    @Override
+    public ST visitVariableArray(@NotNull ToursParser.VariableArrayContext ctx) {
+        ST st = stGroup.getInstanceOf("concatenator");
+        String type = ctx.variableType().getText().toLowerCase();
+        String typeClass;
+        List<String> stList = new ArrayList<>();
+
+        stList.add(visit(ctx.arrayAssignment()).render());
+
+        typeClass = getTypeClass(type);
+        for (TerminalNode identifier : ctx.IDENTIFIER()) {
+            symbolTable.addVariable(identifier.getText(), new Type(ctx.variableType().getText(), false));
 
             ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", typeClass));
             stVariable.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));
@@ -182,7 +206,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         Map<String, Type> variables = new HashMap<>();
 
         for (int i = 0; i < ctx.variableType().size(); i++) {
-            Type type = new Type(ctx.variableType(i).getStart().getType());
+            Type type = new Type(ctx.variableType(i).getStart().getType(), false);
             argumentTypes.add(type);
             variables.put(ctx.IDENTIFIER(i + 1).getText(), type);
         }
@@ -219,12 +243,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
         Map<String, Type> variables = new HashMap<>();
 
         for (int i = 1; i < ctx.variableType().size(); i++) {
-            Type type = new Type(ctx.variableType(i).getStart().getType());
+            Type type = new Type(ctx.variableType(i).getStart().getType(), false);
             argumentTypes.add(type);
             variables.put(ctx.IDENTIFIER(i).getText(), type);
         }
 
-        Type returnType = new Type(ctx.variableType(0).getStart().getType());
+        Type returnType = new Type(ctx.variableType(0).getStart().getType(), false);
         symbolTable.addFunction(ctx.IDENTIFIER(0).getText(), returnType, argumentTypes);
 
         symbolTable.openScope();

@@ -33,8 +33,6 @@ function
     (variableType (LBLOCK RBLOCK)? IDENTIFIER))? RPAR block                                                 #voidFunction
     | FUNC variableType (LBLOCK RBLOCK)? IDENTIFIER LPAR ((variableType (LBLOCK RBLOCK)? IDENTIFIER COMMA)*
     (variableType (LBLOCK RBLOCK)?IDENTIFIER))? RPAR returnBlock                                            #returnFunction
-
-
     ;
 
 /** Grouped sequence of statements. */

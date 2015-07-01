@@ -47,6 +47,10 @@ public class TypeCheckerTest {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_integer.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_string.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_compound.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_boolean.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_character.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_integer.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_string.tours");
     }
 
     @Test
