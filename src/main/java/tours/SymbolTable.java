@@ -34,6 +34,10 @@ public class SymbolTable {
         symbolList.peek().put(id, new Variable(type, identifierCount++));
     }
 
+    public void addVariables(Map<String, Type> variables) {
+        variables.forEach((id, type) -> addVariable(id, type));
+    }
+
     public void addType(String id, Type type) {
         symbolList.peek().put(id, new Variable(type, -1));
     }

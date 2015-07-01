@@ -42,7 +42,7 @@ public class CompilerTest {
 
     @Test
     public void testHelloWorld() {
-        assertEqualsOutput(Arrays.asList("Hello World"), "src/test/java/tours/examples/compiler/hello_world.tours");
+        assertEqualsOutput(Arrays.asList("Hello World!"), "src/test/java/tours/examples/compiler/hello_world.tours");
     }
 
     @Test
@@ -145,6 +145,12 @@ public class CompilerTest {
                         "3",
                         "1"),
                 "src/test/java/tours/examples/compiler/scopes.tours");
+    }
+
+    @Test
+    public void testVoidFunction() {
+        assertEqualsOutput(Arrays.asList("Hello World!"),
+                "src/test/java/tours/examples/compiler/function.tours");
     }
 
     private String compileAndRun(String filename, List<String> input) {

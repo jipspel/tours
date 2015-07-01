@@ -91,7 +91,7 @@ public class TypeChecker extends ToursBaseListener {
     public void enterReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
         Type returnType = new Type(ctx.variableType(0).getStart().getType());
         List<Type> argumentTypes = new ArrayList<>();
-
+    // TODO argumenten die meegegeven worden moeten in de nieuwe scope vallen
         for (int i = 1; i < ctx.variableType().size(); i++) {
             Type type = new Type(ctx.variableType(i).getStart().getType());
             argumentTypes.add(type);
