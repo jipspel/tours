@@ -21,14 +21,14 @@ public class LexicalTest {
     public void testBoolean() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/lexical_errors/boolean.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 1:9 no viable alternative at input 'booleaanb'", errorList.get(0));
+        assertEquals("line 1:9 missing '=' at 'b'", errorList.get(0));
     }
 
     @Test
     public void testCharacter() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/lexical_errors/character.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 1:11 no viable alternative at input 'characcterc'", errorList.get(0));
+        assertEquals("line 1:11 missing '=' at 'c'", errorList.get(0));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class LexicalTest {
         assertEquals("line 2:10 no viable alternative at input 'integer'", errorList.get(1));
         assertEquals("line 2:27 mismatched input '<' expecting '='", errorList.get(2));
         assertEquals("line 2:42 mismatched input ')' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ';', '/', '*'}", errorList.get(3));
-        assertEquals("line 5:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, INTEGER, STRING, IDENTIFIER}", errorList.get(4));
+        assertEquals("line 5:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}", errorList.get(4));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class LexicalTest {
         assertEquals(3, errorList.size());
         assertEquals("line 3:8 missing '=' at '('", errorList.get(0));
         assertEquals("line 3:18 mismatched input '{' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ';', '/', '*'}", errorList.get(1));
-        assertEquals("line 6:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, INTEGER, STRING, IDENTIFIER}", errorList.get(2));
+        assertEquals("line 6:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}", errorList.get(2));
     }
 
     @Test
@@ -63,14 +63,14 @@ public class LexicalTest {
     public void testInteger() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/lexical_errors/integer.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 1:9 no viable alternative at input 'inteegeri'", errorList.get(0));
+        assertEquals("line 1:9 missing '=' at 'i'", errorList.get(0));
     }
 
     @Test
     public void testString() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/lexical_errors/string.tours");
         assertEquals(1, errorList.size());
-        assertEquals("line 1:8 no viable alternative at input 'sstrings'", errorList.get(0));
+        assertEquals("line 1:8 missing '=' at 's'", errorList.get(0));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class LexicalTest {
         assertEquals(3, errorList.size());
         assertEquals("line 3:11 missing '=' at '('", errorList.get(0));
         assertEquals("line 3:21 mismatched input '{' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ';', '/', '*'}", errorList.get(1));
-        assertEquals("line 6:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, INTEGER, STRING, IDENTIFIER}", errorList.get(2));
+        assertEquals("line 6:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}", errorList.get(2));
     }
 
     private List<String> parseToursFile(String filename) throws IOException {

@@ -1,4 +1,4 @@
-main() {
+func void main() {
     integer x = 35;
     integer y = 35;
 
