@@ -29,8 +29,11 @@ variableAssignment
  *  type name(arguments)
  */
 function
-    : FUNC VOID IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR block                #voidFunction
-    | FUNC variableType (LBLOCK RBLOCK)? IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock  #returnFunction
+    : FUNC VOID IDENTIFIER LPAR ((variableType (LBLOCK RBLOCK)? IDENTIFIER COMMA)*
+    (variableType (LBLOCK RBLOCK)? IDENTIFIER))? RPAR block                                                 #voidFunction
+    | FUNC variableType (LBLOCK RBLOCK)? IDENTIFIER LPAR ((variableType (LBLOCK RBLOCK)? IDENTIFIER COMMA)*
+    (variableType (LBLOCK RBLOCK)?IDENTIFIER))? RPAR returnBlock                                            #returnFunction
+
 
     ;
 
