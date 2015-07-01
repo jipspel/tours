@@ -1,3 +1,7 @@
+func void addToZ(integer z) {
+    z = z + 1;
+}
+
 func void main() {
     integer x = 36;
     integer y = {
@@ -19,4 +23,8 @@ func void main() {
 
     for (i = 0; i < 1; i = i + 1) {}
     print(i);   // i = 1
+
+    integer z = 2;
+    addToZ(z);
+    print(z);   // z = 2
 }

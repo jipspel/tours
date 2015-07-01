@@ -143,7 +143,8 @@ public class CompilerTest {
                         "37",
                         "0",
                         "3",
-                        "1"),
+                        "1",
+                        "2"),
                 "src/test/java/tours/examples/compiler/scopes.tours");
     }
 
