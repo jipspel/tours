@@ -489,51 +489,109 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ToursParser#variableType}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableType(@NotNull ToursParser.VariableTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#variableType}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableType(@NotNull ToursParser.VariableTypeContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code intType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void enterIntType(@NotNull ToursParser.IntTypeContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code intType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void exitIntType(@NotNull ToursParser.IntTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code boolType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void enterBoolType(@NotNull ToursParser.BoolTypeContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code boolType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void exitBoolType(@NotNull ToursParser.BoolTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code charType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void enterCharType(@NotNull ToursParser.CharTypeContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code charType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void exitCharType(@NotNull ToursParser.CharTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code strType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void enterStrType(@NotNull ToursParser.StrTypeContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code strType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
 	void exitStrType(@NotNull ToursParser.StrTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code intArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code intArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code boolArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boolArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code charArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code charArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code strArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void enterStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code strArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void exitStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx);
 }

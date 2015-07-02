@@ -36,19 +36,19 @@ public class GrammarTest {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_string.tours");
         assertEquals(0, errorList.size());
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (variableType boolean) y = (expression true)) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (primitiveType boolean) y = (expression true)) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_boolean.tours"));
 
-        assertEquals("(program (body (function func void main ( ) (block { (variable (variableType integer) i) ; (statement (variableAssignment i = (expression { (variable (variableType integer) x = (expression 35)) ; }))) ; (variable (variableType integer) j = (expression { (variable (variableType integer) y = (expression 36)) ; })) ; (statement (variableAssignment j = (expression { (expression (expression 5) (multiplyOperator *) (expression 5)) ; }))) ; (statement (variableAssignment j = (expression { (statement (variableAssignment i = (expression 3))) ; }))) ; }))))",
+        assertEquals("(program (body (function func void main ( ) (block { (variable (primitiveType integer) i) ; (statement (variableAssignment i = (expression { (variable (primitiveType integer) x = (expression 35)) ; }))) ; (variable (primitiveType integer) j = (expression { (variable (primitiveType integer) y = (expression 36)) ; })) ; (statement (variableAssignment j = (expression { (expression (expression 5) (multiplyOperator *) (expression 5)) ; }))) ; (statement (variableAssignment j = (expression { (statement (variableAssignment i = (expression 3))) ; }))) ; }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_compound.tours"));
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType character) x) ;) (variableAssignment x = (expression 'a')) ; (variableDeclaration (variable (variableType character) y = (expression 'a')) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType character) x) ;) (variableAssignment x = (expression 'a')) ; (variableDeclaration (variable (primitiveType character) y = (expression 'a')) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_character.tours"));
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x) ;) (variableAssignment x = (expression 35)) ; (variableDeclaration (variable (variableType integer) y = (expression 35)) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType integer) x) ;) (variableAssignment x = (expression 35)) ; (variableDeclaration (variable (primitiveType integer) y = (expression 35)) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_integer.tours"));
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType string) x) ;) (variableAssignment x = (expression \"Hello\")) ; (variableDeclaration (variable (variableType string) y = (expression \"Hello\")) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType string) x) ;) (variableAssignment x = (expression \"Hello\")) ; (variableDeclaration (variable (primitiveType string) y = (expression \"Hello\")) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_string.tours"));
     }
 
@@ -66,16 +66,16 @@ public class GrammarTest {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_array_string.tours");
         assertEquals(0, errorList.size());
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (variableType boolean) y = (expression true)) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType boolean) x) ;) (variableAssignment x = (expression false)) ; (variableDeclaration (variable (primitiveType boolean) y = (expression true)) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_boolean.tours"));
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType character) x) ;) (variableAssignment x = (expression 'a')) ; (variableDeclaration (variable (variableType character) y = (expression 'a')) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType character) x) ;) (variableAssignment x = (expression 'a')) ; (variableDeclaration (variable (primitiveType character) y = (expression 'a')) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_character.tours"));
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x) ;) (variableAssignment x = (expression 35)) ; (variableDeclaration (variable (variableType integer) y = (expression 35)) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType integer) x) ;) (variableAssignment x = (expression 35)) ; (variableDeclaration (variable (primitiveType integer) y = (expression 35)) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_integer.tours"));
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType string) x) ;) (variableAssignment x = (expression \"Hello\")) ; (variableDeclaration (variable (variableType string) y = (expression \"Hello\")) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType string) x) ;) (variableAssignment x = (expression \"Hello\")) ; (variableDeclaration (variable (primitiveType string) y = (expression \"Hello\")) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/assignments_string.tours"));
     }
 
@@ -96,19 +96,19 @@ public class GrammarTest {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/variable_declaration.tours");
         assertEquals(0, errorList.size());
 
-        assertEquals("(program (body (function func void awesome_print ( (variableType string) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (function func (variableType integer) next_number ( (variableType integer) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; }))))",
+        assertEquals("(program (body (function func void awesome_print ( (variableType (primitiveType string)) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (function func (variableType (primitiveType integer)) next_number ( (variableType (primitiveType integer)) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/functions.tours"));
 
-        assertEquals("(program (body (function func void main ( ) (block { (variable (variableType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (variableType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (block { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) }))))",
+        assertEquals("(program (body (function func void main ( ) (block { (variable (primitiveType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (primitiveType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (block { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/statement_for_single.tours"));
 
-        assertEquals("(program (body (function func void main ( ) (block { (variable (variableType integer) x = (expression 35)) ; (variable (variableType integer) y = (expression 35)) ; (conditionalStatement if ( (expression (expression x) (compareOperator ==) (expression 35)) ) (block { (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ; }) else (block { (statement (variableAssignment y = (expression 36))) ; })) }))))",
+        assertEquals("(program (body (function func void main ( ) (block { (variable (primitiveType integer) x = (expression 35)) ; (variable (primitiveType integer) y = (expression 35)) ; (conditionalStatement if ( (expression (expression x) (compareOperator ==) (expression 35)) ) (block { (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ; }) else (block { (statement (variableAssignment y = (expression 36))) ; })) }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/statement_if.tours"));
 
-        assertEquals("(program (body (function func void main ( ) (block { (variable (variableType integer) x) ; (conditionalStatement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ; })) }))))",
+        assertEquals("(program (body (function func void main ( ) (block { (variable (primitiveType integer) x) ; (conditionalStatement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ; })) }))))",
                 getParseTree("src/test/java/tours/examples/typechecker/statement_while.tours"));
 
-        assertEquals("(program (body (variableDeclaration (variable (variableType integer) x , y) ; (variable (variableType character) z) ; (variable (variableType boolean) a) ; (variable (variableType string) b) ;)))",
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType integer) x , y) ; (variable (primitiveType character) z) ; (variable (primitiveType boolean) a) ; (variable (primitiveType string) b) ;)))",
                 getParseTree("src/test/java/tours/examples/typechecker/variable_declaration.tours"));
     }
 
@@ -137,7 +137,7 @@ public class GrammarTest {
                 errorList.get(0));
         assertEquals("line 4:15 mismatched input ';' expecting '='",
                 errorList.get(1));
-        assertEquals("line 5:4 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}",
+        assertEquals("line 5:4 extraneous input '}' expecting {<EOF>, BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FUNC, INTEGER, INTEGERARRAY, STRING, STRINGARRAY, IDENTIFIER}",
                 errorList.get(2));
     }
 
@@ -145,15 +145,15 @@ public class GrammarTest {
     public void testInvalidFunctionReturns() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/function_returns.tours");
         assertEquals(5, errorList.size());
-        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, CHARACTER, FALSE, FOR, IF, INPUT, INTEGER, PRINT, STRING, TRUE, WHILE, '{', '(', '-', '!', '+', '}', IDENTIFIER, INT, STR, CHAR}",
+        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGERARRAY, PRINT, STRING, STRINGARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', '}', IDENTIFIER, INT, STR, CHAR}",
                 errorList.get(0));
-        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, CHARACTER, FALSE, FOR, IF, INPUT, INTEGER, PRINT, RETURN, STRING, TRUE, WHILE, '{', '(', '-', '!', '+', IDENTIFIER, INT, STR, CHAR}",
+        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGERARRAY, PRINT, RETURN, STRING, STRINGARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', IDENTIFIER, INT, STR, CHAR}",
                 errorList.get(1));
         assertEquals("line 11:4 mismatched input 'return' expecting '}'",
                 errorList.get(2));
         assertEquals("line 11:13 missing '=' at '+'",
                 errorList.get(3));
-        assertEquals("line 12:0 extraneous input '}' expecting {<EOF>, BOOLEAN, CHARACTER, FUNC, INTEGER, STRING, IDENTIFIER}",
+        assertEquals("line 12:0 extraneous input '}' expecting {<EOF>, BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FUNC, INTEGER, INTEGERARRAY, STRING, STRINGARRAY, IDENTIFIER}",
                 errorList.get(4));
     }
 

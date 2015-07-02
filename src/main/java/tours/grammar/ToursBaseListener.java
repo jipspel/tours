@@ -521,6 +521,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterVariableType(@NotNull ToursParser.VariableTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariableType(@NotNull ToursParser.VariableTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIntType(@NotNull ToursParser.IntTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -564,6 +576,54 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStrType(@NotNull ToursParser.StrTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

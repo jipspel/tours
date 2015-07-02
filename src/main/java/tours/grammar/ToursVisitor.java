@@ -294,31 +294,65 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ToursParser#variableType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariableType(@NotNull ToursParser.VariableTypeContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code intType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitIntType(@NotNull ToursParser.IntTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code boolType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBoolType(@NotNull ToursParser.BoolTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code charType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCharType(@NotNull ToursParser.CharTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code strType}
-	 * labeled alternative in {@link ToursParser#variableType}.
+	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStrType(@NotNull ToursParser.StrTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code intArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code boolArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code charArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code strArrayType}
+	 * labeled alternative in {@link ToursParser#arrayType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx);
 }

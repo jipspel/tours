@@ -16,8 +16,8 @@ variableDeclaration
 
 /** Variable declaration. */
 variable
-    : variableType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?                      #variablePrimitive
-    | variableType LBLOCK RBLOCK IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT arrayAssignment)    #variableArray
+    : primitiveType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?    #variablePrimitive
+    | arrayType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT arrayAssignment)    #variableArray
     ;
 
 /** Variable assignment */
@@ -29,10 +29,8 @@ variableAssignment
  *  type name(arguments)
  */
 function
-    : FUNC VOID IDENTIFIER LPAR ((variableType (LBLOCK RBLOCK)? IDENTIFIER COMMA)*
-    (variableType (LBLOCK RBLOCK)? IDENTIFIER))? RPAR block                                                 #voidFunction
-    | FUNC variableType (LBLOCK RBLOCK)? IDENTIFIER LPAR ((variableType (LBLOCK RBLOCK)? IDENTIFIER COMMA)*
-    (variableType (LBLOCK RBLOCK)?IDENTIFIER))? RPAR returnBlock                                            #returnFunction
+    : FUNC VOID IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR block                                                 #voidFunction
+    | FUNC variableType  IDENTIFIER LPAR ((variableType  IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock                                            #returnFunction
     ;
 
 /** Grouped sequence of statements. */
@@ -87,7 +85,7 @@ expression:     LPAR expression RPAR                                            
 
 arrayAssignment
   : LBRACE expression (COMMA expression)* RBRACE    #arrayExpressionInitialisation
-  | variableType LBLOCK INT RBLOCK                  #arrayExpressionNew
+  | primitiveType LBLOCK INT RBLOCK                  #arrayExpressionNew
   ;
 
 /** Prefix operator. */
@@ -106,16 +104,28 @@ booleanOperator: AND | OR;
 compareOperator: LE | LT | GE | GT | EQ | NE;
 
 /** Variable data type. */
-variableType: INTEGER   #intType
-            | BOOLEAN   #boolType
-            | CHARACTER #charType
-            | STRING    #strType
+variableType: primitiveType
+            | arrayType
             ;
+
+primitiveType: INTEGER   #intType
+             | BOOLEAN   #boolType
+             | CHARACTER #charType
+             | STRING    #strType
+                ;
+
+arrayType:   INTEGERARRAY   #intArrayType
+           | BOOLEANARRAY   #boolArrayType
+           | CHARACTERARRAY #charArrayType
+           | STRINGARRAY    #strArrayType
+           ;
 
 // Keywords
 BEGIN:      B E G I N ;
 BOOLEAN:    B O O L E A N ;
+BOOLEANARRAY:    B O O L E A N LBLOCK RBLOCK;
 CHARACTER:  C H A R A C T E R ;
+CHARACTERARRAY:  C H A R A C T E R LBLOCK RBLOCK;
 ELSE:       E L S E ;
 END:        E N D ;
 EXIT:       E X I T ;
@@ -125,10 +135,12 @@ FUNC:       F U N C ;
 IF:         I F ;
 INPUT:      I N P U T ;
 INTEGER:    I N T E G E R ;
+INTEGERARRAY: I N T E G E R LBLOCK RBLOCK;
 PRINT:      P R I N T ;
 PROGRAM:    P R O G R A M ;
 RETURN:     R E T U R N ;
 STRING:     S T R I N G ;
+STRINGARRAY: S T R I N G LBLOCK RBLOCK;
 TRUE:       T R U E ;
 VOID:       V O I D;
 WHILE:      W H I L E ;
