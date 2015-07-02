@@ -70,8 +70,13 @@ public class TypeChecker extends ToursBaseListener {
     @Override
     public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
         String identifier = ctx.IDENTIFIER().getText();
-        String expression = ctx.expression().getText();
+        List<ToursParser.ExpressionContext> expressions = ctx.expression();
+        String expression = expressions.get(expressions.size() - 1).getText();
         Type type = symbolTable.getType(identifier);
+
+        if (expressions.size() > 1 && !symbolTable.getType(expressions.get(0).getText()).equals(Type.INTEGER)) {
+            errors.add(String.format("Error <expected integer> on line %s, pos %s", expressions.get(0).getStart().getLine(), expressions.get(0).getStart().getCharPositionInLine()));
+        }
 
         // if it is an array, remove the array part in the type of type[i]
         if (ctx.LBLOCK() != null) {
@@ -218,6 +223,14 @@ public class TypeChecker extends ToursBaseListener {
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(ctx.expression().getText()));
     }
 
+    @Override
+    public void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) {
+        if (!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
+            errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
+        }
+
+        symbolTable.addType(ctx.getText(), symbolTable.getType(ctx.IDENTIFIER().getText()));
+    }
 
     @Override
     public void exitStringExpr(@NotNull ToursParser.StringExprContext ctx) {

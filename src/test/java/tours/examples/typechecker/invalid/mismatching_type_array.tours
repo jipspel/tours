@@ -17,4 +17,7 @@ func void main() {
     character[] f = integer[5];
     integer[] g = string[5];
     string[] h = boolean[5];
+
+    boolean[] j = boolean[5];
+    j[false] = false;
 }

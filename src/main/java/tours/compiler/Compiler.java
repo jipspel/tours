@@ -194,7 +194,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st = stGroup.getInstanceOf(String.format("assignment_%s", getTypeClass(symbolTable.getType(ctx.IDENTIFIER().getText()).toString())));
 
         st.add("identifier_number", symbolTable.getIdentifier(ctx.IDENTIFIER().getText()));
-        st.add("expression", visit(ctx.expression()).render());
+        st.add("expression", visit(ctx.expression(0)).render());
 
         return st;
     }

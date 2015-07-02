@@ -25,5 +25,4 @@ func void main() {
     y = print(false);
     z = print('a');
     a = print("Hello!");
-
 }

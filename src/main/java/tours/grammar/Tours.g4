@@ -22,7 +22,7 @@ variable
 
 /** Variable assignment */
 variableAssignment
-    : IDENTIFIER (LBLOCK INT RBLOCK)? ASSIGNMENT expression
+    : IDENTIFIER (LBLOCK expression RBLOCK)? ASSIGNMENT expression
     ;
 
 /** Function
@@ -73,7 +73,7 @@ expression:     LPAR expression RPAR                                            
                     ((statement | variable | expression) SEMI) RBRACE           #compoundExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
-              | IDENTIFIER LBLOCK INT RBLOCK                                    #arrayExpression
+              | IDENTIFIER LBLOCK expression RBLOCK                             #arrayExpression
               | IDENTIFIER LPAR ((expression COMMA)* expression)? RPAR          #functionExpression
               | IDENTIFIER                                                      #identifierExpr
               | CHAR                                                            #characterExpr
