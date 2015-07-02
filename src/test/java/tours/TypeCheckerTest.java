@@ -54,7 +54,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testMismatchingTypes() throws IOException {
+    public void testMismatchingTypesBasic() throws IOException {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 2, pos 14",
                 "Error <mismatching types> on line 3, pos 16",
@@ -66,6 +66,25 @@ public class TypeCheckerTest {
                 "Error <mismatching types> on line 10, pos 13"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type.tours");
+    }
+
+    @Test
+    public void testMismatchingTypesArrays() throws IOException {
+        List<String> errors = Arrays.asList(
+                "Error <mismatching types> on line 3, pos 9",
+                "Error <mismatching types> on line 5, pos 9",
+                "Error <mismatching types> on line 7, pos 9",
+                "Error <mismatching types> on line 9, pos 9",
+                "Error <mismatching types> on line 11, pos 14",
+                "Error <mismatching types> on line 12, pos 16",
+                "Error <mismatching types> on line 13, pos 14",
+                "Error <mismatching types> on line 14, pos 13",
+                "Error <mismatching types> on line 16, pos 16",
+                "Error <mismatching types> on line 17, pos 18",
+                "Error <mismatching types> on line 18, pos 16",
+                "Error <mismatching types> on line 19, pos 15"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_array.tours");
     }
 
     @Test

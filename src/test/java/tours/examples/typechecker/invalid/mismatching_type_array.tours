@@ -1,0 +1,20 @@
+func void main() {
+    boolean[] b = boolean[5];
+    b[0] = 'a';
+    character[] c = character[5];
+    c[1] = 5;
+    integer[] i = integer[5];
+    i[2] = "Hello";
+    string[] s = string[5];
+    s[3] = false;
+
+    boolean p = c[0];
+    character q = i[0];
+    integer r = s[0];
+    string t = b[0];
+
+    boolean[] e = character[5];
+    character[] f = integer[5];
+    integer[] g = string[5];
+    string[] h = boolean[5];
+}
