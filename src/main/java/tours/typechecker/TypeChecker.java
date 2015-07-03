@@ -62,7 +62,7 @@ public class TypeChecker extends ToursBaseListener {
         }
 
         // assignment
-        if (!(new Type(ctx.arrayType().getText())).equals(symbolTable.getType(ctx.arrayAssignment().getText()))) {
+        if (!(new Type(ctx.arrayType().getText())).getPrimitiveType().equals(symbolTable.getType(ctx.arrayAssignment().getText()))) {
             errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
     }
@@ -268,7 +268,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx) {
+    public void exitArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx) {
         Type expressionType = symbolTable.getType(ctx.expression(0).getText());
 
         for(int i = 1; i < ctx.expression().size(); i++) {
@@ -281,7 +281,10 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx) {
+    public void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) {
+        if (!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
+            errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
+        }
         symbolTable.addType(ctx.getText(), new Type(ctx.primitiveType().getText()));
     }
 

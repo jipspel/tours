@@ -84,8 +84,8 @@ expression:     LPAR expression RPAR                                            
               ;
 
 arrayAssignment
-  : LBRACE expression (COMMA expression)* RBRACE    #arrayExpressionInitialisation
-  | primitiveType LBLOCK INT RBLOCK                  #arrayExpressionNew
+  : LBRACE expression (COMMA expression)* RBRACE    #arrayAssignmentWithInitialisation
+  | primitiveType LBLOCK expression RBLOCK          #arrayAssignmentNew
   ;
 
 /** Prefix operator. */

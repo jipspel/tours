@@ -2327,7 +2327,7 @@ public class ToursParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class ArrayExpressionInitialisationContext extends ArrayAssignmentContext {
+	public static class ArrayAssignmentWithInitialisationContext extends ArrayAssignmentContext {
 		public TerminalNode LBRACE() { return getToken(ToursParser.LBRACE, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -2340,40 +2340,42 @@ public class ToursParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(ToursParser.COMMA, i);
 		}
-		public ArrayExpressionInitialisationContext(ArrayAssignmentContext ctx) { copyFrom(ctx); }
+		public ArrayAssignmentWithInitialisationContext(ArrayAssignmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterArrayExpressionInitialisation(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterArrayAssignmentWithInitialisation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitArrayExpressionInitialisation(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitArrayAssignmentWithInitialisation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitArrayExpressionInitialisation(this);
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitArrayAssignmentWithInitialisation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ArrayExpressionNewContext extends ArrayAssignmentContext {
+	public static class ArrayAssignmentNewContext extends ArrayAssignmentContext {
 		public PrimitiveTypeContext primitiveType() {
 			return getRuleContext(PrimitiveTypeContext.class,0);
 		}
 		public TerminalNode LBLOCK() { return getToken(ToursParser.LBLOCK, 0); }
-		public TerminalNode INT() { return getToken(ToursParser.INT, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
 		public TerminalNode RBLOCK() { return getToken(ToursParser.RBLOCK, 0); }
-		public ArrayExpressionNewContext(ArrayAssignmentContext ctx) { copyFrom(ctx); }
+		public ArrayAssignmentNewContext(ArrayAssignmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterArrayExpressionNew(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterArrayAssignmentNew(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitArrayExpressionNew(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitArrayAssignmentNew(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitArrayExpressionNew(this);
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitArrayAssignmentNew(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2386,7 +2388,7 @@ public class ToursParser extends Parser {
 			setState(340);
 			switch (_input.LA(1)) {
 			case LBRACE:
-				_localctx = new ArrayExpressionInitialisationContext(_localctx);
+				_localctx = new ArrayAssignmentWithInitialisationContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(324); 
@@ -2417,7 +2419,7 @@ public class ToursParser extends Parser {
 			case CHARACTER:
 			case INTEGER:
 			case STRING:
-				_localctx = new ArrayExpressionNewContext(_localctx);
+				_localctx = new ArrayAssignmentNewContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(335); 
@@ -2425,7 +2427,7 @@ public class ToursParser extends Parser {
 				setState(336); 
 				match(LBLOCK);
 				setState(337); 
-				match(INT);
+				expression(0);
 				setState(338); 
 				match(RBLOCK);
 				}
@@ -3169,7 +3171,7 @@ public class ToursParser extends Parser {
 		"\2\2\u0149\u014b\5\30\r\2\u014a\u0148\3\2\2\2\u014b\u014e\3\2\2\2\u014c"+
 		"\u014a\3\2\2\2\u014c\u014d\3\2\2\2\u014d\u014f\3\2\2\2\u014e\u014c\3\2"+
 		"\2\2\u014f\u0150\7/\2\2\u0150\u0157\3\2\2\2\u0151\u0152\5(\25\2\u0152"+
-		"\u0153\7$\2\2\u0153\u0154\7\67\2\2\u0154\u0155\7.\2\2\u0155\u0157\3\2"+
+		"\u0153\7$\2\2\u0153\u0154\5\30\r\2\u0154\u0155\7.\2\2\u0155\u0157\3\2"+
 		"\2\2\u0156\u0146\3\2\2\2\u0156\u0151\3\2\2\2\u0157\33\3\2\2\2\u0158\u0159"+
 		"\t\2\2\2\u0159\35\3\2\2\2\u015a\u015b\t\3\2\2\u015b\37\3\2\2\2\u015c\u015d"+
 		"\t\4\2\2\u015d!\3\2\2\2\u015e\u015f\t\5\2\2\u015f#\3\2\2\2\u0160\u0161"+

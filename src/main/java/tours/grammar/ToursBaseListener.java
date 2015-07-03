@@ -437,25 +437,25 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx) { }
+	@Override public void enterArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx) { }
+	@Override public void exitArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx) { }
+	@Override public void enterArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx) { }
+	@Override public void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

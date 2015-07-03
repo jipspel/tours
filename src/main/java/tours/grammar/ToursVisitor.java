@@ -250,19 +250,19 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code arrayExpressionInitialisation}
+	 * Visit a parse tree produced by the {@code arrayAssignmentWithInitialisation}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx);
+	T visitArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code arrayExpressionNew}
+	 * Visit a parse tree produced by the {@code arrayAssignmentNew}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx);
+	T visitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ToursParser#prefixOperator}.
 	 * @param ctx the parse tree

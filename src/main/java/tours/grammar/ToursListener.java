@@ -415,29 +415,29 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code arrayExpressionInitialisation}
+	 * Enter a parse tree produced by the {@code arrayAssignmentWithInitialisation}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx);
+	void enterArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code arrayExpressionInitialisation}
+	 * Exit a parse tree produced by the {@code arrayAssignmentWithInitialisation}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayExpressionInitialisation(@NotNull ToursParser.ArrayExpressionInitialisationContext ctx);
+	void exitArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code arrayExpressionNew}
+	 * Enter a parse tree produced by the {@code arrayAssignmentNew}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx);
+	void enterArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code arrayExpressionNew}
+	 * Exit a parse tree produced by the {@code arrayAssignmentNew}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayExpressionNew(@NotNull ToursParser.ArrayExpressionNewContext ctx);
+	void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ToursParser#prefixOperator}.
 	 * @param ctx the parse tree
