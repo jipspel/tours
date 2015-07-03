@@ -233,6 +233,17 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
+    public void exitIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx) {
+        Type type = symbolTable.getType(ctx.compound(0).getText());
+
+        if (!type.equals(symbolTable.getType(ctx.compound(1).getText()))) {
+            errors.add(String.format("Error <mismatching expression types> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
+        }
+
+        symbolTable.addType(ctx.getText(), type);
+    }
+
+    @Override
     public void exitStringExpr(@NotNull ToursParser.StringExprContext ctx) {
         symbolTable.addVariable(ctx.getText(), Type.STRING);
     }
@@ -265,6 +276,16 @@ public class TypeChecker extends ToursBaseListener {
         } else {
             symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
         }
+    }
+
+    @Override public void enterCompound(@NotNull ToursParser.CompoundContext ctx) {
+        symbolTable.openScope();
+    }
+
+    @Override public void exitCompound(@NotNull ToursParser.CompoundContext ctx) {
+        Type type = symbolTable.getType(ctx.getChild(ctx.getChildCount() - 3).getText());
+        symbolTable.closeScope();
+        symbolTable.addVariable(ctx.getText(), type);
     }
 
     @Override
@@ -319,18 +340,6 @@ public class TypeChecker extends ToursBaseListener {
                 symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
             }
         }
-    }
-
-    @Override
-    public void enterCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
-        symbolTable.openScope();
-    }
-
-    @Override
-    public void exitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
-        Type type = symbolTable.getType(ctx.getChild(ctx.getChildCount() - 3).getText());
-        symbolTable.closeScope();
-        symbolTable.addVariable(ctx.getText(), type);
     }
 
     @Override

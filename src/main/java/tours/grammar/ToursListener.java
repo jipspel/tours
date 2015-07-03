@@ -271,6 +271,18 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code ifElseExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ifElseExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code functionExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -414,6 +426,16 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ToursParser#compound}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompound(@NotNull ToursParser.CompoundContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ToursParser#compound}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompound(@NotNull ToursParser.CompoundContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arrayAssignmentWithInitialisation}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.

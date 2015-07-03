@@ -583,6 +583,15 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx) {
         symbolTable.openScope();
 
+        ST st = visit(ctx.compound());
+
+        symbolTable.closeScope();
+
+        return st;
+    }
+
+    @Override
+    public ST visitCompound(@NotNull ToursParser.CompoundContext ctx) {
         ST st = stGroup.getInstanceOf("concatenator");
         List<String> blocks = new ArrayList<>();
         for (int i = 0; i < ctx.getChildCount() - 1; i++) {
@@ -599,9 +608,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
             blocks.set(blocks.size() - 1, lastBlock.substring(0, lastBlock.lastIndexOf("pop")));
         }
         st.add("blocks", blocks);
-
-        symbolTable.closeScope();
-
         return st;
     }
 

@@ -293,6 +293,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -432,6 +444,18 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompound(@NotNull ToursParser.CompoundContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompound(@NotNull ToursParser.CompoundContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

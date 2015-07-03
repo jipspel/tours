@@ -166,6 +166,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code ifElseExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code functionExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -249,6 +256,12 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ToursParser#compound}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCompound(@NotNull ToursParser.CompoundContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arrayAssignmentWithInitialisation}
 	 * labeled alternative in {@link ToursParser#arrayAssignment}.

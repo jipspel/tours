@@ -68,9 +68,8 @@ expression:     LPAR expression RPAR                                            
               | expression compareOperator expression                           #compareExpression
               | expression AND expression                                       #booleanAndExpression
               | expression OR expression                                        #booleanOrExpression
-              | LBRACE
-                    ((statement | variable | expression) SEMI | conditionalStatement)*
-                    ((statement | variable | expression) SEMI) RBRACE           #compoundExpression
+              | compound                                                        #compoundExpression
+              | IF LPAR expression RPAR compound ELSE compound                  #ifElseExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
               | IDENTIFIER LBLOCK expression RBLOCK                             #arrayExpression
@@ -82,6 +81,11 @@ expression:     LPAR expression RPAR                                            
               | TRUE                                                            #trueExpr
               | FALSE                                                           #falseExpr
               ;
+
+compound
+    : LBRACE ((statement | variable | expression) SEMI | conditionalStatement)*
+                          ((statement | variable | expression) SEMI) RBRACE
+    ;
 
 arrayAssignment
   : LBRACE expression (COMMA expression)* RBRACE    #arrayAssignmentWithInitialisation
