@@ -80,6 +80,15 @@ public class GrammarTest {
     }
 
     @Test
+    public void testValidIfElseAssignments() throws IOException {
+        errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_with_if_else.tours");
+        assertEquals(0, errorList.size());
+
+        assertEquals("(program (body (variableDeclaration (variable (primitiveType boolean) b = (expression if ( (expression true) ) (compound { (variable (primitiveType boolean) a = (expression false)) ; }) else (compound { (variable (primitiveType boolean) a = (expression true)) ; }))) ; (variable (primitiveType character) c = (expression if ( (expression true) ) (compound { (variable (primitiveType character) d = (expression 'a')) ; }) else (compound { (variable (primitiveType character) d = (expression 'b')) ; }))) ; (variable (primitiveType integer) i = (expression if ( (expression true) ) (compound { (variable (primitiveType integer) j = (expression 35)) ; }) else (compound { (variable (primitiveType integer) j = (expression 36)) ; }))) ; (variable (primitiveType string) s = (expression if ( (expression true) ) (compound { (variable (primitiveType string) t = (expression \"Hello\")) ; }) else (compound { (variable (primitiveType string) t = (expression \"World\")) ; }))) ;)))",
+                getParseTree("src/test/java/tours/examples/typechecker/assignments_with_if_else.tours"));
+    }
+
+    @Test
     public void testValidExamples() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/functions.tours");
         assertEquals(0, errorList.size());
@@ -124,9 +133,11 @@ public class GrammarTest {
     @Test
     public void testMissingSemicolon() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/missing_semicolon.tours");
-        assertEquals(1, errorList.size());
-        assertEquals("line 5:4 mismatched input '}' expecting {'&&', '==', '>=', '>', '<=', '<', '-', '%', '!=', '||', '+', ';', '/', '*'}",
+        assertEquals(2, errorList.size());
+        assertEquals("line 5:4 no viable alternative at input 'if(x!=35){x=35}'",
                 errorList.get(0));
+        assertEquals("line 3:10 mismatched input '!=' expecting '='",
+                errorList.get(1));
     }
 
     @Test

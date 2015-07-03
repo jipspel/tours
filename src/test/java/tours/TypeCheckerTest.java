@@ -46,11 +46,14 @@ public class TypeCheckerTest {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_character.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_integer.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_string.tours");
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_compound.tours");
+
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_boolean.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_character.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_integer.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_array_string.tours");
+
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_with_if_else.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_compound.tours");
     }
 
     @Test
@@ -86,6 +89,21 @@ public class TypeCheckerTest {
                 "Error <expected integer> on line 22, pos 6"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_array.tours");
+    }
+
+    @Test
+    public void testMismatchingTypesIfElse() throws IOException {
+        List<String> errors = Arrays.asList(
+                "Error <mismatching types> on line 1, pos 11",
+                "Error <mismatching types> on line 2, pos 13",
+                "Error <mismatching types> on line 3, pos 11",
+                "Error <mismatching types> on line 4, pos 10",
+                "Error <mismatching expression types> on line 6, pos 17",
+                "Error <mismatching expression types> on line 7, pos 19",
+                "Error <mismatching expression types> on line 8, pos 17",
+                "Error <mismatching expression types> on line 9, pos 16"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_if_else.tours");
     }
 
     @Test
