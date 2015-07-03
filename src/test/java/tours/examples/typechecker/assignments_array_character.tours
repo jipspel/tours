@@ -1,3 +1,3 @@
-character[] x = character[5];
+character[] x = new character[5];
 x[1] = 'a';
 character[] y = {'a', 'b', 'c'};

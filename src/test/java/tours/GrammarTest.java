@@ -18,7 +18,6 @@ public class GrammarTest {
 
     List<String> errorList;
 
-
     @Test
     public void testValidAssignments() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/assignments_boolean.tours");
@@ -148,7 +147,7 @@ public class GrammarTest {
                 errorList.get(0));
         assertEquals("line 4:15 mismatched input ';' expecting '='",
                 errorList.get(1));
-        assertEquals("line 5:4 extraneous input '}' expecting {<EOF>, BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FUNC, INTEGER, INTEGERARRAY, STRING, STRINGARRAY, IDENTIFIER}",
+        assertEquals("line 5:4 extraneous input '}' expecting {<EOF>, BOOLEAN, BOOLEAN_ARRAY, CHARACTER, CHARACTER_ARRAY, FUNC, INTEGER, INTEGER_ARRAY, STRING, STRING_ARRAY, IDENTIFIER}",
                 errorList.get(2));
     }
 
@@ -156,15 +155,15 @@ public class GrammarTest {
     public void testInvalidFunctionReturns() throws IOException {
         errorList = parseToursFile("src/test/java/tours/examples/typechecker/invalid/function_returns.tours");
         assertEquals(5, errorList.size());
-        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGERARRAY, PRINT, STRING, STRINGARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', '}', IDENTIFIER, INT, STR, CHAR}",
+        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, BOOLEAN_ARRAY, CHARACTER, CHARACTER_ARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGER_ARRAY, PRINT, STRING, STRING_ARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', '}', IDENTIFIER, INT, STR, CHAR}",
                 errorList.get(0));
-        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGERARRAY, PRINT, RETURN, STRING, STRINGARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', IDENTIFIER, INT, STR, CHAR}",
+        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, BOOLEAN_ARRAY, CHARACTER, CHARACTER_ARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGER_ARRAY, PRINT, RETURN, STRING, STRING_ARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', IDENTIFIER, INT, STR, CHAR}",
                 errorList.get(1));
         assertEquals("line 11:4 mismatched input 'return' expecting '}'",
                 errorList.get(2));
         assertEquals("line 11:13 missing '=' at '+'",
                 errorList.get(3));
-        assertEquals("line 12:0 extraneous input '}' expecting {<EOF>, BOOLEAN, BOOLEANARRAY, CHARACTER, CHARACTERARRAY, FUNC, INTEGER, INTEGERARRAY, STRING, STRINGARRAY, IDENTIFIER}",
+        assertEquals("line 12:0 extraneous input '}' expecting {<EOF>, BOOLEAN, BOOLEAN_ARRAY, CHARACTER, CHARACTER_ARRAY, FUNC, INTEGER, INTEGER_ARRAY, STRING, STRING_ARRAY, IDENTIFIER}",
                 errorList.get(4));
     }
 

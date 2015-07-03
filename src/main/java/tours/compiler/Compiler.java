@@ -170,7 +170,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st = stGroup.getInstanceOf("concatenator");
 
         ST stNewArray;
-        if (ctx.arrayType().getText().toLowerCase().equals(Type.STRINGARRAY.toString())) {
+        if (ctx.arrayType().getText().toLowerCase().equals(Type.STRING_ARRAY.toString())) {
             stNewArray = stGroup.getInstanceOf("new_array_string");
         } else {
             stNewArray = stGroup.getInstanceOf("new_array");

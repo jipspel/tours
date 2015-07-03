@@ -2,7 +2,7 @@ func void main() {
     boolean[] b1 = {true, false};
     print(b1[0], b1[1]);
 
-    boolean[] b2 = boolean[1];
+    boolean[] b2 = new boolean[1];
     b2[0] = false;
     print(b2[0]);
 

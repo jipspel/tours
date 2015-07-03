@@ -12,6 +12,7 @@ import java.util.List;
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
 import static org.junit.Assert.assertNotEquals;
+
 public class LexicalTest {
 
     List<String> errorList;

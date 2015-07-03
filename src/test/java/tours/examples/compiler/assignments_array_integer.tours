@@ -2,7 +2,7 @@ func void main() {
     integer[] i1 = {35, 36};
     print(i1[0], i1[1]);
 
-    integer[] i2 = integer[1];
+    integer[] i2 = new integer[1];
     i2[0] = 37;
     print(i2[0]);
 

@@ -1,4 +1,4 @@
-boolean[] x = boolean[5];
+boolean[] x = new boolean[5];
 x[1] = false;
-boolean[] y = {true, true, false};
+boolean[] y = { true, true, false };
 y[2-1] = false;

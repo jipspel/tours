@@ -89,7 +89,7 @@ compound
 
 arrayAssignment
   : LBRACE expression (COMMA expression)* RBRACE    #arrayAssignmentWithInitialisation
-  | primitiveType LBLOCK expression RBLOCK          #arrayAssignmentNew
+  | NEW primitiveType LBLOCK expression RBLOCK          #arrayAssignmentNew
   ;
 
 /** Prefix operator. */
@@ -118,18 +118,18 @@ primitiveType: INTEGER   #intType
              | STRING    #strType
                 ;
 
-arrayType:   INTEGERARRAY   #intArrayType
-           | BOOLEANARRAY   #boolArrayType
-           | CHARACTERARRAY #charArrayType
-           | STRINGARRAY    #strArrayType
+arrayType:   INTEGER_ARRAY   #intArrayType
+           | BOOLEAN_ARRAY   #boolArrayType
+           | CHARACTER_ARRAY #charArrayType
+           | STRING_ARRAY    #strArrayType
            ;
 
 // Keywords
 BEGIN:      B E G I N ;
 BOOLEAN:    B O O L E A N ;
-BOOLEANARRAY:    B O O L E A N LBLOCK RBLOCK;
+BOOLEAN_ARRAY:    B O O L E A N LBLOCK RBLOCK ;
 CHARACTER:  C H A R A C T E R ;
-CHARACTERARRAY:  C H A R A C T E R LBLOCK RBLOCK;
+CHARACTER_ARRAY:  C H A R A C T E R LBLOCK RBLOCK ;
 ELSE:       E L S E ;
 END:        E N D ;
 EXIT:       E X I T ;
@@ -139,12 +139,13 @@ FUNC:       F U N C ;
 IF:         I F ;
 INPUT:      I N P U T ;
 INTEGER:    I N T E G E R ;
-INTEGERARRAY: I N T E G E R LBLOCK RBLOCK;
+INTEGER_ARRAY: I N T E G E R LBLOCK RBLOCK ;
+NEW :       N E W ;
 PRINT:      P R I N T ;
 PROGRAM:    P R O G R A M ;
 RETURN:     R E T U R N ;
 STRING:     S T R I N G ;
-STRINGARRAY: S T R I N G LBLOCK RBLOCK;
+STRING_ARRAY: S T R I N G LBLOCK RBLOCK ;
 TRUE:       T R U E ;
 VOID:       V O I D;
 WHILE:      W H I L E ;

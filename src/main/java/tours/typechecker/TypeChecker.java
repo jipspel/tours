@@ -80,13 +80,13 @@ public class TypeChecker extends ToursBaseListener {
 
         // if it is an array, remove the array part in the type of type[i]
         if (ctx.LBLOCK() != null) {
-            if (type.equals(Type.BOOLEANARRAY)) {
+            if (type.equals(Type.BOOLEAN_ARRAY)) {
                 type = Type.BOOLEAN;
-            } else if(type.equals(Type.CHARACTERARRAY)) {
+            } else if(type.equals(Type.CHARACTER_ARRAY)) {
                 type = Type.CHARACTER;
-            } else if(type.equals(Type.INTEGERARRAY)) {
+            } else if(type.equals(Type.INTEGER_ARRAY)) {
                 type = Type.INTEGER;
-            } else if(type.equals(Type.STRINGARRAY)) {
+            } else if(type.equals(Type.STRING_ARRAY)) {
                 type = Type.STRING;
             } else {
                 errors.add(String.format("Error <type of array element not defined> on line %s, pos %s", ctx.LBLOCK().getSymbol().getLine(), ctx.LBLOCK().getSymbol().getCharPositionInLine()));

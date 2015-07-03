@@ -1,11 +1,11 @@
 func void main() {
-    boolean[] b = boolean[5];
+    boolean[] b = new boolean[5];
     b[0] = 'a';
-    character[] c = character[5];
+    character[] c = new character[5];
     c[1] = 5;
-    integer[] i = integer[5];
+    integer[] i = new integer[5];
     i[2] = "Hello";
-    string[] s = string[5];
+    string[] s = new string[5];
     s[3] = false;
 
     boolean p = c[0];
@@ -13,11 +13,11 @@ func void main() {
     integer r = s[0];
     string t = b[0];
 
-    boolean[] e = character[5];
-    character[] f = integer[5];
-    integer[] g = string[5];
-    string[] h = boolean[5];
+    boolean[] e = new character[5];
+    character[] f = new integer[5];
+    integer[] g = new string[5];
+    string[] h = new boolean[5];
 
-    boolean[] j = boolean[5];
+    boolean[] j = new boolean[5];
     j[false] = false;
 }
