@@ -152,7 +152,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         typeClass = getTypeClass(type);
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
-            symbolTable.addVariable(identifier.getText(), new Type(ctx.primitiveType().getText()));
+            symbolTable.addVariable(identifier.getText(), new Type(type));
 
             ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", typeClass));
             stVariable.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));
@@ -511,10 +511,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st = stGroup.getInstanceOf("load_array_entry");
         st.add("identifier_number", symbolTable.getIdentifier(ctx.IDENTIFIER().getText()));
         st.add("expression", visit(ctx.expression()).render());
-        Type type = symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType();
-        st.add("load_type", type.getPrefix());
 
+        Type type = new Type(symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType());
+        st.add("load_type", type.getPrefix());
         symbolTable.addType(ctx.getText(), type);
+
         return st;
     }
 

@@ -298,7 +298,7 @@ public class TypeChecker extends ToursBaseListener {
             }
         }
 
-        symbolTable.addType(ctx.getText(), new Type(expressionType.getType()));
+        symbolTable.addType(ctx.getText(), expressionType);
     }
 
     @Override
