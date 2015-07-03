@@ -55,6 +55,7 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList("a", "b", "c", "d"), "src/test/java/tours/examples/compiler/assignments_array_character.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37", "38"), "src/test/java/tours/examples/compiler/assignments_array_integer.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37", "39"), "src/test/java/tours/examples/compiler/assignments_array_string.tours");
+        assertEqualsOutput(Arrays.asList("35", "36"), "src/test/java/tours/examples/compiler/assignments_if_else.tours");
     }
 
     @Test

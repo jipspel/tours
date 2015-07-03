@@ -1,0 +1,10 @@
+func void main() {
+    integer x = 40;
+    integer y = 5;
+
+    integer z = if(y < x) { x - y; } else { y - x;};
+    print(z);
+
+    z = if(x < y) { x - y; } else { z +1 ;};
+    print(z);
+}

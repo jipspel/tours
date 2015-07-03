@@ -301,6 +301,24 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
+    public ST visitIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx) {
+        symbolTable.openScope();
+
+        ST st;
+        st = stGroup.getInstanceOf("if_else");
+        st.add("block_if", visit(ctx.compound(0)).render());
+        st.add("block_else", visit(ctx.compound(1)).render());
+
+        labelCount++;
+
+        st.add("expression", visit(ctx.expression()).render());
+        st.add("label_number", labelCount);
+
+        symbolTable.closeScope();
+        return st;
+    }
+
+    @Override
     public ST visitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) {
         symbolTable.addType(ctx.getText(), symbolTable.getType(ctx.IDENTIFIER().getText()));
 
