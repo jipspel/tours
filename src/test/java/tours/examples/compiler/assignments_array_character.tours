@@ -1,0 +1,11 @@
+func void main() {
+    character[] c1 = {'a', 'b'};
+    print(c1[0], c1[1]);
+
+    character[] c2 = character[1];
+    c2[0] = 'c';
+    print(c2[0]);
+
+    c2[0] = 'd';
+    print(c2[0]);
+}

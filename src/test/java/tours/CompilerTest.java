@@ -51,6 +51,10 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList("a", "b", "c"), "src/test/java/tours/examples/compiler/assignments_character.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_integer.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_string.tours");
+        assertEqualsOutput(Arrays.asList("true", "false", "false", "true"), "src/test/java/tours/examples/compiler/assignments_array_boolean.tours");
+        assertEqualsOutput(Arrays.asList("a", "b", "c", "d"), "src/test/java/tours/examples/compiler/assignments_array_character.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37", "38"), "src/test/java/tours/examples/compiler/assignments_array_integer.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37", "39"), "src/test/java/tours/examples/compiler/assignments_array_string.tours");
     }
 
     @Test
