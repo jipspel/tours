@@ -1,11 +1,8 @@
 package tours;
 
-import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
-import tours.grammar.ToursLexer;
-import tours.grammar.ToursParser;
 import tours.typechecker.TypeChecker;
 
 import java.io.IOException;
@@ -13,34 +10,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.nio.file.Files.readAllBytes;
-import static java.nio.file.Paths.get;
 import static org.junit.Assert.assertEquals;
 
 public class TypeCheckerTest {
 
     @Test
-    public void testVariableDeclarations() throws IOException {
+    public void testVariableDeclarations() {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/variable_declaration.tours");
     }
 
     @Test
-    public void testForStatement() throws IOException {
+    public void testForStatement() {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/statement_for.tours");
     }
 
     @Test
-    public void testWhileStatement() throws IOException {
+    public void testWhileStatement() {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/statement_while.tours");
     }
 
     @Test
-    public void testIfStatement() throws IOException {
+    public void testIfStatement() {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/statement_if.tours");
     }
 
     @Test
-    public void testAssignments() throws IOException {
+    public void testAssignments() {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_boolean.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_character.tours");
@@ -57,7 +52,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testMismatchingTypesBasic() throws IOException {
+    public void testMismatchingTypesBasic() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 2, pos 14",
                 "Error <mismatching types> on line 3, pos 16",
@@ -72,7 +67,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testMismatchingTypesArrays() throws IOException {
+    public void testMismatchingTypesArrays() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 3, pos 9",
                 "Error <mismatching types> on line 5, pos 9",
@@ -92,7 +87,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testMismatchingTypesIfElse() throws IOException {
+    public void testMismatchingTypesIfElse() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 1, pos 11",
                 "Error <mismatching types> on line 2, pos 13",
@@ -107,19 +102,19 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testAlreadyDefinedVariables() throws IOException {
+    public void testAlreadyDefinedVariables() {
         List<String> errors = Arrays.asList("Error <variable already defined> on line 3, pos 12");
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/already_defined_variables.tours");
     }
 
     @Test
-    public void testNotDefinedVariables() throws IOException {
         List<String> errors = Arrays.asList("Error <variable not defined> on line 2, pos 6");
+    public void testNotDefinedVariables() {
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables.tours");
     }
 
     @Test
-    public void testInvalidForStatement() throws IOException {
+    public void testInvalidForStatement() {
         List<String> errors = Arrays.asList(
                 "Error <expected boolean> on line 4, pos 16",
                 "Error <expected boolean> on line 8, pos 16",
@@ -131,7 +126,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testInvalidIfStatement() throws IOException {
+    public void testInvalidIfStatement() {
         List<String> errors = Arrays.asList(
                 "Error <expected boolean> on line 6, pos 7",
                 "Error <expected boolean> on line 10, pos 7",
@@ -146,7 +141,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testInvalidWhileStatement() throws IOException {
+    public void testInvalidWhileStatement() {
         List<String> errors = Arrays.asList(
                 "Error <expected boolean> on line 6, pos 10",
                 "Error <expected boolean> on line 10, pos 10",
@@ -161,7 +156,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testMismatchingFunctionAssignments() throws IOException {
+    public void testMismatchingFunctionAssignments() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 9, pos 13",
                 "Error <mismatching types> on line 10, pos 14");
@@ -169,7 +164,7 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testMismatchingFunctionReturnType() throws IOException {
+    public void testMismatchingFunctionReturnType() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 1, pos 27",
                 "Error <mismatching types> on line 5, pos 29",
@@ -178,22 +173,17 @@ public class TypeCheckerTest {
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_function_return_type.tours");
     }
 
-    private void testTypeCheckerErrors(List<String> expected, String filename) throws IOException {
-        ParseTree tree = parseTours(filename);
+    private void testTypeCheckerErrors(List<String> expected, String filename) {
+        ParseTree tree = null;
+        try {
+            tree = TestHelper.toToursParseTree(filename);
+        } catch (IOException e) {
+            System.err.println("Error while parsing: " + filename);
+            System.exit(0);
+        }
         ParseTreeWalker walker = new ParseTreeWalker();
         TypeChecker typeChecker = new TypeChecker();
         walker.walk(typeChecker, tree);
         assertEquals(expected, typeChecker.getErrors());
-    }
-
-    private ParseTree parseTours(String filename) throws IOException {
-        String text = new String(readAllBytes(get(filename)));
-
-        CharStream chars = new ANTLRInputStream(text);
-        Lexer lexer = new ToursLexer(chars);
-        TokenStream tokens = new CommonTokenStream(lexer);
-        ToursParser parser = new ToursParser(tokens);
-
-        return parser.program();
     }
 }

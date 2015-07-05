@@ -18,8 +18,6 @@ public class ToursErrorListener extends BaseErrorListener {
         errorList.add(String.format("line %s:%s %s", line, charPositionInLine, msg));
     }
 
-
-
     public List<String> getErrorList() {
         return errorList;
     }
