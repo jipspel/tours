@@ -1,4 +1,8 @@
 func void main () {
     integer x = 35;
     integer x = 36;
+    integer[] x = new integer[35];
+
+    integer[] y = new integer[35];
+    integer[] y = new integer[36];
 }

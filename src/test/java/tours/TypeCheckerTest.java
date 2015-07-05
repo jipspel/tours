@@ -103,7 +103,11 @@ public class TypeCheckerTest {
 
     @Test
     public void testAlreadyDefinedVariables() {
-        List<String> errors = Arrays.asList("Error <variable already defined> on line 3, pos 12");
+        List<String> errors = Arrays.asList(
+                "Error <variable already defined> on line 3, pos 12",
+                "Error <variable already defined> on line 4, pos 14",
+                "Error <variable already defined> on line 7, pos 14"
+        );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/already_defined_variables.tours");
     }
 
