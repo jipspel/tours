@@ -1,3 +1,4 @@
 func void main () {
     x = 35;
+    y;
 }
