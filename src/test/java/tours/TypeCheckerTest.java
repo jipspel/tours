@@ -176,6 +176,30 @@ public class TypeCheckerTest {
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_function_return_type.tours");
     }
 
+    @Test
+    public void testMismatchingTypesOnArithmeticExpressions() {
+        List<String> errors = Arrays.asList(
+                "Error <expected integers> on line 2, pos 4",
+                "Error <expected integers> on line 3, pos 4",
+                "Error <expected integers> on line 5, pos 4",
+                "Error <expected integers> on line 6, pos 4",
+                "Error <expected integers> on line 8, pos 4",
+                "Error <expected integers> on line 9, pos 4",
+                "Error <expected integers> on line 11, pos 4",
+                "Error <expected integers> on line 12, pos 4");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_types_arithmetic_expressions.tours");
+    }
+
+    @Test
+    public void testMismatchingTypesOnComparisonExpressions() {
+        List<String> errors = Arrays.asList(
+                "Error <expected integers> on line 2, pos 4",
+                "Error <expected integers> on line 3, pos 4",
+                "Error <expected integers> on line 4, pos 4",
+                "Error <expected integers> on line 5, pos 4");
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_types_comparison_expressions.tours");
+    }
+
     private void testTypeCheckerErrors(List<String> expected, String filename) {
         ParseTree tree = null;
         try {
