@@ -119,11 +119,17 @@ public class TypeCheckerTest {
     @Test
     public void testInvalidForStatement() {
         List<String> errors = Arrays.asList(
-                "Error <expected boolean> on line 4, pos 16",
-                "Error <expected boolean> on line 8, pos 16",
-                "Error <expected boolean> on line 12, pos 16",
-                "Error <expected boolean> on line 16, pos 16",
-                "Error <expected boolean> on line 20, pos 16"
+                "Error <expected boolean> on line 6, pos 11",
+                "Error <expected boolean> on line 7, pos 11",
+                "Error <expected boolean> on line 8, pos 11",
+                "Error <expected integers> on line 9, pos 11",
+                "Error <expected boolean> on line 9, pos 11",
+                "Error <expected boolean> on line 10, pos 11",
+                "Error <expected boolean> on line 11, pos 11",
+                "Error <expected boolean> on line 12, pos 11",
+                "Error <expected boolean> on line 13, pos 11",
+                "Error <expected boolean> on line 14, pos 11",
+                "Error <expected boolean> on line 15, pos 11"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_for.tours");
     }
@@ -132,13 +138,16 @@ public class TypeCheckerTest {
     public void testInvalidIfStatement() {
         List<String> errors = Arrays.asList(
                 "Error <expected boolean> on line 6, pos 7",
+                "Error <expected boolean> on line 7, pos 7",
+                "Error <expected boolean> on line 8, pos 7",
+                "Error <expected integers> on line 9, pos 8",
+                "Error <expected boolean> on line 9, pos 7",
                 "Error <expected boolean> on line 10, pos 7",
+                "Error <expected boolean> on line 11, pos 7",
+                "Error <expected boolean> on line 12, pos 7",
+                "Error <expected boolean> on line 13, pos 7",
                 "Error <expected boolean> on line 14, pos 7",
-                "Error <expected boolean> on line 18, pos 7",
-                "Error <expected boolean> on line 22, pos 7",
-                "Error <expected boolean> on line 26, pos 7",
-                "Error <expected boolean> on line 30, pos 7",
-                "Error <expected boolean> on line 34, pos 7"
+                "Error <expected boolean> on line 15, pos 7"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_if.tours");
     }
@@ -147,13 +156,16 @@ public class TypeCheckerTest {
     public void testInvalidWhileStatement() {
         List<String> errors = Arrays.asList(
                 "Error <expected boolean> on line 6, pos 10",
+                "Error <expected boolean> on line 7, pos 10",
+                "Error <expected boolean> on line 8, pos 10",
+                "Error <expected integers> on line 9, pos 11",
+                "Error <expected boolean> on line 9, pos 10",
                 "Error <expected boolean> on line 10, pos 10",
+                "Error <expected boolean> on line 11, pos 10",
+                "Error <expected boolean> on line 12, pos 10",
+                "Error <expected boolean> on line 13, pos 10",
                 "Error <expected boolean> on line 14, pos 10",
-                "Error <expected boolean> on line 18, pos 10",
-                "Error <expected boolean> on line 22, pos 10",
-                "Error <expected boolean> on line 26, pos 10",
-                "Error <expected boolean> on line 30, pos 10",
-                "Error <expected boolean> on line 34, pos 10"
+                "Error <expected boolean> on line 15, pos 10"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_while.tours");
     }
