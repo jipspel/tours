@@ -8,28 +8,21 @@ import java.util.Stack;
 public class SymbolTable {
     private Stack<Map<String, Symbol>> symbolList;
     private int identifierCount;
-    private int argumentCount;
 
 
     public SymbolTable() {
         symbolList = new Stack<>();
         symbolList.push(new HashMap<>());
+        identifierCount =0;
     }
 
     /**
-     * Sets the identifierCount, to make sure memory is saved for program arguments
-     * @param identifierCount the start of the identifiercount
+     * Resets the identifierCount, to make sure memory is saved for program arguments
      */
-    public void setStartIdentifierCount(int identifierCount){
-        this.identifierCount = identifierCount;
+    public void resetCount(){
+        identifierCount = 0;
     }
 
-    /**
-     * Resets the argumentCount
-     */
-    public void resetArgumentCount(){
-        this.argumentCount = 0;
-    }
 
     public int getIdentifierCount() {
         return identifierCount;
@@ -70,9 +63,9 @@ public class SymbolTable {
     }
 
     /**
-     * Adds a new local variable to the symbol table
-     * @param id the identifier of the local variable
-     * @param type the type of the local variable
+     * Adds a new variable to the symbol table
+     * @param id the identifier of the variable
+     * @param type the type of the variable
      */
     public void addVariable(String id, Type type) {
         addVariable(id, type, identifierCount++);
@@ -83,17 +76,9 @@ public class SymbolTable {
      * @param variables map with the identifier and the type of the arguments
      */
     public void addArgumentVariables(Map<String, Type> variables) {
-        variables.forEach((id, type) -> addArgumentVariable(id, type));
+        variables.forEach((id, type) -> addVariable(id, type));
     }
 
-    /**
-     * Adds an argument variable to the symbol table
-     * @param id the identifier of the argument
-     * @param type the type of the argument
-     */
-    private void addArgumentVariable(String id, Type type) {
-        addVariable(id, type, argumentCount++);
-    }
 
     /**
      * Adds a type with identifier to the symbol table

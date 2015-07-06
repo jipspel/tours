@@ -238,8 +238,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         List<Type> argumentTypes = new ArrayList<>();
         Map<String, Type> variables = new HashMap<>();
 
-        symbolTable.resetArgumentCount();
-        symbolTable.setStartIdentifierCount(ctx.IDENTIFIER().size() - 1);
+        symbolTable.resetCount();
 
         for (int i = 0; i < ctx.variableType().size(); i++) {
             Type type = new Type(ctx.variableType(i).getText());
@@ -270,8 +269,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
 
-        symbolTable.resetArgumentCount();
-        symbolTable.setStartIdentifierCount(ctx.IDENTIFIER().size() - 1);
+        symbolTable.resetCount();
 
         List<Type> argumentTypes = new ArrayList<>();
         Map<String, Type> variables = new HashMap<>();
@@ -311,6 +309,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
+        symbolTable.resetCount();
+
         ST st = stGroup.getInstanceOf("function");
         st.add("return_type", "V");
         st.add("function_name", "main");
