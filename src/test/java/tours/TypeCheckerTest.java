@@ -3,6 +3,7 @@ package tours;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
+import tours.compiler.CompilerTools;
 import tours.typechecker.TypeChecker;
 
 import java.io.IOException;
@@ -227,7 +228,7 @@ public class TypeCheckerTest {
     private void testTypeCheckerErrors(List<String> expected, String filename) {
         ParseTree tree = null;
         try {
-            tree = TestHelper.toToursParseTree(filename);
+            tree = CompilerTools.toToursParseTree(filename);
         } catch (IOException e) {
             System.err.println("Error while parsing: " + filename);
             System.exit(0);

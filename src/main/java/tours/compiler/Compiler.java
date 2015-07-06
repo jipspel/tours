@@ -1,8 +1,7 @@
 package tours.compiler;
 
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.io.FileUtils;
 import org.stringtemplate.v4.ST;
@@ -11,7 +10,6 @@ import org.stringtemplate.v4.STGroupDir;
 import tours.SymbolTable;
 import tours.Type;
 import tours.grammar.ToursBaseVisitor;
-import tours.grammar.ToursLexer;
 import tours.grammar.ToursParser;
 
 import java.io.File;
@@ -19,9 +17,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.nio.file.Files.readAllBytes;
-import static java.nio.file.Paths.get;
 
 public class Compiler extends ToursBaseVisitor<ST> {
     private static final int SCANNER_LOCATION = 0;
@@ -32,7 +27,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     public Compiler(String className) {
         this.className = className;
-        labelCount =0;
+        labelCount = 0;
         symbolTable = new SymbolTable();
     }
 
@@ -42,15 +37,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             System.exit(0);
         }
 
-        String text = null;
-        try {
-            text = new String(readAllBytes(get(args[0])));
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + args[0]);
-        }
-
         System.out.println("<<<");
-        System.out.println(CompilerTools.toByteCode(text));
+        System.out.println(CompilerTools.toByteCode(args[0]));
         System.out.println(">>>");
 
         if (args.length == 2 && args[1].equals("--execute")) {
@@ -59,7 +47,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
             String filename = "./tmp/output.j";
             String workingDirectory = "./tmp";
             try {
-                CompilerTools.toByteCode(text, filename);
+                CompilerTools.toByteCode(args[0], filename);
                 CompilerTools.compileByteCodeToClassFile(filename, workingDirectory);
                 System.out.println(CompilerTools.runClassFile("Tours", workingDirectory));
 
@@ -71,13 +59,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
         }
     }
 
-    public ST process(String text) {
-        CharStream stream = new ANTLRInputStream(text);
-        Lexer lexer = new ToursLexer(stream);
-        TokenStream tokens = new CommonTokenStream(lexer);
-        ToursParser parser = new ToursParser(tokens);
-        ParseTree tree = parser.program();
-        return visit(tree);
+    public ST process(String filename) {
+        try {
+            return visit(CompilerTools.toToursParseTree(filename));
+        } catch (IOException e) {
+            System.err.println("Error reading: " + filename);
+            System.exit(0);
+        }
+        return null;
     }
 
     public String getTypeClass(String type) {
@@ -327,9 +316,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
         symbolTable.openScope();
 
         ST st;
-        st = stGroup.getInstanceOf("if_else");
-        st.add("block_if", visit(ctx.compound(0)).render());
-        st.add("block_else", visit(ctx.compound(1)).render());
+        if (ctx.compound().size() == 2) {
+            st = stGroup.getInstanceOf("if_else");
+            st.add("block_if", visit(ctx.compound(0)).render());
+            st.add("block_else", visit(ctx.compound(1)).render());
+        } else {
+            st = stGroup.getInstanceOf("if");
+            st.add("block_if", visit(ctx.compound(0)).render());
+        }
 
         labelCount++;
 

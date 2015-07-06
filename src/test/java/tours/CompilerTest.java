@@ -12,8 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.nio.file.Files.readAllBytes;
-import static java.nio.file.Paths.get;
 import static org.junit.Assert.assertEquals;
 
 public class CompilerTest {
@@ -188,8 +186,7 @@ public class CompilerTest {
 
     private String compileAndRun(String filename, List<String> input) {
         try {
-            String text = new String(readAllBytes(get(filename)));
-            CompilerTools.toByteCode(text, "./tmp/output.j");
+            CompilerTools.toByteCode(filename, "./tmp/output.j");
             CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
             return CompilerTools.runClassFile("Tours", "./tmp", input);
         } catch (NoSuchMethodException | InvocationTargetException | IOException | IllegalAccessException | ClassNotFoundException e) {

@@ -1,5 +1,11 @@
 package tours.compiler;
 
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.ParseTree;
+import tours.grammar.ToursErrorListener;
+import tours.grammar.ToursLexer;
+import tours.grammar.ToursParser;
+
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -8,15 +14,37 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
 
+import static java.nio.file.Files.readAllBytes;
+import static java.nio.file.Paths.get;
+import static org.junit.Assert.assertEquals;
+
 public class CompilerTools {
-    public static String toByteCode(String text) {
-        Compiler compiler = new Compiler("Tours");
-        return compiler.process(text).render();
+    public static ParseTree toToursParseTree(String filename) throws IOException {
+        String file = new String(readAllBytes(get(filename)));
+
+        CharStream chars = new ANTLRInputStream(file);
+        ToursErrorListener errorListener = new ToursErrorListener();
+        Lexer lexer = new ToursLexer(chars);
+        lexer.removeErrorListeners();
+        lexer.addErrorListener(errorListener);
+        TokenStream tokens = new CommonTokenStream(lexer);
+        ToursParser parser = new ToursParser(tokens);
+        parser.removeErrorListeners();
+        parser.addErrorListener(errorListener);
+
+        ParseTree program = parser.program();
+        assertEquals(0, errorListener.getErrorList().size());
+        return program;
     }
 
-    public static void toByteCode(String text, String destination) throws IOException {
+    public static String toByteCode(String filename) {
         Compiler compiler = new Compiler("Tours");
-        compiler.process(text).write(new File(destination), null);
+        return compiler.process(filename).render();
+    }
+
+    public static void toByteCode(String filename, String destination) throws IOException {
+        Compiler compiler = new Compiler("Tours");
+        compiler.process(filename).write(new File(destination), null);
     }
 
     public static void compileByteCodeToClassFile(String byteCodeFilename, String destinationFolder) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {

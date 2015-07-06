@@ -1,7 +1,6 @@
 package tours;
 
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.ParseTree;
 import tours.grammar.ToursErrorListener;
 import tours.grammar.ToursLexer;
 import tours.grammar.ToursParser;
@@ -29,24 +28,6 @@ public class TestHelper {
         parser.addErrorListener(errorListener);
         parser.program();
         return errorListener.getErrorList();
-    }
-
-    public static ParseTree toToursParseTree(String filename) throws IOException {
-        String file = new String(readAllBytes(get(filename)));
-
-        CharStream chars = new ANTLRInputStream(file);
-        ToursErrorListener errorListener = new ToursErrorListener();
-        Lexer lexer = new ToursLexer(chars);
-        lexer.removeErrorListeners();
-        lexer.addErrorListener(errorListener);
-        TokenStream tokens = new CommonTokenStream(lexer);
-        ToursParser parser = new ToursParser(tokens);
-        parser.removeErrorListeners();
-        parser.addErrorListener(errorListener);
-
-        ParseTree program = parser.program();
-        assertEquals(0, errorListener.getErrorList().size());
-        return program;
     }
 
     public static String toToursParseTreeString(String filename) throws IOException {
