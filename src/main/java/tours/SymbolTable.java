@@ -14,7 +14,6 @@ public class SymbolTable {
     public SymbolTable() {
         symbolList = new Stack<>();
         symbolList.push(new HashMap<>());
-        argumentCount = 0;
     }
 
     /**
@@ -23,6 +22,17 @@ public class SymbolTable {
      */
     public void setStartIdentifierCount(int identifierCount){
         this.identifierCount = identifierCount;
+    }
+
+    /**
+     * Resets the argumentCount
+     */
+    public void resetArgumentCount(){
+        this.argumentCount = 0;
+    }
+
+    public int getIdentifierCount() {
+        return identifierCount;
     }
 
     /**
@@ -37,10 +47,6 @@ public class SymbolTable {
      */
     public void openScope() {
         symbolList.push(new HashMap<>());
-
-        if(getLevel() == 1) {
-            argumentCount =0;
-        }
     }
 
     /**

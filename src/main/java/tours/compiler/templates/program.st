@@ -1,4 +1,4 @@
-program(class, locals_limit, stack_limit, main, functions) ::= <<
+program(class, main, functions) ::= <<
 .class public <class>
 .super java/lang/Object
 
@@ -10,10 +10,5 @@ program(class, locals_limit, stack_limit, main, functions) ::= <<
 
 <functions; separator="\n">
 
-.method public static main([Ljava/lang/String;)V
-    .limit locals <locals_limit>
-    .limit stack <stack_limit>
-    <main>
-    return
-.end method
+<main>
 >>

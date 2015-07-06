@@ -86,15 +86,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitProgram(@NotNull ToursParser.ProgramContext ctx) {
-        int maxNumberOfArguments = 0;
         // Listing all functions in symbol table
         for (ToursParser.VoidFunctionContext function : ctx.voidFunction()) {
             Type returnType = Type.VOID;
             List<Type> argumentTypes = new ArrayList<>();
-
-            int numberOfArguments = function.IDENTIFIER().size() -1;
-            maxNumberOfArguments = maxNumberOfArguments >= numberOfArguments ?
-                    maxNumberOfArguments : numberOfArguments;
 
             for (int i = 0; i < function.variableType().size(); i++) {
                 ToursParser.VariableTypeContext variableType = function.variableType(i);
@@ -112,10 +107,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
                     function.variableType(0).primitiveType().getText()));
             List<Type> argumentTypes = new ArrayList<>();
 
-            int numberOfArguments = function.IDENTIFIER().size() -1;
-            maxNumberOfArguments = maxNumberOfArguments >= numberOfArguments ?
-                    maxNumberOfArguments : numberOfArguments;
-
             for (int i = 1; i < function.variableType().size(); i++) {
                 ToursParser.VariableTypeContext variableType = function.variableType(i);
                 Type type = new Type(variableType.arrayType() != null ?
@@ -126,12 +117,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
         }
 
-        symbolTable.setStartIdentifierCount(maxNumberOfArguments);
-
         ST st = stGroup.getInstanceOf("program");
         st.add("class", className);
-        st.add("locals_limit", 100);
-        st.add("stack_limit", 35);
 
         List<String> functions = new ArrayList<>();
         functions.addAll(ctx.voidFunction().stream().map(function -> visit(function).render()).collect(Collectors.toList()));
@@ -251,6 +238,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
         List<Type> argumentTypes = new ArrayList<>();
         Map<String, Type> variables = new HashMap<>();
 
+        symbolTable.resetArgumentCount();
+        symbolTable.setStartIdentifierCount(ctx.IDENTIFIER().size() - 1);
+
         for (int i = 0; i < ctx.variableType().size(); i++) {
             Type type = new Type(ctx.variableType(i).getText());
             argumentTypes.add(type);
@@ -260,21 +250,18 @@ public class Compiler extends ToursBaseVisitor<ST> {
         symbolTable.openScope();
         symbolTable.addArgumentVariables(variables);
 
-        ST st;
+        ST st = stGroup.getInstanceOf("function");
+        st.add("return_type", returnType.getJavaObjectType());
+        st.add("function_name", ctx.IDENTIFIER(0).getText());
 
-        if (ctx.IDENTIFIER(0).getText().toLowerCase().equals("main")) {
-            st = visitChildren(ctx);
-        } else{
-            st = stGroup.getInstanceOf("function");
-            st.add("locals_limit", 35);
-            st.add("stack_limit", 35);
-            st.add("return_type", returnType.getJavaObjectType());
-            st.add("function_name", ctx.IDENTIFIER(0).getText());
+        List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
+        st.add("argument_types", arguments);
+        st.add("block", Arrays.asList(visit(ctx.block()).render(), stGroup.getInstanceOf("return").render()));
 
-            List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
-            st.add("argument_types", arguments);
-            st.add("block", Arrays.asList(visit(ctx.block()).render(), stGroup.getInstanceOf("return").render()));
-        }
+        st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
+        st.add("stack_limit", 4);
+        st.add("return", "return");
+
 
         symbolTable.closeScope();
         return st;
@@ -282,6 +269,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
+
+        symbolTable.resetArgumentCount();
+        symbolTable.setStartIdentifierCount(ctx.IDENTIFIER().size() - 1);
 
         List<Type> argumentTypes = new ArrayList<>();
         Map<String, Type> variables = new HashMap<>();
@@ -297,21 +287,23 @@ public class Compiler extends ToursBaseVisitor<ST> {
         symbolTable.openScope();
         symbolTable.addArgumentVariables(variables);
 
-        ST st;
+        ST st = stGroup.getInstanceOf("function");
+        st.add("return_type", returnType.getJavaObjectType());
+        st.add("function_name", ctx.IDENTIFIER(0).getText());
 
-        if (ctx.IDENTIFIER(0).getText().toLowerCase().equals("main")) {
-            st = visitChildren(ctx);
-        } else{
-            st = stGroup.getInstanceOf("function");
-            st.add("locals_limit", 35);
-            st.add("stack_limit", 35);
-            st.add("return_type", returnType.getJavaObjectType());
-            st.add("function_name", ctx.IDENTIFIER(0).getText());
+        List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
+        st.add("argument_types", arguments);
+        st.add("block", visit(ctx.returnBlock()).render());
 
-            List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
-            st.add("argument_types", arguments);
-            st.add("block", visit(ctx.returnBlock()).render());
-        }
+        st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
+        st.add("stack_limit", 4);
+
+        String returnString = symbolTable.getType(ctx.returnBlock().returnStatement().expression().getText()).equals(Type.STRING) ? "areturn" : "ireturn";
+        st.add("return", returnString);
+
+
+
+
 
         symbolTable.closeScope();
         return st;
@@ -319,7 +311,18 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
-        return concatenate(ctx.block());
+        ST st = stGroup.getInstanceOf("function");
+        st.add("return_type", "V");
+        st.add("function_name", "main");
+
+        st.add("argument_types", "[Ljava/lang/String;");
+        st.add("block", visit(ctx.block()).render());
+
+        st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
+        st.add("stack_limit", 4);
+
+        st.add("return", "return");
+        return st;
     }
 
     @Override
@@ -508,14 +511,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitReturnStatement(@NotNull ToursParser.ReturnStatementContext ctx) {
-        ST st = stGroup.getInstanceOf("concatenator");
-
-        String expression = visit(ctx.expression()).render();
-        String templateFile = symbolTable.getType(ctx.expression().getText()).equals(Type.STRING) ? "areturn" : "ireturn";
-
-        st.add("blocks", Arrays.asList(expression, stGroup.getInstanceOf(templateFile).render()));
-
-        return st;
+        return visit(ctx.expression());
     }
 
     @Override
