@@ -64,7 +64,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
             return visit(CompilerTools.toToursParseTree(filename));
         } catch (IOException e) {
             System.err.println("Error reading: " + filename);
-            System.exit(0);
+            System.exit(1);
         }
         return null;
     }

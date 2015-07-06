@@ -231,7 +231,7 @@ public class TypeCheckerTest {
             tree = CompilerTools.toToursParseTree(filename);
         } catch (IOException e) {
             System.err.println("Error while parsing: " + filename);
-            System.exit(0);
+            System.exit(1);
         }
         ParseTreeWalker walker = new ParseTreeWalker();
         TypeChecker typeChecker = new TypeChecker();

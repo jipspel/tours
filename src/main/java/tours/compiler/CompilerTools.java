@@ -16,7 +16,6 @@ import java.util.List;
 
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
-import static org.junit.Assert.assertEquals;
 
 public class CompilerTools {
     public static ParseTree toToursParseTree(String filename) throws IOException {
@@ -33,7 +32,10 @@ public class CompilerTools {
         parser.addErrorListener(errorListener);
 
         ParseTree program = parser.program();
-        assertEquals(0, errorListener.getErrorList().size());
+        if (errorListener.getErrorList().size() > 0) {
+            System.err.println("Error lexing and parsing: " + filename);
+            System.exit(1);
+        }
         return program;
     }
 
