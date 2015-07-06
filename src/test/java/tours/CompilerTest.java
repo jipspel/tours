@@ -162,8 +162,8 @@ public class CompilerTest {
     @Test
     public void testCallEachOtherFunction() {
         assertEqualsOutput(Arrays.asList(
+                        "33",
                         "34",
-                        "35",
                         "35"),
                 "src/test/java/tours/examples/compiler/function_call_each_other.tours");
     }

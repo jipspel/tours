@@ -1,16 +1,14 @@
 func main() {
-    integer i = 34;
-    printInteger(34);
+    printInteger(33);
 }
 
 func void printInteger(integer i) {
-    while( i < 36) {
-        print(i);
-        i = addOneWithPrint(i);
+    print(i);
+    if (i < 35) {
+        addOneWithPrint(i);
     }
 }
 
-func integer addOneWithPrint(integer i) {
-    printInteger(i+1);
-    return i + 1;
+func void addOneWithPrint(integer i) {
+    printInteger(i + 1);
 }
