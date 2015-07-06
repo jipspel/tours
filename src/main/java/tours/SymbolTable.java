@@ -37,7 +37,10 @@ public class SymbolTable {
      */
     public void openScope() {
         symbolList.push(new HashMap<>());
-        argumentCount =0;
+
+        if(getLevel() == 1) {
+            argumentCount =0;
+        }
     }
 
     /**
