@@ -53,26 +53,22 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code voidFunction}
-	 * labeled alternative in {@link ToursParser#function}.
+	 * Enter a parse tree produced by {@link ToursParser#voidFunction}.
 	 * @param ctx the parse tree
 	 */
 	void enterVoidFunction(@NotNull ToursParser.VoidFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code voidFunction}
-	 * labeled alternative in {@link ToursParser#function}.
+	 * Exit a parse tree produced by {@link ToursParser#voidFunction}.
 	 * @param ctx the parse tree
 	 */
 	void exitVoidFunction(@NotNull ToursParser.VoidFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code returnFunction}
-	 * labeled alternative in {@link ToursParser#function}.
+	 * Enter a parse tree produced by {@link ToursParser#returnFunction}.
 	 * @param ctx the parse tree
 	 */
 	void enterReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code returnFunction}
-	 * labeled alternative in {@link ToursParser#function}.
+	 * Exit a parse tree produced by {@link ToursParser#returnFunction}.
 	 * @param ctx the parse tree
 	 */
 	void exitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx);

@@ -38,15 +38,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code voidFunction}
-	 * labeled alternative in {@link ToursParser#function}.
+	 * Visit a parse tree produced by {@link ToursParser#voidFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVoidFunction(@NotNull ToursParser.VoidFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code returnFunction}
-	 * labeled alternative in {@link ToursParser#function}.
+	 * Visit a parse tree produced by {@link ToursParser#returnFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */

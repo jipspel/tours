@@ -3,7 +3,7 @@ grammar Tours;
 @header{package tours.grammar;}
 
 program
-    : function* mainFunction?
+    : (voidFunction | returnFunction)* mainFunction? (voidFunction | returnFunction)*
     ;
 
 /** Variable declaration. */
@@ -17,15 +17,17 @@ variableAssignment
     : IDENTIFIER (LBLOCK expression RBLOCK)? ASSIGNMENT expression
     ;
 
-/** Function
- *  type name(arguments)
- */
-function
-    : FUNC VOID IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR block                    #voidFunction
-    | FUNC variableType  IDENTIFIER LPAR ((variableType  IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock    #returnFunction
+/** Void function */
+voidFunction
+    : FUNC VOID IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR block
     ;
 
-/** Main functino */
+/** Return function */
+returnFunction
+    : FUNC variableType  IDENTIFIER LPAR ((variableType  IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock
+    ;
+
+/** Main function */
 mainFunction
     : FUNC MAIN LPAR RPAR block
     ;

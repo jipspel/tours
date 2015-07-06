@@ -97,7 +97,7 @@ public class GrammarTest {
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/variable_declaration.tours");
         assertEquals(0, errorList.size());
 
-        assertEquals("(program (function func void awesome_print ( (variableType (primitiveType string)) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (function func (variableType (primitiveType integer)) next_number ( (variableType (primitiveType integer)) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; })))",
+        assertEquals("(program (voidFunction func void awesome_print ( (variableType (primitiveType string)) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (returnFunction func (variableType (primitiveType integer)) next_number ( (variableType (primitiveType integer)) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions.tours"));
 
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (primitiveType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (block { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) })))",
@@ -141,12 +141,8 @@ public class GrammarTest {
     @Test
     public void testInvalidFunctionReturns() throws IOException {
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/invalid/function_returns.tours");
-        assertEquals(3, errorList.size());
-        assertEquals("line 2:4 extraneous input 'return' expecting {BOOLEAN, BOOLEAN_ARRAY, CHARACTER, CHARACTER_ARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGER_ARRAY, PRINT, STRING, STRING_ARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', '}', IDENTIFIER, INT, STR, CHAR}",
+        assertEquals(1, errorList.size());
+        assertEquals("line 2:4 no viable alternative at input 'funcvoidawesome_print(stringtext){return'",
                 errorList.get(0));
-        assertEquals("line 7:0 extraneous input '}' expecting {BOOLEAN, BOOLEAN_ARRAY, CHARACTER, CHARACTER_ARRAY, FALSE, FOR, IF, INPUT, INTEGER, INTEGER_ARRAY, PRINT, RETURN, STRING, STRING_ARRAY, TRUE, WHILE, '{', '(', '-', '!', '+', IDENTIFIER, INT, STR, CHAR}",
-                errorList.get(1));
-        assertEquals("line 11:4 mismatched input 'return' expecting '}'",
-                errorList.get(2));
     }
 }

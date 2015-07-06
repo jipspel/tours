@@ -92,9 +92,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("stack_limit", 35);
 
         List<String> functions = new ArrayList<>();
-        for (ToursParser.FunctionContext function : ctx.function()) {
+        // TODO streams van maken
+        for (ToursParser.VoidFunctionContext function : ctx.voidFunction()) {
             functions.add(visit(function).render());
-
+        }
+        for (ToursParser.ReturnFunctionContext function : ctx.returnFunction()) {
+            functions.add(visit(function).render());
         }
         st.add("functions", functions);
 

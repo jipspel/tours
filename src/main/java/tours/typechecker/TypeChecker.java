@@ -20,6 +20,48 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
+    public void enterProgram(@NotNull ToursParser.ProgramContext ctx) {
+        for (ToursParser.VoidFunctionContext function : ctx.voidFunction()) {
+            Type returnType = Type.VOID;
+            List<Type> argumentTypes = new ArrayList<>();
+
+            for (int i = 0; i < function.variableType().size(); i++) {
+                ToursParser.VariableTypeContext variableType = function.variableType(i);
+                Type type = new Type(variableType.arrayType() != null ?
+                        variableType.arrayType().getText() : variableType.primitiveType().getText());
+                argumentTypes.add(type);
+            }
+
+            if (symbolTable.contains(function.IDENTIFIER(0).getText())) {
+                errors.add(String.format("Error <function name already defined> on line %s, pos %s", function.IDENTIFIER(0).getSymbol().getLine(), function.IDENTIFIER(0).getSymbol().getCharPositionInLine()));
+            }
+
+            symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
+        }
+
+        for (ToursParser.ReturnFunctionContext function : ctx.returnFunction()) {
+            Type returnType = new Type((function.variableType(0).arrayType() != null ?
+                    function.variableType(0).arrayType().getText() :
+                    function.variableType(0).primitiveType().getText()));
+            List<Type> argumentTypes = new ArrayList<>();
+
+            // TODO argumenten die meegegeven worden moeten in de nieuwe scope vallen
+            for (int i = 1; i < function.variableType().size(); i++) {
+                ToursParser.VariableTypeContext variableType = function.variableType(i);
+                Type type = new Type(variableType.arrayType() != null ?
+                        variableType.arrayType().getText() : variableType.primitiveType().getText());
+                argumentTypes.add(type);
+            }
+
+            if (symbolTable.contains(function.IDENTIFIER(0).getText())) {
+                errors.add(String.format("Error <function name already defined> on line %s, pos %s", function.IDENTIFIER(0).getSymbol().getLine(), function.IDENTIFIER(0).getSymbol().getCharPositionInLine()));
+            }
+
+            symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
+        }
+    }
+
+    @Override
     public void exitVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx) {
         // declarations
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
@@ -98,24 +140,13 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void enterVoidFunction(@NotNull ToursParser.VoidFunctionContext ctx) {
-        Type returnType = Type.VOID;
-        List<Type> argumentTypes = new ArrayList<>();
-
+        symbolTable.openScope();
         for (int i = 0; i < ctx.variableType().size(); i++) {
             ToursParser.VariableTypeContext variableType = ctx.variableType(i);
             Type type = new Type(variableType.arrayType() != null ?
                     variableType.arrayType().getText() : variableType.primitiveType().getText());
-            argumentTypes.add(type);
             symbolTable.addVariable(ctx.IDENTIFIER(i + 1).getText(), type);
         }
-
-        if (symbolTable.contains(ctx.IDENTIFIER(0).getText())) {
-            errors.add(String.format("Error <function name already defined> on line %s, pos %s", ctx.IDENTIFIER(0).getSymbol().getLine(), ctx.IDENTIFIER(0).getSymbol().getCharPositionInLine()));
-        }
-
-        symbolTable.addFunction(ctx.IDENTIFIER(0).getText(), returnType, argumentTypes);
-
-        symbolTable.openScope();
     }
 
     @Override
@@ -126,26 +157,13 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void enterReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
-        Type returnType = new Type((ctx.variableType(0).arrayType() != null ?
-                ctx.variableType(0).arrayType().getText() :
-                ctx.variableType(0).primitiveType().getText()));
-        List<Type> argumentTypes = new ArrayList<>();
-
-    // TODO argumenten die meegegeven worden moeten in de nieuwe scope vallen
+        symbolTable.openScope();
         for (int i = 1; i < ctx.variableType().size(); i++) {
             ToursParser.VariableTypeContext variableType = ctx.variableType(i);
             Type type = new Type(variableType.arrayType() != null ?
                     variableType.arrayType().getText() : variableType.primitiveType().getText());
-            argumentTypes.add(type);
             symbolTable.addVariable(ctx.IDENTIFIER(i).getText(), type);
         }
-
-        if (symbolTable.contains(ctx.IDENTIFIER(0).getText())) {
-            errors.add(String.format("Error <function name already defined> on line %s, pos %s", ctx.IDENTIFIER(0).getSymbol().getLine(), ctx.IDENTIFIER(0).getSymbol().getCharPositionInLine()));
-        }
-
-        symbolTable.addFunction(ctx.IDENTIFIER(0).getText(), returnType, argumentTypes);
-        symbolTable.openScope();
     }
 
     @Override
