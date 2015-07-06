@@ -1,0 +1,7 @@
+func main() {
+    integer x = 2;
+}
+
+func integer addOne() {
+    return x + 1;
+}

@@ -132,7 +132,6 @@ public class TypeCheckerTest {
                 "Error <expected boolean> on line 7, pos 11",
                 "Error <expected boolean> on line 8, pos 11",
                 "Error <expected integers> on line 9, pos 11",
-                "Error <expected boolean> on line 9, pos 11",
                 "Error <expected boolean> on line 10, pos 11",
                 "Error <expected boolean> on line 11, pos 11",
                 "Error <expected boolean> on line 12, pos 11",
@@ -150,7 +149,6 @@ public class TypeCheckerTest {
                 "Error <expected boolean> on line 7, pos 7",
                 "Error <expected boolean> on line 8, pos 7",
                 "Error <expected integers> on line 9, pos 8",
-                "Error <expected boolean> on line 9, pos 7",
                 "Error <expected boolean> on line 10, pos 7",
                 "Error <expected boolean> on line 11, pos 7",
                 "Error <expected boolean> on line 12, pos 7",
@@ -168,7 +166,6 @@ public class TypeCheckerTest {
                 "Error <expected boolean> on line 7, pos 10",
                 "Error <expected boolean> on line 8, pos 10",
                 "Error <expected integers> on line 9, pos 11",
-                "Error <expected boolean> on line 9, pos 10",
                 "Error <expected boolean> on line 10, pos 10",
                 "Error <expected boolean> on line 11, pos 10",
                 "Error <expected boolean> on line 12, pos 10",
@@ -177,6 +174,14 @@ public class TypeCheckerTest {
                 "Error <expected boolean> on line 15, pos 10"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_statements_while.tours");
+    }
+
+    @Test
+    public void testInvalidScopes() {
+        List<String> errors = Arrays.asList(
+                "Error <variable not defined> on line 6, pos 11"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_scopes.tours");
     }
 
     @Test

@@ -108,7 +108,7 @@ public class TypeChecker extends ToursBaseListener {
         String expression = expressions.get(expressions.size() - 1).getText();
         Type type = symbolTable.getType(identifier);
 
-        if (expressions.size() > 1 && !symbolTable.getType(expressions.get(0).getText()).equals(Type.INTEGER)) {
+        if (expressions.size() > 1 && (symbolTable.getType(ctx.expression(0).getText()) == null || !symbolTable.getType(expressions.get(0).getText()).equals(Type.INTEGER))) {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", expressions.get(0).getStart().getLine(), expressions.get(0).getStart().getCharPositionInLine()));
         }
 
@@ -181,7 +181,8 @@ public class TypeChecker extends ToursBaseListener {
         String returnExpression = ctx.returnBlock().returnStatement().expression().getText();
         String identifier = ctx.IDENTIFIER(0).getText();
 
-        if (!symbolTable.getType(identifier).equals(symbolTable.getType(returnExpression))) {
+        if (symbolTable.getType(identifier) != null &&
+                !symbolTable.getType(identifier).equals(symbolTable.getType(returnExpression))) {
             errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.returnBlock().getStart().getLine(), ctx.returnBlock().getStart().getCharPositionInLine()));
         }
 
@@ -203,10 +204,11 @@ public class TypeChecker extends ToursBaseListener {
     public void enterIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
         symbolTable.openScope();
     }
+
     @Override
     public void exitIfStatement(@NotNull ToursParser.IfStatementContext ctx) {
         Type type = symbolTable.getType(ctx.expression().getText());
-        if (type == null || !type.equals(Type.BOOLEAN)) {
+        if (type != null && !type.equals(Type.BOOLEAN)) {
             errors.add(String.format("Error <expected boolean> on line %s, pos %s", ctx.LPAR().getSymbol().getLine(), ctx.LPAR().getSymbol().getCharPositionInLine()));
         }
 
@@ -222,7 +224,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx) {
         Type type = symbolTable.getType(ctx.expression().getText());
 
-        if (type == null || !type.equals(Type.BOOLEAN)) {
+        if (type != null && !type.equals(Type.BOOLEAN)) {
             errors.add(String.format("Error <expected boolean> on line %s, pos %s", ctx.LPAR().getSymbol().getLine(), ctx.LPAR().getSymbol().getCharPositionInLine()));
         }
 
@@ -238,7 +240,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitForStatement(@NotNull ToursParser.ForStatementContext ctx) {
         Type type = symbolTable.getType(ctx.expression().getText());
 
-        if (type == null || !type.equals(Type.BOOLEAN)) {
+        if (type != null && !type.equals(Type.BOOLEAN)) {
             errors.add(String.format("Error <expected boolean> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         }
         symbolTable.closeScope();
@@ -250,7 +252,9 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) {
-        if (!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
+        if (!symbolTable.contains(ctx.expression().getText())) {
+            errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
+        } else if(!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         }
 
@@ -261,7 +265,7 @@ public class TypeChecker extends ToursBaseListener {
     public void exitIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx) {
         Type type = symbolTable.getType(ctx.compound(0).getText());
 
-        if (!type.equals(symbolTable.getType(ctx.compound(1).getText()))) {
+        if (type != null && !type.equals(symbolTable.getType(ctx.compound(1).getText()))) {
             errors.add(String.format("Error <mismatching expression types> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         }
 
@@ -285,22 +289,26 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitMultiplyExpression(@NotNull ToursParser.MultiplyExpressionContext ctx) {
-        if (!symbolTable.getType(ctx.expression(0).getText()).equals(Type.INTEGER) ||
-               !symbolTable.getType(ctx.expression(1).getText()).equals(Type.INTEGER)) {
+        if ((symbolTable.getType(ctx.expression(0).getText()) != null &&
+                !symbolTable.getType(ctx.expression(0).getText()).equals(Type.INTEGER)) ||
+                (symbolTable.getType(ctx.expression(1).getText()) != null &&
+                        !symbolTable.getType(ctx.expression(1).getText()).equals(Type.INTEGER))) {
             errors.add(String.format("Error <expected integers> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
-        } else {
-            symbolTable.addVariable(ctx.getText(), Type.INTEGER);
         }
+        symbolTable.addVariable(ctx.getText(), Type.INTEGER);
+
     }
 
     @Override
     public void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) {
-        if (!symbolTable.getType(ctx.expression(0).getText()).equals(Type.BOOLEAN) ||
-                !symbolTable.getType(ctx.expression(1).getText()).equals(Type.BOOLEAN)) {
+        if ((symbolTable.getType(ctx.expression(0).getText()) == null &&
+                !symbolTable.getType(ctx.expression(0).getText()).equals(Type.BOOLEAN)) ||
+                (symbolTable.getType(ctx.expression(1).getText()) == null &&
+                !symbolTable.getType(ctx.expression(1).getText()).equals(Type.BOOLEAN))) {
             errors.add(String.format("Error <expected booleans> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
-        } else {
-            symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
         }
+        symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
+
     }
 
     @Override public void enterCompound(@NotNull ToursParser.CompoundContext ctx) {
@@ -318,7 +326,8 @@ public class TypeChecker extends ToursBaseListener {
         Type expressionType = symbolTable.getType(ctx.expression(0).getText());
 
         for(int i = 1; i < ctx.expression().size(); i++) {
-            if (!symbolTable.getType(ctx.expression(i).getText()).equals(expressionType)) {
+            if (symbolTable.getType(ctx.expression(i).getText()) != null &&
+                    !symbolTable.getType(ctx.expression(i).getText()).equals(expressionType)) {
                 errors.add(String.format("Error <mismatching array types> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
             }
         }
@@ -328,7 +337,8 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) {
-        if (!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
+        if (symbolTable.getType(ctx.expression().getText()) != null &&
+                !symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         }
         symbolTable.addType(ctx.getText(), new Type(ctx.primitiveType().getText()));
@@ -336,12 +346,14 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) {
-        if (!symbolTable.getType(ctx.expression(0).getText()).equals(Type.BOOLEAN) ||
-                !symbolTable.getType(ctx.expression(1).getText()).equals(Type.BOOLEAN)) {
+        if ((symbolTable.getType(ctx.expression(0).getText()) != null &&
+                !symbolTable.getType(ctx.expression(0).getText()).equals(Type.BOOLEAN)) ||
+                (symbolTable.getType(ctx.expression(1).getText()) != null &&
+                !symbolTable.getType(ctx.expression(1).getText()).equals(Type.BOOLEAN))) {
             errors.add(String.format("Error <expected booleans> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
-        } else {
-            symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
         }
+        symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
+
     }
 
     @Override
@@ -352,18 +364,26 @@ public class TypeChecker extends ToursBaseListener {
     @Override
     public void exitPrefixExpression(@NotNull ToursParser.PrefixExpressionContext ctx) {
         if (ctx.prefixOperator().MINUS() != null || ctx.prefixOperator().PLUS() != null) {
-            if (!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
+            if (symbolTable.getType(ctx.expression().getText()) != null &&
+                    !symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
                 errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
-            } else {
-                symbolTable.addVariable(ctx.getText(), Type.INTEGER);
             }
+            symbolTable.addVariable(ctx.getText(), Type.INTEGER);
+
         } else {
             assert(ctx.prefixOperator().NOT() != null);
             if (!symbolTable.getType(ctx.expression().getText()).equals(Type.BOOLEAN)) {
                 errors.add(String.format("Error <expected boolean> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
-            } else {
-                symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
             }
+            symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
+
+        }
+    }
+
+    @Override
+    public void exitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) {
+        if (!symbolTable.contains(ctx.IDENTIFIER().getText())) {
+            errors.add(String.format("Error <function not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         }
     }
 
@@ -374,27 +394,29 @@ public class TypeChecker extends ToursBaseListener {
             if (!symbolTable.getType(ctx.expression(0).getText()).equals(Type.INTEGER) ||
                     !symbolTable.getType(ctx.expression(1).getText()).equals(Type.INTEGER)) {
                 errors.add(String.format("Error <expected integers> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
-            } else {
-                symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
             }
+            symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
+
         } else {
             assert(ctx.compareOperator().EQ() != null || ctx.compareOperator().NE() != null);
             if (!symbolTable.getType(ctx.expression(0).getText()).equals(symbolTable.getType(ctx.expression(1).getText()))) {
                 errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
-            } else {
-                symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
             }
+            symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
+
         }
     }
 
     @Override
     public void exitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) {
-        if (!symbolTable.getType(ctx.expression(0).getText()).equals(Type.INTEGER) ||
-                !symbolTable.getType(ctx.expression(1).getText()).equals(Type.INTEGER)) {
+        if ((symbolTable.getType(ctx.expression(0).getText()) != null &&
+                !symbolTable.getType(ctx.expression(0).getText()).equals(Type.INTEGER) ||
+                (symbolTable.getType(ctx.expression(1).getText()) != null &&
+                !symbolTable.getType(ctx.expression(1).getText()).equals(Type.INTEGER)))) {
             errors.add(String.format("Error <expected integers> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
-        } else {
-            symbolTable.addVariable(ctx.getText(), Type.INTEGER);
         }
+        symbolTable.addVariable(ctx.getText(), Type.INTEGER);
+
     }
 
     @Override
