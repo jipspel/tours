@@ -93,10 +93,10 @@ public class TypeChecker extends ToursBaseListener {
             }
         }
 
-        String arrayType = new Type(ctx.arrayType().getText()).getPrimitiveType();
+        Type arrayType = new Type(ctx.arrayType().getText());
         String assignmentType = symbolTable.getType(ctx.arrayAssignment().getText()).toString();
         // assignment
-        if (!arrayType.equals(assignmentType)) {
+        if (!arrayType.getPrimitiveType().equals(assignmentType)) {
             errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
         }
     }
