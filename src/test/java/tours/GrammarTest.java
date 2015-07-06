@@ -73,11 +73,11 @@ public class GrammarTest {
 
     @Test
     public void testValidIfElseAssignments() throws IOException {
-        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/assignments_with_if_else.tours");
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/assignments_if_else.tours");
         assertEquals(0, errorList.size());
 
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType boolean) b = (expression if ( (expression true) ) (compound { (variable (primitiveType boolean) a = (expression false)) ; }) else (compound { (variable (primitiveType boolean) a = (expression true)) ; }))) ; (variable (primitiveType character) c = (expression if ( (expression true) ) (compound { (variable (primitiveType character) d = (expression 'a')) ; }) else (compound { (variable (primitiveType character) d = (expression 'b')) ; }))) ; (variable (primitiveType integer) i = (expression if ( (expression true) ) (compound { (variable (primitiveType integer) j = (expression 35)) ; }) else (compound { (variable (primitiveType integer) j = (expression 36)) ; }))) ; (variable (primitiveType string) s = (expression if ( (expression true) ) (compound { (variable (primitiveType string) t = (expression \"Hello\")) ; }) else (compound { (variable (primitiveType string) t = (expression \"World\")) ; }))) ; })))",
-                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/assignments_with_if_else.tours"));
+                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/assignments_if_else.tours"));
     }
 
     @Test
