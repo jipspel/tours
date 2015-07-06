@@ -61,6 +61,11 @@ public class Type {
         this(stringToIntType(type));
     }
 
+    /**
+     * Returns the integer representation of a type
+     * @param type the string representation fo a type
+     * @return the integer representation of a type
+     */
     public static int stringToIntType(String type) {
         if (type.equals(Type.BOOLEAN.toString())) {
             return ToursParser.BOOLEAN;
@@ -85,6 +90,10 @@ public class Type {
         }
     }
 
+    /**
+     * Returns the integer representation of the current type
+     * @return the integer representation
+     */
     public int getType() {
         return type;
     }
@@ -100,18 +109,35 @@ public class Type {
         return properties.get(0);
     }
 
+    /**
+     * Returns the string representation of java object type of the Type
+     * @return the java object type
+     */
     public String getJavaObjectType() {
         return properties.get(1);
     }
 
+    /**
+     * Returns the string representation of the array type of an array type
+     * required to build new arrays in Java bytecode
+     * @return if type is array type, its string representation type, else null
+     */
     public String getArrayType() {
         return properties.get(2);
     }
 
+    /**
+     * Returns the Java bytecode prefix of Type
+     * @return the Java bytecode prefix
+     */
     public String getPrefix() {
         return properties.get(3);
     }
 
+    /**
+     * Returns the string representation of the primitive type of an array type
+     * @return if type is array type, its primitive type, else null
+     */
     public String getPrimitiveType() {
         return properties.get(4);
     }
