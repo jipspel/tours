@@ -2,10 +2,7 @@ grammar Tours;
 
 @header{package tours.grammar;}
 
-program: body;
-
-/** Body of a program. */
-body
+program
     : function* mainFunction?
     ;
 

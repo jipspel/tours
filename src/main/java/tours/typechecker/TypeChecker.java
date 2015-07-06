@@ -20,16 +20,6 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void enterBody(@NotNull ToursParser.BodyContext ctx) {
-        symbolTable.openScope();
-    }
-
-    @Override
-    public void exitBody(@NotNull ToursParser.BodyContext ctx) {
-        symbolTable.closeScope();
-    }
-
-    @Override
     public void exitVariablePrimitive(@NotNull ToursParser.VariablePrimitiveContext ctx) {
         // declarations
         for (TerminalNode identifier : ctx.IDENTIFIER()) {

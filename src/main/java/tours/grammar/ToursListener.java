@@ -19,16 +19,6 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitProgram(@NotNull ToursParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ToursParser#body}.
-	 * @param ctx the parse tree
-	 */
-	void enterBody(@NotNull ToursParser.BodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ToursParser#body}.
-	 * @param ctx the parse tree
-	 */
-	void exitBody(@NotNull ToursParser.BodyContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code variablePrimitive}
 	 * labeled alternative in {@link ToursParser#variable}.
 	 * @param ctx the parse tree

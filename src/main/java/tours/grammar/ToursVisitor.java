@@ -18,12 +18,6 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(@NotNull ToursParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ToursParser#body}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBody(@NotNull ToursParser.BodyContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code variablePrimitive}
 	 * labeled alternative in {@link ToursParser#variable}.
 	 * @param ctx the parse tree

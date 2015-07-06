@@ -92,13 +92,13 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("stack_limit", 35);
 
         List<String> functions = new ArrayList<>();
-        for (ToursParser.FunctionContext function : ctx.body().function()) {
+        for (ToursParser.FunctionContext function : ctx.function()) {
             functions.add(visit(function).render());
 
         }
         st.add("functions", functions);
 
-        st.add("main", visit(ctx.body().mainFunction()).render());
+        st.add("main", visit(ctx.mainFunction()).render());
 
         return st;
     }
@@ -114,11 +114,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
         }
         st.add("blocks", blocks);
         return st;
-    }
-
-    @Override
-    public ST visitBody(@NotNull ToursParser.BodyContext ctx) {
-        return concatenate(ctx);
     }
 
     @Override
