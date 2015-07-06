@@ -120,7 +120,8 @@ public class TypeCheckerTest {
     public void testNotDefinedVariables() {
         List<String> errors = Arrays.asList(
                 "Error <variable not defined> on line 2, pos 6",
-                "Error <variable not defined> on line 3, pos 4"
+                "Error <variable not defined> on line 3, pos 4",
+                "Error <variable not defined> on line 8, pos 11"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables.tours");
     }
@@ -177,14 +178,6 @@ public class TypeCheckerTest {
     }
 
     @Test
-    public void testInvalidScopes() {
-        List<String> errors = Arrays.asList(
-                "Error <variable not defined> on line 6, pos 11"
-        );
-        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_scopes.tours");
-    }
-
-    @Test
     public void testMismatchingFunctionAssignments() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 9, pos 13",
@@ -223,6 +216,7 @@ public class TypeCheckerTest {
                 "Error <expected integers> on line 3, pos 4",
                 "Error <expected integers> on line 4, pos 4",
                 "Error <expected integers> on line 5, pos 4",
+
                 "Error <mismatching types> on line 7, pos 4",
                 "Error <mismatching types> on line 8, pos 4"
         );

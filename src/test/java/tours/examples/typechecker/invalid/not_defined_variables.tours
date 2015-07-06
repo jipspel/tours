@@ -1,4 +1,9 @@
 func main () {
-    x = 35;
-    y;
+    integer x;
+    y = 35;
+    z;
+}
+
+func integer addOne() {
+    return x + 1;
 }
