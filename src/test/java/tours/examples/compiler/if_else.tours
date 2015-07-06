@@ -9,7 +9,7 @@ func main() {
 
     if (x >= 35) {
         print("Too bad!");
-    } else {
-        print("Vanaf hier wordt alles beter!");
     }
+
+    if (x < 35) {}
 }
