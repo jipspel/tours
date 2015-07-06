@@ -218,8 +218,8 @@ public class TypeCheckerTest {
                 "Error <expected integers> on line 3, pos 4",
                 "Error <expected integers> on line 4, pos 4",
                 "Error <expected integers> on line 5, pos 4",
-                "Error <expected integers> on line 6, pos 4",
-                "Error <expected integers> on line 7, pos 4"
+                "Error <mismatching types> on line 7, pos 4",
+                "Error <mismatching types> on line 8, pos 4"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_types_comparison_expressions.tours");
     }
