@@ -53,7 +53,8 @@ public class TypeCheckerTest {
 
     @Test
     public void testFunctions() {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions_primitive_type.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions_array_type.tours");
     }
 
     @Test

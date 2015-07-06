@@ -82,7 +82,7 @@ public class GrammarTest {
 
     @Test
     public void testValidExamples() throws IOException {
-        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/functions.tours");
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/functions_primitive_type.tours");
         assertEquals(0, errorList.size());
 
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/statement_for.tours");
@@ -98,7 +98,7 @@ public class GrammarTest {
         assertEquals(0, errorList.size());
 
         assertEquals("(program (voidFunction func void awesome_print ( (variableType (primitiveType string)) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (returnFunction func (variableType (primitiveType integer)) next_number ( (variableType (primitiveType integer)) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; })))",
-                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions.tours"));
+                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions_primitive_type.tours"));
 
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (primitiveType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (block { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/statement_for_single.tours"));

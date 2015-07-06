@@ -3,5 +3,5 @@ func void awesome_print(string text) {
 }
 
 func integer next_number(integer i) {
-    return print(i+1);
+    return print(i + 1);
 }
