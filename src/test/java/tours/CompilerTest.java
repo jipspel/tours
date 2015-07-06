@@ -160,6 +160,15 @@ public class CompilerTest {
     }
 
     @Test
+    public void testCallEachOtherFunction() {
+        assertEqualsOutput(Arrays.asList(
+                        "34",
+                        "35",
+                        "35"),
+                "src/test/java/tours/examples/compiler/function_call_each_other.tours");
+    }
+
+    @Test
     public void testReturningOneNumber() {
         assertEqualsOutput(Arrays.asList("35"),
                 "src/test/java/tours/examples/compiler/function_return_next_number.tours");

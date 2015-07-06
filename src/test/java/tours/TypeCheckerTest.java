@@ -52,6 +52,11 @@ public class TypeCheckerTest {
     }
 
     @Test
+    public void testFunctions() {
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions.tours");
+    }
+
+    @Test
     public void testMismatchingTypesBasic() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 2, pos 14",

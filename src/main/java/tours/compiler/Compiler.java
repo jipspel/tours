@@ -86,6 +86,48 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitProgram(@NotNull ToursParser.ProgramContext ctx) {
+        int maxNumberOfArguments = 0;
+        // Listing all functions in symbol table
+        for (ToursParser.VoidFunctionContext function : ctx.voidFunction()) {
+            Type returnType = Type.VOID;
+            List<Type> argumentTypes = new ArrayList<>();
+
+            int numberOfArguments = function.IDENTIFIER().size() -1;
+            maxNumberOfArguments = maxNumberOfArguments >= numberOfArguments ?
+                    maxNumberOfArguments : numberOfArguments;
+
+            for (int i = 0; i < function.variableType().size(); i++) {
+                ToursParser.VariableTypeContext variableType = function.variableType(i);
+                Type type = new Type(variableType.arrayType() != null ?
+                        variableType.arrayType().getText() : variableType.primitiveType().getText());
+                argumentTypes.add(type);
+            }
+
+            symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
+        }
+
+        for (ToursParser.ReturnFunctionContext function : ctx.returnFunction()) {
+            Type returnType = new Type((function.variableType(0).arrayType() != null ?
+                    function.variableType(0).arrayType().getText() :
+                    function.variableType(0).primitiveType().getText()));
+            List<Type> argumentTypes = new ArrayList<>();
+
+            int numberOfArguments = function.IDENTIFIER().size() -1;
+            maxNumberOfArguments = maxNumberOfArguments >= numberOfArguments ?
+                    maxNumberOfArguments : numberOfArguments;
+
+            for (int i = 1; i < function.variableType().size(); i++) {
+                ToursParser.VariableTypeContext variableType = function.variableType(i);
+                Type type = new Type(variableType.arrayType() != null ?
+                        variableType.arrayType().getText() : variableType.primitiveType().getText());
+                argumentTypes.add(type);
+            }
+
+            symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
+        }
+
+        symbolTable.setStartIdentifierCount(maxNumberOfArguments);
+
         ST st = stGroup.getInstanceOf("program");
         st.add("class", className);
         st.add("locals_limit", 100);
@@ -220,10 +262,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             variables.put(ctx.IDENTIFIER(i + 1).getText(), type);
         }
 
-        symbolTable.addFunction(ctx.IDENTIFIER(0).getText(), returnType, argumentTypes);
-
         symbolTable.openScope();
-        symbolTable.addVariables(variables);
+        symbolTable.addArgumentVariables(variables);
 
         ST st;
 
@@ -258,10 +298,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
         }
 
         Type returnType = new Type(ctx.variableType(0).getText());
-        symbolTable.addFunction(ctx.IDENTIFIER(0).getText(), returnType, argumentTypes);
 
         symbolTable.openScope();
-        symbolTable.addVariables(variables);
+        symbolTable.addArgumentVariables(variables);
 
         ST st;
 

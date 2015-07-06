@@ -8,11 +8,16 @@ import java.util.Stack;
 public class SymbolTable {
     private Stack<Map<String, Symbol>> symbolList;
     private int identifierCount;
+    private int argumentCount;
 
     public SymbolTable() {
         symbolList = new Stack<>();
         symbolList.push(new HashMap<>());
-        identifierCount = 0;
+        argumentCount = 0;
+    }
+
+    public void setStartIdentifierCount(int identifierCount){
+        this.identifierCount = identifierCount;
     }
 
     public int getLevel() {
@@ -21,6 +26,7 @@ public class SymbolTable {
 
     public void openScope() {
         symbolList.push(new HashMap<>());
+        argumentCount =0;
     }
 
     public void closeScope() {
@@ -30,12 +36,20 @@ public class SymbolTable {
         symbolList.pop();
     }
 
-    public void addVariable(String id, Type type) {
-        symbolList.peek().put(id, new Variable(type, identifierCount++));
+    public void addVariable(String id, Type type, int identifier) {
+        symbolList.peek().put(id, new Variable(type, identifier));
     }
 
-    public void addVariables(Map<String, Type> variables) {
-        variables.forEach((id, type) -> addVariable(id, type));
+    public void addVariable(String id, Type type) {
+        addVariable(id, type, identifierCount++);
+    }
+
+    public void addArgumentVariables(Map<String, Type> variables) {
+        variables.forEach((id, type) -> addArgumentVariable(id, type));
+    }
+
+    private void addArgumentVariable(String id, Type type) {
+        addVariable(id, type, argumentCount++);
     }
 
     public void addType(String id, Type type) {
