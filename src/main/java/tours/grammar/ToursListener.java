@@ -211,30 +211,6 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code integerExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code integerExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code trueExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterTrueExpr(@NotNull ToursParser.TrueExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code trueExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitTrueExpr(@NotNull ToursParser.TrueExprContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code printExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -246,6 +222,30 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code identifierExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code identifierExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code falseExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterFalseExpression(@NotNull ToursParser.FalseExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code falseExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitFalseExpression(@NotNull ToursParser.FalseExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code booleanOrExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -283,6 +283,18 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitIfElseExpression(@NotNull ToursParser.IfElseExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code integerExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code integerExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code functionExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -294,18 +306,6 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code stringExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterStringExpr(@NotNull ToursParser.StringExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code stringExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitStringExpr(@NotNull ToursParser.StringExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code compareExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -343,17 +343,29 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitCompoundExpression(@NotNull ToursParser.CompoundExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code characterExpr}
+	 * Enter a parse tree produced by the {@code stringExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx);
+	void enterStringExpression(@NotNull ToursParser.StringExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code characterExpr}
+	 * Exit a parse tree produced by the {@code stringExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx);
+	void exitStringExpression(@NotNull ToursParser.StringExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code trueExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code trueExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code plusExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -367,17 +379,17 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code falseExpr}
+	 * Enter a parse tree produced by the {@code characterExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterFalseExpr(@NotNull ToursParser.FalseExprContext ctx);
+	void enterCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code falseExpr}
+	 * Exit a parse tree produced by the {@code characterExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitFalseExpr(@NotNull ToursParser.FalseExprContext ctx);
+	void exitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code parExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -402,18 +414,6 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInputExpression(@NotNull ToursParser.InputExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code identifierExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code identifierExpr}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code booleanAndExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -521,99 +521,99 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitVariableType(@NotNull ToursParser.VariableTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code intType}
+	 * Enter a parse tree produced by the {@code integerType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void enterIntType(@NotNull ToursParser.IntTypeContext ctx);
+	void enterIntegerType(@NotNull ToursParser.IntegerTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code intType}
+	 * Exit a parse tree produced by the {@code integerType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void exitIntType(@NotNull ToursParser.IntTypeContext ctx);
+	void exitIntegerType(@NotNull ToursParser.IntegerTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code boolType}
+	 * Enter a parse tree produced by the {@code booleanType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void enterBoolType(@NotNull ToursParser.BoolTypeContext ctx);
+	void enterBooleanType(@NotNull ToursParser.BooleanTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code boolType}
+	 * Exit a parse tree produced by the {@code booleanType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void exitBoolType(@NotNull ToursParser.BoolTypeContext ctx);
+	void exitBooleanType(@NotNull ToursParser.BooleanTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code charType}
+	 * Enter a parse tree produced by the {@code characterType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void enterCharType(@NotNull ToursParser.CharTypeContext ctx);
+	void enterCharacterType(@NotNull ToursParser.CharacterTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code charType}
+	 * Exit a parse tree produced by the {@code characterType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void exitCharType(@NotNull ToursParser.CharTypeContext ctx);
+	void exitCharacterType(@NotNull ToursParser.CharacterTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code strType}
+	 * Enter a parse tree produced by the {@code stringType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void enterStrType(@NotNull ToursParser.StrTypeContext ctx);
+	void enterStringType(@NotNull ToursParser.StringTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code strType}
+	 * Exit a parse tree produced by the {@code stringType}
 	 * labeled alternative in {@link ToursParser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
-	void exitStrType(@NotNull ToursParser.StrTypeContext ctx);
+	void exitStringType(@NotNull ToursParser.StringTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code intArrayType}
+	 * Enter a parse tree produced by the {@code integerArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void enterIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx);
+	void enterIntegerArrayType(@NotNull ToursParser.IntegerArrayTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code intArrayType}
+	 * Exit a parse tree produced by the {@code integerArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void exitIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx);
+	void exitIntegerArrayType(@NotNull ToursParser.IntegerArrayTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code boolArrayType}
+	 * Enter a parse tree produced by the {@code booleanArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void enterBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx);
+	void enterBooleanArrayType(@NotNull ToursParser.BooleanArrayTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code boolArrayType}
+	 * Exit a parse tree produced by the {@code booleanArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void exitBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx);
+	void exitBooleanArrayType(@NotNull ToursParser.BooleanArrayTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code charArrayType}
+	 * Enter a parse tree produced by the {@code characterArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void enterCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx);
+	void enterCharacterArrayType(@NotNull ToursParser.CharacterArrayTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code charArrayType}
+	 * Exit a parse tree produced by the {@code characterArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void exitCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx);
+	void exitCharacterArrayType(@NotNull ToursParser.CharacterArrayTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code strArrayType}
+	 * Enter a parse tree produced by the {@code stringArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void enterStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx);
+	void enterStringArrayType(@NotNull ToursParser.StringArrayTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code strArrayType}
+	 * Exit a parse tree produced by the {@code stringArrayType}
 	 * labeled alternative in {@link ToursParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void exitStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx);
+	void exitStringArrayType(@NotNull ToursParser.StringArrayTypeContext ctx);
 }

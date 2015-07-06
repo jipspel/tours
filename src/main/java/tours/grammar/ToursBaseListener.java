@@ -233,30 +233,6 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTrueExpr(@NotNull ToursParser.TrueExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTrueExpr(@NotNull ToursParser.TrueExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -264,6 +240,30 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFalseExpression(@NotNull ToursParser.FalseExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFalseExpression(@NotNull ToursParser.FalseExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -305,6 +305,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -312,18 +324,6 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStringExpr(@NotNull ToursParser.StringExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStringExpr(@NotNull ToursParser.StringExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -365,13 +365,25 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) { }
+	@Override public void enterStringExpression(@NotNull ToursParser.StringExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) { }
+	@Override public void exitStringExpression(@NotNull ToursParser.StringExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -389,13 +401,13 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFalseExpr(@NotNull ToursParser.FalseExprContext ctx) { }
+	@Override public void enterCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFalseExpr(@NotNull ToursParser.FalseExprContext ctx) { }
+	@Override public void exitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -420,18 +432,6 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -557,97 +557,97 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntType(@NotNull ToursParser.IntTypeContext ctx) { }
+	@Override public void enterIntegerType(@NotNull ToursParser.IntegerTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIntType(@NotNull ToursParser.IntTypeContext ctx) { }
+	@Override public void exitIntegerType(@NotNull ToursParser.IntegerTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBoolType(@NotNull ToursParser.BoolTypeContext ctx) { }
+	@Override public void enterBooleanType(@NotNull ToursParser.BooleanTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBoolType(@NotNull ToursParser.BoolTypeContext ctx) { }
+	@Override public void exitBooleanType(@NotNull ToursParser.BooleanTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCharType(@NotNull ToursParser.CharTypeContext ctx) { }
+	@Override public void enterCharacterType(@NotNull ToursParser.CharacterTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCharType(@NotNull ToursParser.CharTypeContext ctx) { }
+	@Override public void exitCharacterType(@NotNull ToursParser.CharacterTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStrType(@NotNull ToursParser.StrTypeContext ctx) { }
+	@Override public void enterStringType(@NotNull ToursParser.StringTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStrType(@NotNull ToursParser.StrTypeContext ctx) { }
+	@Override public void exitStringType(@NotNull ToursParser.StringTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx) { }
+	@Override public void enterIntegerArrayType(@NotNull ToursParser.IntegerArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx) { }
+	@Override public void exitIntegerArrayType(@NotNull ToursParser.IntegerArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx) { }
+	@Override public void enterBooleanArrayType(@NotNull ToursParser.BooleanArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx) { }
+	@Override public void exitBooleanArrayType(@NotNull ToursParser.BooleanArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx) { }
+	@Override public void enterCharacterArrayType(@NotNull ToursParser.CharacterArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx) { }
+	@Override public void exitCharacterArrayType(@NotNull ToursParser.CharacterArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx) { }
+	@Override public void enterStringArrayType(@NotNull ToursParser.StringArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx) { }
+	@Override public void exitStringArrayType(@NotNull ToursParser.StringArrayTypeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

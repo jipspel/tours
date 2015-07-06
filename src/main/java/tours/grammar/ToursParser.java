@@ -1,4 +1,4 @@
-// Generated from /Users/twancoenraad/Code/tours/src/main/java/tours/grammar/Tours.g4 by ANTLR 4.5
+// Generated from C:/Users/Jip/Documents/tours/src/main/java/tours/grammar\Tours.g4 by ANTLR 4.5
 package tours.grammar;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -1502,40 +1502,6 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class IntegerExprContext extends ExpressionContext {
-		public TerminalNode INT() { return getToken(ToursParser.INT, 0); }
-		public IntegerExprContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIntegerExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntegerExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntegerExpr(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class TrueExprContext extends ExpressionContext {
-		public TerminalNode TRUE() { return getToken(ToursParser.TRUE, 0); }
-		public TrueExprContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterTrueExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitTrueExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitTrueExpr(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class PrintExpressionContext extends ExpressionContext {
 		public TerminalNode PRINT() { return getToken(ToursParser.PRINT, 0); }
 		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
@@ -1555,6 +1521,40 @@ public class ToursParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitPrintExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IdentifierExpressionContext extends ExpressionContext {
+		public TerminalNode IDENTIFIER() { return getToken(ToursParser.IDENTIFIER, 0); }
+		public IdentifierExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIdentifierExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIdentifierExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIdentifierExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FalseExpressionContext extends ExpressionContext {
+		public TerminalNode FALSE() { return getToken(ToursParser.FALSE, 0); }
+		public FalseExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterFalseExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitFalseExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitFalseExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1635,6 +1635,23 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class IntegerExpressionContext extends ExpressionContext {
+		public TerminalNode INT() { return getToken(ToursParser.INT, 0); }
+		public IntegerExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIntegerExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntegerExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntegerExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class FunctionExpressionContext extends ExpressionContext {
 		public TerminalNode IDENTIFIER() { return getToken(ToursParser.IDENTIFIER, 0); }
 		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
@@ -1661,23 +1678,6 @@ public class ToursParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitFunctionExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class StringExprContext extends ExpressionContext {
-		public TerminalNode STR() { return getToken(ToursParser.STR, 0); }
-		public StringExprContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterStringExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStringExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStringExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1747,20 +1747,37 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class CharacterExprContext extends ExpressionContext {
-		public TerminalNode CHAR() { return getToken(ToursParser.CHAR, 0); }
-		public CharacterExprContext(ExpressionContext ctx) { copyFrom(ctx); }
+	public static class StringExpressionContext extends ExpressionContext {
+		public TerminalNode STR() { return getToken(ToursParser.STR, 0); }
+		public StringExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterCharacterExpr(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterStringExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharacterExpr(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStringExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharacterExpr(this);
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStringExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class TrueExpressionContext extends ExpressionContext {
+		public TerminalNode TRUE() { return getToken(ToursParser.TRUE, 0); }
+		public TrueExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterTrueExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitTrueExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitTrueExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1789,20 +1806,20 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class FalseExprContext extends ExpressionContext {
-		public TerminalNode FALSE() { return getToken(ToursParser.FALSE, 0); }
-		public FalseExprContext(ExpressionContext ctx) { copyFrom(ctx); }
+	public static class CharacterExpressionContext extends ExpressionContext {
+		public TerminalNode CHAR() { return getToken(ToursParser.CHAR, 0); }
+		public CharacterExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterFalseExpr(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterCharacterExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitFalseExpr(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharacterExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitFalseExpr(this);
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharacterExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1844,23 +1861,6 @@ public class ToursParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitInputExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class IdentifierExprContext extends ExpressionContext {
-		public TerminalNode IDENTIFIER() { return getToken(ToursParser.IDENTIFIER, 0); }
-		public IdentifierExprContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIdentifierExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIdentifierExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIdentifierExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2048,7 +2048,7 @@ public class ToursParser extends Parser {
 				break;
 			case 9:
 				{
-				_localctx = new IdentifierExprContext(_localctx);
+				_localctx = new IdentifierExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(281); 
@@ -2057,7 +2057,7 @@ public class ToursParser extends Parser {
 				break;
 			case 10:
 				{
-				_localctx = new CharacterExprContext(_localctx);
+				_localctx = new CharacterExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(282); 
@@ -2066,7 +2066,7 @@ public class ToursParser extends Parser {
 				break;
 			case 11:
 				{
-				_localctx = new StringExprContext(_localctx);
+				_localctx = new StringExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(283); 
@@ -2075,7 +2075,7 @@ public class ToursParser extends Parser {
 				break;
 			case 12:
 				{
-				_localctx = new IntegerExprContext(_localctx);
+				_localctx = new IntegerExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(284); 
@@ -2084,7 +2084,7 @@ public class ToursParser extends Parser {
 				break;
 			case 13:
 				{
-				_localctx = new TrueExprContext(_localctx);
+				_localctx = new TrueExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(285); 
@@ -2093,7 +2093,7 @@ public class ToursParser extends Parser {
 				break;
 			case 14:
 				{
-				_localctx = new FalseExprContext(_localctx);
+				_localctx = new FalseExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(286); 
@@ -2794,71 +2794,71 @@ public class ToursParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class CharTypeContext extends PrimitiveTypeContext {
-		public TerminalNode CHARACTER() { return getToken(ToursParser.CHARACTER, 0); }
-		public CharTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterCharType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class StrTypeContext extends PrimitiveTypeContext {
-		public TerminalNode STRING() { return getToken(ToursParser.STRING, 0); }
-		public StrTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterStrType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStrType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStrType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class IntTypeContext extends PrimitiveTypeContext {
-		public TerminalNode INTEGER() { return getToken(ToursParser.INTEGER, 0); }
-		public IntTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIntType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BoolTypeContext extends PrimitiveTypeContext {
+	public static class BooleanTypeContext extends PrimitiveTypeContext {
 		public TerminalNode BOOLEAN() { return getToken(ToursParser.BOOLEAN, 0); }
-		public BoolTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
+		public BooleanTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterBoolType(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterBooleanType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBoolType(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBooleanType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBoolType(this);
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBooleanType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class CharacterTypeContext extends PrimitiveTypeContext {
+		public TerminalNode CHARACTER() { return getToken(ToursParser.CHARACTER, 0); }
+		public CharacterTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterCharacterType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharacterType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharacterType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IntegerTypeContext extends PrimitiveTypeContext {
+		public TerminalNode INTEGER() { return getToken(ToursParser.INTEGER, 0); }
+		public IntegerTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIntegerType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntegerType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntegerType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class StringTypeContext extends PrimitiveTypeContext {
+		public TerminalNode STRING() { return getToken(ToursParser.STRING, 0); }
+		public StringTypeContext(PrimitiveTypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterStringType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStringType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStringType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2870,7 +2870,7 @@ public class ToursParser extends Parser {
 			setState(372);
 			switch (_input.LA(1)) {
 			case INTEGER:
-				_localctx = new IntTypeContext(_localctx);
+				_localctx = new IntegerTypeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(368); 
@@ -2878,7 +2878,7 @@ public class ToursParser extends Parser {
 				}
 				break;
 			case BOOLEAN:
-				_localctx = new BoolTypeContext(_localctx);
+				_localctx = new BooleanTypeContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(369); 
@@ -2886,7 +2886,7 @@ public class ToursParser extends Parser {
 				}
 				break;
 			case CHARACTER:
-				_localctx = new CharTypeContext(_localctx);
+				_localctx = new CharacterTypeContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(370); 
@@ -2894,7 +2894,7 @@ public class ToursParser extends Parser {
 				}
 				break;
 			case STRING:
-				_localctx = new StrTypeContext(_localctx);
+				_localctx = new StringTypeContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(371); 
@@ -2927,71 +2927,71 @@ public class ToursParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class BoolArrayTypeContext extends ArrayTypeContext {
+	public static class BooleanArrayTypeContext extends ArrayTypeContext {
 		public TerminalNode BOOLEAN_ARRAY() { return getToken(ToursParser.BOOLEAN_ARRAY, 0); }
-		public BoolArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
+		public BooleanArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterBoolArrayType(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterBooleanArrayType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBoolArrayType(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitBooleanArrayType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBoolArrayType(this);
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitBooleanArrayType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class StrArrayTypeContext extends ArrayTypeContext {
-		public TerminalNode STRING_ARRAY() { return getToken(ToursParser.STRING_ARRAY, 0); }
-		public StrArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterStrArrayType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStrArrayType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStrArrayType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class IntArrayTypeContext extends ArrayTypeContext {
-		public TerminalNode INTEGER_ARRAY() { return getToken(ToursParser.INTEGER_ARRAY, 0); }
-		public IntArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIntArrayType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntArrayType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntArrayType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class CharArrayTypeContext extends ArrayTypeContext {
+	public static class CharacterArrayTypeContext extends ArrayTypeContext {
 		public TerminalNode CHARACTER_ARRAY() { return getToken(ToursParser.CHARACTER_ARRAY, 0); }
-		public CharArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
+		public CharacterArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterCharArrayType(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterCharacterArrayType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharArrayType(this);
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitCharacterArrayType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharArrayType(this);
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitCharacterArrayType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class StringArrayTypeContext extends ArrayTypeContext {
+		public TerminalNode STRING_ARRAY() { return getToken(ToursParser.STRING_ARRAY, 0); }
+		public StringArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterStringArrayType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitStringArrayType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitStringArrayType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class IntegerArrayTypeContext extends ArrayTypeContext {
+		public TerminalNode INTEGER_ARRAY() { return getToken(ToursParser.INTEGER_ARRAY, 0); }
+		public IntegerArrayTypeContext(ArrayTypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterIntegerArrayType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitIntegerArrayType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitIntegerArrayType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3003,7 +3003,7 @@ public class ToursParser extends Parser {
 			setState(378);
 			switch (_input.LA(1)) {
 			case INTEGER_ARRAY:
-				_localctx = new IntArrayTypeContext(_localctx);
+				_localctx = new IntegerArrayTypeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(374); 
@@ -3011,7 +3011,7 @@ public class ToursParser extends Parser {
 				}
 				break;
 			case BOOLEAN_ARRAY:
-				_localctx = new BoolArrayTypeContext(_localctx);
+				_localctx = new BooleanArrayTypeContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(375); 
@@ -3019,7 +3019,7 @@ public class ToursParser extends Parser {
 				}
 				break;
 			case CHARACTER_ARRAY:
-				_localctx = new CharArrayTypeContext(_localctx);
+				_localctx = new CharacterArrayTypeContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(376); 
@@ -3027,7 +3027,7 @@ public class ToursParser extends Parser {
 				}
 				break;
 			case STRING_ARRAY:
-				_localctx = new StrArrayTypeContext(_localctx);
+				_localctx = new StringArrayTypeContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(377); 

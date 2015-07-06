@@ -497,7 +497,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) {
+    public ST visitIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx) {
       symbolTable.addType(ctx.getText(), Type.INTEGER);
 
         ST st = stGroup.getInstanceOf("bipush");
@@ -520,7 +520,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitTrueExpr(@NotNull ToursParser.TrueExprContext ctx) {
+    public ST visitTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx) {
         symbolTable.addType(ctx.getText(), Type.BOOLEAN);
         return stGroup.getInstanceOf("load_integer_1");
     }
@@ -546,7 +546,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitStringExpr(@NotNull ToursParser.StringExprContext ctx) {
+    public ST visitStringExpression(@NotNull ToursParser.StringExpressionContext ctx) {
         symbolTable.addType(ctx.getText(), Type.STRING);
 
         ST st = stGroup.getInstanceOf("load_constant");
@@ -631,7 +631,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) {
+    public ST visitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx) {
         symbolTable.addType(ctx.getText(), Type.CHARACTER);
 
         ST st = stGroup.getInstanceOf("bipush");
@@ -650,7 +650,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitFalseExpr(@NotNull ToursParser.FalseExprContext ctx) {
+    public ST visitFalseExpression(@NotNull ToursParser.FalseExpressionContext ctx) {
         symbolTable.addType(ctx.getText(), Type.BOOLEAN);
         return stGroup.getInstanceOf("load_integer_0");
     }
@@ -663,7 +663,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) {
+    public ST visitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx) {
         String type = symbolTable.getType(ctx.IDENTIFIER().getText()).toString();
         ST st = stGroup.getInstanceOf(String.format("load_identifier_%s", getTypeClass(type)));
 

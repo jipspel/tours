@@ -144,21 +144,21 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitTrueExpr(@NotNull ToursParser.TrueExprContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFalseExpression(@NotNull ToursParser.FalseExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -186,14 +186,14 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStringExpr(@NotNull ToursParser.StringExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -221,7 +221,14 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStringExpression(@NotNull ToursParser.StringExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -235,7 +242,7 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFalseExpr(@NotNull ToursParser.FalseExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -250,13 +257,6 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -333,54 +333,54 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntType(@NotNull ToursParser.IntTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerType(@NotNull ToursParser.IntegerTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBoolType(@NotNull ToursParser.BoolTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBooleanType(@NotNull ToursParser.BooleanTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCharType(@NotNull ToursParser.CharTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCharacterType(@NotNull ToursParser.CharacterTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStrType(@NotNull ToursParser.StrTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStringType(@NotNull ToursParser.StringTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntArrayType(@NotNull ToursParser.IntArrayTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerArrayType(@NotNull ToursParser.IntegerArrayTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBoolArrayType(@NotNull ToursParser.BoolArrayTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBooleanArrayType(@NotNull ToursParser.BooleanArrayTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCharArrayType(@NotNull ToursParser.CharArrayTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCharacterArrayType(@NotNull ToursParser.CharacterArrayTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStrArrayType(@NotNull ToursParser.StrArrayTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStringArrayType(@NotNull ToursParser.StringArrayTypeContext ctx) { return visitChildren(ctx); }
 }

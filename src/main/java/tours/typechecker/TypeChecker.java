@@ -251,17 +251,17 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitStringExpr(@NotNull ToursParser.StringExprContext ctx) {
+    public void exitStringExpression(@NotNull ToursParser.StringExpressionContext ctx) {
         symbolTable.addVariable(ctx.getText(), Type.STRING);
     }
 
     @Override
-    public void exitCharacterExpr(@NotNull ToursParser.CharacterExprContext ctx) {
+    public void exitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx) {
         symbolTable.addVariable(ctx.getText(), Type.CHARACTER);
     }
 
     @Override
-    public void exitTrueExpr(@NotNull ToursParser.TrueExprContext ctx) {
+    public void exitTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx) {
         symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
     }
 
@@ -327,7 +327,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitIntegerExpr(@NotNull ToursParser.IntegerExprContext ctx) {
+    public void exitIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx) {
         symbolTable.addVariable(ctx.getText(), Type.INTEGER);
     }
 
@@ -380,7 +380,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void enterFalseExpr(@NotNull ToursParser.FalseExprContext ctx) {
+    public void enterFalseExpression(@NotNull ToursParser.FalseExpressionContext ctx) {
         symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
     }
 
@@ -390,7 +390,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitIdentifierExpr(@NotNull ToursParser.IdentifierExprContext ctx) {
+    public void exitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx) {
         if (!symbolTable.contains(ctx.getText())) {
             errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         }
