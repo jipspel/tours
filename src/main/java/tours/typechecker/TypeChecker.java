@@ -254,7 +254,7 @@ public class TypeChecker extends ToursBaseListener {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         }
 
-        symbolTable.addType(ctx.getText(), symbolTable.getType(ctx.IDENTIFIER().getText()));
+        symbolTable.addType(ctx.getText(), new Type(symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType()));
     }
 
     @Override
