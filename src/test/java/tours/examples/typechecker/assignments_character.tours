@@ -1,3 +1,5 @@
-character x;
-x = 'a';
-character y = 'a';
+func void main() {
+    character x;
+    x = 'a';
+    character y = 'a';
+}

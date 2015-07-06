@@ -1,3 +1,5 @@
-boolean x;
-x = false;
-boolean y = true;
+func void main() {
+    boolean x;
+    x = false;
+    boolean y = true;
+}

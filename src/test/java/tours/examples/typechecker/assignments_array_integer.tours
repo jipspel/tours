@@ -1,3 +1,5 @@
-integer[] x = new integer[5];
-x[1] = 5;
-integer[] y = {1, 2, 3};
+func void main() {
+    integer[] x = new integer[5];
+    x[1] = 5;
+    integer[] y = {1, 2, 3};
+}

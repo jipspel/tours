@@ -1,10 +1,11 @@
-boolean b1 = if (true) { string t = "Hello";} else { string t = "World";};
-character c1 = if (true) { boolean a = false;} else { boolean a = true;};
-integer i1 = if (true) { character d = 'a';} else { character d = 'b';};
-string s1 = if (true) { integer j = 35;} else { integer j = 36;};
+func void main() {
+    boolean b1 = if (true) { string t = "Hello";} else { string t = "World";};
+    character c1 = if (true) { boolean a = false;} else { boolean a = true;};
+    integer i1 = if (true) { character d = 'a';} else { character d = 'b';};
+    string s1 = if (true) { integer j = 35;} else { integer j = 36;};
 
-boolean b2 = if (true) { boolean a = false;} else { character a = 'a';};
-character c2 = if (true) { character d = 'a';} else { integer d = 35;};
-integer i2 = if (true) { integer j = 35;} else { string j = "Hello";};
-string s2 = if (true) { string t = "Hello";} else { boolean t = false;};
-
+    boolean b2 = if (true) { boolean a = false;} else { character a = 'a';};
+    character c2 = if (true) { character d = 'a';} else { integer d = 35;};
+    integer i2 = if (true) { integer j = 35;} else { string j = "Hello";};
+    string s2 = if (true) { string t = "Hello";} else { boolean t = false;};
+}

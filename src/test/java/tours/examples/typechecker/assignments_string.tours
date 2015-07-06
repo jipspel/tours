@@ -1,3 +1,5 @@
-string x;
-x = "Hello";
-string y = "Hello";
+func void main() {
+    string x;
+    x = "Hello";
+    string y = "Hello";
+}

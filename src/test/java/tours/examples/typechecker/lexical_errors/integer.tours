@@ -1,1 +1,3 @@
-inteeger i;
+func void main() {
+    inteeger i;
+}

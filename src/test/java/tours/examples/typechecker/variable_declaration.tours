@@ -1,4 +1,6 @@
-integer x, y;
-character z;
-boolean a;
-string b;
+func void main() {
+    integer x, y;
+    character z;
+    boolean a;
+    string b;
+}

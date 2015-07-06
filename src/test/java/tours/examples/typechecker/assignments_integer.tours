@@ -1,3 +1,5 @@
-integer x;
-x = 35;
-integer y = 35;
+func void main() {
+    integer x;
+    x = 35;
+    integer y = 35;
+}

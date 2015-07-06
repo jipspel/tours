@@ -1,1 +1,3 @@
-characcter c;
+func void main() {
+    characcter c;
+}

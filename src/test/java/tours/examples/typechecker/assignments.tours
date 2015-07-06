@@ -1,9 +1,9 @@
-integer x;
-boolean y;
-character z;
-string a;
-
 func void main() {
+    integer x;
+    boolean y;
+    character z;
+    string a;
+
     x = 35;
     y = false;
     z = 'a';

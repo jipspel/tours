@@ -1,3 +1,5 @@
-character[] x = new character[5];
-x[1] = 'a';
-character[] y = {'a', 'b', 'c'};
+func void main() {
+    character[] x = new character[5];
+    x[1] = 'a';
+    character[] y = {'a', 'b', 'c'};
+}

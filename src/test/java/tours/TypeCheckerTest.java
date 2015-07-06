@@ -89,14 +89,14 @@ public class TypeCheckerTest {
     @Test
     public void testMismatchingTypesIfElse() {
         List<String> errors = Arrays.asList(
-                "Error <mismatching types> on line 1, pos 11",
-                "Error <mismatching types> on line 2, pos 13",
-                "Error <mismatching types> on line 3, pos 11",
-                "Error <mismatching types> on line 4, pos 10",
-                "Error <mismatching expression types> on line 6, pos 17",
-                "Error <mismatching expression types> on line 7, pos 19",
-                "Error <mismatching expression types> on line 8, pos 17",
-                "Error <mismatching expression types> on line 9, pos 16"
+                "Error <mismatching types> on line 2, pos 15",
+                "Error <mismatching types> on line 3, pos 17",
+                "Error <mismatching types> on line 4, pos 15",
+                "Error <mismatching types> on line 5, pos 14",
+                "Error <mismatching expression types> on line 7, pos 21",
+                "Error <mismatching expression types> on line 8, pos 23",
+                "Error <mismatching expression types> on line 9, pos 21",
+                "Error <mismatching expression types> on line 10, pos 20"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_if_else.tours");
     }

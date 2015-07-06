@@ -1,1 +1,3 @@
-booleaan b;
+func void main() {
+    booleaan b;
+}

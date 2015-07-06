@@ -1,1 +1,3 @@
-sstring s;
+func void main() {
+    sstring s;
+}
