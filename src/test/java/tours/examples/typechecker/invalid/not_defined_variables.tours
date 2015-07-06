@@ -1,9 +1,14 @@
-func main () {
+func main() {
     integer x;
     y = 35;
+    scope();
     z;
 }
 
 func integer addOne() {
     return x + 1;
+}
+
+func void scope() {
+    integer z = 3;
 }
