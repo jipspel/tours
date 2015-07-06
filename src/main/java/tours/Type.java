@@ -35,23 +35,23 @@ public class Type {
         this.type = type;
 
         if (type == ToursParser.BOOLEAN) {
-            properties = Arrays.asList("boolean", BOOLEAN_JAVA, null, "b", null);
+            properties = Arrays.asList("boolean", BOOLEAN_JAVA, null, "i", null, "boolean[]");
         } else if (type == ToursParser.BOOLEAN_ARRAY) {
-            properties = Arrays.asList("boolean[]", BOOLEAN_ARRAY_JAVA, "boolean", "b", "boolean");
+            properties = Arrays.asList("boolean[]", BOOLEAN_ARRAY_JAVA, "boolean", "b", "boolean", null);
         } else if (type == ToursParser.CHARACTER) {
-            properties = Arrays.asList("character", CHARACTER_JAVA, null, "c", null);
+            properties = Arrays.asList("character", CHARACTER_JAVA, null, "i", null, "character[]");
         } else if (type == ToursParser.CHARACTER_ARRAY) {
-            properties = Arrays.asList("character[]", CHARACTER_ARRAY_JAVA, "char", "c", "character");
+            properties = Arrays.asList("character[]", CHARACTER_ARRAY_JAVA, "char", "c", "character", null);
         } else if (type == ToursParser.INTEGER) {
-            properties = Arrays.asList("integer", INTEGER_JAVA, null, "i", null);
+            properties = Arrays.asList("integer", INTEGER_JAVA, null, "i", null, "integer[]");
         } else if (type == ToursParser.INTEGER_ARRAY) {
-            properties = Arrays.asList("integer[]", INTEGER_ARRAY_JAVA, "int", "i", "integer");
+            properties = Arrays.asList("integer[]", INTEGER_ARRAY_JAVA, "int", "i", "integer", null);
         } else if (type == ToursParser.STRING) {
-            properties = Arrays.asList("string", STRING_JAVA, null, "a", null);
+            properties = Arrays.asList("string", STRING_JAVA, null, "a", null, "string[]");
         } else if (type == ToursParser.STRING_ARRAY) {
-            properties = Arrays.asList("string[]", STRING_ARRAY_JAVA, "java/lang/String", "a", "string");
+            properties = Arrays.asList("string[]", STRING_ARRAY_JAVA, "java/lang/String", "a", "string", null);
         } else if (type == ToursParser.VOID) {
-            properties = Arrays.asList("void", VOID_JAVA, null, null, null);
+            properties = Arrays.asList("void", VOID_JAVA, null, null, null, null);
         } else {
             throw new UnsupportedOperationException("Type: " + type + " was undefined");
         }
@@ -122,7 +122,7 @@ public class Type {
      * required to build new arrays in Java bytecode
      * @return if type is array type, its string representation type, else null
      */
-    public String getArrayType() {
+    public String getNewArrayType() {
         return properties.get(2);
     }
 
@@ -141,4 +141,14 @@ public class Type {
     public String getPrimitiveType() {
         return properties.get(4);
     }
+
+
+    /**
+     * Returns the string representation of the array type of a primitive type
+     * @return if type is primitive type, its array type, else null
+     */
+    public String getArrayType() {
+        return properties.get(5);
+    }
+
 }

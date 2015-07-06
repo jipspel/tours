@@ -161,7 +161,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             symbolTable.addVariable(identifier.getText(), new Type(type));
 
-            ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", typeClass));
+            ST stVariable = stGroup.getInstanceOf("store_variable");
+            stVariable.add("store_type", symbolTable.getType(identifier.getText()).getPrefix());
             stVariable.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));
             stList.add(stVariable.render());
         }
@@ -199,7 +200,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
             symbolTable.addVariable(identifier.getText(), new Type(ctx.arrayType().getText()));
 
             stNewArray.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));
-            stNewArray.add("array_type", symbolTable.getType(identifier.getText()).getArrayType());
+            stNewArray.add("array_type", symbolTable.getType(identifier.getText()).getNewArrayType());
 
             stList.add(stNewArray.render());
         }
@@ -218,7 +219,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
             st.add("identifier_number", symbolTable.getIdentifier(ctx.IDENTIFIER().getText()));
             st.add("expression", visit(ctx.expression(0)).render());
-            st.add("store_type", symbolTable.getType(ctx.IDENTIFIER().getText()).equals(Type.STRING) ? "s" : "i");
+            st.add("store_type", symbolTable.getType(ctx.IDENTIFIER().getText()).getPrefix());
         } else {
             st = stGroup.getInstanceOf(String.format("assignment_array"));
 
@@ -298,10 +299,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         String returnString = symbolTable.getType(ctx.returnBlock().returnStatement().expression().getText()).equals(Type.STRING) ? "areturn" : "ireturn";
         st.add("return", returnString);
-
-
-
-
 
         symbolTable.closeScope();
         return st;
@@ -390,8 +387,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("reader_number", SCANNER_LOCATION);
 
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
-            ST stVariable = stGroup.getInstanceOf(String.format("variable_%s",
-                    getTypeClass(symbolTable.getType(identifier.getText()).toString())));
+            ST stVariable = stGroup.getInstanceOf("store_variable");
+            stVariable.add("store_type", symbolTable.getType(identifier.getText()).getPrefix());
             stVariable.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));
 
             stList.add(stVariable.render());
@@ -406,7 +403,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) {
         TerminalNode identifier = ctx.IDENTIFIER();
         ST st = stGroup.getInstanceOf(String.format("read_%s", symbolTable.getType(identifier.getText()).toString()));
-        ST stVariable = stGroup.getInstanceOf(String.format("variable_%s", getTypeClass(symbolTable.getType(identifier.getText()).toString())));
+        ST stVariable = stGroup.getInstanceOf("store_variable");
+        stVariable.add("store_type", symbolTable.getType(identifier.getText()).getPrefix());
         stVariable.add("identifier_number", symbolTable.getIdentifier(identifier.getText()));
 
         st.add("reader_number", SCANNER_LOCATION);
@@ -530,9 +528,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("identifier_number", symbolTable.getIdentifier(ctx.IDENTIFIER().getText()));
         st.add("expression", visit(ctx.expression()).render());
 
-        Type type = new Type(symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType());
-        st.add("load_type", type.getPrefix());
-        symbolTable.addType(ctx.getText(), type);
+        Type arrayType = symbolTable.getType(ctx.IDENTIFIER().getText());
+        Type primitiveType = new Type(arrayType.getPrimitiveType());
+        st.add("load_type", arrayType.getPrefix());
+        symbolTable.addType(ctx.getText(), primitiveType);
 
         return st;
     }
@@ -682,9 +681,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx) {
-        String type = symbolTable.getType(ctx.IDENTIFIER().getText()).toString();
-        ST st = stGroup.getInstanceOf(String.format("load_identifier_%s", getTypeClass(type)));
+        Type type = symbolTable.getType(ctx.IDENTIFIER().getText());
+        ST st = stGroup.getInstanceOf("load_identifier");
 
+        st.add("load_type", type.getPrefix());
         st.add("identifier_number", symbolTable.getIdentifier(ctx.getText()));
 
         return st;
@@ -718,7 +718,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
             ST stExpression = stGroup.getInstanceOf("assignment_array_initialisation");
             stExpression.add("index", i);
             stExpression.add("expressions", visit(ctx.expression(i)).render());
-            Type type = symbolTable.getType(ctx.expression(i).getText());
+            Type type = new Type(symbolTable.getType(ctx.expression(i).getText()).getArrayType());
             stExpression.add("store_type", type.getPrefix());
             expressions.add(stExpression.render());
         }
