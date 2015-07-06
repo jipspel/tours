@@ -1,7 +1,12 @@
 func main() {
     integer x = 2;
+    print(z);
 }
 
 func integer addOne() {
     return x + 1;
+}
+
+func void doSomething() {
+    integer z = 3;
 }

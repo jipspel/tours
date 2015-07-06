@@ -179,7 +179,8 @@ public class TypeCheckerTest {
     @Test
     public void testInvalidScopes() {
         List<String> errors = Arrays.asList(
-                "Error <variable not defined> on line 6, pos 11"
+                "Error <variable not defined> on line 3, pos 10",
+                "Error <variable not defined> on line 7, pos 11"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_scopes.tours");
     }
