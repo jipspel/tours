@@ -6,12 +6,7 @@ program: body;
 
 /** Body of a program. */
 body
-    : (variableDeclaration | variableAssignment SEMI | function)*
-    ;
-
-/** Variable declaration block. */
-variableDeclaration
-    : (variable SEMI)+
+    : function*
     ;
 
 /** Variable declaration. */

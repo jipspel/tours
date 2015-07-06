@@ -91,14 +91,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("locals_limit", 100);
         st.add("stack_limit", 35);
 
-        ST variables = stGroup.getInstanceOf("concatenator");
-        List<String> header = new ArrayList<>();
-        ctx.body().variableDeclaration().stream().forEach(variableDeclaration ->
-                header.add(visit(variableDeclaration).render()));
-        ctx.body().variableAssignment().stream().forEach(variableAssignment ->
-                header.add(visit(variableAssignment).render()));
-        st.add("header", header);
-
         List<String> functions = new ArrayList<>();
         for (ToursParser.FunctionContext function : ctx.body().function()) {
             if (function instanceof ToursParser.VoidFunctionContext &&
@@ -128,11 +120,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitBody(@NotNull ToursParser.BodyContext ctx) {
-        return concatenate(ctx);
-    }
-
-    @Override
-    public ST visitVariableDeclaration(@NotNull ToursParser.VariableDeclarationContext ctx) {
         return concatenate(ctx);
     }
 
