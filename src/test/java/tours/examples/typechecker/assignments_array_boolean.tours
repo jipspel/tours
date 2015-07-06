@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     boolean[] x = new boolean[5];
     x[1] = false;
     boolean[] y = { true, true, false };

@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     integer x;
     character y;
     string z;

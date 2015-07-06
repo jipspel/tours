@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     boolean b1, b2;
     character c1, c2;
     integer i1, i2;

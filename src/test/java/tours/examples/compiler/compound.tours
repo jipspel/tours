@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     integer x = {
         integer y = 30;
         print(y);

@@ -93,14 +93,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         List<String> functions = new ArrayList<>();
         for (ToursParser.FunctionContext function : ctx.body().function()) {
-            if (function instanceof ToursParser.VoidFunctionContext &&
-                    ((ToursParser.VoidFunctionContext) function).IDENTIFIER(0).getText().toLowerCase().equals("main")) {
-                st.add("main", visit(function).render());
-            } else {
-                functions.add(visit(function).render());
-            }
+            functions.add(visit(function).render());
+
         }
         st.add("functions", functions);
+
+        st.add("main", visit(ctx.body().mainFunction()).render());
 
         return st;
     }
@@ -285,6 +283,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         symbolTable.closeScope();
         return st;
+    }
+
+    @Override
+    public ST visitMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
+        return concatenate(ctx.block());
     }
 
     @Override

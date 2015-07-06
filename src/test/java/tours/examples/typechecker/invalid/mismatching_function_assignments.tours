@@ -5,7 +5,7 @@ func integer next_number(integer i) {
 func void do_nothing() {
 }
 
-func void main() {
+func main() {
     string s = next_number(5);
     integer i = do_nothing();
 }

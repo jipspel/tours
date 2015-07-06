@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     print(true, false);
     print("35", "36");
     print('a', 'b');

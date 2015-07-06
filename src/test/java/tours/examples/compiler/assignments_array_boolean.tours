@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     boolean[] b1 = {true, false};
     print(b1[0], b1[1]);
 

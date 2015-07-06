@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     string x;
     x = "Hello";
     string y = "Hello";

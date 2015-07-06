@@ -58,6 +58,12 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ToursParser#mainFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMainFunction(@NotNull ToursParser.MainFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ToursParser#block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

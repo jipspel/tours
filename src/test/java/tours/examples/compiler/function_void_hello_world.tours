@@ -2,6 +2,6 @@ func void awesome_print(string s) {
     print(s);
 }
 
-func void main() {
+func main() {
     awesome_print("Hello World!");
 }

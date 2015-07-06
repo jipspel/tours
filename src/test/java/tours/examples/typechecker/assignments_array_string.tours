@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     string[] x = new string[5];
     x[1] = "aa";
     string[] y = {"aa", "bb", "cc"};

@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     integer x = 35;
     if (x != 35 ) {
         x = 35

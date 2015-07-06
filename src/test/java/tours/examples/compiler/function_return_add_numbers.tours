@@ -3,7 +3,7 @@ func integer add_numbers( integer i, integer j) {
     return i + j;
 }
 
-func void main() {
+func main() {
     integer x = add_numbers(33, 2);
     print("Sum: ", x);
 }

@@ -2,7 +2,7 @@ func void addToZ(integer z) {
     z = z + 1;
 }
 
-func void main() {
+func main() {
     integer x = 36;
     integer y = {
         integer x = 35;

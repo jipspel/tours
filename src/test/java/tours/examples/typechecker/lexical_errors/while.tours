@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     integer x;
     wHhile (x != 35) {
         x = x + 1;

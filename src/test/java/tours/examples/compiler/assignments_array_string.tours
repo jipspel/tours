@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     string[] s1 = {"35", "36"};
     print(s1[0], s1[1]);
 

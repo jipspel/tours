@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     String x = "35";
     String y;
     y = "36";

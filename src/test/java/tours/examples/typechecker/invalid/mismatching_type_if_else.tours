@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     boolean b1 = if (true) { string t = "Hello";} else { string t = "World";};
     character c1 = if (true) { boolean a = false;} else { boolean a = true;};
     integer i1 = if (true) { character d = 'a';} else { character d = 'b';};

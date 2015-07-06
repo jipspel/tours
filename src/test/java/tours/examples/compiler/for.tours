@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     integer i = 0;
     for (integer x = 1; x <= 35; x = x + 1) {
         i = i + 1;

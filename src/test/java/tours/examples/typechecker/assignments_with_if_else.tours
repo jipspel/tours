@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     boolean b = if (true) { boolean a = false;} else { boolean a = true;};
     character c = if (true) { character d = 'a';} else { character d = 'b';};
     integer i = if (true) { integer j = 35;} else { integer j = 36;};

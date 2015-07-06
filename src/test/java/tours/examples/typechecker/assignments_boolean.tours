@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     boolean x;
     x = false;
     boolean y = true;

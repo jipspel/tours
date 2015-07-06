@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     integer x = 32;
 
     while (x < 35) {

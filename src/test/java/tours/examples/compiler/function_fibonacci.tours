@@ -8,6 +8,6 @@ func integer fibonacci(integer i) {
     return result;
 }
 
-func void main() {
+func main() {
     print(fibonacci(6));
 }

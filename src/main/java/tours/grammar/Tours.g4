@@ -6,7 +6,7 @@ program: body;
 
 /** Body of a program. */
 body
-    : function*
+    : function* mainFunction?
     ;
 
 /** Variable declaration. */
@@ -26,6 +26,11 @@ variableAssignment
 function
     : FUNC VOID IDENTIFIER LPAR ((variableType IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR block                    #voidFunction
     | FUNC variableType  IDENTIFIER LPAR ((variableType  IDENTIFIER COMMA)* (variableType IDENTIFIER))? RPAR returnBlock    #returnFunction
+    ;
+
+/** Main functino */
+mainFunction
+    : FUNC MAIN LPAR RPAR block
     ;
 
 /** Grouped sequence of statements. */
@@ -135,6 +140,7 @@ IF:                 I F ;
 INPUT:              I N P U T ;
 INTEGER:            I N T E G E R ;
 INTEGER_ARRAY:      I N T E G E R LBLOCK RBLOCK ;
+MAIN:               M A I N ;
 NEW :               N E W ;
 PRINT:              P R I N T ;
 PROGRAM:            P R O G R A M ;

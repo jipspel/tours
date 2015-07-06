@@ -159,6 +159,16 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
+    public void enterMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
+         symbolTable.openScope();
+    }
+
+    @Override
+    public void exitMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
+        symbolTable.closeScope();
+    }
+
+    @Override
     public void exitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
         String returnExpression = ctx.returnBlock().returnStatement().expression().getText();
         String identifier = ctx.IDENTIFIER(0).getText();

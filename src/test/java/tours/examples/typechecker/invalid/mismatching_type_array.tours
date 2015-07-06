@@ -1,4 +1,4 @@
-func void main() {
+func main() {
     boolean[] b = new boolean[5];
     b[0] = 'a';
     character[] c = new character[5];
