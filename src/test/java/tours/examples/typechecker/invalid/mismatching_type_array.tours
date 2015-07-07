@@ -1,18 +1,34 @@
 func main() {
     boolean[] b = new boolean[5];
+    b[0] = 35;
+    b[0] = "35";
     b[0] = 'a';
     character[] c = new character[5];
-    c[0] = 5;
+    c[0] = 35;
+    c[0] = "35";
+    c[0] = true;
     integer[] i = new integer[5];
-    i[0] = "Hello";
+    i[0] = "35";
+    i[0] = 'a';
+    i[0] = true;
     string[] s = new string[5];
-    s[0] = false;
+    s[0] = 35;
+    s[0] = 'a';
+    s[0] = true;
 
-    boolean[] e = { true, 35 };
-    character[] f = { 'a', 35 };
-    integer[] g = { 35, "35" };
-    string[] h = { "35", 35 };
+    boolean[] e = { 35, "35", 'a' };
+    character[] f = { true, 35, "35" };
+    integer[] g = { true, "35", 'a' };
+    string[] h = { true, 35, 'a' };
 
-    boolean[] j = new boolean[5];
-    j[false] = false;
+    b["35"] = false;
+    b['3'] = false;
+    b[false] = false;
+    b["35"];
+    b['3'];
+    b[false];
+
+    boolean[] j = new boolean["35"];
+    boolean[] k = new boolean['3'];
+    boolean[] l = new boolean[true];
 }

@@ -82,14 +82,38 @@ public class TypeCheckerTest {
     public void testMismatchingTypesArrays() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 3, pos 9",
+                "Error <mismatching types> on line 4, pos 9",
                 "Error <mismatching types> on line 5, pos 9",
                 "Error <mismatching types> on line 7, pos 9",
+                "Error <mismatching types> on line 8, pos 9",
                 "Error <mismatching types> on line 9, pos 9",
-                "Error <mismatching array types> on line 11, pos 20",
-                "Error <mismatching array types> on line 12, pos 22",
-                "Error <mismatching array types> on line 13, pos 20",
-                "Error <mismatching array types> on line 14, pos 19",
-                "Error <expected integer> on line 17, pos 6"
+                "Error <mismatching types> on line 11, pos 9",
+                "Error <mismatching types> on line 12, pos 9",
+                "Error <mismatching types> on line 13, pos 9",
+                "Error <mismatching types> on line 15, pos 9",
+                "Error <mismatching types> on line 16, pos 9",
+                "Error <mismatching types> on line 17, pos 9",
+                "Error <mismatching array types> on line 19, pos 20",
+                "Error <mismatching array types> on line 19, pos 20",
+                "Error <mismatching types> on line 19, pos 16",
+                "Error <mismatching array types> on line 20, pos 22",
+                "Error <mismatching array types> on line 20, pos 22",
+                "Error <mismatching types> on line 20, pos 18",
+                "Error <mismatching array types> on line 21, pos 20",
+                "Error <mismatching array types> on line 21, pos 20",
+                "Error <mismatching types> on line 21, pos 16",
+                "Error <mismatching array types> on line 22, pos 19",
+                "Error <mismatching array types> on line 22, pos 19",
+                "Error <mismatching types> on line 22, pos 15",
+                "Error <expected integer> on line 24, pos 6",
+                "Error <expected integer> on line 25, pos 6",
+                "Error <expected integer> on line 26, pos 6",
+                "Error <expected integer> on line 27, pos 6",
+                "Error <expected integer> on line 28, pos 6",
+                "Error <expected integer> on line 29, pos 6",
+                "Error <expected integer> on line 31, pos 30",
+                "Error <expected integer> on line 32, pos 30",
+                "Error <expected integer> on line 33, pos 30"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_array.tours");
     }
