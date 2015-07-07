@@ -106,19 +106,18 @@ public class GrammarTest {
         assertEquals("(program (voidFunction func void awesome_print ( (variableType (primitiveType string)) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (returnFunction func (variableType (primitiveType integer)) next_number ( (variableType (primitiveType integer)) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions_primitive_type.tours"));
 
-        assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (primitiveType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (block { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) })))",
+        assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (primitiveType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (compound { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/statement_for_single.tours"));
 
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) x = (expression 35)) ; (variable (primitiveType integer) y = (expression 35)) ; (conditionalStatement if ( (expression (expression x) (compareOperator ==) (expression 35)) ) (compound { (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ; }) else (compound { (statement (variableAssignment y = (expression 36))) ; })) })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/statement_if.tours"));
 
-        assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) x) ; (conditionalStatement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (block { (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ; })) })))",
+        assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) x) ; (conditionalStatement while ( (expression (expression x) (compareOperator !=) (expression 35)) ) (compound { (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ; })) })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/statement_while.tours"));
 
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) x , y) ; (variable (primitiveType character) z) ; (variable (primitiveType boolean) a) ; (variable (primitiveType string) b) ; })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/variable_declaration.tours"));
     }
-
 
     @Test
     public void testMissingAssignment() throws IOException {

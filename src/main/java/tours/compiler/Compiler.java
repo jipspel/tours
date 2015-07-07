@@ -475,7 +475,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         ST st = stGroup.getInstanceOf("while");
         st.add("expression", visit(ctx.expression()).render());
-        st.add("block_while", visit(ctx.block()).render());
+        st.add("block_while", visit(ctx.compound()).render());
         st.add("label_number", labelCount);
 
         symbolTable.closeScope();
@@ -495,7 +495,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
                         visit(ctx.statement(0)).render() : "");
         st.add("termination", visit(ctx.expression()).render());
         st.add("increment", visit(ctx.statement(ctx.statement().size() - 1)).render());
-        st.add("block_for", visit(ctx.block()).render());
+        st.add("block_for", visit(ctx.compound()).render());
 
         symbolTable.closeScope();
 

@@ -1181,8 +1181,8 @@ public class ToursParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
+		public CompoundContext compound() {
+			return getRuleContext(CompoundContext.class,0);
 		}
 		public WhileStatementContext(ConditionalStatementContext ctx) { copyFrom(ctx); }
 		@Override
@@ -1216,8 +1216,8 @@ public class ToursParser extends Parser {
 			return getRuleContext(StatementContext.class,i);
 		}
 		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
+		public CompoundContext compound() {
+			return getRuleContext(CompoundContext.class,0);
 		}
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
@@ -1314,7 +1314,7 @@ public class ToursParser extends Parser {
 				setState(218); 
 				match(RPAR);
 				setState(219); 
-				block();
+				compound();
 				}
 				break;
 			case FOR:
@@ -1364,7 +1364,7 @@ public class ToursParser extends Parser {
 				setState(231); 
 				match(RPAR);
 				setState(232); 
-				block();
+				compound();
 				}
 				break;
 			default:
@@ -3144,26 +3144,26 @@ public class ToursParser extends Parser {
 		"\7)\2\2\u00d2\u00d3\5\30\r\2\u00d3\u00d4\7\63\2\2\u00d4\u00d7\5\32\16"+
 		"\2\u00d5\u00d6\7\b\2\2\u00d6\u00d8\5\32\16\2\u00d7\u00d5\3\2\2\2\u00d7"+
 		"\u00d8\3\2\2\2\u00d8\u00ed\3\2\2\2\u00d9\u00da\7\34\2\2\u00da\u00db\7"+
-		")\2\2\u00db\u00dc\5\30\r\2\u00dc\u00dd\7\63\2\2\u00dd\u00de\5\16\b\2\u00de"+
-		"\u00ed\3\2\2\2\u00df\u00e0\7\f\2\2\u00e0\u00e3\7)\2\2\u00e1\u00e4\5\4"+
-		"\3\2\u00e2\u00e4\5\22\n\2\u00e3\u00e1\3\2\2\2\u00e3\u00e2\3\2\2\2\u00e3"+
-		"\u00e4\3\2\2\2\u00e4\u00e5\3\2\2\2\u00e5\u00e6\7\64\2\2\u00e6\u00e7\5"+
-		"\30\r\2\u00e7\u00e8\7\64\2\2\u00e8\u00e9\5\22\n\2\u00e9\u00ea\7\63\2\2"+
-		"\u00ea\u00eb\5\16\b\2\u00eb\u00ed\3\2\2\2\u00ec\u00d0\3\2\2\2\u00ec\u00d9"+
-		"\3\2\2\2\u00ec\u00df\3\2\2\2\u00ed\25\3\2\2\2\u00ee\u00ef\7\27\2\2\u00ef"+
-		"\u00f0\5\30\r\2\u00f0\27\3\2\2\2\u00f1\u00f2\b\r\1\2\u00f2\u00f3\5\36"+
-		"\20\2\u00f3\u00f4\5\30\r\25\u00f4\u0128\3\2\2\2\u00f5\u00f6\7)\2\2\u00f6"+
-		"\u00f7\5\30\r\2\u00f7\u00f8\7\63\2\2\u00f8\u0128\3\2\2\2\u00f9\u0128\5"+
-		"\32\16\2\u00fa\u00fb\7\16\2\2\u00fb\u00fc\7)\2\2\u00fc\u00fd\5\30\r\2"+
-		"\u00fd\u00fe\7\63\2\2\u00fe\u00ff\5\32\16\2\u00ff\u0100\7\b\2\2\u0100"+
-		"\u0101\5\32\16\2\u0101\u0128\3\2\2\2\u0102\u0103\7\17\2\2\u0103\u0104"+
-		"\7)\2\2\u0104\u0105\79\2\2\u0105\u0128\7\63\2\2\u0106\u0107\7\25\2\2\u0107"+
-		"\u0108\7)\2\2\u0108\u0109\5\30\r\2\u0109\u010a\7\63\2\2\u010a\u0128\3"+
-		"\2\2\2\u010b\u010c\79\2\2\u010c\u010d\7\'\2\2\u010d\u010e\5\30\r\2\u010e"+
-		"\u010f\7\61\2\2\u010f\u0128\3\2\2\2\u0110\u0111\79\2\2\u0111\u0112\7!"+
-		"\2\2\u0112\u0128\7\22\2\2\u0113\u0114\79\2\2\u0114\u011e\7)\2\2\u0115"+
-		"\u0116\5\30\r\2\u0116\u0117\7 \2\2\u0117\u0119\3\2\2\2\u0118\u0115\3\2"+
-		"\2\2\u0119\u011c\3\2\2\2\u011a\u0118\3\2\2\2\u011a\u011b\3\2\2\2\u011b"+
+		")\2\2\u00db\u00dc\5\30\r\2\u00dc\u00dd\7\63\2\2\u00dd\u00de\5\32\16\2"+
+		"\u00de\u00ed\3\2\2\2\u00df\u00e0\7\f\2\2\u00e0\u00e3\7)\2\2\u00e1\u00e4"+
+		"\5\4\3\2\u00e2\u00e4\5\22\n\2\u00e3\u00e1\3\2\2\2\u00e3\u00e2\3\2\2\2"+
+		"\u00e3\u00e4\3\2\2\2\u00e4\u00e5\3\2\2\2\u00e5\u00e6\7\64\2\2\u00e6\u00e7"+
+		"\5\30\r\2\u00e7\u00e8\7\64\2\2\u00e8\u00e9\5\22\n\2\u00e9\u00ea\7\63\2"+
+		"\2\u00ea\u00eb\5\32\16\2\u00eb\u00ed\3\2\2\2\u00ec\u00d0\3\2\2\2\u00ec"+
+		"\u00d9\3\2\2\2\u00ec\u00df\3\2\2\2\u00ed\25\3\2\2\2\u00ee\u00ef\7\27\2"+
+		"\2\u00ef\u00f0\5\30\r\2\u00f0\27\3\2\2\2\u00f1\u00f2\b\r\1\2\u00f2\u00f3"+
+		"\5\36\20\2\u00f3\u00f4\5\30\r\25\u00f4\u0128\3\2\2\2\u00f5\u00f6\7)\2"+
+		"\2\u00f6\u00f7\5\30\r\2\u00f7\u00f8\7\63\2\2\u00f8\u0128\3\2\2\2\u00f9"+
+		"\u0128\5\32\16\2\u00fa\u00fb\7\16\2\2\u00fb\u00fc\7)\2\2\u00fc\u00fd\5"+
+		"\30\r\2\u00fd\u00fe\7\63\2\2\u00fe\u00ff\5\32\16\2\u00ff\u0100\7\b\2\2"+
+		"\u0100\u0101\5\32\16\2\u0101\u0128\3\2\2\2\u0102\u0103\7\17\2\2\u0103"+
+		"\u0104\7)\2\2\u0104\u0105\79\2\2\u0105\u0128\7\63\2\2\u0106\u0107\7\25"+
+		"\2\2\u0107\u0108\7)\2\2\u0108\u0109\5\30\r\2\u0109\u010a\7\63\2\2\u010a"+
+		"\u0128\3\2\2\2\u010b\u010c\79\2\2\u010c\u010d\7\'\2\2\u010d\u010e\5\30"+
+		"\r\2\u010e\u010f\7\61\2\2\u010f\u0128\3\2\2\2\u0110\u0111\79\2\2\u0111"+
+		"\u0112\7!\2\2\u0112\u0128\7\22\2\2\u0113\u0114\79\2\2\u0114\u011e\7)\2"+
+		"\2\u0115\u0116\5\30\r\2\u0116\u0117\7 \2\2\u0117\u0119\3\2\2\2\u0118\u0115"+
+		"\3\2\2\2\u0119\u011c\3\2\2\2\u011a\u0118\3\2\2\2\u011a\u011b\3\2\2\2\u011b"+
 		"\u011d\3\2\2\2\u011c\u011a\3\2\2\2\u011d\u011f\5\30\r\2\u011e\u011a\3"+
 		"\2\2\2\u011e\u011f\3\2\2\2\u011f\u0120\3\2\2\2\u0120\u0128\7\63\2\2\u0121"+
 		"\u0128\79\2\2\u0122\u0128\7<\2\2\u0123\u0128\7;\2\2\u0124\u0128\7:\2\2"+
