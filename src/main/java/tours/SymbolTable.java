@@ -76,7 +76,7 @@ public class SymbolTable {
      * @param variables map with the identifier and the type of the arguments
      */
     public void addArgumentVariables(Map<String, Type> variables) {
-        variables.forEach((id, type) -> addVariable(id, type));
+        variables.forEach(this::addVariable);
     }
 
 
@@ -124,47 +124,20 @@ public class SymbolTable {
         return false;
     }
 
-    /**
-     * Returns the type of the identifier
-     * @param id the identifier of the variable or function
-     * @return if the symbol table contains the id, its type else null
-     */
     public Type getType(String id) {
+        Symbol type = getSymbol(id);
+        return (type != null) ? getSymbol(id).getType() : null;
+    }
+
+    public Symbol getSymbol(String id) {
         for (int i = getLevel(); i >= 0; i--) {
             if (symbolList.get(i).containsKey(id)) {
-                return symbolList.get(i).get(id).getType();
+                return symbolList.get(i).get(id);
             }
         }
         return null;
     }
 
-    /**
-     * Returns the identifier number of the identifier
-     * @param id the identifier of the variable
-     * @return if the symbol table contains the id, its identifier number else -1
-     */
-    public int getIdentifier(String id) {
-        for (int i = getLevel(); i >= 0; i--) {
-            if (symbolList.get(i).containsKey(id)) {
-                return ((Variable) symbolList.get(i).get(id)).getIdentifier();
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Returns the list of argument types of the identifier
-     * @param id the identifier of the function
-     * @return if the symbol table contains the id, its list with argument types else null
-     */
-    public List<Type> getArgumentTypes(String id) {
-        for (int i = getLevel(); i >= 0; i--) {
-            if (symbolList.get(i).containsKey(id)) {
-                return ((Function) symbolList.get(i).get(id)).getArgumentTypes();
-            }
-        }
-        return null;
-    }
 
     public abstract class Symbol {
         protected Type type = null;
