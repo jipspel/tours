@@ -82,6 +82,9 @@ public class GrammarTest {
 
     @Test
     public void testValidExamples() throws IOException {
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/array_length.tours");
+        assertEquals(0, errorList.size());
+
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/functions_primitive_type.tours");
         assertEquals(0, errorList.size());
 
@@ -96,6 +99,9 @@ public class GrammarTest {
 
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/variable_declaration.tours");
         assertEquals(0, errorList.size());
+
+        assertEquals("(program (mainFunction func main ( ) (block { (variable (arrayType boolean[]) b = (arrayAssignment new (primitiveType boolean) [ (expression 35) ])) ; (statement print ( (expression b . length) )) ; (variable (arrayType character[]) c = (arrayAssignment new (primitiveType character) [ (expression 36) ])) ; (statement print ( (expression c . length) )) ; (variable (arrayType integer[]) i = (arrayAssignment new (primitiveType integer) [ (expression 37) ])) ; (statement print ( (expression i . length) )) ; (variable (arrayType string[]) s = (arrayAssignment new (primitiveType string) [ (expression 38) ])) ; (statement print ( (expression s . length) )) ; })))",
+                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/array_length.tours"));
 
         assertEquals("(program (voidFunction func void awesome_print ( (variableType (primitiveType string)) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (returnFunction func (variableType (primitiveType integer)) next_number ( (variableType (primitiveType integer)) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions_primitive_type.tours"));
