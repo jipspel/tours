@@ -1,0 +1,13 @@
+func main() {
+    boolean[] b = new boolean[35];
+    print(b.length);
+
+    character[] c = new character[36];
+    print(c.length);
+
+    integer[] i = new integer[37];
+    print(i.length);
+
+    string[] s = new string[38];
+    print(s.length);
+}

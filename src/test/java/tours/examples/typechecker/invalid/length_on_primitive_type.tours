@@ -1,0 +1,13 @@
+func main() {
+    boolean b = false;
+    print(b.length);
+
+    character c = 'a';
+    print(c.length);
+
+    integer i = 35;
+    print(i.length);
+
+    string s = "36";
+    print(s.length);
+}

@@ -1,0 +1,10 @@
+func main() {
+    boolean[] b1 = new boolean[35];
+    boolean b2 = b1.length;
+
+    character[] c1 = new character[36];
+    character c2 = c1.length;
+
+    string[] s1 = new string[38];
+    string s2 = s1.length;
+}

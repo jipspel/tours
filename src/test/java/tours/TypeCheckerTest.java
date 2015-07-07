@@ -50,6 +50,7 @@ public class TypeCheckerTest {
 
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_if_else.tours");
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/assignments_compound.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/array_length.tours");
     }
 
     @Test
@@ -91,6 +92,16 @@ public class TypeCheckerTest {
                 "Error <expected integer> on line 22, pos 6"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_array.tours");
+    }
+
+    @Test
+    public void testMismatchingTypesArrayLength() {
+        List<String> errors = Arrays.asList(
+                "Error <mismatching types> on line 3, pos 15",
+                "Error <mismatching types> on line 6, pos 17",
+                "Error <mismatching types> on line 9, pos 14"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_array_length.tours");
     }
 
     @Test
@@ -223,6 +234,16 @@ public class TypeCheckerTest {
                 "Error <mismatching types> on line 8, pos 4"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_types_comparison_expressions.tours");
+    }
+
+    @Test
+    public void testLengthOnPrimitiveType() {
+        List<String> errors = Arrays.asList("Error <expected array> on line 3, pos 10",
+                "Error <expected array> on line 6, pos 10",
+                "Error <expected array> on line 9, pos 10",
+                "Error <expected array> on line 12, pos 10"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/length_on_primitive_type.tours");
     }
 
     private void testTypeCheckerErrors(List<String> expected, String filename) {

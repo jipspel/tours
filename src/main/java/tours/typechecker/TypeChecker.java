@@ -383,7 +383,7 @@ public class TypeChecker extends ToursBaseListener {
     @Override
     public void exitFunctionExpression(@NotNull ToursParser.FunctionExpressionContext ctx) {
         if (!symbolTable.contains(ctx.IDENTIFIER().getText())) {
-            errors.add(String.format("Error <function not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
+            errors.add(String.format("Error <function not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(), ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         }
     }
 
@@ -405,6 +405,17 @@ public class TypeChecker extends ToursBaseListener {
             symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
 
         }
+    }
+
+    @Override public void exitArrayLengthExpression(@NotNull ToursParser.ArrayLengthExpressionContext ctx) {
+        Type type = symbolTable.getType(ctx.IDENTIFIER().getText());
+        if (type != null && !(type.equals(Type.BOOLEAN_ARRAY) || type.equals(Type.CHARACTER_ARRAY) ||
+                type.equals(Type.INTEGER_ARRAY) || type.equals(Type.STRING_ARRAY))) {
+            errors.add(String.format("Error <expected array> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(), ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
+        }
+
+        symbolTable.addType(ctx.getText(), Type.INTEGER);
+
     }
 
     @Override
