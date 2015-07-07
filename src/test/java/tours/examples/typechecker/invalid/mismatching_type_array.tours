@@ -2,21 +2,16 @@ func main() {
     boolean[] b = new boolean[5];
     b[0] = 'a';
     character[] c = new character[5];
-    c[1] = 5;
+    c[0] = 5;
     integer[] i = new integer[5];
-    i[2] = "Hello";
+    i[0] = "Hello";
     string[] s = new string[5];
-    s[3] = false;
+    s[0] = false;
 
-    boolean p = c[0];
-    character q = i[0];
-    integer r = s[0];
-    string t = b[0];
-
-    boolean[] e = new character[5];
-    character[] f = new integer[5];
-    integer[] g = new string[5];
-    string[] h = new boolean[5];
+    boolean[] e = { true, 35 };
+    character[] f = { 'a', 35 };
+    integer[] g = { 35, "35" };
+    string[] h = { "35", 35 };
 
     boolean[] j = new boolean[5];
     j[false] = false;
