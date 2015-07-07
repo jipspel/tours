@@ -1,5 +1,6 @@
 package tours.typechecker;
 
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import tours.SymbolTable;
@@ -102,24 +103,24 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
-        String identifier = ctx.IDENTIFIER().getText();
-        List<ToursParser.ExpressionContext> expressions = ctx.expression();
-        String expression = expressions.get(expressions.size() - 1).getText();
-        Type type = symbolTable.getType(identifier);
+        ToursParser.ExpressionContext leftHandExpression = ctx.expression(0);
 
-        if (expressions.size() > 1 && (symbolTable.getType(ctx.expression(0).getText()) == null || !symbolTable.getType(expressions.get(0).getText()).equals(Type.INTEGER))) {
-            errors.add(String.format("Error <expected integer> on line %s, pos %s", expressions.get(0).getStart().getLine(), expressions.get(0).getStart().getCharPositionInLine()));
+        if (ctx.expression().size() > 1 && (symbolTable.getType(leftHandExpression.getText()) == null || !symbolTable.getType(leftHandExpression.getText()).equals(Type.INTEGER))) {
+            errors.add(String.format("Error <expected integer> on line %s, pos %s", leftHandExpression.getStart().getLine(), leftHandExpression.getStart().getCharPositionInLine()));
         }
 
+        Type type = symbolTable.getType(ctx.IDENTIFIER().getText());
         // if it is an array, remove the array part in the type of type[i]
         if (ctx.LBLOCK() != null) {
             type = new Type(type.getPrimitiveType());
         }
 
-        if (type == null ) {
-            errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
-        } else if (!type.equals(symbolTable.getType(expression))) {
-            errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
+        String rightHandExpression = ctx.expression().get(ctx.expression().size() - 1).getText();
+        Token assignmentSymbol = ctx.ASSIGNMENT().getSymbol();
+        if (type == null) {
+            errors.add(String.format("Error <variable not defined> on line %s, pos %s", assignmentSymbol.getLine(), assignmentSymbol.getCharPositionInLine()));
+        } else if (!type.equals(symbolTable.getType(rightHandExpression))) {
+            errors.add(String.format("Error <mismatching types> on line %s, pos %s", assignmentSymbol.getLine(), assignmentSymbol.getCharPositionInLine()));
         }
 
         symbolTable.addVariable(ctx.getText(), type);
