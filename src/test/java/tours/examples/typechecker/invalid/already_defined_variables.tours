@@ -6,3 +6,12 @@ func main () {
     integer[] y = new integer[35];
     integer[] y = new integer[36];
 }
+
+func void doNothing(integer i) {
+    integer i = 35;
+}
+
+func integer addOne(integer i) {
+    integer i = 35;
+    return i + 1;
+}
