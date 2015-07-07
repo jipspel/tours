@@ -3,14 +3,14 @@ func main() {
     character y;
     string z;
 
-    while (-x) {}
-    while ((x)) {}
-    while (x + 35) {}
-    while ('x' < 35) {}
-    while (y) {}
-    while (z) {}
-    while ('a') {}
-    while (1) {}
-    while ("aa") {}
-    while (x * x) {}
+    while (-x) {true;}
+    while ((x)) {true;}
+    while (x + 35) {true;}
+    while ('x' < 35) {true;}
+    while (y) {true;}
+    while (z) {true;}
+    while ('a') {true;}
+    while (1) {true;}
+    while ("aa") {true;}
+    while (x * x) {true;}
 }

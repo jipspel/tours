@@ -454,11 +454,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st;
         if (ctx.ELSE() == null) {
             st = stGroup.getInstanceOf("if");
-            st.add("block_if", visit(ctx.block(0)).render());
+            st.add("block_if", visit(ctx.compound(0)).render());
         } else {
             st = stGroup.getInstanceOf("if_else");
-            st.add("block_if", visit(ctx.block(0)).render());
-            st.add("block_else", visit(ctx.block(1)).render());
+            st.add("block_if", visit(ctx.compound(0)).render());
+            st.add("block_else", visit(ctx.compound(1)).render());
         }
         labelCount++;
 

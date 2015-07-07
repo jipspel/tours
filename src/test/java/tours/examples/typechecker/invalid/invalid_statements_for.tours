@@ -3,14 +3,14 @@ func main() {
     character y;
     string z;
 
-    for (; -x; x = x + 1) {}
-    for (; (x); x = x + 1) {}
-    for (; x + 35; x = x + 1) {}
-    for (; 'x' < 35; x = x + 1) {}
-    for (; y; x = x + 1) {}
-    for (; z; x = x + 1) {}
-    for (; 'a'; x = x + 1) {}
-    for (; 1; x = x + 1) {}
-    for (; "aa"; x = x + 1) {}
-    for (; x * x; x = x + 1) {}
+    for (; -x; x = x + 1) {true;}
+    for (; (x); x = x + 1) {true;}
+    for (; x + 35; x = x + 1) {true;}
+    for (; 'x' < 35; x = x + 1) {true;}
+    for (; y; x = x + 1) {true;}
+    for (; z; x = x + 1) {true;}
+    for (; 'a'; x = x + 1) {true;}
+    for (; 1; x = x + 1) {true;}
+    for (; "aa"; x = x + 1) {true;}
+    for (; x * x; x = x + 1) {true;}
 }

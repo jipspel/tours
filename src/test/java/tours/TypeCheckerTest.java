@@ -140,6 +140,14 @@ public class TypeCheckerTest {
     }
 
     @Test
+    public void testNotDefinedVariablesIf() {
+        List<String> errors = Arrays.asList(
+            "Error <variable not defined> on line 8, pos 10"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables_if.tours");
+    }
+
+    @Test
     public void testInvalidForStatement() {
         List<String> errors = Arrays.asList(
                 "Error <expected boolean> on line 6, pos 11",

@@ -3,14 +3,14 @@ func main() {
     character y;
     string z;
 
-    if (-x) {}
-    if ((x)) {}
-    if (x + 35) {}
-    if ('x' < 35) {}
-    if (y) {}
-    if (z) {}
-    if ('a') {}
-    if (1) {}
-    if ("aa") {}
-    if (x * x) {}
+    if (-x) {true;}
+    if ((x)) {true;}
+    if (x + 35) {true;}
+    if ('x' < 35) {true;}
+    if (y) {true;}
+    if (z) {true;}
+    if ('a') {true;}
+    if (1) {true;}
+    if ("aa") {true;}
+    if (x * x) {true;}
 }

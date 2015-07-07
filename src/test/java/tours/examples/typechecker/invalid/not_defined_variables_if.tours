@@ -1,0 +1,9 @@
+func main() {
+    integer i = 3;
+    if (i < 4) {
+        integer z = 3;
+    } else {
+        integer z = 4;
+    }
+    print(z);
+}

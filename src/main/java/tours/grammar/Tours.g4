@@ -49,7 +49,7 @@ statement: variableAssignment                               #assignStatement
          ;
 
 /** Coditional statement. */
-conditionalStatement: IF LPAR expression RPAR block (ELSE block)?                                   #ifStatement
+conditionalStatement: IF LPAR expression RPAR compound (ELSE compound)?                                   #ifStatement
                     | WHILE LPAR expression RPAR block                                              #whileStatement
                     | FOR LPAR (variable | statement)? SEMI expression SEMI statement RPAR block    #forStatement
                     ;
