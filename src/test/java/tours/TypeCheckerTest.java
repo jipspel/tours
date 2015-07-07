@@ -14,10 +14,14 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class TypeCheckerTest {
-
     @Test
     public void testVariableDeclarations() {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/variable_declaration.tours");
+    }
+
+    @Test
+    public void testBooleanExpressions() {
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/boolean_expressions.tours");
     }
 
     @Test
@@ -145,6 +149,19 @@ public class TypeCheckerTest {
             "Error <variable not defined> on line 8, pos 10"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables_if.tours");
+    }
+
+    @Test
+    public void testInvalidBooleanExpressions() {
+        List<String> errors = Arrays.asList(
+                "Error <expected booleans> on line 2, pos 4",
+                "Error <expected booleans> on line 3, pos 4",
+                "Error <expected booleans> on line 4, pos 4",
+                "Error <expected booleans> on line 6, pos 4",
+                "Error <expected booleans> on line 7, pos 4",
+                "Error <expected booleans> on line 8, pos 4"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_boolean_expressions.tours");
     }
 
     @Test

@@ -290,9 +290,9 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitBooleanAndExpression(@NotNull ToursParser.BooleanAndExpressionContext ctx) {
-        if ((symbolTable.getType(ctx.expression(0).getText()) == null &&
+        if ((symbolTable.getType(ctx.expression(0).getText()) != null &&
                 !symbolTable.getType(ctx.expression(0).getText()).equals(Type.BOOLEAN)) ||
-                (symbolTable.getType(ctx.expression(1).getText()) == null &&
+                (symbolTable.getType(ctx.expression(1).getText()) != null &&
                 !symbolTable.getType(ctx.expression(1).getText()).equals(Type.BOOLEAN))) {
             errors.add(String.format("Error <expected booleans> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
         }

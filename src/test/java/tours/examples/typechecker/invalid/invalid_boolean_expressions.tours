@@ -1,0 +1,9 @@
+func main() {
+    true && 35;
+    true && "35";
+    true && '5';
+
+    true || 35;
+    true || "35";
+    true || '5';
+}
