@@ -1,0 +1,6 @@
+func main() {
+    integer i = 1;
+    integer x = while (i < 3) {
+                    i = i + 1;
+                };
+}

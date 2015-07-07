@@ -159,4 +159,14 @@ public class GrammarTest {
         assertEquals("line 2:30 mismatched input ';' expecting ELSE",
                 errorList.get(0));
     }
+
+    @Test
+    public void testWhileAssignment() throws IOException {
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/invalid/invalid_while_assignments.tours");
+        assertEquals(2, errorList.size());
+        assertEquals("line 3:16 no viable alternative at input 'while'",
+                errorList.get(0));
+        assertEquals("line 5:17 mismatched input ';' expecting {<EOF>, FUNC}",
+                errorList.get(1));
+    }
 }
