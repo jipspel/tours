@@ -228,6 +228,13 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitArrayLengthExpression(@NotNull ToursParser.ArrayLengthExpressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

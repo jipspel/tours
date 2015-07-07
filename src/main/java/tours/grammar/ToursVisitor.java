@@ -214,6 +214,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTrueExpression(@NotNull ToursParser.TrueExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code arrayLengthExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayLengthExpression(@NotNull ToursParser.ArrayLengthExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code plusExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree

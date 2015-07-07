@@ -377,6 +377,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArrayLengthExpression(@NotNull ToursParser.ArrayLengthExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayLengthExpression(@NotNull ToursParser.ArrayLengthExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

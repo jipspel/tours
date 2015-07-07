@@ -72,6 +72,7 @@ expression:     LPAR expression RPAR                                            
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
               | IDENTIFIER LBLOCK expression RBLOCK                             #arrayExpression
+              | IDENTIFIER DOT LENGTH                                           #arrayLengthExpression
               | IDENTIFIER LPAR ((expression COMMA)* expression)? RPAR          #functionExpression
               | IDENTIFIER                                                      #identifierExpression
               | CHAR                                                            #characterExpression
@@ -88,7 +89,7 @@ compound
 
 arrayAssignment
   : LBRACE expression (COMMA expression)* RBRACE    #arrayAssignmentWithInitialisation
-  | NEW primitiveType LBLOCK expression RBLOCK          #arrayAssignmentNew
+  | NEW primitiveType LBLOCK expression RBLOCK      #arrayAssignmentNew
   ;
 
 /** Prefix operator. */
@@ -139,6 +140,7 @@ IF:                 I F ;
 INPUT:              I N P U T ;
 INTEGER:            I N T E G E R ;
 INTEGER_ARRAY:      I N T E G E R LBLOCK RBLOCK ;
+LENGTH:             L E N G T H ;
 MAIN:               M A I N ;
 NEW :               N E W ;
 PRINT:              P R I N T ;
