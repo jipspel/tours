@@ -652,6 +652,15 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
+    public ST visitArrayLengthExpression(@NotNull ToursParser.ArrayLengthExpressionContext ctx) {
+        ST st = stGroup.getInstanceOf("array_length");
+        st.add("identifier_number", symbolTable.getIdentifier(ctx.IDENTIFIER().getText()));
+
+        symbolTable.addType(ctx.getText(), Type.INTEGER);
+        return st;
+    }
+
+    @Override
     public ST visitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) {
         symbolTable.addType(ctx.getText(), Type.INTEGER);
 

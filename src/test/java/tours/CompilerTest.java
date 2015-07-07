@@ -184,6 +184,16 @@ public class CompilerTest {
                 "src/test/java/tours/examples/compiler/function_fibonacci.tours");
     }
 
+    @Test
+    public void testArrayLength() {
+        assertEqualsOutput(Arrays.asList(
+                "35",
+                "36",
+                "37",
+                "38"
+        ), "src/test/java/tours/examples/compiler/array_length.tours");
+    }
+
     private String compileAndRun(String filename, List<String> input) {
         try {
             CompilerTools.toByteCode(filename, "./tmp/output.j");
