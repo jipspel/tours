@@ -4,8 +4,8 @@ func main () {
     integer p = 'a';
     string s = true;
 
-    boolean t = print(1);
-    character u = print("hello");
-    integer v = print('a');
-    string w = print(true);
+    boolean t = 1;
+    character u = "hello";
+    integer v = 'a';
+    string w = true;
 }
