@@ -6,7 +6,6 @@ import org.junit.Test;
 import tours.compiler.CompilerTools;
 import tours.typechecker.TypeChecker;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -186,6 +185,19 @@ public class TypeCheckerTest {
                 "Error <expected booleans> on line 8, pos 4"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_boolean_expressions.tours");
+    }
+
+    @Test
+    public void testInvalidPrefixExpressions() {
+        List<String> errors = Arrays.asList(
+                "Error <expected integer> on line 2, pos 5",
+                "Error <expected integer> on line 3, pos 5",
+                "Error <expected integer> on line 4, pos 5",
+                "Error <expected boolean> on line 6, pos 5",
+                "Error <expected boolean> on line 7, pos 5",
+                "Error <expected boolean> on line 8, pos 5"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_prefix_expressions.tours");
     }
 
     @Test
