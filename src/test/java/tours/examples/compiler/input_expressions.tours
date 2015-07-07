@@ -10,7 +10,7 @@ func main() {
     c2 = input(c1);
     print(c1, c2);
 
-    i2 = input(i1) +5;
+    i2 = input(i1) + 5;
     print(i1, i2);
 
     s2 = input(s1);

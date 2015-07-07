@@ -8,13 +8,13 @@ import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupDir;
 import tours.SymbolTable;
-import tours.SymbolTable.*;
+import tours.SymbolTable.Function;
+import tours.SymbolTable.Variable;
 import tours.Type;
 import tours.grammar.ToursBaseVisitor;
 import tours.grammar.ToursParser;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -66,6 +66,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitProgram(@NotNull ToursParser.ProgramContext ctx) {
+        // TODO refactor
         // Listing all functions in symbol table
         for (ToursParser.VoidFunctionContext function : ctx.voidFunction()) {
             Type returnType = Type.VOID;
@@ -279,6 +280,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
         st.add("stack_limit", 4);
 
+        // TODO test bouwen
         String returnString = symbolTable.getSymbol(ctx.returnBlock().returnStatement().expression().getText()).getType().equals(Type.STRING)
                 ? "areturn" : "ireturn";
         st.add("return", returnString);

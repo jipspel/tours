@@ -1,0 +1,10 @@
+func main() {
+    boolean b;
+    b = input(b);
+    character c;
+    c = input(c);
+    integer i;
+    i = input(i);
+    string s;
+    s = input(s);
+}

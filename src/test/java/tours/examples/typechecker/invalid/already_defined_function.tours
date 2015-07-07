@@ -1,0 +1,9 @@
+func main() { true; }
+
+func void duplicate() { true; }
+func void duplicate() { true; }
+func boolean duplicate() { return true; }
+
+func boolean doubleDuplicate() { return true; }
+func boolean doubleDuplicate() { return true; }
+func void doubleDuplicate() { true; }

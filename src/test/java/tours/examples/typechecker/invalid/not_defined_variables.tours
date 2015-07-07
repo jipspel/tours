@@ -1,13 +1,16 @@
 func main() {
     integer x;
     y = 35;
+    boolean[] b = new boolean[5];
+    c[0];
+
     scope();
     z;
 
     i = addOneWithArgument(35);
 
     doNothing(33);
-    j = 5;
+    j;
 }
 
 func integer addOne() {
@@ -22,6 +25,4 @@ func integer addOneWithArgument(integer i) {
     return i + 1;
 }
 
-func void doNothing(integer j) {
-
-}
+func void doNothing(integer j) {}

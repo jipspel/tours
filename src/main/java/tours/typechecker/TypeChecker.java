@@ -241,13 +241,13 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) {
-        if (!symbolTable.contains(ctx.expression().getText())) {
+        if (!symbolTable.contains(ctx.IDENTIFIER().getText())) {
             errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         } else if(!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
+        } else {
+            symbolTable.addType(ctx.getText(), new Type(symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType()));
         }
-
-        symbolTable.addType(ctx.getText(), new Type(symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType()));
     }
 
     @Override

@@ -63,6 +63,11 @@ public class TypeCheckerTest {
     }
 
     @Test
+    public void testInput() {
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/input_expressions.tours");
+    }
+
+    @Test
     public void testMismatchingTypesBasic() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 2, pos 14",
@@ -155,13 +160,25 @@ public class TypeCheckerTest {
     }
 
     @Test
+    public void testAlreadyDefinedFunction() {
+        List<String> errors = Arrays.asList(
+                "Error <function name already defined> on line 4, pos 10",
+                "Error <function name already defined> on line 5, pos 13",
+                "Error <function name already defined> on line 7, pos 13",
+                "Error <function name already defined> on line 8, pos 13"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/already_defined_function.tours");
+    }
+
+    @Test
     public void testNotDefinedVariables() {
         List<String> errors = Arrays.asList(
                 "Error <variable not defined> on line 3, pos 6",
                 "Error <variable not defined> on line 5, pos 4",
-                "Error <variable not defined> on line 7, pos 6",
+                "Error <variable not defined> on line 8, pos 4",
                 "Error <variable not defined> on line 10, pos 6",
-                "Error <variable not defined> on line 14, pos 11"
+                "Error <variable not defined> on line 13, pos 4",
+                "Error <variable not defined> on line 17, pos 11"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables.tours");
     }
@@ -172,6 +189,14 @@ public class TypeCheckerTest {
             "Error <variable not defined> on line 8, pos 10"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables_if.tours");
+    }
+
+    @Test
+    public void testNotDefinedFunction() {
+        List<String> errors = Arrays.asList(
+            "Error <function not defined> on line 2, pos 4"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_function.tours");
     }
 
     @Test
