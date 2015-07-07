@@ -1,0 +1,4 @@
+func main() {
+    boolean[] b = new boolean[1];
+    b[1];
+}

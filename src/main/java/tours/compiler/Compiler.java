@@ -14,7 +14,6 @@ import tours.grammar.ToursParser;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -52,9 +51,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
                 System.out.println(CompilerTools.runClassFile("Tours", workingDirectory));
 
                 FileUtils.deleteDirectory(new File(workingDirectory));
-            } catch (NoSuchMethodException | InvocationTargetException | IOException | IllegalAccessException | ClassNotFoundException e) {
-                System.out.println("Error compiling and running: " + filename);
+            } catch (Throwable e) {
+                System.err.println("Error compiling and running: " + filename);
                 e.printStackTrace();
+                System.exit(1);
             }
         }
     }

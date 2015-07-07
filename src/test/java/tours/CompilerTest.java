@@ -35,6 +35,22 @@ public class CompilerTest {
         for (String line : expectedOutput) {
             expectedOutputString += line + System.getProperty("line.separator");
         }
+        try {
+            assertEquals(expectedOutputString, compileAndRun(filename, input));
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    private void assertEqualsOutputException(List<String> expectedOutput, String filename) throws Throwable {
+        assertEqualsOutputException(expectedOutput, filename, null);
+    }
+
+    private void assertEqualsOutputException(List<String> expectedOutput, String filename, List<String> input) throws Throwable {
+        String expectedOutputString = "";
+        for (String line : expectedOutput) {
+            expectedOutputString += line + System.getProperty("line.separator");
+        }
         assertEquals(expectedOutputString, compileAndRun(filename, input));
     }
 
@@ -194,19 +210,49 @@ public class CompilerTest {
         ), "src/test/java/tours/examples/compiler/array_length.tours");
     }
 
-    private String compileAndRun(String filename, List<String> input) {
+    @Test(expected=ArrayIndexOutOfBoundsException.class)
+    public void testArrayIndexOutOfBounds() throws ArrayIndexOutOfBoundsException {
+        try {
+            assertEqualsOutputException(Arrays.asList(), "src/test/java/tours/examples/compiler/runtime_exceptions/array_index_out_of_bounds.tours");
+        } catch (Throwable throwable) {
+            throw (ArrayIndexOutOfBoundsException) throwable;
+        }
+    }
+
+    @Test(expected=ArrayIndexOutOfBoundsException.class)
+    public void testArrayInitializationIndexOutOfBounds() throws ArrayIndexOutOfBoundsException {
+        try {
+            assertEqualsOutputException(Arrays.asList(), "src/test/java/tours/examples/compiler/runtime_exceptions/array_initialization_index_out_of_bounds.tours");
+        } catch (Throwable throwable) {
+            throw (ArrayIndexOutOfBoundsException) throwable;
+        }
+    }
+
+//    @Test
+//    public void testInfiniteLoop() {
+//        assertEqualsOutput(Arrays.asList("8"),
+//                "src/test/java/tours/examples/compiler/runtime_exceptions/infinite_loop.tours");
+//    }
+
+    @Test(expected=ArithmeticException.class)
+    public void testDivisionByZero() throws InvocationTargetException {
+        try {
+            assertEqualsOutputException(Arrays.asList(), "src/test/java/tours/examples/compiler/runtime_exceptions/division_by_zero.tours");
+        } catch (Throwable throwable) {
+            throw (ArithmeticException) throwable;
+        }
+    }
+
+    private String compileAndRun(String filename, List<String> input) throws Throwable {
         try {
             CompilerTools.toByteCode(filename, "./tmp/output.j");
             CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
             return CompilerTools.runClassFile("Tours", "./tmp", input);
-        } catch (NoSuchMethodException | InvocationTargetException | IOException | IllegalAccessException | ClassNotFoundException e) {
-            System.out.println("Error compiling and running: " + filename);
+        } catch (NoSuchMethodException | IOException | IllegalAccessException | ClassNotFoundException e) {
+            System.err.println("Error compiling and running: " + filename);
             e.printStackTrace();
+            System.exit(1);
         }
         return null;
-    }
-
-    private String compileAndRun(String filename) {
-        return compileAndRun(filename, null);
     }
 }

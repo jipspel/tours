@@ -1,0 +1,4 @@
+func main() {
+    boolean[] b = { true };
+    b[1];
+}

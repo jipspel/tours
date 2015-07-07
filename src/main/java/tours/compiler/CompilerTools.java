@@ -55,7 +55,7 @@ public class CompilerTools {
         main.invoke(null, (Object) new String[]{byteCodeFilename, "-d", destinationFolder});
     }
 
-    public static String runClassFile(String klass, String workingDirectory, List<String> input) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static String runClassFile(String klass, String workingDirectory, List<String> input) throws Throwable {
         if (input != null) {
             String inputLine = "";
             for (String line : input) {
@@ -72,12 +72,16 @@ public class CompilerTools {
 
         Class<?> tours = new URLClassLoader(new URL[]{ new File(workingDirectory).toURI().toURL() }).loadClass(klass);
         Method main = tours.getMethod("main", String[].class);
-        main.invoke(null, (Object) new String[1]);
+        try {
+            main.invoke(null, (Object) new String[1]);
+        } catch (InvocationTargetException e) {
+            throw e.getCause();
+        }
 
         return baos.toString();
     }
 
-    public static String runClassFile(String klass, String workingDirectory) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static String runClassFile(String klass, String workingDirectory) throws Throwable {
         return runClassFile(klass, workingDirectory, null);
     }
 }
