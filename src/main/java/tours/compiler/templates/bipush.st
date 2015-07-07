@@ -1,4 +1,0 @@
-bipush(text) ::=
-<<
-bipush <text>
->>

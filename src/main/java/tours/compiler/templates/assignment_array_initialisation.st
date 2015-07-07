@@ -1,7 +1,7 @@
 assignment_array_initialisation(index, expressions, store_type) ::=
 <<
 dup
-bipush <index>
+ldc <index>
 <expressions>
 <store_type>astore
 >>

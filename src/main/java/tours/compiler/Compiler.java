@@ -175,7 +175,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
 
         if (ctx.arrayAssignment() instanceof ToursParser.ArrayAssignmentWithInitialisationContext) {
-            ST stExpression = stGroup.getInstanceOf("bipush");
+            ST stExpression = stGroup.getInstanceOf("load_constant");
             stExpression.add("text", ((ToursParser.ArrayAssignmentWithInitialisationContext) ctx.arrayAssignment()).expression().size());
             stNewArray.add("expression", stExpression.render());
             stNewArray.add("initialisation", visit(ctx.arrayAssignment()).render());
@@ -511,7 +511,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitIntegerExpression(@NotNull ToursParser.IntegerExpressionContext ctx) {
       symbolTable.addType(ctx.getText(), Type.INTEGER);
 
-        ST st = stGroup.getInstanceOf("bipush");
+        ST st = stGroup.getInstanceOf("load_constant");
         st.add("text", ctx.getText());
 
         return st;
@@ -646,7 +646,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx) {
         symbolTable.addType(ctx.getText(), Type.CHARACTER);
 
-        ST st = stGroup.getInstanceOf("bipush");
+        ST st = stGroup.getInstanceOf("load_constant");
         st.add("text", (int) ctx.getText().charAt(1));
 
         return st;
