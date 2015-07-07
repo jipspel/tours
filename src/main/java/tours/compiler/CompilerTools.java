@@ -18,8 +18,14 @@ import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
 
 public class CompilerTools {
-    public static ParseTree toToursParseTree(String filename) throws IOException {
-        String file = new String(readAllBytes(get(filename)));
+    public static ParseTree toToursParseTree(String filename) {
+        String file = null;
+        try {
+            file = new String(readAllBytes(get(filename)));
+        } catch (IOException e) {
+            System.err.println("Error while reading: " + filename);
+            System.exit(1);
+        }
 
         CharStream chars = new ANTLRInputStream(file);
         ToursErrorListener errorListener = new ToursErrorListener();
@@ -34,6 +40,7 @@ public class CompilerTools {
         ParseTree program = parser.program();
         if (errorListener.getErrorList().size() > 0) {
             System.err.println("Error lexing and parsing: " + filename);
+            System.err.println(errorListener.getErrorList());
             System.exit(1);
         }
         return program;
