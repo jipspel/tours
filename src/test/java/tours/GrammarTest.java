@@ -151,4 +151,12 @@ public class GrammarTest {
         assertEquals("line 2:4 no viable alternative at input 'funcvoidawesome_print(stringtext){return'",
                 errorList.get(0));
     }
+
+    @Test
+    public void testMissingElseInIfElseExpression() throws IOException {
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/invalid/missing_else_in_if_else_expression.tours");
+        assertEquals(1, errorList.size());
+        assertEquals("line 2:30 mismatched input ';' expecting ELSE",
+                errorList.get(0));
+    }
 }
