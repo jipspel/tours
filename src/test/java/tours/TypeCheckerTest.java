@@ -130,7 +130,9 @@ public class TypeCheckerTest {
         List<String> errors = Arrays.asList(
                 "Error <variable not defined> on line 3, pos 6",
                 "Error <variable not defined> on line 5, pos 4",
-                "Error <variable not defined> on line 9, pos 11"
+                "Error <variable not defined> on line 7, pos 6",
+                "Error <variable not defined> on line 10, pos 6",
+                "Error <variable not defined> on line 14, pos 11"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables.tours");
     }

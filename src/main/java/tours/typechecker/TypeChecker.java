@@ -45,7 +45,6 @@ public class TypeChecker extends ToursBaseListener {
                     function.variableType(0).primitiveType().getText()));
             List<Type> argumentTypes = new ArrayList<>();
 
-            // TODO argumenten die meegegeven worden moeten in de nieuwe scope vallen
             for (int i = 1; i < function.variableType().size(); i++) {
                 ToursParser.VariableTypeContext variableType = function.variableType(i);
                 Type type = new Type(variableType.arrayType() != null ?
@@ -167,16 +166,6 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void enterMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
-         symbolTable.openScope();
-    }
-
-    @Override
-    public void exitMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
-        symbolTable.closeScope();
-    }
-
-    @Override
     public void exitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
         String returnExpression = ctx.returnBlock().returnStatement().expression().getText();
         String identifier = ctx.IDENTIFIER(0).getText();
@@ -187,6 +176,16 @@ public class TypeChecker extends ToursBaseListener {
         }
 
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(identifier));
+        symbolTable.closeScope();
+    }
+
+    @Override
+    public void enterMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
+        symbolTable.openScope();
+    }
+
+    @Override
+    public void exitMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
         symbolTable.closeScope();
     }
 

@@ -224,11 +224,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitVoidFunction(@NotNull ToursParser.VoidFunctionContext ctx) {
+        symbolTable.resetCount();
+        symbolTable.openScope();
+
         Type returnType = Type.VOID;
         List<Type> argumentTypes = new ArrayList<>();
         Map<String, Type> variables = new HashMap<>();
-
-        symbolTable.resetCount();
 
         for (int i = 0; i < ctx.variableType().size(); i++) {
             Type type = new Type(ctx.variableType(i).getText());
@@ -236,7 +237,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
             variables.put(ctx.IDENTIFIER(i + 1).getText(), type);
         }
 
-        symbolTable.openScope();
         symbolTable.addArgumentVariables(variables);
 
         ST st = stGroup.getInstanceOf("function");
@@ -258,8 +258,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitReturnFunction(@NotNull ToursParser.ReturnFunctionContext ctx) {
-
         symbolTable.resetCount();
+        symbolTable.openScope();
 
         List<Type> argumentTypes = new ArrayList<>();
         Map<String, Type> variables = new HashMap<>();
@@ -272,7 +272,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         Type returnType = new Type(ctx.variableType(0).getText());
 
-        symbolTable.openScope();
         symbolTable.addArgumentVariables(variables);
 
         ST st = stGroup.getInstanceOf("function");
@@ -296,6 +295,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     @Override
     public ST visitMainFunction(@NotNull ToursParser.MainFunctionContext ctx) {
         symbolTable.resetCount();
+        symbolTable.openScope();
 
         ST st = stGroup.getInstanceOf("function");
         st.add("return_type", "V");
@@ -308,6 +308,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("stack_limit", 4);
 
         st.add("return", "return");
+        symbolTable.closeScope();
         return st;
     }
 

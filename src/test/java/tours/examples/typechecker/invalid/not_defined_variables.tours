@@ -3,6 +3,11 @@ func main() {
     y = 35;
     scope();
     z;
+
+    i = addOneWithArgument(35);
+
+    doNothing(33);
+    j = 5;
 }
 
 func integer addOne() {
@@ -11,4 +16,12 @@ func integer addOne() {
 
 func void scope() {
     integer z = 3;
+}
+
+func integer addOneWithArgument(integer i) {
+    return i + 1;
+}
+
+func void doNothing(integer j) {
+
 }
