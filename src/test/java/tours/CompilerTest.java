@@ -227,13 +227,7 @@ public class CompilerTest {
             throw (ArrayIndexOutOfBoundsException) throwable;
         }
     }
-
-//    @Test
-//    public void testInfiniteLoop() {
-//        assertEqualsOutput(Arrays.asList("8"),
-//                "src/test/java/tours/examples/compiler/runtime_exceptions/infinite_loop.tours");
-//    }
-
+    
     @Test(expected=ArithmeticException.class)
     public void testDivisionByZero() throws InvocationTargetException {
         try {
