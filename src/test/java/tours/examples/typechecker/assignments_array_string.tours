@@ -2,4 +2,8 @@ func main() {
     string[] x = new string[5];
     x[1] = "aa";
     string[] y = {"aa", "bb", "cc"};
+
+    string[] z;
+    z = new string[5];
+    z = {"a", "b", "c"};
 }

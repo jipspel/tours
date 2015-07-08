@@ -68,10 +68,10 @@ public class TypeChecker extends ToursBaseListener {
             String id = identifier.getText();
             if (symbolTable.containsInCurrentScope(id)) {
                 errors.add(String.format("Error <variable already defined> on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
-            } else {
-                symbolTable.addVariable(id, new Type(ctx.primitiveType().getText()));
-                symbolTable.addVariable(ctx.getText(), new Type(ctx.primitiveType().getText()));
             }
+            symbolTable.addVariable(id, new Type(ctx.primitiveType().getText()));
+            symbolTable.addVariable(ctx.getText(), new Type(ctx.primitiveType().getText()));
+
         }
 
         // assignment
@@ -87,17 +87,18 @@ public class TypeChecker extends ToursBaseListener {
             String id = identifier.getText();
             if (symbolTable.containsInCurrentScope(id)) {
                 errors.add(String.format("Error <variable already defined> on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
-            } else {
-                symbolTable.addVariable(id, new Type(ctx.arrayType().getText()));
-                symbolTable.addVariable(ctx.getText(), new Type(ctx.arrayType().getText()));
             }
+            symbolTable.addVariable(id, new Type(ctx.arrayType().getText()));
+            symbolTable.addVariable(ctx.getText(), new Type(ctx.arrayType().getText()));
         }
 
         Type arrayType = new Type(ctx.arrayType().getText());
-        Type assignmentType = symbolTable.getType(ctx.arrayAssignment().getText());
-        // assignment
-        if (!arrayType.equals(assignmentType)) {
-            errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
+        if (ctx.expression() != null ) {
+            Type assignmentType = symbolTable.getType(ctx.expression().getText());
+            // assignment
+            if (!arrayType.equals(assignmentType)) {
+                errors.add(String.format("Error <mismatching types> on line %s, pos %s", ctx.ASSIGNMENT().getSymbol().getLine(), ctx.ASSIGNMENT().getSymbol().getCharPositionInLine()));
+            }
         }
     }
 
@@ -240,7 +241,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) {
+    public void exitArrayElementExpression(@NotNull ToursParser.ArrayElementExpressionContext ctx) {
         if (!symbolTable.contains(ctx.IDENTIFIER().getText())) {
             errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         } else if(!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
@@ -311,7 +312,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx) {
+    public void exitArrayInitialisationExpression(@NotNull ToursParser.ArrayInitialisationExpressionContext ctx) {
         Type expressionType = symbolTable.getType(ctx.expression(0).getText());
 
         for(int i = 1; i < ctx.expression().size(); i++) {
@@ -325,7 +326,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) {
+    public void exitArrayNewExpression(@NotNull ToursParser.ArrayNewExpressionContext ctx) {
         if (symbolTable.getType(ctx.expression().getText()) != null &&
                 !symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
@@ -333,19 +334,19 @@ public class TypeChecker extends ToursBaseListener {
         symbolTable.addType(ctx.getText(), new Type(ctx.primitiveType().getText() + "[]"));
     }
 
-    @Override
-    public void exitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) {
-        Type expressionType = symbolTable.getType(ctx.expression().getText());
-
-        if (expressionType != null && !(expressionType.equals(Type.BOOLEAN_ARRAY) ||
-                expressionType.equals(Type.CHARACTER_ARRAY) ||
-                expressionType.equals(Type.INTEGER_ARRAY) ||
-                expressionType.equals(Type.STRING_ARRAY))) {
-            errors.add(String.format("Error <expected array> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
-        }
-
-        symbolTable.addType(ctx.getText(), expressionType);
-    }
+//    @Override
+//    public void exitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) {
+//        Type expressionType = symbolTable.getType(ctx.expression().getText());
+//
+//        if (expressionType != null && !(expressionType.equals(Type.BOOLEAN_ARRAY) ||
+//                expressionType.equals(Type.CHARACTER_ARRAY) ||
+//                expressionType.equals(Type.INTEGER_ARRAY) ||
+//                expressionType.equals(Type.STRING_ARRAY))) {
+//            errors.add(String.format("Error <expected array> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
+//        }
+//
+//        symbolTable.addType(ctx.getText(), expressionType);
+//    }
     @Override
     public void exitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) {
         if ((symbolTable.getType(ctx.expression(0).getText()) != null &&

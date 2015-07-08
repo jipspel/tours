@@ -3,4 +3,8 @@ func main() {
     x[1] = false;
     boolean[] y = { true, true, false };
     y[2-1] = false;
+
+    boolean[] z;
+    z = new boolean[5];
+    z = {true, true, false};
 }

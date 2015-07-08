@@ -2,4 +2,8 @@ func main() {
     integer[] x = new integer[5];
     x[1] = 5;
     integer[] y = {1, 2, 3};
+
+    integer[] z;
+    z = new integer[5];
+    z = {1, 2, 3};
 }
