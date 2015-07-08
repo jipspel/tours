@@ -209,18 +209,6 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -240,6 +228,30 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayNewExpression(@NotNull ToursParser.ArrayNewExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayNewExpression(@NotNull ToursParser.ArrayNewExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayInitialisationExpression(@NotNull ToursParser.ArrayInitialisationExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayInitialisationExpression(@NotNull ToursParser.ArrayInitialisationExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -425,6 +437,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArrayElementExpression(@NotNull ToursParser.ArrayElementExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayElementExpression(@NotNull ToursParser.ArrayElementExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInputExpression(@NotNull ToursParser.InputExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -456,42 +480,6 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCompound(@NotNull ToursParser.CompoundContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

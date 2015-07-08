@@ -9,7 +9,7 @@ program
 /** Variable declaration. */
 variable
     : primitiveType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?    #variablePrimitive
-    | arrayType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT arrayAssignment)    #variableArray
+    | arrayType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?   #variableArray
     ;
 
 /** Variable assignment */
@@ -67,12 +67,14 @@ expression:     LPAR expression RPAR                                            
               | expression compareOperator expression                           #compareExpression
               | expression AND expression                                       #booleanAndExpression
               | expression OR expression                                        #booleanOrExpression
+              | IDENTIFIER LBLOCK expression RBLOCK                             #arrayElementExpression
+              | LBRACE expression (COMMA expression)* RBRACE                    #arrayInitialisationExpression
+              | NEW primitiveType LBLOCK expression RBLOCK                      #arrayNewExpression
+              | IDENTIFIER DOT LENGTH                                           #arrayLengthExpression
               | compound                                                        #compoundExpression
               | IF LPAR expression RPAR compound ELSE compound                  #ifElseExpression
               | INPUT LPAR IDENTIFIER RPAR                                      #inputExpression
               | PRINT LPAR expression RPAR                                      #printExpression
-              | IDENTIFIER LBLOCK expression RBLOCK                             #arrayExpression
-              | IDENTIFIER DOT LENGTH                                           #arrayLengthExpression
               | IDENTIFIER LPAR ((expression COMMA)* expression)? RPAR          #functionExpression
               | IDENTIFIER                                                      #identifierExpression
               | CHAR                                                            #characterExpression
@@ -86,12 +88,6 @@ compound
     : LBRACE ((statement | variable | expression) SEMI | conditionalStatement)*
                           ((statement | variable | expression) SEMI) RBRACE
     ;
-
-arrayAssignment
-  : LBRACE expression (COMMA expression)* RBRACE    #arrayAssignmentWithInitialisation
-  | NEW primitiveType LBLOCK expression RBLOCK      #arrayAssignmentNew
-  | expression                                      #arrayAssignmentExpression
-  ;
 
 /** Prefix operator. */
 prefixOperator: MINUS | NOT | PLUS;

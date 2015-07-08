@@ -185,18 +185,6 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitReturnStatement(@NotNull ToursParser.ReturnStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code arrayExpression}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code arrayExpression}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayExpression(@NotNull ToursParser.ArrayExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code printExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -220,6 +208,30 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arrayNewExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayNewExpression(@NotNull ToursParser.ArrayNewExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayNewExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayNewExpression(@NotNull ToursParser.ArrayNewExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code arrayInitialisationExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayInitialisationExpression(@NotNull ToursParser.ArrayInitialisationExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayInitialisationExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayInitialisationExpression(@NotNull ToursParser.ArrayInitialisationExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code falseExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
@@ -401,6 +413,18 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitParExpression(@NotNull ToursParser.ParExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code arrayElementExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayElementExpression(@NotNull ToursParser.ArrayElementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayElementExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayElementExpression(@NotNull ToursParser.ArrayElementExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code inputExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -434,42 +458,6 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCompound(@NotNull ToursParser.CompoundContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code arrayAssignmentWithInitialisation}
-	 * labeled alternative in {@link ToursParser#arrayAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code arrayAssignmentWithInitialisation}
-	 * labeled alternative in {@link ToursParser#arrayAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayAssignmentWithInitialisation(@NotNull ToursParser.ArrayAssignmentWithInitialisationContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code arrayAssignmentNew}
-	 * labeled alternative in {@link ToursParser#arrayAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code arrayAssignmentNew}
-	 * labeled alternative in {@link ToursParser#arrayAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code arrayAssignmentExpression}
-	 * labeled alternative in {@link ToursParser#arrayAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code arrayAssignmentExpression}
-	 * labeled alternative in {@link ToursParser#arrayAssignment}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ToursParser#prefixOperator}.
 	 * @param ctx the parse tree
