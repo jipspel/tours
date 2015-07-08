@@ -159,11 +159,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st = stGroup.getInstanceOf("concatenator");
 
         ST stNewArray;
-        if (ctx.arrayType().getText().toLowerCase().equals(Type.STRING_ARRAY.toString())) {
+        if (ctx.arrayAssignment() instanceof ToursParser.ArrayAssignmentExpressionContext) {
+            stNewArray = stGroup.getInstanceOf("new_array_function_initialisation");
+        } else if (ctx.arrayType().getText().toLowerCase().equals(Type.STRING_ARRAY.toString())) {
             stNewArray = stGroup.getInstanceOf("new_array_string");
         } else {
             stNewArray = stGroup.getInstanceOf("new_array");
         }
+
 
 
         if (ctx.arrayAssignment() instanceof ToursParser.ArrayAssignmentWithInitialisationContext) {
@@ -171,10 +174,13 @@ public class Compiler extends ToursBaseVisitor<ST> {
             stExpression.add("text", ((ToursParser.ArrayAssignmentWithInitialisationContext) ctx.arrayAssignment()).expression().size());
             stNewArray.add("expression", stExpression.render());
             stNewArray.add("initialisation", visit(ctx.arrayAssignment()).render());
-        } else {
-            stNewArray.add("expression", visit(ctx.arrayAssignment()).render());
-            stNewArray.add("initialisation", "");
+        } else if (ctx.arrayAssignment() instanceof ToursParser.ArrayAssignmentExpressionContext) {
+            stNewArray.add("function_call", visit(ctx.arrayAssignment()).render());
+        } else{
+                stNewArray.add("expression", visit(ctx.arrayAssignment()).render());
+                stNewArray.add("initialisation", "");
         }
+
 
         List<String> stList = new ArrayList<>();
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
@@ -182,7 +188,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
             Variable variable = (Variable) symbolTable.getSymbol(identifier.getText());
             stNewArray.add("identifier_number", variable.getIdentifier());
-            stNewArray.add("array_type", variable.getType().getNewArrayType());
+
+            if (!(ctx.arrayAssignment() instanceof  ToursParser.ArrayAssignmentExpressionContext)) {
+                stNewArray.add("array_type", variable.getType().getNewArrayType());
+            }
 
             stList.add(stNewArray.render());
         }
@@ -196,15 +205,23 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st;
 
         // assignment of a primitive type
-        if (ctx.LBLOCK() == null) {
+        if (ctx.LBLOCK() == null && symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() != null) {
             st = stGroup.getInstanceOf(String.format("assignment_primitive"));
 
             Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
             st.add("identifier_number", variable.getIdentifier());
             st.add("expression", visit(ctx.expression(0)).render());
             st.add("store_type", variable.getType().getPrefix());
-        } else {
-            st = stGroup.getInstanceOf(String.format("assignment_array"));
+        } // assignment of array type
+        else if(ctx.LBLOCK() == null && symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() == null) {
+            st = stGroup.getInstanceOf(String.format("assignment_array_with_function"));
+
+            Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
+            st.add("identifier_number", variable.getIdentifier());
+            st.add("expressions", visit(ctx.expression(0)).render());
+        } // assignment of element of array type
+        else{
+            st = stGroup.getInstanceOf(String.format("assignment_array_per_element"));
 
             Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
             st.add("identifier_number", variable.getIdentifier());
@@ -281,8 +298,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("stack_limit", 4);
 
         // TODO test bouwen
-        String returnString = symbolTable.getSymbol(ctx.returnBlock().returnStatement().expression().getText()).getType().equals(Type.STRING)
-                ? "areturn" : "ireturn";
+        String returnString = returnType.equals(Type.BOOLEAN) ||
+                returnType.equals(Type.CHARACTER) ||
+                returnType.equals(Type.INTEGER)
+                ? "ireturn" : "areturn";
         st.add("return", returnString);
 
         symbolTable.closeScope();
@@ -689,7 +708,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
         Type type = symbolTable.getSymbol(ctx.IDENTIFIER().getText()).getType();
         ST st = stGroup.getInstanceOf("load_identifier");
 
-        st.add("load_type", type.getPrefix());
+        if (type.getArrayType() == null) {
+            st.add("load_type", "a");
+        } else {
+            st.add("load_type", type.getPrefix());
+        }
+
         st.add("identifier_number", ((Variable) symbolTable.getSymbol(ctx.getText())).getIdentifier());
 
         return st;
@@ -734,6 +758,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx) {
+        return visit(ctx.expression());
+    }
+
+    @Override
+    public ST visitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) {
         return visit(ctx.expression());
     }
 

@@ -201,6 +201,12 @@ public class CompilerTest {
     }
 
     @Test
+    public void testReturnArrayFunction() {
+        assertEqualsOutput(Arrays.asList("false", "true", "a", "b", "35", "36", "Hello", "World!"),
+                "src/test/java/tours/examples/compiler/function_return_array_type.tours");
+    }
+
+    @Test
     public void testArrayLength() {
         assertEqualsOutput(Arrays.asList(
                 "35",
