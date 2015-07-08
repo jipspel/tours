@@ -36,9 +36,7 @@ public class CompilerTest {
         for (String line : expectedOutput) {
             expectedOutputString += line + System.getProperty("line.separator");
         }
-        System.out.println(filename);
         try {
-            System.out.println(compileAndRun(filename, input));
             assertEquals(expectedOutputString, compileAndRun(filename, input));
         } catch (Throwable throwable) {
             fail(throwable.toString());

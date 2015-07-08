@@ -340,19 +340,6 @@ public class TypeChecker extends ToursBaseListener {
         symbolTable.addType(ctx.getText(), new Type(ctx.primitiveType().getText() + "[]"));
     }
 
-//    @Override
-//    public void exitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) {
-//        Type expressionType = symbolTable.getType(ctx.expression().getText());
-//
-//        if (expressionType != null && !(expressionType.equals(Type.BOOLEAN_ARRAY) ||
-//                expressionType.equals(Type.CHARACTER_ARRAY) ||
-//                expressionType.equals(Type.INTEGER_ARRAY) ||
-//                expressionType.equals(Type.STRING_ARRAY))) {
-//            errors.add(String.format("Error <expected array> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
-//        }
-//
-//        symbolTable.addType(ctx.getText(), expressionType);
-//    }
     @Override
     public void exitBooleanOrExpression(@NotNull ToursParser.BooleanOrExpressionContext ctx) {
         if ((symbolTable.getType(ctx.expression(0).getText()) != null &&
