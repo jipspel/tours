@@ -6,6 +6,7 @@ func void printInteger(integer i) {
     print(i);
     if (i < 35) {
         addOneWithPrint(i);
+        integer j = 3;
     }
 }
 

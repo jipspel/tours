@@ -2,6 +2,7 @@ package tours.typechecker;
 
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import tours.SymbolTable;
 import tours.Type;
@@ -306,8 +307,13 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override public void exitCompound(@NotNull ToursParser.CompoundContext ctx) {
-        Type type = symbolTable.getType(ctx.getChild(ctx.getChildCount() - 3).getText());
+        ParseTree lastElement = ctx.getChild(ctx.getChildCount() - 3);
+        Type type = symbolTable.getType(lastElement.getText());
         symbolTable.closeScope();
+
+        if (type.equals(Type.VOID)) {
+            errors.add(String.format("Error <last type is a void> on line %s, pos %s", ctx.RBRACE().getSymbol().getLine(), ctx.RBRACE().getSymbol().getCharPositionInLine()));
+        }
         symbolTable.addVariable(ctx.getText(), type);
     }
 

@@ -25,8 +25,8 @@ public class Type {
 
     public static final String BOOLEAN_ARRAY_JAVA = "[Z";
     public static final String CHARACTER_ARRAY_JAVA = "[C";
-    public static final String INTEGER_ARRAY_JAVA = "[I]";
-    public static final String STRING_ARRAY_JAVA = "Ljava/lang/String;[]";
+    public static final String INTEGER_ARRAY_JAVA = "[I";
+    public static final String STRING_ARRAY_JAVA = "[Ljava/lang/String;";
 
     private final int type;
     private final List<String> properties;
