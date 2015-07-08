@@ -485,6 +485,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrefixOperator(@NotNull ToursParser.PrefixOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}

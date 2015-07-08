@@ -58,6 +58,9 @@ public class GrammarTest {
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/assignments_array_string.tours");
         assertEquals(0, errorList.size());
 
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/functions_return_array_type.tours");
+        assertEquals(0, errorList.size());
+
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType boolean) x) ; (statement (variableAssignment x = (expression false))) ; (variable (primitiveType boolean) y = (expression true)) ; })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/assignments_boolean.tours"));
 
@@ -69,6 +72,9 @@ public class GrammarTest {
 
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType string) x) ; (statement (variableAssignment x = (expression \"Hello\"))) ; (variable (primitiveType string) y = (expression \"Hello\")) ; })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/assignments_string.tours"));
+
+        assertEquals("(program (returnFunction func (variableType (arrayType boolean[])) makeArrayBoolean ( (variableType (primitiveType boolean)) i ) (returnBlock { (variable (arrayType boolean[]) j = (arrayAssignment { (expression i) , (expression i) })) ; (returnStatement return (expression j)) ; })) (returnFunction func (variableType (arrayType character[])) makeArrayCharacter ( (variableType (primitiveType character)) i ) (returnBlock { (variable (arrayType character[]) j = (arrayAssignment { (expression i) , (expression i) })) ; (returnStatement return (expression j)) ; })) (returnFunction func (variableType (arrayType integer[])) makeArrayInteger ( (variableType (primitiveType integer)) i ) (returnBlock { (variable (arrayType integer[]) j = (arrayAssignment { (expression i) , (expression i) })) ; (returnStatement return (expression j)) ; })) (returnFunction func (variableType (arrayType string[])) makeArrayString ( (variableType (primitiveType string)) i ) (returnBlock { (variable (arrayType string[]) j = (arrayAssignment { (expression i) , (expression i) })) ; (returnStatement return (expression j)) ; })) (mainFunction func main ( ) (block { (variable (arrayType boolean[]) b1 = (arrayAssignment (expression makeArrayBoolean ( (expression false) )))) ; (variable (arrayType boolean[]) b2 = (arrayAssignment new (primitiveType boolean) [ (expression 5) ])) ; (statement (variableAssignment b2 = (expression makeArrayBoolean ( (expression false) )))) ; (variable (arrayType character[]) c1 = (arrayAssignment (expression makeArrayCharacter ( (expression 'a') )))) ; (variable (arrayType character[]) c2 = (arrayAssignment new (primitiveType character) [ (expression 5) ])) ; (statement (variableAssignment c2 = (expression makeArrayCharacter ( (expression 'a') )))) ; (variable (arrayType integer[]) i1 = (arrayAssignment (expression makeArrayInteger ( (expression 35) )))) ; (variable (arrayType integer[]) i2 = (arrayAssignment new (primitiveType integer) [ (expression 5) ])) ; (statement (variableAssignment i2 = (expression makeArrayInteger ( (expression 36) )))) ; (variable (arrayType string[]) s1 = (arrayAssignment (expression makeArrayString ( (expression \"Hello World!\") )))) ; (variable (arrayType string[]) s2 = (arrayAssignment new (primitiveType string) [ (expression 5) ])) ; (statement (variableAssignment s2 = (expression makeArrayString ( (expression \"Hello World!\") )))) ; })))",
+                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions_return_array_type.tours"));
     }
 
     @Test
@@ -85,8 +91,12 @@ public class GrammarTest {
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/array_length.tours");
         assertEquals(0, errorList.size());
 
-        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/functions_primitive_type.tours");
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/functions_arguments_primitive_type.tours");
         assertEquals(0, errorList.size());
+
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/functions_arguments_array_type.tours");
+        assertEquals(0, errorList.size());
+
 
         errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/statement_for.tours");
         assertEquals(0, errorList.size());
@@ -104,7 +114,10 @@ public class GrammarTest {
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/array_length.tours"));
 
         assertEquals("(program (voidFunction func void awesome_print ( (variableType (primitiveType string)) text ) (block { (statement print ( (expression \"awesome\") , (expression text) )) ; })) (returnFunction func (variableType (primitiveType integer)) next_number ( (variableType (primitiveType integer)) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression i) (plusOperator +) (expression 1)) ))) ; })))",
-                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions_primitive_type.tours"));
+                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions_arguments_primitive_type.tours"));
+
+        assertEquals("(program (voidFunction func void awesome_print ( (variableType (arrayType string[])) text ) (block { (statement print ( (expression \"awesome\") , (expression text [ (expression 0) ]) , (expression text [ (expression 1) ]) )) ; })) (returnFunction func (variableType (primitiveType integer)) next_number ( (variableType (arrayType integer[])) i ) (returnBlock { (returnStatement return (expression print ( (expression (expression (expression i [ (expression 0) ]) (plusOperator +) (expression i [ (expression 1) ])) (plusOperator +) (expression 1)) ))) ; })))",
+                TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/functions_arguments_array_type.tours"));
 
         assertEquals("(program (mainFunction func main ( ) (block { (variable (primitiveType integer) i = (expression 0)) ; (conditionalStatement for ( (variable (primitiveType integer) x = (expression 1)) ; (expression (expression x) (compareOperator <) (expression 35)) ; (statement (variableAssignment x = (expression (expression x) (plusOperator +) (expression 1)))) ) (compound { (statement (variableAssignment i = (expression (expression i) (plusOperator +) (expression 1)))) ; })) })))",
                 TestHelper.toToursParseTreeString("src/test/java/tours/examples/typechecker/statement_for_single.tours"));

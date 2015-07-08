@@ -1,0 +1,37 @@
+func boolean[] makeArrayBoolean(boolean i) {
+    boolean[] j = {i, i};
+    return j;
+}
+
+func character[] makeArrayCharacter(character i) {
+    character[] j = {i, i};
+    return j;
+}
+
+func integer[] makeArrayInteger(integer i) {
+    integer[] j = {i, i};
+    return j;
+}
+
+func string[] makeArrayString(string i) {
+    string[] j = {i, i};
+    return j;
+}
+
+func main() {
+    boolean[] b1 = makeArrayBoolean(false);
+    boolean[] b2 = new boolean[5];
+    b2 = makeArrayBoolean(false);
+
+    character[] c1 = makeArrayCharacter('a');
+    character[] c2 = new character[5];
+    c2 = makeArrayCharacter('a');
+
+    integer[] i1 = makeArrayInteger(35);
+    integer[] i2 = new integer[5];
+    i2 = makeArrayInteger(36);
+
+    string[] s1 = makeArrayString("Hello World!");
+    string[] s2 = new string[5];
+    s2 = makeArrayString("Hello World!");
+}

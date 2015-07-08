@@ -276,6 +276,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code arrayAssignmentExpression}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ToursParser#prefixOperator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

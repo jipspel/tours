@@ -459,6 +459,18 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitArrayAssignmentNew(@NotNull ToursParser.ArrayAssignmentNewContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code arrayAssignmentExpression}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code arrayAssignmentExpression}
+	 * labeled alternative in {@link ToursParser#arrayAssignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayAssignmentExpression(@NotNull ToursParser.ArrayAssignmentExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ToursParser#prefixOperator}.
 	 * @param ctx the parse tree
 	 */

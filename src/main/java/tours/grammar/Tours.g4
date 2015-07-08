@@ -90,6 +90,7 @@ compound
 arrayAssignment
   : LBRACE expression (COMMA expression)* RBRACE    #arrayAssignmentWithInitialisation
   | NEW primitiveType LBLOCK expression RBLOCK      #arrayAssignmentNew
+  | expression                                      #arrayAssignmentExpression
   ;
 
 /** Prefix operator. */
