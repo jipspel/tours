@@ -1,0 +1,3 @@
+func string[] main(String[] s) {
+    return s;
+}

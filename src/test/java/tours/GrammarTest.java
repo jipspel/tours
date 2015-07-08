@@ -181,4 +181,23 @@ public class GrammarTest {
         assertEquals("line 5:17 mismatched input ';' expecting {<EOF>, FUNC}",
                 errorList.get(1));
     }
+
+    @Test
+    public void testMultipleMainFunctions() throws  IOException {
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/invalid/invalid_main_function_void.tours");
+        assertEquals(1, errorList.size());
+        assertEquals("line 1:10 no viable alternative at input 'funcvoidmain'",
+                errorList.get(0));
+
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/invalid/invalid_main_function_return_array.tours");
+        assertEquals(1, errorList.size());
+        assertEquals("line 1:14 no viable alternative at input 'funcstring[]main'",
+                errorList.get(0));
+
+        errorList = TestHelper.parseTours("src/test/java/tours/examples/typechecker/invalid/invalid_main_function_return_primitive.tours");
+        assertEquals(1, errorList.size());
+        assertEquals("line 1:12 no viable alternative at input 'funcstringmain'",
+                errorList.get(0));
+
+    }
 }

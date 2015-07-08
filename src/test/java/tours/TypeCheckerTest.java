@@ -336,7 +336,8 @@ public class TypeCheckerTest {
 
     @Test
     public void testLengthOnPrimitiveType() {
-        List<String> errors = Arrays.asList("Error <expected array> on line 3, pos 10",
+        List<String> errors = Arrays.asList(
+                "Error <expected array> on line 3, pos 10",
                 "Error <expected array> on line 6, pos 10",
                 "Error <expected array> on line 9, pos 10",
                 "Error <expected array> on line 12, pos 10"
