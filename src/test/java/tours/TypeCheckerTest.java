@@ -58,8 +58,9 @@ public class TypeCheckerTest {
 
     @Test
     public void testFunctions() {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions_primitive_type.tours");
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions_array_type.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions_arguments_primitive_type.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions_arguments_array_type.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/functions_return_array_type.tours");
     }
 
     @Test
@@ -130,6 +131,17 @@ public class TypeCheckerTest {
                 "Error <mismatching types> on line 9, pos 14"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_array_length.tours");
+    }
+
+    @Test
+    public void testMismatchingTypesArrayReturn() {
+        List<String> errors = Arrays.asList(
+                "Error <mismatching types> on line 22, pos 16",
+                "Error <mismatching types> on line 23, pos 18",
+                "Error <mismatching types> on line 24, pos 16",
+                "Error <mismatching types> on line 25, pos 13"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_return_array.tours");
     }
 
     @Test

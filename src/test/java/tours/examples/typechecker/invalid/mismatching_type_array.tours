@@ -32,3 +32,4 @@ func main() {
     boolean[] k = new boolean['3'];
     boolean[] l = new boolean[true];
 }
+
