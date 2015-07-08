@@ -1,0 +1,17 @@
+func void awesome_print(string[] text) {
+    print("awesome", text[0], text[1]);
+}
+
+func integer next_number(integer[] i) {
+    return print(i[0] + i[1] + 1);
+}
+
+
+func main() {
+    string[] text = {"Hello", "World!"};
+    awesome_print(text);
+
+    integer[] i = {33, 1};
+    integer j = next_number(i);
+    print(j+1);
+}

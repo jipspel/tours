@@ -75,7 +75,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             for (int i = 0; i < function.variableType().size(); i++) {
                 ToursParser.VariableTypeContext variableType = function.variableType(i);
                 Type type = new Type(variableType.arrayType() != null ?
-                        variableType.arrayType().getText() : variableType.primitiveType().getText());
+                        variableType.arrayType().getText() :
+                        variableType.primitiveType().getText());
                 argumentTypes.add(type);
             }
 
@@ -687,7 +688,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitPlusExpression(@NotNull ToursParser.PlusExpressionContext ctx) {
-        System.out.println(ctx.getText());
         symbolTable.addType(ctx.getText(), Type.INTEGER);
 
         ST st = ctx.plusOperator().MINUS() == null ? stGroup.getInstanceOf("iadd") : stGroup.getInstanceOf("isub");

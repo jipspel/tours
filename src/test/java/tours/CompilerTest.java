@@ -37,6 +37,7 @@ public class CompilerTest {
             expectedOutputString += line + System.getProperty("line.separator");
         }
         try {
+            System.out.println(compileAndRun(filename, input));
             assertEquals(expectedOutputString, compileAndRun(filename, input));
         } catch (Throwable throwable) {
             fail(throwable.toString());
@@ -215,6 +216,24 @@ public class CompilerTest {
                 "37",
                 "38"
         ), "src/test/java/tours/examples/compiler/array_length.tours");
+    }
+
+    @Test
+    public void testFunctionArguments() {
+        assertEqualsOutput(Arrays.asList(
+                "awesome",
+                "Hello World!",
+                "35",
+                "36"
+        ), "src/test/java/tours/examples/compiler/functions_arguments_primitive_type.tours");
+
+        assertEqualsOutput(Arrays.asList(
+                "awesome",
+                "Hello",
+                "World!",
+                "35",
+                "36"
+        ), "src/test/java/tours/examples/compiler/functions_arguments_array_type.tours");
     }
 
     @Test(expected=ArrayIndexOutOfBoundsException.class)
