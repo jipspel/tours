@@ -8,4 +8,14 @@ func main() {
 
     i2[0] = 38;
     print(i2[0]);
+
+    integer[] i3 = {39, 40};
+    print(i3[0]);
+
+    i3 = new integer[5];
+    i3[4] = 41;
+    print(i3[4]);
+
+    i3 = {42, 43, 44};
+    print(i3[1]);
 }

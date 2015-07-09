@@ -8,4 +8,14 @@ func main() {
 
     b2[0] = true;
     print(b2[0]);
+
+    boolean[] b3 = {true, false};
+    print(b3[0]);
+
+    b3 = new boolean[5];
+    b3[4] = false;
+    print(b3[4]);
+
+    b3 = {true, true, false};
+    print(b3[1]);
 }

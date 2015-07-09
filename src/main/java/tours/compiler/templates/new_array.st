@@ -1,7 +1,7 @@
-new_array(expression, initialisation, array_type, identifier_number) ::=
+new_array(expression, prefix, initialisation, array_type, identifier_number) ::=
 <<
 <expression>
-newarray <array_type>
+<prefix>newarray <array_type>
 <initialisation>
 astore <identifier_number>
 >>

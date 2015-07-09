@@ -8,4 +8,14 @@ func main() {
 
     s2[0] = "39";
     print(s2[0]);
+
+    string[] s3 = {"40", "41"};
+    print(s3[0]);
+
+    s3 = new string[5];
+    s3[4] = "42";
+    print(s3[4]);
+
+    s3 = {"43", "44", "45"};
+    print(s3[1]);
 }

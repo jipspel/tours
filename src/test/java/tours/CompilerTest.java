@@ -37,7 +37,6 @@ public class CompilerTest {
             expectedOutputString += line + System.getProperty("line.separator");
         }
         try {
-            System.out.println(compileAndRun(filename, input));
             assertEquals(expectedOutputString, compileAndRun(filename, input));
         } catch (Throwable throwable) {
             fail(throwable.toString());
@@ -67,10 +66,10 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList("a", "b", "c"), "src/test/java/tours/examples/compiler/assignments_character.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_integer.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_string.tours");
-        assertEqualsOutput(Arrays.asList("true", "false", "false", "true"), "src/test/java/tours/examples/compiler/assignments_array_boolean.tours");
-        assertEqualsOutput(Arrays.asList("a", "b", "c", "d"), "src/test/java/tours/examples/compiler/assignments_array_character.tours");
-        assertEqualsOutput(Arrays.asList("35", "36", "37", "38"), "src/test/java/tours/examples/compiler/assignments_array_integer.tours");
-        assertEqualsOutput(Arrays.asList("35", "36", "37", "39"), "src/test/java/tours/examples/compiler/assignments_array_string.tours");
+        assertEqualsOutput(Arrays.asList("true", "false", "false", "true", "true", "false", "true"), "src/test/java/tours/examples/compiler/assignments_array_boolean.tours");
+        assertEqualsOutput(Arrays.asList("a", "b", "c", "d", "e", "g", "i"), "src/test/java/tours/examples/compiler/assignments_array_character.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37", "38", "39", "41", "43"), "src/test/java/tours/examples/compiler/assignments_array_integer.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37", "39", "40", "42", "44"), "src/test/java/tours/examples/compiler/assignments_array_string.tours");
         assertEqualsOutput(Arrays.asList("35", "36"), "src/test/java/tours/examples/compiler/assignments_if_else.tours");
     }
 

@@ -8,4 +8,14 @@ func main() {
 
     c2[0] = 'd';
     print(c2[0]);
+
+    character[] c3 = {'e', 'f'};
+    print(c3[0]);
+
+    c3 = new character[5];
+    c3[4] = 'g';
+    print(c3[4]);
+
+    c3 = {'h', 'i', 'j'};
+    print(c3[1]);
 }
