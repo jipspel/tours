@@ -1213,11 +1213,8 @@ public class ToursParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
-		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public VariableAssignmentContext variableAssignment() {
+			return getRuleContext(VariableAssignmentContext.class,0);
 		}
 		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
 		public CompoundContext compound() {
@@ -1225,6 +1222,9 @@ public class ToursParser extends Parser {
 		}
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
+		}
+		public StatementContext statement() {
+			return getRuleContext(StatementContext.class,0);
 		}
 		public ForStatementContext(ConditionalStatementContext ctx) { copyFrom(ctx); }
 		@Override
@@ -1364,7 +1364,7 @@ public class ToursParser extends Parser {
 				setState(228); 
 				match(SEMI);
 				setState(229); 
-				statement();
+				variableAssignment();
 				setState(230); 
 				match(RPAR);
 				setState(231); 
@@ -3120,7 +3120,7 @@ public class ToursParser extends Parser {
 		"\2\u00df\u00e2\7)\2\2\u00e0\u00e3\5\4\3\2\u00e1\u00e3\5\22\n\2\u00e2\u00e0"+
 		"\3\2\2\2\u00e2\u00e1\3\2\2\2\u00e2\u00e3\3\2\2\2\u00e3\u00e4\3\2\2\2\u00e4"+
 		"\u00e5\7\64\2\2\u00e5\u00e6\5\30\r\2\u00e6\u00e7\7\64\2\2\u00e7\u00e8"+
-		"\5\22\n\2\u00e8\u00e9\7\63\2\2\u00e9\u00ea\5\32\16\2\u00ea\u00ec\3\2\2"+
+		"\5\6\4\2\u00e8\u00e9\7\63\2\2\u00e9\u00ea\5\32\16\2\u00ea\u00ec\3\2\2"+
 		"\2\u00eb\u00cf\3\2\2\2\u00eb\u00d8\3\2\2\2\u00eb\u00de\3\2\2\2\u00ec\25"+
 		"\3\2\2\2\u00ed\u00ee\7\27\2\2\u00ee\u00ef\5\30\r\2\u00ef\27\3\2\2\2\u00f0"+
 		"\u00f1\b\r\1\2\u00f1\u00f2\5\34\17\2\u00f2\u00f3\5\30\r\27\u00f3\u0138"+

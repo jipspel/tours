@@ -503,10 +503,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("label_number", labelCount);
 
         st.add("initialization", (ctx.variable() != null) ? visit(ctx.variable()).render() :
-                (ctx.statement().size() == 2) ?
-                        visit(ctx.statement(0)).render() : "");
+                (ctx.statement() != null) ?
+                        visit(ctx.statement()).render() : "");
         st.add("termination", visit(ctx.expression()).render());
-        st.add("increment", visit(ctx.statement(ctx.statement().size() - 1)).render());
+        st.add("increment", visit(ctx.variableAssignment()).render());
         st.add("block_for", visit(ctx.compound()).render());
 
         symbolTable.closeScope();
