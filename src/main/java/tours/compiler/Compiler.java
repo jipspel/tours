@@ -170,16 +170,20 @@ public class Compiler extends ToursBaseVisitor<ST> {
             stNewArray = visit(expression);
         }
 
-
         List<String> stList = new ArrayList<>();
+        if (ctx.expression() != null){
+            stList.add(stNewArray.render());
+        }
+
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             symbolTable.addVariable(identifier.getText(), new Type(ctx.arrayType().getText()));
 
             if (expression != null) {
+                ST stStore = stGroup.getInstanceOf("store_array");
                 Variable variable = (Variable) symbolTable.getSymbol(identifier.getText());
-                stNewArray.add("identifier_number", variable.getIdentifier());
+                stStore.add("identifier_number", variable.getIdentifier());
 
-                stList.add(stNewArray.render());
+                stList.add(stStore.render());
             }
         }
         st.add("blocks", stList);
@@ -202,14 +206,22 @@ public class Compiler extends ToursBaseVisitor<ST> {
         } // assignment of array type
         else if(ctx.LBLOCK() == null && symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() == null) {
             Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
+            st = stGroup.getInstanceOf("concatenator");
 
+            List<String> stList = new ArrayList<>();
             if (ctx.expression(0) instanceof ToursParser.FunctionExpressionContext) {
-                st = stGroup.getInstanceOf("new_array_function_initialisation");
-                st.add("function_call", visit(ctx.expression(0)).render());
+                ST stArray = stGroup.getInstanceOf("new_array_function_initialisation");
+                stArray.add("function_call", visit(ctx.expression(0)).render());
+                stList.add(stArray.render());
             } else {
-                st = visit(ctx.expression(0));
+                stList.add(visit(ctx.expression(0)).render());
             }
-            st.add("identifier_number", variable.getIdentifier());
+
+            ST stStore = stGroup.getInstanceOf("store_array");
+            stStore.add("identifier_number", variable.getIdentifier());
+            stList.add(stStore.render());
+
+            st.add("blocks", stList);
         } // assignment of element of array type
         else{
             st = stGroup.getInstanceOf("assignment_array_per_element");
@@ -251,7 +263,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", Arrays.asList(visit(ctx.block()).render(), stGroup.getInstanceOf("return").render()));
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
-        st.add("stack_limit", 4);
+        st.add("stack_limit", 100);
         st.add("return", "return");
 
 
@@ -286,7 +298,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", visit(ctx.returnBlock()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 100);
-        st.add("stack_limit", 4);
+        st.add("stack_limit", 100);
 
         // TODO test bouwen
         String returnString = returnType.equals(Type.BOOLEAN) ||
@@ -312,7 +324,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", visit(ctx.block()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
-        st.add("stack_limit", 4);
+        st.add("stack_limit", 100);
 
         st.add("return", "return");
         symbolTable.closeScope();
@@ -788,5 +800,4 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("array_type", arrayType.getNewArrayType());
         return st;
     }
-
 }

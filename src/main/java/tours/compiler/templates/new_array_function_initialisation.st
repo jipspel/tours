@@ -1,5 +1,4 @@
-new_array_function_initialisation(function_call, identifier_number) ::=
+new_array_function_initialisation(function_call) ::=
 <<
 <function_call>
-astore <identifier_number>
 >>
