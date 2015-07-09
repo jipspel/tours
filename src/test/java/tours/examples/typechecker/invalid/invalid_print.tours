@@ -1,0 +1,5 @@
+func main() {
+    string[] s1;
+    print(s1);
+    string[] s2 = print(s1);
+}
