@@ -183,11 +183,17 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
+        if (symbolTable.getType(ctx.expression().getText()).getPrimitiveType() != null) {
+            errors.add(String.format("Error <print not defined for array element> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
+        }
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(ctx.expression().getText()));
     }
 
     @Override
     public void exitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) {
+        if (symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType() != null) {
+            errors.add(String.format("Error <input not defined for array element> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(), ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
+        }
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(ctx.IDENTIFIER().getText()));
     }
 
@@ -198,11 +204,25 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitInputStatement(@NotNull ToursParser.InputStatementContext ctx) {
+        for (TerminalNode identifier : ctx.IDENTIFIER()) {
+            if (symbolTable.getType(identifier.getText()).getPrimitiveType() != null) {
+                errors.add(String.format("Error <input not defined for array element> on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
+
+            }
+        }
+
         symbolTable.addType(ctx.getText(), Type.VOID);
     }
 
     @Override
     public void exitPrintStatement(@NotNull ToursParser.PrintStatementContext ctx) {
+        for (ToursParser.ExpressionContext expression : ctx.expression()) {
+            if (expression != null && symbolTable.getType(expression.getText()) != null &&
+                    symbolTable.getType(expression.getText()).getPrimitiveType() != null) {
+                errors.add(String.format("Error <print not defined for array element> on line %s, pos %s", expression.getStart().getLine(), expression.getStart().getCharPositionInLine()));
+
+            }
+        }
         symbolTable.addType(ctx.getText(), Type.VOID);
     }
 
