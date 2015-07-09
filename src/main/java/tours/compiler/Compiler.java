@@ -489,6 +489,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx) {
         symbolTable.openScope();
 
+        labelCount++;
+
         ST st = stGroup.getInstanceOf("while");
         st.add("expression", visit(ctx.expression()).render());
         st.add("block_while", visit(ctx.compound()).render());
