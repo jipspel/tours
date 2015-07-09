@@ -209,6 +209,18 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code parenthesisExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenthesisExpression(@NotNull ToursParser.ParenthesisExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code parenthesisExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenthesisExpression(@NotNull ToursParser.ParenthesisExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code arrayNewExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -400,18 +412,6 @@ public interface ToursListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parExpression}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterParExpression(@NotNull ToursParser.ParExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parExpression}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitParExpression(@NotNull ToursParser.ParExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code arrayElementExpression}
 	 * labeled alternative in {@link ToursParser#expression}.

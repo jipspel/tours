@@ -130,6 +130,13 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdentifierExpression(@NotNull ToursParser.IdentifierExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code parenthesisExpression}
+	 * labeled alternative in {@link ToursParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenthesisExpression(@NotNull ToursParser.ParenthesisExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code arrayNewExpression}
 	 * labeled alternative in {@link ToursParser#expression}.
 	 * @param ctx the parse tree
@@ -241,13 +248,6 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code parExpression}
-	 * labeled alternative in {@link ToursParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParExpression(@NotNull ToursParser.ParExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code arrayElementExpression}
 	 * labeled alternative in {@link ToursParser#expression}.

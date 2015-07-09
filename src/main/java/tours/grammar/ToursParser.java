@@ -1483,6 +1483,27 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class ParenthesisExpressionContext extends ExpressionContext {
+		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
+		public ParenthesisExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterParenthesisExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitParenthesisExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitParenthesisExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class ArrayNewExpressionContext extends ExpressionContext {
 		public TerminalNode NEW() { return getToken(ToursParser.NEW, 0); }
 		public PrimitiveTypeContext primitiveType() {
@@ -1837,27 +1858,6 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ParExpressionContext extends ExpressionContext {
-		public TerminalNode LPAR() { return getToken(ToursParser.LPAR, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public TerminalNode RPAR() { return getToken(ToursParser.RPAR, 0); }
-		public ParExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterParExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitParExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitParExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class ArrayElementExpressionContext extends ExpressionContext {
 		public TerminalNode IDENTIFIER() { return getToken(ToursParser.IDENTIFIER, 0); }
 		public TerminalNode LBLOCK() { return getToken(ToursParser.LBLOCK, 0); }
@@ -1956,7 +1956,7 @@ public class ToursParser extends Parser {
 				break;
 			case 2:
 				{
-				_localctx = new ParExpressionContext(_localctx);
+				_localctx = new ParenthesisExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(242); 

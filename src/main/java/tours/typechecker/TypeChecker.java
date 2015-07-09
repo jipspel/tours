@@ -443,7 +443,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitParExpression(@NotNull ToursParser.ParExpressionContext ctx) {
+    public void exitParenthesisExpression(@NotNull ToursParser.ParenthesisExpressionContext ctx) {
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(ctx.expression().getText()));
     }
 

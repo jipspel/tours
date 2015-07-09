@@ -60,7 +60,7 @@ returnStatement
     ;
 
 /** Expression.*/
-expression:     LPAR expression RPAR                                            #parExpression
+expression:     LPAR expression RPAR                                            #parenthesisExpression
               | prefixOperator expression                                       #prefixExpression
               | expression multiplyOperator expression                          #multiplyExpression
               | expression plusOperator expression                              #plusExpression

@@ -233,6 +233,18 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterParenthesisExpression(@NotNull ToursParser.ParenthesisExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParenthesisExpression(@NotNull ToursParser.ParenthesisExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArrayNewExpression(@NotNull ToursParser.ArrayNewExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -420,18 +432,6 @@ public class ToursBaseListener implements ToursListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCharacterExpression(@NotNull ToursParser.CharacterExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParExpression(@NotNull ToursParser.ParExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParExpression(@NotNull ToursParser.ParExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -696,7 +696,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitParExpression(@NotNull ToursParser.ParExpressionContext ctx) {
+    public ST visitParenthesisExpression(@NotNull ToursParser.ParenthesisExpressionContext ctx) {
         visit(ctx.expression());
         symbolTable.addType(ctx.getText(), symbolTable.getSymbol(ctx.expression().getText()).getType());
 
