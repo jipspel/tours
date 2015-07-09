@@ -8,8 +8,8 @@ program
 
 /** Variable declaration. */
 variable
-    : primitiveType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?    #variablePrimitive
-    | arrayType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?   #variableArray
+    : primitiveType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)? #variablePrimitive
+    | arrayType IDENTIFIER (COMMA IDENTIFIER)* (ASSIGNMENT expression)?     #variableArray
     ;
 
 /** Variable assignment */
@@ -49,9 +49,9 @@ statement: variableAssignment                               #assignStatement
          ;
 
 /** Coditional statement. */
-conditionalStatement: IF LPAR expression RPAR compound (ELSE compound)?                             #ifStatement
-                    | WHILE LPAR expression RPAR compound                                           #whileStatement
-                    | FOR LPAR (variable | statement)? SEMI expression SEMI variableAssignment RPAR compound #forStatement
+conditionalStatement: IF LPAR expression RPAR compound (ELSE compound)?                                         #ifStatement
+                    | WHILE LPAR expression RPAR compound                                                       #whileStatement
+                    | FOR LPAR (variable | statement)? SEMI expression SEMI variableAssignment RPAR compound    #forStatement
                     ;
 
 /** Return statement. */

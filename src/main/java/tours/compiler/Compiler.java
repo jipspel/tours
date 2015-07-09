@@ -159,13 +159,15 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitVariableArray(@NotNull ToursParser.VariableArrayContext ctx) {
         ST st = stGroup.getInstanceOf("concatenator");
 
-        ST stNewArray;
+        ToursParser.ExpressionContext expression = ctx.expression();
 
-        if (ctx.expression() instanceof ToursParser.FunctionExpressionContext) {
+        ST stNewArray = null;
+
+        if (expression instanceof ToursParser.FunctionExpressionContext) {
             stNewArray = stGroup.getInstanceOf("new_array_function_initialisation");
-            stNewArray.add("function_call", visit(ctx.expression()).render());
-        } else {
-            stNewArray = visit(ctx.expression());
+            stNewArray.add("function_call", visit(expression).render());
+        } else if (expression != null) {
+            stNewArray = visit(expression);
         }
 
 
@@ -173,10 +175,12 @@ public class Compiler extends ToursBaseVisitor<ST> {
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             symbolTable.addVariable(identifier.getText(), new Type(ctx.arrayType().getText()));
 
-            Variable variable = (Variable) symbolTable.getSymbol(identifier.getText());
-            stNewArray.add("identifier_number", variable.getIdentifier());
+            if (expression != null) {
+                Variable variable = (Variable) symbolTable.getSymbol(identifier.getText());
+                stNewArray.add("identifier_number", variable.getIdentifier());
 
-            stList.add(stNewArray.render());
+                stList.add(stNewArray.render());
+            }
         }
         st.add("blocks", stList);
 

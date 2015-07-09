@@ -18,4 +18,12 @@ func main() {
 
     i3 = {42, 43, 44};
     print(i3[1]);
+
+    integer[] i4;
+    i4 = new integer[3];
+    i4[1] = 44;
+    print(i4[1]);
+
+    i4= {45};
+    print(i4[0]);
 }

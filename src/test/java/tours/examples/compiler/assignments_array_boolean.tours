@@ -18,4 +18,12 @@ func main() {
 
     b3 = {true, true, false};
     print(b3[1]);
+
+    boolean[] b4;
+    b4 = new boolean[3];
+    b4[1] = false;
+    print(b4[1]);
+
+    b4= {true};
+    print(b4[0]);
 }

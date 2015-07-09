@@ -66,10 +66,10 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList("a", "b", "c"), "src/test/java/tours/examples/compiler/assignments_character.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_integer.tours");
         assertEqualsOutput(Arrays.asList("35", "36", "37"), "src/test/java/tours/examples/compiler/assignments_string.tours");
-        assertEqualsOutput(Arrays.asList("true", "false", "false", "true", "true", "false", "true"), "src/test/java/tours/examples/compiler/assignments_array_boolean.tours");
-        assertEqualsOutput(Arrays.asList("a", "b", "c", "d", "e", "g", "i"), "src/test/java/tours/examples/compiler/assignments_array_character.tours");
-        assertEqualsOutput(Arrays.asList("35", "36", "37", "38", "39", "41", "43"), "src/test/java/tours/examples/compiler/assignments_array_integer.tours");
-        assertEqualsOutput(Arrays.asList("35", "36", "37", "39", "40", "42", "44"), "src/test/java/tours/examples/compiler/assignments_array_string.tours");
+        assertEqualsOutput(Arrays.asList("true", "false", "false", "true", "true", "false", "true", "false", "true"), "src/test/java/tours/examples/compiler/assignments_array_boolean.tours");
+        assertEqualsOutput(Arrays.asList("a", "b", "c", "d", "e", "g", "i", "j", "k"), "src/test/java/tours/examples/compiler/assignments_array_character.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37", "38", "39", "41", "43", "44", "45"), "src/test/java/tours/examples/compiler/assignments_array_integer.tours");
+        assertEqualsOutput(Arrays.asList("35", "36", "37", "39", "40", "42", "44", "45", "46"), "src/test/java/tours/examples/compiler/assignments_array_string.tours");
         assertEqualsOutput(Arrays.asList("35", "36"), "src/test/java/tours/examples/compiler/assignments_if_else.tours");
     }
 
