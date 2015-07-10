@@ -66,6 +66,20 @@ public class TypeCheckerTest {
     @Test
     public void testInput() {
         testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/input_expressions.tours");
+        List<String> errors = Arrays.asList(
+                "Error <input not defined for array element> on line 3, pos 10",
+                "Error <input not defined for array element> on line 4, pos 24"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_input.tours");
+    }
+
+    @Test
+    public void testInvalidPrint() {
+        List<String> errors = Arrays.asList(
+                "Error <print not defined for array element> on line 3, pos 10",
+                "Error <print not defined for array element> on line 4, pos 24"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_print.tours");
     }
 
     @Test
