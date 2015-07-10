@@ -98,9 +98,6 @@ multiplyOperator: STAR | SLASH | MODULO;
 /** Additive operator. */
 plusOperator: PLUS | MINUS;
 
-/** Boolean operator. */
-booleanOperator: AND | OR;
-
 /** Comparison operator. */
 compareOperator: LE | LT | GE | GT | EQ | NE;
 

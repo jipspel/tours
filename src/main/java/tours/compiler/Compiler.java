@@ -752,10 +752,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
         return st;
     }
 
-    public ST visitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx) {
-        return concatenate(ctx);
-    }
-
     @Override
     public ST visitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx) {
         return concatenate(ctx);

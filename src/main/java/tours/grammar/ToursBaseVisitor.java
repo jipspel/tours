@@ -312,13 +312,6 @@ public class ToursBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

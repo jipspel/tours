@@ -11,5 +11,7 @@ func main() {
         print("Too bad!");
     }
 
-    if (x < 35) {true;}
+    if (x < 35) {
+        print(x);
+    }
 }

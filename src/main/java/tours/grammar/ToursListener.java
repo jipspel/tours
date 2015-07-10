@@ -489,16 +489,6 @@ public interface ToursListener extends ParseTreeListener {
 	 */
 	void exitPlusOperator(@NotNull ToursParser.PlusOperatorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ToursParser#booleanOperator}.
-	 * @param ctx the parse tree
-	 */
-	void enterBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ToursParser#booleanOperator}.
-	 * @param ctx the parse tree
-	 */
-	void exitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ToursParser#compareOperator}.
 	 * @param ctx the parse tree
 	 */

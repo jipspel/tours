@@ -294,12 +294,6 @@ public interface ToursVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPlusOperator(@NotNull ToursParser.PlusOperatorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ToursParser#booleanOperator}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ToursParser#compareOperator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

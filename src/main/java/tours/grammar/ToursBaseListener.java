@@ -521,18 +521,6 @@ public class ToursBaseListener implements ToursListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBooleanOperator(@NotNull ToursParser.BooleanOperatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCompareOperator(@NotNull ToursParser.CompareOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
