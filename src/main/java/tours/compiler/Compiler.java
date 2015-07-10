@@ -79,7 +79,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
                         variableType.primitiveType().getText());
                 argumentTypes.add(type);
             }
-
             symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
         }
 
@@ -95,7 +94,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
                         variableType.arrayType().getText() : variableType.primitiveType().getText());
                 argumentTypes.add(type);
             }
-
             symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
         }
 
@@ -120,6 +118,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
             if (child != null) {
                 blocks.add(child.render());
             }
+
         }
         st.add("blocks", blocks);
         return st;
@@ -186,6 +185,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
                 stList.add(stStore.render());
             }
         }
+        if (expression!= null) {
+            stList.add(stGroup.getInstanceOf("pop").render());
+        }
         st.add("blocks", stList);
 
         return st;
@@ -220,6 +222,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
             ST stStore = stGroup.getInstanceOf("store_array");
             stStore.add("identifier_number", variable.getIdentifier());
             stList.add(stStore.render());
+            stList.add(stGroup.getInstanceOf("pop").render());
 
             st.add("blocks", stList);
         } // assignment of element of array type
@@ -244,15 +247,13 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         Type returnType = Type.VOID;
         List<Type> argumentTypes = new ArrayList<>();
-        Map<String, Type> variables = new HashMap<>();
 
         for (int i = 0; i < ctx.variableType().size(); i++) {
             Type type = new Type(ctx.variableType(i).getText());
             argumentTypes.add(type);
-            variables.put(ctx.IDENTIFIER(i + 1).getText(), type);
+            symbolTable.addVariable(ctx.IDENTIFIER().get(i+1).getText(), type);
         }
 
-        symbolTable.addArgumentVariables(variables);
 
         ST st = stGroup.getInstanceOf("function");
         st.add("return_type", returnType.getJavaObjectType());
@@ -260,7 +261,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
         st.add("argument_types", arguments);
-        st.add("block", Arrays.asList(visit(ctx.block()).render(), stGroup.getInstanceOf("return").render()));
+        st.add("block", visit(ctx.block()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
         st.add("stack_limit", 100);
@@ -277,17 +278,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
         symbolTable.openScope();
 
         List<Type> argumentTypes = new ArrayList<>();
-        Map<String, Type> variables = new HashMap<>();
 
         for (int i = 1; i < ctx.variableType().size(); i++) {
             Type type = new Type(ctx.variableType(i).getText());
             argumentTypes.add(type);
-            variables.put(ctx.IDENTIFIER(i).getText(), type);
+            symbolTable.addVariable(ctx.IDENTIFIER(i).getText(), type);
         }
 
         Type returnType = new Type(ctx.variableType(0).getText());
-
-        symbolTable.addArgumentVariables(variables);
 
         ST st = stGroup.getInstanceOf("function");
         st.add("return_type", returnType.getJavaObjectType());
@@ -374,9 +372,22 @@ public class Compiler extends ToursBaseVisitor<ST> {
         List<String> expressions = new ArrayList<>();
         ctx.expression().stream().forEach(expression ->
                 expressions.add(visit(expression).render()));
+        List<String> expressionse = reverseList(expressions);
+
+
+
         st.add("blocks", Arrays.asList(expressions, stInvokeFunction.render()));
 
         return st;
+    }
+
+    private List<String> reverseList(List<String> expressions) {
+        List<String> result = new ArrayList<>();
+        for(int i = expressions.size()-1; i >=0; i--) {
+            result.add(expressions.get(i));
+        }
+        return result;
+
     }
 
     @Override

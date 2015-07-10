@@ -1,0 +1,18 @@
+func character getCharacter(character[] c1, character[] c2, character[] c3, character[] c4, character[] c5) {
+    print(c1[0]);
+    print(c2[0]);
+    print(c3[0]);
+    return c3[1];
+}
+
+func main() {
+    character c2 = getCharacter({'a', 'b'}, {'b', 'b'}, {'c', 'b'}, {'d', 'b'}, {'e', 'b'});
+    printFirst({'a'}, {1,2,3,4}, {"Hello World!", ""}, {true, false, false, false});
+}
+
+func void printFirst(character[] c1, integer[] c2, string[] c3, boolean[] c4) {
+    print(c1[0]);
+    print(c2[0]);
+    print(c3[0]);
+    print(c4[0]);
+}

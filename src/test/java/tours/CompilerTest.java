@@ -233,6 +233,16 @@ public class CompilerTest {
                 "35",
                 "36"
         ), "src/test/java/tours/examples/compiler/functions_arguments_array_type.tours");
+
+        assertEqualsOutput(Arrays.asList(
+                "a",
+                "b",
+                "c",
+                "a",
+                "1",
+                "Hello World!",
+                "true"
+        ), "src/test/java/tours/examples/compiler/function_argument_order.tours");
     }
 
     @Test(expected=ArrayIndexOutOfBoundsException.class)

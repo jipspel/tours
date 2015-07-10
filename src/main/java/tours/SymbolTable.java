@@ -72,15 +72,6 @@ public class SymbolTable {
     }
 
     /**
-     * Adds the argument variables to the symbol table
-     * @param variables map with the identifier and the type of the arguments
-     */
-    public void addArgumentVariables(Map<String, Type> variables) {
-        variables.forEach(this::addVariable);
-    }
-
-
-    /**
      * Adds a type with identifier to the symbol table
      * @param id the identifier
      * @param type the type
