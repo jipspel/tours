@@ -29,7 +29,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public Compiler(String className) {
         this.className = className;
         labelCount = 0;
-        maxNumberOfArguments = 1;
+        maxNumberOfArguments = 0;
         symbolTable = new SymbolTable();
     }
 
@@ -270,7 +270,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", visit(ctx.block()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
-        st.add("stack_limit", maxNumberOfArguments * 3 + 1);
+        st.add("stack_limit", arguments.size() + 4);
         st.add("return", "return");
 
 
@@ -302,7 +302,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", visit(ctx.returnBlock()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 100);
-        st.add("stack_limit", maxNumberOfArguments * 3 + 1);
+        st.add("stack_limit", arguments.size() + 4);
 
         // TODO test bouwen
         String returnString = returnType.equals(Type.BOOLEAN) ||
@@ -328,7 +328,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", visit(ctx.block()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
-        st.add("stack_limit", maxNumberOfArguments * 3 + 1);
+        st.add("stack_limit", maxNumberOfArguments + 4);
 
         st.add("return", "return");
         symbolTable.closeScope();
