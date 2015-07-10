@@ -37,7 +37,7 @@ block
     : LBRACE (((statement | variable | expression) SEMI) | conditionalStatement)* RBRACE
     ;
 
-/** Grouped sequence of statements. */
+/** Grouped sequence of statements with return. */
 returnBlock
     : LBRACE (((statement | variable | expression) SEMI) | conditionalStatement)* returnStatement SEMI RBRACE
     ;
@@ -83,7 +83,7 @@ expression:     LPAR expression RPAR                                            
               | TRUE                                                            #trueExpression
               | FALSE                                                           #falseExpression
               ;
-
+/** Compound expression */
 compound
     : LBRACE ((statement | variable | expression) SEMI | conditionalStatement)*
                           ((statement | variable | expression) SEMI) RBRACE
@@ -108,13 +108,13 @@ compareOperator: LE | LT | GE | GT | EQ | NE;
 variableType: primitiveType
             | arrayType
             ;
-
+/** Primitive types */
 primitiveType: INTEGER   #integerType
              | BOOLEAN   #booleanType
              | CHARACTER #characterType
              | STRING    #stringType
                 ;
-
+/** Array types */
 arrayType:   INTEGER_ARRAY   #integerArrayType
            | BOOLEAN_ARRAY   #booleanArrayType
            | CHARACTER_ARRAY #characterArrayType
@@ -151,7 +151,6 @@ WHILE:              W H I L E ;
 
 ASSIGNMENT:    '=';
 AND:           '&&';
-COLON:         ':';
 COMMA:         ',';
 DOT:           '.';
 DQUOTE:        '"';
