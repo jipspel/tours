@@ -2,17 +2,21 @@ package tours.compiler;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import tours.grammar.ToursErrorListener;
 import tours.grammar.ToursLexer;
 import tours.grammar.ToursParser;
+import tours.typechecker.TypeChecker;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.List;
 
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
@@ -46,12 +50,33 @@ public class CompilerTools {
         return program;
     }
 
+    public static TypeChecker typeCheck(String filename) {
+        ParseTreeWalker walker = new ParseTreeWalker();
+        TypeChecker typeChecker = new TypeChecker();
+        walker.walk(typeChecker, CompilerTools.toToursParseTree(filename));
+        return typeChecker;
+    }
+
     public static String toByteCode(String filename) {
+        TypeChecker typeChecker = typeCheck(filename);
+        if (typeChecker.getErrors().size() > 0) {
+            System.err.println("Error typechecking: " + filename);
+            System.err.println(typeChecker.getErrors());
+            System.exit(1);
+        }
+
         Compiler compiler = new Compiler("Tours");
         return compiler.process(filename).render();
     }
 
     public static void toByteCode(String filename, String destination) throws IOException {
+        TypeChecker typeChecker = typeCheck(filename);
+        if (typeChecker.getErrors().size() > 0) {
+            System.err.println("Error typechecking: " + filename);
+            System.err.println(typeChecker.getErrors());
+            System.exit(1);
+        }
+
         Compiler compiler = new Compiler("Tours");
         compiler.process(filename).write(new File(destination), null);
     }

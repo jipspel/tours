@@ -375,10 +375,6 @@ public class TypeCheckerTest {
     }
 
     private void testTypeCheckerErrors(List<String> expected, String filename) {
-        ParseTree tree = CompilerTools.toToursParseTree(filename);
-        ParseTreeWalker walker = new ParseTreeWalker();
-        TypeChecker typeChecker = new TypeChecker();
-        walker.walk(typeChecker, tree);
-        assertEquals(expected, typeChecker.getErrors());
+        assertEquals(expected, CompilerTools.typeCheck(filename).getErrors());
     }
 }
