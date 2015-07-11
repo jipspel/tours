@@ -62,16 +62,7 @@ public class CompilerTools {
         main.invoke(null, (Object) new String[]{byteCodeFilename, "-d", destinationFolder});
     }
 
-    public static String runClassFile(String klass, String workingDirectory, List<String> input) throws Throwable {
-        if (input != null) {
-            String inputLine = "";
-            for (String line : input) {
-                inputLine += line + System.getProperty("line.separator");
-            }
-            ByteArrayInputStream bais = new ByteArrayInputStream(inputLine.getBytes());
-            System.setIn(bais);
-        }
-
+    public static String runClassFile(String klass, String workingDirectory) throws Throwable {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(baos);
         System.setOut(printStream);
@@ -86,9 +77,5 @@ public class CompilerTools {
         }
 
         return baos.toString();
-    }
-
-    public static String runClassFile(String klass, String workingDirectory) throws Throwable {
-        return runClassFile(klass, workingDirectory, null);
     }
 }

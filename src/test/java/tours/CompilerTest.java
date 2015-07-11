@@ -3,7 +3,9 @@ package tours;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import tours.compiler.CompilerTools;
 
 import java.io.File;
@@ -14,8 +16,12 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 public class CompilerTest {
+
+    @Rule
+    public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
 
     @Before
     public void createWorkingDirectory() {
@@ -32,12 +38,16 @@ public class CompilerTest {
     }
 
     private void assertEqualsOutput(List<String> expectedOutput, String filename, List<String> input) {
+        if (input != null) {
+            systemInMock.provideLines(input.toArray(new String[input.size()]));
+        }
+
         String expectedOutputString = "";
         for (String line : expectedOutput) {
             expectedOutputString += line + System.getProperty("line.separator");
         }
         try {
-            assertEquals(expectedOutputString, compileAndRun(filename, input));
+            assertEquals(expectedOutputString, compileAndRun(filename));
         } catch (Throwable throwable) {
             fail(throwable.toString());
         }
@@ -48,11 +58,15 @@ public class CompilerTest {
     }
 
     private void assertEqualsOutputException(List<String> expectedOutput, String filename, List<String> input) throws Throwable {
+        if (input != null) {
+            systemInMock.provideLines(input.toArray(new String[input.size()]));
+        }
+
         String expectedOutputString = "";
         for (String line : expectedOutput) {
             expectedOutputString += line + System.getProperty("line.separator");
         }
-        assertEquals(expectedOutputString, compileAndRun(filename, input));
+        assertEquals(expectedOutputString, compileAndRun(filename));
     }
 
     @Test
@@ -110,11 +124,17 @@ public class CompilerTest {
     }
 
     @Test
-    public void testInput() {
-        assertEqualsOutput(Arrays.asList("35", "35"),
-                "src/test/java/tours/examples/compiler/input_statements.tours",
-                Arrays.asList("35"));
+    public void testInputExpressions() {
+        assertEqualsOutput(Arrays.asList("true", "true", "a", "a", "35", "40", "35", "35"),
+                "src/test/java/tours/examples/compiler/input_expressions.tours", Arrays.asList("true", "a", "35", "35"));
     }
+
+    @Test
+    public void testInputStatements() {
+        assertEqualsOutput(Arrays.asList("35", "35"),
+                "src/test/java/tours/examples/compiler/input_statements.tours", Arrays.asList("35"));
+    }
+
 
     @Test
     public void testIf() {
@@ -272,11 +292,11 @@ public class CompilerTest {
         }
     }
 
-    private String compileAndRun(String filename, List<String> input) throws Throwable {
+    private String compileAndRun(String filename) throws Throwable {
         try {
             CompilerTools.toByteCode(filename, "./tmp/output.j");
             CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
-            return CompilerTools.runClassFile("Tours", "./tmp", input);
+            return CompilerTools.runClassFile("Tours", "./tmp");
         } catch (NoSuchMethodException | IOException | IllegalAccessException | ClassNotFoundException e) {
             System.err.println("Error compiling and running: " + filename);
             e.printStackTrace();
