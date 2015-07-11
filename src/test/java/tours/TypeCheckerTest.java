@@ -359,6 +359,15 @@ public class TypeCheckerTest {
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/length_on_primitive_type.tours");
     }
 
+    @Test
+    public void testVoidCompoundExpression() {
+        List<String> errors = Arrays.asList(
+                "Error <last type is a void> on line 4, pos 4",
+                "Error <mismatching types> on line 2, pos 14"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/void_compound_expression.tours");
+    }
+
     private void testTypeCheckerErrors(List<String> expected, String filename) {
         ParseTree tree = CompilerTools.toToursParseTree(filename);
         ParseTreeWalker walker = new ParseTreeWalker();
