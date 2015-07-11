@@ -1,10 +1,7 @@
 package tours;
 
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
 import tours.compiler.CompilerTools;
-import tours.typechecker.TypeChecker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +62,7 @@ public class TypeCheckerTest {
 
     @Test
     public void testInput() {
-        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/input_expressions.tours");
+        testTypeCheckerErrors(new ArrayList<>(), "src/test/java/tours/examples/typechecker/input.tours");
         List<String> errors = Arrays.asList(
                 "Error <input not defined for array element> on line 3, pos 10",
                 "Error <input not defined for array element> on line 4, pos 24"
@@ -142,7 +139,11 @@ public class TypeCheckerTest {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 3, pos 15",
                 "Error <mismatching types> on line 6, pos 17",
-                "Error <mismatching types> on line 9, pos 14"
+                "Error <mismatching types> on line 9, pos 14",
+                "Error <expected array> on line 12, pos 4",
+                "Error <expected array> on line 15, pos 4",
+                "Error <expected array> on line 18, pos 4",
+                "Error <expected array> on line 21, pos 4"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type_array_length.tours");
     }
@@ -204,7 +205,16 @@ public class TypeCheckerTest {
                 "Error <variable not defined> on line 8, pos 4",
                 "Error <variable not defined> on line 10, pos 6",
                 "Error <variable not defined> on line 13, pos 4",
-                "Error <variable not defined> on line 17, pos 11"
+                "Error <variable not defined> on line 15, pos 10",
+                "Error <variable not defined> on line 16, pos 10",
+                "Error <variable not defined> on line 20, pos 9",
+                "Error <variable not defined> on line 21, pos 4",
+                "Error <variable not defined> on line 23, pos 9",
+                "Error <variable not defined> on line 24, pos 4",
+                "Error <variable not defined> on line 26, pos 9",
+                "Error <variable not defined> on line 27, pos 4",
+                "Error <variable not defined> on line 29, pos 9",
+                "Error <variable not defined> on line 30, pos 4"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/not_defined_variables.tours");
     }

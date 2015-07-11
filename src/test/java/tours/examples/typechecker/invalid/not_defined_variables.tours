@@ -11,10 +11,23 @@ func main() {
 
     doNothing(33);
     j;
+
+    input(k);
+    print(l);
 }
 
-func integer addOne() {
-    return x + 1;
+func void addOne() {
+    35 + x;
+    x + 35;
+
+    35 - x;
+    x - 35;
+
+    35 * x;
+    x * 35;
+
+    35 / x;
+    x / 35;
 }
 
 func void scope() {

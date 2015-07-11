@@ -131,8 +131,8 @@ public class CompilerTest {
 
     @Test
     public void testInputStatements() {
-        assertEqualsOutput(Arrays.asList("35", "35"),
-                "src/test/java/tours/examples/compiler/input_statements.tours", Arrays.asList("35"));
+        assertEqualsOutput(Arrays.asList("true", "true", "a", "a", "35", "35", "35", "35"),
+                "src/test/java/tours/examples/compiler/input_statements.tours", Arrays.asList("true", "a", "35", "35"));
     }
 
 //    @Test

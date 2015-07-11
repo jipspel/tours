@@ -7,4 +7,16 @@ func main() {
 
     string[] s1 = new string[38];
     string s2 = s1.length;
+
+    boolean b3;
+    b3.length;
+
+    character c3;
+    c3.length;
+
+    string s3;
+    s3.length;
+
+    integer i;
+    i.length;
 }

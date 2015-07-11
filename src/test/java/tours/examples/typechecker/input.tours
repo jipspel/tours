@@ -1,0 +1,17 @@
+func main() {
+    boolean b1;
+    input(b1);
+    boolean b2 = input(b1);
+
+    character c1;
+    input(c1);
+    character c2 = input(c1);
+
+    integer i1;
+    input(i1);
+    integer i2 = input(i1);
+
+    string s1;
+    input(s1);
+    string s2 = input(s1);
+}
