@@ -233,7 +233,13 @@ public class TypeCheckerTest {
                 "Error <expected booleans> on line 4, pos 4",
                 "Error <expected booleans> on line 6, pos 4",
                 "Error <expected booleans> on line 7, pos 4",
-                "Error <expected booleans> on line 8, pos 4"
+                "Error <expected booleans> on line 8, pos 4",
+                "Error <expected booleans> on line 10, pos 4",
+                "Error <expected booleans> on line 11, pos 4",
+                "Error <expected booleans> on line 12, pos 4",
+                "Error <expected booleans> on line 14, pos 4",
+                "Error <expected booleans> on line 15, pos 4",
+                "Error <expected booleans> on line 16, pos 4"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_boolean_expressions.tours");
     }
