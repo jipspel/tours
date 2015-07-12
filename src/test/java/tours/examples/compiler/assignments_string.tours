@@ -1,6 +1,6 @@
 func main() {
-    String x = "35";
-    String y;
+    string x = "35";
+    string y;
     y = "36";
     print(x);
     print(y);

@@ -58,7 +58,7 @@ public class Type {
     }
 
     public Type(String type) {
-        this(stringToIntType(type));
+        this(stringToIntType(type.toLowerCase()));
     }
 
     /**
