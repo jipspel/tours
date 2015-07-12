@@ -68,40 +68,36 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     @Override
     public ST visitProgram(@NotNull ToursParser.ProgramContext ctx) {
-        // TODO refactor
         // Listing all functions in symbol table
-        for (ToursParser.VoidFunctionContext function : ctx.voidFunction()) {
+        ctx.voidFunction().stream().forEach(function -> {
             Type returnType = Type.VOID;
             List<Type> argumentTypes = new ArrayList<>();
 
-            for (int i = 0; i < function.variableType().size(); i++) {
-                ToursParser.VariableTypeContext variableType = function.variableType(i);
+            function.variableType().stream().forEach(variableType -> {
                 Type type = new Type(variableType.arrayType() != null ?
                         variableType.arrayType().getText() :
                         variableType.primitiveType().getText());
                 argumentTypes.add(type);
-            }
-            maxNumberOfArguments = maxNumberOfArguments > argumentTypes.size() ?
-                    maxNumberOfArguments : argumentTypes.size();
+            });
+            maxNumberOfArguments = Math.max(maxNumberOfArguments, argumentTypes.size());
             symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
-        }
+        });
 
-        for (ToursParser.ReturnFunctionContext function : ctx.returnFunction()) {
+        ctx.returnFunction().stream().forEach(function -> {
             Type returnType = new Type((function.variableType(0).arrayType() != null ?
                     function.variableType(0).arrayType().getText() :
                     function.variableType(0).primitiveType().getText()));
             List<Type> argumentTypes = new ArrayList<>();
 
-            for (int i = 1; i < function.variableType().size(); i++) {
-                ToursParser.VariableTypeContext variableType = function.variableType(i);
+            function.variableType().stream().forEach(variableType -> {
+                if (variableType == function.variableType(0)) { return; }
                 Type type = new Type(variableType.arrayType() != null ?
                         variableType.arrayType().getText() : variableType.primitiveType().getText());
                 argumentTypes.add(type);
-            }
-            maxNumberOfArguments = maxNumberOfArguments > argumentTypes.size() ?
-                    maxNumberOfArguments : argumentTypes.size();
+            });
+            maxNumberOfArguments = Math.max(maxNumberOfArguments, argumentTypes.size());
             symbolTable.addFunction(function.IDENTIFIER(0).getText(), returnType, argumentTypes);
-        }
+        });
 
         ST st = stGroup.getInstanceOf("program");
         st.add("class", className);
