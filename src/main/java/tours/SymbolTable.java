@@ -9,7 +9,6 @@ public class SymbolTable {
     private Stack<Map<String, Symbol>> symbolList;
     private int identifierCount;
 
-
     public SymbolTable() {
         symbolList = new Stack<>();
         symbolList.push(new HashMap<>());
@@ -24,12 +23,17 @@ public class SymbolTable {
     }
 
 
+    /**
+     * Returns the counter of the identifiers
+     * @return the counter of the identifiers
+     */
     public int getIdentifierCount() {
         return identifierCount;
     }
 
     /**
      * Returns the current depth of the symbol table
+     * @return the current depth of the symbol table
      */
     public int getLevel() {
         return symbolList.size() - 1;
@@ -115,11 +119,21 @@ public class SymbolTable {
         return false;
     }
 
+    /**
+     * Returns the type of an identifier
+     * @param id the string representation of the identifier
+     * @return if the symbol table contains the id, the type, else null
+     */
     public Type getType(String id) {
         Symbol type = getSymbol(id);
         return (type != null) ? getSymbol(id).getType() : null;
     }
 
+    /**
+     * Returns the symbol of the first occurrence of an identifier, starting at the current level
+     * @param id the string representation of the identifier
+     * @return if the symbol table contains the id, the symbol, else null
+     */
     public Symbol getSymbol(String id) {
         for (int i = getLevel(); i >= 0; i--) {
             if (symbolList.get(i).containsKey(id)) {
@@ -129,10 +143,13 @@ public class SymbolTable {
         return null;
     }
 
-
     public abstract class Symbol {
         protected Type type = null;
 
+        /**
+         * Returns the type of the symbol
+         * @return the type of the symbol
+         */
         public Type getType() {
             return type;
         }
@@ -141,11 +158,20 @@ public class SymbolTable {
     public class Variable extends Symbol {
         private final int identifier;
 
+        /**
+         * Constructs a new Variable object
+         * @param type the type of the variable
+         * @param identifier the identifier of the variable
+         */
         public Variable(Type type, int identifier) {
             this.type = type;
             this.identifier = identifier;
         }
 
+        /**
+         * Returns the identifier of the object
+         * @return the identifier of the object
+         */
         public int getIdentifier() {
             return identifier;
         }
@@ -154,11 +180,20 @@ public class SymbolTable {
     public class Function extends Symbol {
         private final List<Type> argumentTypes;
 
+        /**
+         * Constructs a new function object
+         * @param type the type of the function
+         * @param argumentTypes the types of the arguments of the function
+         */
         public Function(Type type, List<Type> argumentTypes) {
             this.type = type;
             this.argumentTypes = argumentTypes;
         }
 
+        /**
+         * Returns the argument types
+         * @return a list with the argument types
+         */
         public List<Type> getArgumentTypes() {
             return argumentTypes;
         }

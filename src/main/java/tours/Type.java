@@ -71,6 +71,10 @@ public class Type {
         initialize(type);
     }
 
+    /**
+     * Constructs a new type object
+     * @param type the string representation of the type
+     */
     public Type(String type) {
         if (type.equals(Type.BOOLEAN.toString())) {
             initialize(ToursParser.BOOLEAN);

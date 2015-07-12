@@ -22,6 +22,12 @@ import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
 
 public class CompilerTools {
+
+    /**
+     * Lexes and parses a tours file
+     * @param filename the name of the tours file
+     * @return ParseTree of the file
+     */
     public static ParseTree toToursParseTree(String filename) {
         String file = null;
         try {
@@ -50,6 +56,11 @@ public class CompilerTools {
         return program;
     }
 
+    /**
+     * Checks the types of the elements in the file
+     * @param filename the name of the tours file
+     * @return TypeChecker of the file
+     */
     public static TypeChecker typeCheck(String filename) {
         ParseTreeWalker walker = new ParseTreeWalker();
         TypeChecker typeChecker = new TypeChecker();
@@ -57,22 +68,50 @@ public class CompilerTools {
         return typeChecker;
     }
 
+    /**
+     * Compiles the file into Java Bytecode
+     * @param filename the name of the tours file
+     * @return the Bytecode corresponding to the tours file
+     */
     public static String toByteCode(String filename) {
         Compiler compiler = new Compiler("Tours");
         return compiler.process(filename).render();
     }
 
+    /**
+     * Compiles the file into Java Bytecode and writes it to a file
+     * @param filename the name of the tours file
+     * @param destination the location of the Bytecode file
+     * @throws IOException
+     */
     public static void toByteCode(String filename, String destination) throws IOException {
         Compiler compiler = new Compiler("Tours");
         compiler.process(filename).write(new File(destination), null);
     }
 
+    /**
+     * Compiles Bytecode to a Java class file
+     * @param byteCodeFilename the name of the Bytecode file
+     * @param destinationFolder the destination folder
+     * @throws MalformedURLException
+     * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     public static void compileByteCodeToClassFile(String byteCodeFilename, String destinationFolder) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<?> jasmin = new URLClassLoader(new URL[]{ new File("src/main/resources/jasmin.jar").toURI().toURL() }).loadClass("jasmin.Main");
         Method main = jasmin.getMethod("main", String[].class);
         main.invoke(null, (Object) new String[]{byteCodeFilename, "-d", destinationFolder});
     }
 
+    /**
+     * Runs the class file
+     * @param klass the class name
+     * @param workingDirectory the working directory
+     * @return the output of the classFile
+     * @throws Throwable
+     */
     public static String runClassFile(String klass, String workingDirectory) throws Throwable {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(baos);
