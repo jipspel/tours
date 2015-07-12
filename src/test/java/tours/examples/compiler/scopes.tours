@@ -10,7 +10,7 @@ func main() {
     };
     print(x);
 
-    integer y = {
+    y = {
         x = 37;
     };
     print(x);
