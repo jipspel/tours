@@ -114,7 +114,7 @@ public class TypeChecker extends ToursBaseListener {
         Type type = symbolTable.getType(ctx.IDENTIFIER().getText());
         // if it is an array, remove the array part in the type of type[i]
         if (ctx.LBLOCK() != null) {
-            type = new Type(type.getPrimitiveType());
+            type = new Type(type.toPrimitive());
         }
 
         String rightHandExpression = ctx.expression().get(ctx.expression().size() - 1).getText();
@@ -182,7 +182,7 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitPrintExpression(@NotNull ToursParser.PrintExpressionContext ctx) {
-        if (symbolTable.getType(ctx.expression().getText()).getPrimitiveType() != null) {
+        if (symbolTable.getType(ctx.expression().getText()).toPrimitive() != null) {
             errors.add(String.format("Error <print not defined for array element> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         }
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(ctx.expression().getText()));
@@ -190,7 +190,7 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitInputExpression(@NotNull ToursParser.InputExpressionContext ctx) {
-        if (symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType() != null) {
+        if (symbolTable.getType(ctx.IDENTIFIER().getText()).toPrimitive() != null) {
             errors.add(String.format("Error <input not defined for array element> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(), ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         }
         symbolTable.addVariable(ctx.getText(), symbolTable.getType(ctx.IDENTIFIER().getText()));
@@ -209,7 +209,7 @@ public class TypeChecker extends ToursBaseListener {
             if (type == null) {
                 errors.add(String.format("Error <variable not defined> on line %s, pos %s", identifier.getSymbol().getLine(),  identifier.getSymbol().getCharPositionInLine()));
             }
-            if (type != null && type.getPrimitiveType() != null) {
+            if (type != null && type.toPrimitive() != null) {
                 errors.add(String.format("Error <input not defined for array element> on line %s, pos %s", identifier.getSymbol().getLine(), identifier.getSymbol().getCharPositionInLine()));
             }
         }
@@ -222,7 +222,7 @@ public class TypeChecker extends ToursBaseListener {
         for (ToursParser.ExpressionContext expression : ctx.expression()) {
             Type type = symbolTable.getType(expression.getText());
 
-            if (type != null && type.getPrimitiveType() != null) {
+            if (type != null && type.toPrimitive() != null) {
                 errors.add(String.format("Error <print not defined for array element> on line %s, pos %s", expression.getStart().getLine(), expression.getStart().getCharPositionInLine()));
             }
         }
@@ -277,12 +277,12 @@ public class TypeChecker extends ToursBaseListener {
     public void exitArrayElementExpression(@NotNull ToursParser.ArrayElementExpressionContext ctx) {
         if (!symbolTable.contains(ctx.IDENTIFIER().getText())) {
             errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
-        } else if (symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() != null) {
+        } else if (symbolTable.getType(ctx.IDENTIFIER().getText()).toArray() != null) {
             errors.add(String.format("Error <expected array> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         } else if(!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         } else {
-            symbolTable.addType(ctx.getText(), new Type(symbolTable.getType(ctx.IDENTIFIER().getText()).getPrimitiveType()));
+            symbolTable.addType(ctx.getText(), new Type(symbolTable.getType(ctx.IDENTIFIER().getText()).toPrimitive()));
         }
     }
 
@@ -359,7 +359,7 @@ public class TypeChecker extends ToursBaseListener {
             }
         }
 
-        symbolTable.addType(ctx.getText(), new Type(expressionType.getArrayType()));
+        symbolTable.addType(ctx.getText(), new Type(expressionType.toArray()));
     }
 
     @Override

@@ -153,7 +153,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
             ST stVariable = stGroup.getInstanceOf("store_variable");
             Variable variable = (Variable) symbolTable.getSymbol(identifier.getText());
-            stVariable.add("store_type", variable.getType().getPrefix());
+            stVariable.add("store_type", variable.getType().javaByteCodePrefix());
             stVariable.add("identifier_number", variable.getIdentifier());
             stList.add(stVariable.render());
         }
@@ -208,14 +208,14 @@ public class Compiler extends ToursBaseVisitor<ST> {
         ST st;
 
         if (ctx.LBLOCK() == null) {
-            if (symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() != null) {
+            if (symbolTable.getType(ctx.IDENTIFIER().getText()).toArray() != null) {
                 // assignment of a primitive type
                 st = stGroup.getInstanceOf("assignment_primitive");
 
                 Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
                 st.add("identifier_number", variable.getIdentifier());
                 st.add("expression", visit(ctx.expression(0)).render());
-                st.add("store_type", variable.getType().getPrefix());
+                st.add("store_type", variable.getType().javaByteCodePrefix());
             } else {
                 // assignment of array type
                 Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
@@ -246,7 +246,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
             st.add("expressions", Arrays.asList(visit(ctx.expression(0)).render(), visit(ctx.expression(1)).render()));
 
             Type type = variable.getType();
-            st.add("store_type", type.getPrefix());
+            st.add("store_type", type.javaByteCodePrefix());
         }
 
         return st;
@@ -267,10 +267,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
         }
 
         ST st = stGroup.getInstanceOf("function");
-        st.add("return_type", returnType.getJavaObjectType());
+        st.add("return_type", returnType.getJavaByteCodeType());
         st.add("function_name", ctx.IDENTIFIER(0).getText());
 
-        List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
+        List<String> arguments = argumentTypes.stream().map(Type::getJavaByteCodeType).collect(Collectors.toList());
         st.add("argument_types", arguments);
         st.add("block", visit(ctx.block()).render());
 
@@ -298,10 +298,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
         Type returnType = new Type(ctx.variableType(0).getText());
 
         ST st = stGroup.getInstanceOf("function");
-        st.add("return_type", returnType.getJavaObjectType());
+        st.add("return_type", returnType.getJavaByteCodeType());
         st.add("function_name", ctx.IDENTIFIER(0).getText());
 
-        List<String> arguments = argumentTypes.stream().map(Type::getJavaObjectType).collect(Collectors.toList());
+        List<String> arguments = argumentTypes.stream().map(Type::getJavaByteCodeType).collect(Collectors.toList());
         st.add("argument_types", arguments);
         st.add("block", visit(ctx.returnBlock()).render());
 
@@ -366,9 +366,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
         stInvokeFunction.add("function_name", identifier);
 
         List<String> argumentTypes = function.getArgumentTypes()
-                .stream().map(Type::getJavaObjectType).collect(Collectors.toList());
+                .stream().map(Type::getJavaByteCodeType).collect(Collectors.toList());
         stInvokeFunction.add("function_argument_types", argumentTypes);
-        stInvokeFunction.add("function_type", function.getType().getJavaObjectType());
+        stInvokeFunction.add("function_type", function.getType().getJavaByteCodeType());
 
         List<String> expressions = new ArrayList<>();
         ctx.expression().stream().forEach(expression ->
@@ -416,7 +416,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         for (TerminalNode identifier : ctx.IDENTIFIER()) {
             Variable variable = (Variable) symbolTable.getSymbol(identifier.getText());
             ST stVariable = stGroup.getInstanceOf("store_variable");
-            stVariable.add("store_type", variable.getType().getPrefix());
+            stVariable.add("store_type", variable.getType().javaByteCodePrefix());
             stVariable.add("identifier_number", variable.getIdentifier());
 
             stList.add(stVariable.render());
@@ -433,7 +433,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
         ST st = stGroup.getInstanceOf(String.format("read_%s", variable.getType().toString()));
         ST stVariable = stGroup.getInstanceOf("store_variable");
-        stVariable.add("store_type", variable.getType().getPrefix());
+        stVariable.add("store_type", variable.getType().javaByteCodePrefix());
         stVariable.add("identifier_number", variable.getIdentifier());
 
         st.add("reader_number", SCANNER_LOCATION);
@@ -456,7 +456,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
                 stExpression = stGroup.getInstanceOf("print_dup");
             }
             stExpression.add("block", block);
-            stExpression.add("type", symbolTable.getSymbol(expression.getText()).getType().getJavaObjectType());
+            stExpression.add("type", symbolTable.getSymbol(expression.getText()).getType().getJavaByteCodeType());
             expressions.add(stExpression.render());
         }
 
@@ -476,7 +476,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         String block = visit(ctx.expression()).render();
         ST st = stGroup.getInstanceOf("print_dup");
         st.add("block", block);
-        st.add("type", symbolTable.getSymbol(ctx.expression().getText()).getType().getJavaObjectType());
+        st.add("type", symbolTable.getSymbol(ctx.expression().getText()).getType().getJavaByteCodeType());
 
         return st;
     }
@@ -563,8 +563,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("expression", visit(ctx.expression()).render());
 
         Type arrayType = variable.getType();
-        Type primitiveType = new Type(arrayType.getPrimitiveType());
-        st.add("load_type", arrayType.getPrefix());
+        Type primitiveType = new Type(arrayType.toPrimitive());
+        st.add("load_type", arrayType.javaByteCodePrefix());
         symbolTable.addType(ctx.getText(), primitiveType);
 
         return st;
@@ -727,10 +727,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
         Type type = symbolTable.getSymbol(ctx.IDENTIFIER().getText()).getType();
         ST st = stGroup.getInstanceOf("load_identifier");
 
-        if (type.getArrayType() == null) {
+        if (type.toArray() == null) {
             st.add("load_type", "a");
         } else {
-            st.add("load_type", type.getPrefix());
+            st.add("load_type", type.javaByteCodePrefix());
         }
 
         st.add("identifier_number", ((Variable) symbolTable.getSymbol(ctx.getText())).getIdentifier());
@@ -763,8 +763,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             ST stExpression = stGroup.getInstanceOf("assignment_array_initialisation");
             stExpression.add("index", i);
             stExpression.add("expressions", visit(ctx.expression(i)).render());
-            Type type = new Type(symbolTable.getSymbol(ctx.expression(i).getText()).getType().getArrayType());
-            stExpression.add("store_type", type.getPrefix());
+            Type type = new Type(symbolTable.getSymbol(ctx.expression(i).getText()).getType().toArray());
+            stExpression.add("store_type", type.javaByteCodePrefix());
             expressions.add(stExpression.render());
         }
 
@@ -783,8 +783,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             st.add("prefix", "");
         }
 
-        Type arrayType = new Type(expressionType.getArrayType());
-        st.add("array_type", arrayType.getNewArrayType());
+        Type arrayType = new Type(expressionType.toArray());
+        st.add("array_type", arrayType.getJavaByteCodeArrayType());
         return st;
     }
 
@@ -800,7 +800,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         }
 
         Type arrayType = new Type(ctx.primitiveType().getText() + "[]");
-        st.add("array_type", arrayType.getNewArrayType());
+        st.add("array_type", arrayType.getJavaByteCodeArrayType());
         return st;
     }
 }
