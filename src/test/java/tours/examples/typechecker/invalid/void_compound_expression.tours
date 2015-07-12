@@ -1,5 +1,5 @@
 func main() {
     integer x = {
-        print(35);
+        print(35, 36);
     };
 }

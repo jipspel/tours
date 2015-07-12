@@ -134,15 +134,7 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList("true", "true", "a", "a", "35", "35", "35", "35"),
                 "src/test/java/tours/examples/compiler/input_statements.tours", Arrays.asList("true", "a", "35", "35"));
     }
-
-//    @Test
-//    public void testIf() {
-//        assertEqualsOutput(Arrays.asList(
-//                        "Vanaf hier wordt alles beter!",
-//                        "Too bad!"),
-//                "src/test/java/tours/examples/compiler/if_else.tours");
-//    }
-
+    
     @Test
     public void testIf() {
         assertEqualsOutput(Arrays.asList(
@@ -172,28 +164,28 @@ public class CompilerTest {
                 "src/test/java/tours/examples/compiler/for.tours");
     }
 
-//    @Test
-//    public void testCompound() {
-//        assertEqualsOutput(Arrays.asList(
-//                        "30",
-//                        "35",
-//                        "36",
-//                        "37"),
-//                "src/test/java/tours/examples/compiler/compound.tours");
-//    }
+    @Test
+    public void testCompound() {
+        assertEqualsOutput(Arrays.asList(
+                        "30",
+                        "35",
+                        "36",
+                        "37"),
+                "src/test/java/tours/examples/compiler/compound.tours");
+    }
 
-//    @Test
-//    public void testScopes() {
-//        assertEqualsOutput(Arrays.asList(
-//                        "35",
-//                        "36",
-//                        "37",
-//                        "0",
-//                        "3",
-//                        "1",
-//                        "2"),
-//                "src/test/java/tours/examples/compiler/scopes.tours");
-//    }
+    @Test
+    public void testScopes() {
+        assertEqualsOutput(Arrays.asList(
+                        "35",
+                        "36",
+                        "37",
+                        "0",
+                        "3",
+                        "1",
+                        "2"),
+                "src/test/java/tours/examples/compiler/scopes.tours");
+    }
 
     @Test
     public void testVoidFunction() {

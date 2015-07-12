@@ -2,16 +2,16 @@ func main() {
     integer x = 35;
 
     if (x < 35) {
-        string z = print("Too bad!");
+        print("Too bad!");
     } else {
-        string z = print("Vanaf hier wordt alles beter!");
+       print("Vanaf hier wordt alles beter!");
     }
 
     if (x >= 35) {
-        string z = print("Too bad!");
+        print("Too bad!");
     }
 
     if (x < 35) {
-        integer y = print(x);
+        print(x);
     }
 }

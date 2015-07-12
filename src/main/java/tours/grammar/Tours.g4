@@ -85,8 +85,8 @@ expression:     LPAR expression RPAR                                            
               ;
 /** Compound expression */
 compound
-    : LBRACE ((statement | variable | expression) SEMI | conditionalStatement)*
-                          ((statement | variable | expression) SEMI) RBRACE
+    : LBRACE ((expression | variable | statement ) SEMI | conditionalStatement)*
+                          ((expression | variable | statement ) SEMI) RBRACE
     ;
 
 /** Prefix operator. */

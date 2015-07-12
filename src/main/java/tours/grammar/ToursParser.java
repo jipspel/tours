@@ -2297,11 +2297,11 @@ public class ToursParser extends Parser {
 		public ConditionalStatementContext conditionalStatement(int i) {
 			return getRuleContext(ConditionalStatementContext.class,i);
 		}
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
 		public List<VariableContext> variable() {
 			return getRuleContexts(VariableContext.class);
@@ -2309,11 +2309,11 @@ public class ToursParser extends Parser {
 		public VariableContext variable(int i) {
 			return getRuleContext(VariableContext.class,i);
 		}
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
+		public List<StatementContext> statement() {
+			return getRuleContexts(StatementContext.class);
 		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public StatementContext statement(int i) {
+			return getRuleContext(StatementContext.class,i);
 		}
 		public CompoundContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2358,7 +2358,7 @@ public class ToursParser extends Parser {
 						case 1:
 							{
 							setState(333); 
-							statement();
+							expression(0);
 							}
 							break;
 						case 2:
@@ -2370,7 +2370,7 @@ public class ToursParser extends Parser {
 						case 3:
 							{
 							setState(335); 
-							expression(0);
+							statement();
 							}
 							break;
 						}
@@ -2397,7 +2397,7 @@ public class ToursParser extends Parser {
 			case 1:
 				{
 				setState(346); 
-				statement();
+				expression(0);
 				}
 				break;
 			case 2:
@@ -2409,7 +2409,7 @@ public class ToursParser extends Parser {
 			case 3:
 				{
 				setState(348); 
-				expression(0);
+				statement();
 				}
 				break;
 			}
@@ -3105,13 +3105,13 @@ public class ToursParser extends Parser {
 		"\f\22\2\2\u0147\u0148\7.\2\2\u0148\u014a\5\30\r\23\u0149\u0137\3\2\2\2"+
 		"\u0149\u013b\3\2\2\2\u0149\u013f\3\2\2\2\u0149\u0143\3\2\2\2\u0149\u0146"+
 		"\3\2\2\2\u014a\u014d\3\2\2\2\u014b\u0149\3\2\2\2\u014b\u014c\3\2\2\2\u014c"+
-		"\31\3\2\2\2\u014d\u014b\3\2\2\2\u014e\u0159\7\'\2\2\u014f\u0153\5\22\n"+
-		"\2\u0150\u0153\5\4\3\2\u0151\u0153\5\30\r\2\u0152\u014f\3\2\2\2\u0152"+
+		"\31\3\2\2\2\u014d\u014b\3\2\2\2\u014e\u0159\7\'\2\2\u014f\u0153\5\30\r"+
+		"\2\u0150\u0153\5\4\3\2\u0151\u0153\5\22\n\2\u0152\u014f\3\2\2\2\u0152"+
 		"\u0150\3\2\2\2\u0152\u0151\3\2\2\2\u0153\u0154\3\2\2\2\u0154\u0155\7\63"+
 		"\2\2\u0155\u0158\3\2\2\2\u0156\u0158\5\24\13\2\u0157\u0152\3\2\2\2\u0157"+
 		"\u0156\3\2\2\2\u0158\u015b\3\2\2\2\u0159\u0157\3\2\2\2\u0159\u015a\3\2"+
-		"\2\2\u015a\u015f\3\2\2\2\u015b\u0159\3\2\2\2\u015c\u0160\5\22\n\2\u015d"+
-		"\u0160\5\4\3\2\u015e\u0160\5\30\r\2\u015f\u015c\3\2\2\2\u015f\u015d\3"+
+		"\2\2\u015a\u015f\3\2\2\2\u015b\u0159\3\2\2\2\u015c\u0160\5\30\r\2\u015d"+
+		"\u0160\5\4\3\2\u015e\u0160\5\22\n\2\u015f\u015c\3\2\2\2\u015f\u015d\3"+
 		"\2\2\2\u015f\u015e\3\2\2\2\u0160\u0161\3\2\2\2\u0161\u0162\7\63\2\2\u0162"+
 		"\u0163\3\2\2\2\u0163\u0164\7\61\2\2\u0164\33\3\2\2\2\u0165\u0166\t\2\2"+
 		"\2\u0166\35\3\2\2\2\u0167\u0168\t\3\2\2\u0168\37\3\2\2\2\u0169\u016a\t"+
