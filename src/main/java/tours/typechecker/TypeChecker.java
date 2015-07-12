@@ -277,6 +277,8 @@ public class TypeChecker extends ToursBaseListener {
     public void exitArrayElementExpression(@NotNull ToursParser.ArrayElementExpressionContext ctx) {
         if (!symbolTable.contains(ctx.IDENTIFIER().getText())) {
             errors.add(String.format("Error <variable not defined> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
+        } else if (symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() != null) {
+            errors.add(String.format("Error <expected array> on line %s, pos %s", ctx.IDENTIFIER().getSymbol().getLine(),  ctx.IDENTIFIER().getSymbol().getCharPositionInLine()));
         } else if(!symbolTable.getType(ctx.expression().getText()).equals(Type.INTEGER)) {
             errors.add(String.format("Error <expected integer> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
         } else {

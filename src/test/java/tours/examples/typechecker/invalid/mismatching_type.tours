@@ -4,8 +4,17 @@ func main () {
     integer p = 'a';
     string s = true;
 
-    boolean t = 1;
-    character u = "hello";
-    integer v = 'a';
-    string w = true;
+    boolean t;
+    t = 1;
+    character u;
+    u = "hello";
+    integer v;
+    v = 'a';
+    string w;
+    w = true;
+
+    q[0];
+    r[0];
+    p[0];
+    s[0];
 }

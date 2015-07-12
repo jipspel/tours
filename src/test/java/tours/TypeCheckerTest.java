@@ -86,10 +86,14 @@ public class TypeCheckerTest {
                 "Error <mismatching types> on line 3, pos 16",
                 "Error <mismatching types> on line 4, pos 14",
                 "Error <mismatching types> on line 5, pos 13",
-                "Error <mismatching types> on line 7, pos 14",
-                "Error <mismatching types> on line 8, pos 16",
-                "Error <mismatching types> on line 9, pos 14",
-                "Error <mismatching types> on line 10, pos 13"
+                "Error <mismatching types> on line 8, pos 6",
+                "Error <mismatching types> on line 10, pos 6",
+                "Error <mismatching types> on line 12, pos 6",
+                "Error <mismatching types> on line 14, pos 6",
+                "Error <expected array> on line 16, pos 4",
+                "Error <expected array> on line 17, pos 4",
+                "Error <expected array> on line 18, pos 4",
+                "Error <expected array> on line 19, pos 4"
         );
         testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/mismatching_type.tours");
     }
