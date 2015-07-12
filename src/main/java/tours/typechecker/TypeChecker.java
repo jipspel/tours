@@ -412,6 +412,16 @@ public class TypeChecker extends ToursBaseListener {
 
     @Override
     public void exitCompareExpression(@NotNull ToursParser.CompareExpressionContext ctx) {
+        Type expression0Type = symbolTable.getType(ctx.expression(0).getText());
+        Type expression1Type = symbolTable.getType(ctx.expression(0).getText());
+        if (expression0Type.equals(Type.STRING) || expression1Type.equals(Type.STRING)) {
+            errors.add(String.format("Error <compare not implemented for strings> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
+        }
+
+        if (expression0Type.toArray() == null || expression1Type.toArray() == null) {
+            errors.add(String.format("Error <compare not implemented for arrays> on line %s, pos %s", ctx.expression(0).getStart().getLine(), ctx.expression(0).getStart().getCharPositionInLine()));
+        }
+
         if (ctx.compareOperator().GE() != null || ctx.compareOperator().GT() != null ||
                 ctx.compareOperator().LE() != null || ctx.compareOperator().LT() != null) {
             if (!symbolTable.getType(ctx.expression(0).getText()).equals(Type.INTEGER) ||

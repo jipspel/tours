@@ -80,6 +80,23 @@ public class TypeCheckerTest {
     }
 
     @Test
+    public void testInvalidCompareExpressions() {
+        List<String> errors = Arrays.asList(
+                "Error <compare not implemented for strings> on line 2, pos 4",
+                "Error <compare not implemented for arrays> on line 3, pos 4",
+                "Error <compare not implemented for arrays> on line 4, pos 4",
+                "Error <compare not implemented for arrays> on line 5, pos 4",
+                "Error <compare not implemented for arrays> on line 6, pos 4",
+                "Error <compare not implemented for strings> on line 8, pos 4",
+                "Error <compare not implemented for arrays> on line 9, pos 4",
+                "Error <compare not implemented for arrays> on line 10, pos 4",
+                "Error <compare not implemented for arrays> on line 11, pos 4",
+                "Error <compare not implemented for arrays> on line 12, pos 4"
+        );
+        testTypeCheckerErrors(errors, "src/test/java/tours/examples/typechecker/invalid/invalid_compare_expressions.tours");
+    }
+
+    @Test
     public void testMismatchingTypesBasic() {
         List<String> errors = Arrays.asList(
                 "Error <mismatching types> on line 2, pos 14",

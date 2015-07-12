@@ -1,0 +1,13 @@
+func main() {
+    "Hello" == "Hello";
+    {true} == {true};
+    {'a'} == {'a'};
+    {35} == {35};
+    {"Hello"} == {"Hello"};
+
+    "Hello" != "Hello";
+    {true} != {true};
+    {'a'} != {'a'};
+    {35} != {35};
+    {"Hello"} != {"Hello"};
+}

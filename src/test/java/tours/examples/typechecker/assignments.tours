@@ -22,14 +22,11 @@ func main() {
 
     y = 1 == 1;
     y = 'a' == 'a';
-    y = "35" == "35";
     y = true == true;
 
     y = 1 != 1;
     y = 'a' != 'a';
-    y = "35" != "35";
     y = true != true;
-
 
     x = print(3);
     y = print(false);
