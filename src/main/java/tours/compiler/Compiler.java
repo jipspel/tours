@@ -266,7 +266,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", visit(ctx.block()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
-        st.add("stack_limit", arguments.size() + 4);
+        st.add("stack_limit", maxNumberOfArguments + 4);
         st.add("return", "return");
 
 
@@ -298,7 +298,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block", visit(ctx.returnBlock()).render());
 
         st.add("locals_limit", symbolTable.getIdentifierCount() + 100);
-        st.add("stack_limit", arguments.size() + 4);
+        st.add("stack_limit", maxNumberOfArguments + 4);
 
         // TODO test bouwen
         String returnString = returnType.equals(Type.BOOLEAN) ||
