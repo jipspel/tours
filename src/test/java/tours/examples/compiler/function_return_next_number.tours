@@ -1,8 +1,0 @@
-func integer next_number(integer i) {
-    return i + 1;
-}
-
-func main() {
-    integer x = next_number(34);
-    print(x);
-}

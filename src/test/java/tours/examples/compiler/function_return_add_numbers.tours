@@ -1,9 +1,0 @@
-func integer add_numbers( integer i, integer j) {
-    print("About to add: ", i, j);
-    return i + j;
-}
-
-func main() {
-    integer x = add_numbers(33, 2);
-    print("Sum: ", x);
-}

@@ -203,27 +203,17 @@ public class CompilerTest {
     }
 
     @Test
-    public void testReturningOneNumber() {
-        assertEqualsOutput(Arrays.asList("35"),
-                "src/test/java/tours/examples/compiler/function_return_next_number.tours");
-    }
-
-    @Test
-    public void testReturnAddingTwoNumbers() {
-        assertEqualsOutput(Arrays.asList("About to add: ", "33", "2", "Sum: ", "35"),
-                "src/test/java/tours/examples/compiler/function_return_add_numbers.tours");
-    }
-
-    @Test
     public void testFibonacci() {
         assertEqualsOutput(Arrays.asList("8"),
                 "src/test/java/tours/examples/compiler/function_fibonacci.tours");
     }
 
     @Test
-    public void testReturnArrayFunction() {
+    public void testReturnFunction() {
         assertEqualsOutput(Arrays.asList("false", "true", "a", "b", "35", "36", "Hello", "World!"),
                 "src/test/java/tours/examples/compiler/function_return_array_type.tours");
+        assertEqualsOutput(Arrays.asList("false", "true", "a", "b", "35", "36", "Hello", "World!"),
+                "src/test/java/tours/examples/compiler/function_return_primitive_type.tours");
     }
 
     @Test

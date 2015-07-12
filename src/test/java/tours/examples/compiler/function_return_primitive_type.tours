@@ -1,0 +1,45 @@
+func boolean makeBoolean(boolean i) {
+    boolean j = i;
+    return j;
+}
+
+func character makeCharacter(character i) {
+    character j = i;
+    return j;
+}
+
+func integer makeInteger(integer i) {
+    integer j = i;
+    return j;
+}
+
+func string makeString(string i) {
+    string j = i;
+    return j;
+}
+
+func main() {
+    boolean b1 = makeBoolean(false);
+    print(b1);
+    boolean b2;
+    b2 = makeBoolean(true);
+    print(b2);
+
+    character c1 = makeCharacter('a');
+    print(c1);
+    character c2;
+    c2 = makeCharacter('b');
+    print(c2);
+
+    integer i1 = makeInteger(35);
+    print(i1);
+    integer i2;
+    i2 = makeInteger(36);
+    print(i2);
+
+    string s1 = makeString("Hello");
+    print(s1);
+    string s2;
+    s2 = makeString("World!");
+    print(s2);
+}
