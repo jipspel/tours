@@ -266,7 +266,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
             symbolTable.addVariable(ctx.IDENTIFIER().get(i+1).getText(), type);
         }
 
-
         ST st = stGroup.getInstanceOf("function");
         st.add("return_type", returnType.getJavaObjectType());
         st.add("function_name", ctx.IDENTIFIER(0).getText());
@@ -278,7 +277,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("locals_limit", symbolTable.getIdentifierCount() + 1);
         st.add("stack_limit", maxNumberOfArguments + 4);
         st.add("return", "return");
-
 
         symbolTable.closeScope();
         return st;
@@ -310,7 +308,6 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("locals_limit", symbolTable.getIdentifierCount() + 100);
         st.add("stack_limit", maxNumberOfArguments + 4);
 
-        // TODO test bouwen
         String returnString = returnType.equals(Type.BOOLEAN) ||
                 returnType.equals(Type.CHARACTER) ||
                 returnType.equals(Type.INTEGER)
@@ -349,11 +346,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
         st.add("block_if", visit(ctx.compound(0)).render());
         st.add("block_else", visit(ctx.compound(1)).render());
 
-
-        labelCount++;
-
         st.add("expression", visit(ctx.expression()).render());
-        st.add("label_number", labelCount);
+        st.add("label_number", labelCount++);
 
         symbolTable.closeScope();
         return st;
@@ -506,10 +500,9 @@ public class Compiler extends ToursBaseVisitor<ST> {
                     stGroup.getInstanceOf("pop").render();
             st.add("block_else", block_else);
         }
-        labelCount++;
 
         st.add("expression", visit(ctx.expression()).render());
-        st.add("label_number", labelCount);
+        st.add("label_number", labelCount++);
 
         symbolTable.closeScope();
         return st;
@@ -519,12 +512,10 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitWhileStatement(@NotNull ToursParser.WhileStatementContext ctx) {
         symbolTable.openScope();
 
-        labelCount++;
-
         ST st = stGroup.getInstanceOf("while");
         st.add("expression", visit(ctx.expression()).render());
         st.add("block_while", visit(ctx.compound()).render());
-        st.add("label_number", labelCount);
+        st.add("label_number", labelCount++);
 
         symbolTable.closeScope();
         return st;
@@ -535,8 +526,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         symbolTable.openScope();
 
         ST st = stGroup.getInstanceOf("for");
-        labelCount++;
-        st.add("label_number", labelCount);
+        st.add("label_number", labelCount++);
 
         st.add("initialization", (ctx.variable() != null) ? visit(ctx.variable()).render() :
                 (ctx.statement() != null) ?
@@ -632,12 +622,11 @@ public class Compiler extends ToursBaseVisitor<ST> {
             st = stGroup.getInstanceOf("gt");
         } else if (ctx.compareOperator().EQ() != null) {
             st = stGroup.getInstanceOf("eq");
-        } else if (ctx.compareOperator().NE() != null) {
+        } else {
             st = stGroup.getInstanceOf("ne");
         }
-        labelCount++;
         st.add("block", block);
-        st.add("label_number", labelCount);
+        st.add("label_number", labelCount++);
         return st;
     }
 
