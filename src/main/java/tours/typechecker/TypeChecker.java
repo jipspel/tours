@@ -393,7 +393,6 @@ public class TypeChecker extends ToursBaseListener {
             symbolTable.addVariable(ctx.getText(), Type.INTEGER);
 
         } else {
-            assert(ctx.prefixOperator().NOT() != null);
             if (!symbolTable.getType(ctx.expression().getText()).equals(Type.BOOLEAN)) {
                 errors.add(String.format("Error <expected boolean> on line %s, pos %s", ctx.expression().getStart().getLine(), ctx.expression().getStart().getCharPositionInLine()));
             }
@@ -436,10 +435,7 @@ public class TypeChecker extends ToursBaseListener {
             symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
 
         } else {
-            assert(ctx.compareOperator().EQ() != null || ctx.compareOperator().NE() != null);
-
             symbolTable.addVariable(ctx.getText(), Type.BOOLEAN);
-
         }
     }
 
