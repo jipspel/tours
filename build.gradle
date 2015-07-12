@@ -16,12 +16,39 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.7.5.201505241946"
+    toolVersion = '0.7.5.201505241946'
 }
 
 jacocoTestReport {
     reports {
-        xml.enabled = true // coveralls plugin depends on xml format report
+        xml.enabled = true
         html.enabled = true
+    }
+}
+
+task generate(type: JavaExec) {
+    description 'Generates Java bytecode: -Psrc filename'
+    main = 'tours.compiler.Compiler'
+    classpath = sourceSets.main.runtimeClasspath
+    if (project.hasProperty('src')) {
+        args project.src
+    }
+}
+
+task generateAndSave(type: JavaExec) {
+    description 'Generates Java bytecode and save it a directory: -Psrc filename -Pdir directory'
+    main = 'tours.compiler.Compiler'
+    classpath = sourceSets.main.runtimeClasspath
+    if (project.hasProperty('src') && project.hasProperty('dir')) {
+        args (project.src, '--save', project.dir)
+    }
+}
+
+task execute(type: JavaExec) {
+    description 'Executes: -Psrc filename'
+    main = 'tours.compiler.Compiler'
+    classpath = sourceSets.main.runtimeClasspath
+    if (project.hasProperty('src')) {
+        args (project.src, '--execute', '--no-bytecode')
     }
 }

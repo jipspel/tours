@@ -40,7 +40,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
 
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.err.println("Usage: filename.tours [--execute]");
+            System.err.println("Usage: filename.tours [--execute --no-bytecode] [--save directory]");
             System.exit(0);
         }
 
@@ -51,19 +51,43 @@ public class Compiler extends ToursBaseVisitor<ST> {
             System.exit(1);
         }
 
-        System.out.println("<<<");
-        System.out.println(CompilerTools.toByteCode(args[0]));
-        System.out.println(">>>");
+        boolean execute = false;
+        boolean save = false;
+        boolean noByteCode = false;
+        if (args.length >= 2 && args[1].equals("--execute")) {
+            execute = true;
 
-        if (args.length == 2 && args[1].equals("--execute")) {
-            new File("tmp/").mkdir();
+            if (args.length >= 3 && args[2].equals("--no-bytecode")) {
+                noByteCode = true;
+            }
+        }
+        if (args.length >= 3 && args[1].equals("--save")) {
+            save = true;
+        }
 
+        if (!noByteCode) {
+            System.out.println("<<<");
+            System.out.println(CompilerTools.toByteCode(args[0]));
+            System.out.println(">>>");
+        }
+
+        if (execute || save) {
             String filename = "./tmp/output.j";
             String workingDirectory = "./tmp";
+            String outputDirectory = workingDirectory;
+
+            if (save) {
+                outputDirectory = args[2];
+            }
+
+            new File(workingDirectory).mkdir();
+
             try {
                 CompilerTools.toByteCode(args[0], filename);
-                CompilerTools.compileByteCodeToClassFile(filename, workingDirectory);
-                System.out.println(CompilerTools.runClassFile("Tours", workingDirectory));
+                CompilerTools.compileByteCodeToClassFile(filename, outputDirectory);
+                if (execute) {
+                    System.out.println(CompilerTools.runClassFile("Tours", outputDirectory));
+                }
 
                 FileUtils.deleteDirectory(new File(workingDirectory));
             } catch (Throwable e) {
