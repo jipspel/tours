@@ -13,6 +13,7 @@ import tours.SymbolTable.Variable;
 import tours.Type;
 import tours.grammar.ToursBaseVisitor;
 import tours.grammar.ToursParser;
+import tours.typechecker.TypeChecker;
 
 import java.io.File;
 import java.util.*;
@@ -37,6 +38,13 @@ public class Compiler extends ToursBaseVisitor<ST> {
         if (args.length == 0) {
             System.err.println("Usage: filename.tours [--execute]");
             System.exit(0);
+        }
+
+        TypeChecker typeChecker = CompilerTools.typeCheck(args[0]);
+        if (typeChecker.getErrors().size() > 0) {
+            System.err.println("Error typechecking: " + args[0]);
+            System.err.println(typeChecker.getErrors());
+            System.exit(1);
         }
 
         System.out.println("<<<");

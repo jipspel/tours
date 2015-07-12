@@ -58,25 +58,11 @@ public class CompilerTools {
     }
 
     public static String toByteCode(String filename) {
-        TypeChecker typeChecker = typeCheck(filename);
-        if (typeChecker.getErrors().size() > 0) {
-            System.err.println("Error typechecking: " + filename);
-            System.err.println(typeChecker.getErrors());
-            System.exit(1);
-        }
-
         Compiler compiler = new Compiler("Tours");
         return compiler.process(filename).render();
     }
 
     public static void toByteCode(String filename, String destination) throws IOException {
-        TypeChecker typeChecker = typeCheck(filename);
-        if (typeChecker.getErrors().size() > 0) {
-            System.err.println("Error typechecking: " + filename);
-            System.err.println(typeChecker.getErrors());
-            System.exit(1);
-        }
-
         Compiler compiler = new Compiler("Tours");
         compiler.process(filename).write(new File(destination), null);
     }
