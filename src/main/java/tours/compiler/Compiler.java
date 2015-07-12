@@ -199,36 +199,38 @@ public class Compiler extends ToursBaseVisitor<ST> {
     public ST visitVariableAssignment(@NotNull ToursParser.VariableAssignmentContext ctx) {
         ST st;
 
-        // assignment of a primitive type
-        if (ctx.LBLOCK() == null && symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() != null) {
-            st = stGroup.getInstanceOf("assignment_primitive");
+        if (ctx.LBLOCK() == null) {
+            if (symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() != null) {
+                // assignment of a primitive type
+                st = stGroup.getInstanceOf("assignment_primitive");
 
-            Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
-            st.add("identifier_number", variable.getIdentifier());
-            st.add("expression", visit(ctx.expression(0)).render());
-            st.add("store_type", variable.getType().getPrefix());
-        } // assignment of array type
-        else if(ctx.LBLOCK() == null && symbolTable.getType(ctx.IDENTIFIER().getText()).getArrayType() == null) {
-            Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
-            st = stGroup.getInstanceOf("concatenator");
-
-            List<String> stList = new ArrayList<>();
-            if (ctx.expression(0) instanceof ToursParser.FunctionExpressionContext) {
-                ST stArray = stGroup.getInstanceOf("new_array_function_initialisation");
-                stArray.add("function_call", visit(ctx.expression(0)).render());
-                stList.add(stArray.render());
+                Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
+                st.add("identifier_number", variable.getIdentifier());
+                st.add("expression", visit(ctx.expression(0)).render());
+                st.add("store_type", variable.getType().getPrefix());
             } else {
-                stList.add(visit(ctx.expression(0)).render());
+                // assignment of array type
+                Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
+                st = stGroup.getInstanceOf("concatenator");
+
+                List<String> stList = new ArrayList<>();
+                if (ctx.expression(0) instanceof ToursParser.FunctionExpressionContext) {
+                    ST stArray = stGroup.getInstanceOf("new_array_function_initialisation");
+                    stArray.add("function_call", visit(ctx.expression(0)).render());
+                    stList.add(stArray.render());
+                } else {
+                    stList.add(visit(ctx.expression(0)).render());
+                }
+
+                ST stStore = stGroup.getInstanceOf("store_array");
+                stStore.add("identifier_number", variable.getIdentifier());
+                stList.add(stStore.render());
+                stList.add(stGroup.getInstanceOf("pop").render());
+
+                st.add("blocks", stList);
             }
-
-            ST stStore = stGroup.getInstanceOf("store_array");
-            stStore.add("identifier_number", variable.getIdentifier());
-            stList.add(stStore.render());
-            stList.add(stGroup.getInstanceOf("pop").render());
-
-            st.add("blocks", stList);
-        } // assignment of element of array type
-        else{
+        } else {
+            // assignment of element of array type
             st = stGroup.getInstanceOf("assignment_array_per_element");
 
             Variable variable = (Variable) symbolTable.getSymbol(ctx.IDENTIFIER().getText());
