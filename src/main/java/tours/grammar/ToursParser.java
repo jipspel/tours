@@ -1526,34 +1526,6 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ArrayInitialisationExpressionContext extends ExpressionContext {
-		public TerminalNode LBRACE() { return getToken(ToursParser.LBRACE, 0); }
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
-		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
-		public TerminalNode RBRACE() { return getToken(ToursParser.RBRACE, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(ToursParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(ToursParser.COMMA, i);
-		}
-		public ArrayInitialisationExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterArrayInitialisationExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitArrayInitialisationExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitArrayInitialisationExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class FalseExpressionContext extends ExpressionContext {
 		public TerminalNode FALSE() { return getToken(ToursParser.FALSE, 0); }
 		public FalseExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
@@ -1855,6 +1827,34 @@ public class ToursParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class ArrayInitializationExpressionContext extends ExpressionContext {
+		public TerminalNode LBRACE() { return getToken(ToursParser.LBRACE, 0); }
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public TerminalNode RBRACE() { return getToken(ToursParser.RBRACE, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(ToursParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(ToursParser.COMMA, i);
+		}
+		public ArrayInitializationExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).enterArrayInitializationExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ToursListener ) ((ToursListener)listener).exitArrayInitializationExpression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ToursVisitor ) return ((ToursVisitor<? extends T>)visitor).visitArrayInitializationExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class ArrayElementExpressionContext extends ExpressionContext {
 		public TerminalNode IDENTIFIER() { return getToken(ToursParser.IDENTIFIER, 0); }
 		public TerminalNode LBLOCK() { return getToken(ToursParser.LBLOCK, 0); }
@@ -1981,7 +1981,7 @@ public class ToursParser extends Parser {
 				break;
 			case 4:
 				{
-				_localctx = new ArrayInitialisationExpressionContext(_localctx);
+				_localctx = new ArrayInitializationExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(249); 

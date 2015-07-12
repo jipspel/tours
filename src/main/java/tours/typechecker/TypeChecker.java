@@ -350,7 +350,7 @@ public class TypeChecker extends ToursBaseListener {
     }
 
     @Override
-    public void exitArrayInitialisationExpression(@NotNull ToursParser.ArrayInitialisationExpressionContext ctx) {
+    public void exitArrayInitializationExpression(@NotNull ToursParser.ArrayInitializationExpressionContext ctx) {
         Type expressionType = symbolTable.getType(ctx.expression(0).getText());
 
         for (int i = 1; i < ctx.expression().size(); i++) {

@@ -753,7 +753,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
     }
 
     @Override
-    public ST visitArrayInitialisationExpression(@NotNull ToursParser.ArrayInitialisationExpressionContext ctx) {
+    public ST visitArrayInitializationExpression(@NotNull ToursParser.ArrayInitializationExpressionContext ctx) {
         ST stExpressions = stGroup.getInstanceOf("concatenator");
         ST st = stGroup.getInstanceOf("new_array");
 
