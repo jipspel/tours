@@ -147,5 +147,4 @@ public class Type {
     public String toArray() {
         return properties.get("toArray");
     }
-
 }
