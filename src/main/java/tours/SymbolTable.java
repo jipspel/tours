@@ -12,7 +12,7 @@ public class SymbolTable {
     public SymbolTable() {
         symbolList = new Stack<>();
         symbolList.push(new HashMap<>());
-        identifierCount =0;
+        identifierCount = 0;
     }
 
     /**
@@ -28,7 +28,7 @@ public class SymbolTable {
      * @return the counter of the identifiers
      */
     public int getIdentifierCount() {
-        return identifierCount;
+        return identifierCount + 1;
     }
 
     /**
