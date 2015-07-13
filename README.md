@@ -18,4 +18,4 @@ Usage
 * Generate *Java bytecode* from *Tours* file and save *Java class* file:
   * `gradle generateAndSave -Psrc filename -Pdir directory`
 * Execute *Tours* file:
-  * `gradle -Psrc filename`
+  * `gradle execute -Psrc filename`
