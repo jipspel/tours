@@ -75,7 +75,7 @@ public class CompilerTools {
      */
     public static String toByteCode(String filename) {
         Compiler compiler = new Compiler("Tours");
-        return compiler.process(filename).render();
+        return compiler.toStringTemplate(filename).render();
     }
 
     /**
@@ -86,7 +86,7 @@ public class CompilerTools {
      */
     public static void toByteCode(String filename, String destination) throws IOException {
         Compiler compiler = new Compiler("Tours");
-        compiler.process(filename).write(new File(destination), null);
+        compiler.toStringTemplate(filename).write(new File(destination), null);
     }
 
     /**

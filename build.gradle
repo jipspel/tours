@@ -28,7 +28,7 @@ jacocoTestReport {
 
 task generate(type: JavaExec) {
     description 'Generates Java bytecode: -Psrc filename'
-    main = 'tours.compiler.Compiler'
+    main = 'tours.Tours'
     classpath = sourceSets.main.runtimeClasspath
     if (project.hasProperty('src')) {
         args project.src
@@ -37,7 +37,7 @@ task generate(type: JavaExec) {
 
 task generateAndSave(type: JavaExec) {
     description 'Generates Java bytecode and save it a directory: -Psrc filename -Pdir directory'
-    main = 'tours.compiler.Compiler'
+    main = 'tours.Tours'
     classpath = sourceSets.main.runtimeClasspath
     if (project.hasProperty('src') && project.hasProperty('dir')) {
         args (project.src, '--save', project.dir)
@@ -46,7 +46,7 @@ task generateAndSave(type: JavaExec) {
 
 task execute(type: JavaExec) {
     description 'Executes: -Psrc filename'
-    main = 'tours.compiler.Compiler'
+    main = 'tours.Tours'
     classpath = sourceSets.main.runtimeClasspath
     if (project.hasProperty('src')) {
         args (project.src, '--execute', '--no-bytecode')
