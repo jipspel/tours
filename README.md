@@ -8,7 +8,7 @@ An imperative language for compiler construction. Compiles to Java bytecode.
 Prerequisites
 =============
 
-* Install [Gradle](https://docs.gradle.org/current/userguide/installation.html)
+* Install [Gradle](https://docs.gradle.org/current/userguide/installation.html) `~> 2.5`
 
 Usage
 =====
