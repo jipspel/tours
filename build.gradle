@@ -27,28 +27,43 @@ jacocoTestReport {
 }
 
 task generate(type: JavaExec) {
-    description 'Generates Java bytecode: -Psrc filename'
+    description 'Generates Java bytecode from Tours file: -Psrc filename'
     main = 'tours.Tours'
     classpath = sourceSets.main.runtimeClasspath
+}
+
+generate.doFirst {
     if (project.hasProperty('src')) {
         args project.src
+    } else {
+        throw new StopExecutionException("Usage: -Psrc filename")
     }
 }
 
 task generateAndSave(type: JavaExec) {
-    description 'Generates Java bytecode and save it a directory: -Psrc filename -Pdir directory'
+    description 'Generates Java bytecode from Tours file and save Java class file to a directory: -Psrc filename -Pdir directory'
     main = 'tours.Tours'
     classpath = sourceSets.main.runtimeClasspath
+}
+
+generateAndSave.doFirst {
     if (project.hasProperty('src') && project.hasProperty('dir')) {
         args (project.src, '--save', project.dir)
+    } else {
+        throw new StopExecutionException("Usage: -Psrc filename -Pdir directory")
     }
 }
 
 task execute(type: JavaExec) {
-    description 'Executes: -Psrc filename'
+    description 'Executes Tours file: -Psrc filename'
     main = 'tours.Tours'
     classpath = sourceSets.main.runtimeClasspath
+}
+
+execute.doFirst {
     if (project.hasProperty('src')) {
         args (project.src, '--execute', '--no-bytecode')
+    } else {
+        throw new StopExecutionException("Usage: -Psrc filename")
     }
 }
