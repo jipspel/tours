@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestHelper {
 
-    public static List<String> parseTours(String filename) throws IOException {
+    public static List<String> parseToursFile(String filename) throws IOException {
         String file = new String(readAllBytes(get(filename)));
 
         CharStream chars = new ANTLRInputStream(file);
