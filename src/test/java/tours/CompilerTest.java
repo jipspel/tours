@@ -232,7 +232,6 @@ public class CompilerTest {
         assertEqualsOutput(Arrays.asList(
                 "awesome",
                 "Hello World!",
-                "35",
                 "36"
         ), "src/test/java/tours/examples/compiler/functions_arguments_primitive_type.tours");
 
@@ -240,8 +239,7 @@ public class CompilerTest {
                 "awesome",
                 "Hello",
                 "World!",
-                "35",
-                "36"
+                "37"
         ), "src/test/java/tours/examples/compiler/functions_arguments_array_type.tours");
 
         assertEqualsOutput(Arrays.asList(
