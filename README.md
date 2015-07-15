@@ -17,11 +17,11 @@ Usage
 =====
 
 * Generate *Java bytecode* from *Tours* file:
-  * `gradle generate -Psrc filename`
+  * `gradle generate -Psrc filename.tours`
 * Generate *Java bytecode* from *Tours* file and save *Java class* file:
-  * `gradle generateAndSave -Psrc filename -Pdir directory`
+  * `gradle generateAndSave -Psrc filename.tours -Pdir directory`
 * Execute *Tours* file:
-  * `gradle execute -Psrc filename`
+  * `gradle execute -Psrc filename.tours`
 
 Hello World!
 ============
