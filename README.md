@@ -1,7 +1,7 @@
 # Tours
 
 ![Tours](http://i.imgur.com/jideETQ.png)
-[Designed by Freepik](http://www.freepik.com), modified by [Twan Coenraad](https://github.com/tcoenraad)
+[Designed by Freepik](http://www.freepik.com/free-vector/free-bicycle-vector-image_714203.htm), modified by [Twan Coenraad](https://github.com/tcoenraad)
 
 An imperative language for compiler construction. Compiles to Java bytecode.
 
