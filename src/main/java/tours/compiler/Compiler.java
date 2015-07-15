@@ -151,7 +151,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
             symbolTable.addVariable(identifier.getText(), new Type(ctx.arrayType().getText()));
 
             if (expression != null) {
-                ST stStore = stGroup.getInstanceOf("store_array");
+                ST stStore = stGroup.getInstanceOf("store_variable");
+                stStore.add("store_type", "a");
                 Variable variable = (Variable) symbolTable.getSymbol(identifier.getText());
                 stStore.add("identifier_number", variable.getIdentifier());
 
@@ -192,7 +193,8 @@ public class Compiler extends ToursBaseVisitor<ST> {
                     stList.add(visit(ctx.expression(0)).render());
                 }
 
-                ST stStore = stGroup.getInstanceOf("store_array");
+                ST stStore = stGroup.getInstanceOf("store_variable");
+                stStore.add("store_type", "a");
                 stStore.add("identifier_number", variable.getIdentifier());
                 stList.add(stStore.render());
                 stList.add(stGroup.getInstanceOf("pop").render());
