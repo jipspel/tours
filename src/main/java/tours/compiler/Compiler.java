@@ -12,6 +12,7 @@ import tours.Type;
 import tours.grammar.ToursBaseVisitor;
 import tours.grammar.ToursParser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +36,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         symbolTable = new SymbolTable();
     }
 
-
-    public ST toStringTemplate(String filename) {
+    public ST toStringTemplate(String filename) throws IOException {
          return visit(CompilerTools.toToursParseTree(filename));
     }
 

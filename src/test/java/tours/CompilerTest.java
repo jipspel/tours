@@ -292,19 +292,12 @@ public class CompilerTest {
     }
 
     private String compileAndRun(String filename) throws Throwable {
-        try {
-            List<String> errors = CompilerTools.typeCheck(filename).getErrors();
-            if (errors.size() > 0) {
-                fail(errors.toString());
-            }
-            CompilerTools.toByteCode(filename, "./tmp/output.j");
-            CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
-            return CompilerTools.runClassFile("Tours", "./tmp");
-        } catch (NoSuchMethodException | IOException | IllegalAccessException | ClassNotFoundException e) {
-            System.err.println("Error compiling and running: " + filename);
-            e.printStackTrace();
-            System.exit(1);
+        List<String> errors = CompilerTools.typeCheck(filename).getErrors();
+        if (errors.size() > 0) {
+            fail(errors.toString());
         }
-        return null;
+        CompilerTools.toByteCode(filename, "./tmp/output.j");
+        CompilerTools.compileByteCodeToClassFile("./tmp/output.j", "./tmp");
+        return CompilerTools.runClassFile("Tours", "./tmp");
     }
 }

@@ -28,14 +28,8 @@ public class CompilerTools {
      * @param filename the name of the tours file
      * @return ParseTree of the file
      */
-    public static ParseTree toToursParseTree(String filename) {
-        String file = null;
-        try {
-            file = new String(readAllBytes(get(filename)));
-        } catch (IOException e) {
-            System.err.println("Error while reading: " + filename);
-            System.exit(1);
-        }
+    public static ParseTree toToursParseTree(String filename) throws IOException {
+        String file = new String(readAllBytes(get(filename)));
 
         CharStream chars = new ANTLRInputStream(file);
         ToursErrorListener errorListener = new ToursErrorListener();
@@ -61,7 +55,7 @@ public class CompilerTools {
      * @param filename the name of the tours file
      * @return TypeChecker of the file
      */
-    public static TypeChecker typeCheck(String filename) {
+    public static TypeChecker typeCheck(String filename) throws IOException {
         ParseTreeWalker walker = new ParseTreeWalker();
         TypeChecker typeChecker = new TypeChecker();
         walker.walk(typeChecker, CompilerTools.toToursParseTree(filename));
@@ -73,9 +67,8 @@ public class CompilerTools {
      * @param filename the name of the tours file
      * @return the Bytecode corresponding to the tours file
      */
-    public static String toByteCode(String filename) {
-        Compiler compiler = new Compiler("Tours");
-        return compiler.toStringTemplate(filename).render();
+    public static String toByteCode(String filename) throws IOException {
+        return new Compiler("Tours").toStringTemplate(filename).render();
     }
 
     /**

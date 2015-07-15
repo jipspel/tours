@@ -3,11 +3,13 @@ package tours;
 import org.junit.Test;
 import tours.compiler.CompilerTools;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class TypeCheckerTest {
     @Test
@@ -411,6 +413,10 @@ public class TypeCheckerTest {
     }
 
     private void testTypeCheckerErrors(List<String> expected, String filename) {
-        assertEquals(expected, CompilerTools.typeCheck(filename).getErrors());
+        try {
+            assertEquals(expected, CompilerTools.typeCheck(filename).getErrors());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 }

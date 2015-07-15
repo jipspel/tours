@@ -5,6 +5,7 @@ import tours.compiler.CompilerTools;
 import tours.typechecker.TypeChecker;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Tours {
     public static void main(String[] args) {
@@ -13,11 +14,15 @@ public class Tours {
             System.exit(0);
         }
 
-        TypeChecker typeChecker = CompilerTools.typeCheck(args[0]);
-        if (typeChecker.getErrors().size() > 0) {
-            System.err.println("Error typechecking: " + args[0]);
-            System.err.println(typeChecker.getErrors());
-            System.exit(1);
+        try {
+            TypeChecker typeChecker = CompilerTools.typeCheck(args[0]);
+            if (typeChecker.getErrors().size() > 0) {
+                System.err.println("Error typechecking: " + args[0]);
+                System.err.println(typeChecker.getErrors());
+                System.exit(1);
+            }
+        } catch (IOException e) {
+            System.err.println("Error while reading: " + args[0]);
         }
 
         boolean execute = false;
@@ -36,7 +41,11 @@ public class Tours {
 
         if (!noByteCode) {
             System.out.println("<<<");
-            System.out.println(CompilerTools.toByteCode(args[0]));
+            try {
+                System.out.println(CompilerTools.toByteCode(args[0]));
+            } catch (IOException e) {
+                System.err.println("Error while reading: " + args[0]);
+            }
             System.out.println(">>>");
         }
 
