@@ -7,7 +7,7 @@ func main () {
     integer[] y = new integer[36];
 }
 
-func void doNothing(integer i) {
+func void do_nothing(integer i) {
     integer i = 35;
 }
 

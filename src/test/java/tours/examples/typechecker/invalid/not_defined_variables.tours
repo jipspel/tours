@@ -9,14 +9,14 @@ func main() {
 
     i = addOneWithArgument(35);
 
-    doNothing(33);
+    do_nothing(33);
     j;
 
     input(k);
     print(l);
 }
 
-func void addOne() {
+func void add_one() {
     35 + x;
     x + 35;
 
@@ -34,8 +34,8 @@ func void scope() {
     integer z = 3;
 }
 
-func integer addOneWithArgument(integer i) {
+func integer add_one_with_argument(integer i) {
     return i + 1;
 }
 
-func void doNothing(integer j) {}
+func void do_nothing(integer j) {}
