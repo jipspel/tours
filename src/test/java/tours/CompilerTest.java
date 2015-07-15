@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -278,6 +279,15 @@ public class CompilerTest {
             assertEqualsOutputException(Arrays.asList(), "src/test/java/tours/examples/compiler/runtime_exceptions/division_by_zero.tours");
         } catch (Throwable throwable) {
             throw (ArithmeticException) throwable;
+        }
+    }
+
+    @Test(expected=InputMismatchException.class)
+    public void testInputMismatching() throws InvocationTargetException {
+        try {
+            assertEqualsOutputException(Arrays.asList(), "src/test/java/tours/examples/compiler/runtime_exceptions/input.tours", Arrays.asList("Not a number!"));
+        } catch (Throwable throwable) {
+            throw (InputMismatchException) throwable;
         }
     }
 
