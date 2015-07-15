@@ -25,7 +25,7 @@ Usage
 * Run all tests:
   * `gradle test`
 * Run all tests with coverage report:
-  * `gradle test jacocoTestReport`
+  * `gradle jacocoTestReport`
 
 Hello World!
 ============
