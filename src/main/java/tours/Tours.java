@@ -25,6 +25,10 @@ public class Tours {
             System.err.println("Error while reading: " + args[0]);
             e.printStackTrace();
             System.exit(1);
+        } catch (CompilerTools.LexOrParseException e) {
+            System.err.println("Error while lexing or parsing: " + args[0]);
+            e.printStackTrace();
+            System.exit(1);
         }
 
         boolean execute = false;
@@ -49,8 +53,13 @@ public class Tours {
                 System.err.println("Error while reading: " + args[0]);
                 e.printStackTrace();
                 System.exit(1);
+            } catch (CompilerTools.LexOrParseException e) {
+                System.err.println("Error while lexing or parsing: " + args[0]);
+                e.printStackTrace();
+                System.exit(1);
             }
-            System.out.println(">>>");
+
+        System.out.println(">>>");
         }
 
         if (execute || save) {

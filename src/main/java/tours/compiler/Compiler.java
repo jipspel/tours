@@ -36,7 +36,7 @@ public class Compiler extends ToursBaseVisitor<ST> {
         symbolTable = new SymbolTable();
     }
 
-    public ST toStringTemplate(String filename) throws IOException {
+    public ST toStringTemplate(String filename) throws IOException, CompilerTools.LexOrParseException {
          return visit(CompilerTools.toToursParseTree(filename));
     }
 

@@ -394,7 +394,7 @@ public class TypeCheckerTest {
     private void assertEqualTypeCheckErrorList(List<String> expected, String filename) {
         try {
             assertEquals(expected, CompilerTools.typeCheck(filename).getErrors());
-        } catch (IOException e) {
+        } catch (IOException | CompilerTools.LexOrParseException e) {
             fail(e.getMessage());
         }
     }

@@ -23,12 +23,18 @@ import static java.nio.file.Paths.get;
 
 public class CompilerTools {
 
+    public static class LexOrParseException extends Exception {
+        public LexOrParseException(String msg) {
+            super(msg);
+        }
+    }
+
     /**
      * Lexes and parses a tours file
      * @param filename the name of the tours file
      * @return ParseTree of the file
      */
-    public static ParseTree toToursParseTree(String filename) throws IOException {
+    public static ParseTree toToursParseTree(String filename) throws IOException, LexOrParseException {
         String file = new String(readAllBytes(get(filename)));
 
         CharStream chars = new ANTLRInputStream(file);
@@ -43,9 +49,7 @@ public class CompilerTools {
 
         ParseTree program = parser.program();
         if (errorListener.getErrorList().size() > 0) {
-            System.err.println("Error lexing and parsing: " + filename);
-            System.err.println(errorListener.getErrorList());
-            System.exit(1);
+            throw new CompilerTools.LexOrParseException(errorListener.getErrorList().toString());
         }
         return program;
     }
@@ -55,7 +59,7 @@ public class CompilerTools {
      * @param filename the name of the tours file
      * @return TypeChecker of the file
      */
-    public static TypeChecker typeCheck(String filename) throws IOException {
+    public static TypeChecker typeCheck(String filename) throws IOException, LexOrParseException {
         ParseTreeWalker walker = new ParseTreeWalker();
         TypeChecker typeChecker = new TypeChecker();
         walker.walk(typeChecker, CompilerTools.toToursParseTree(filename));
@@ -67,7 +71,7 @@ public class CompilerTools {
      * @param filename the name of the tours file
      * @return the Bytecode corresponding to the tours file
      */
-    public static String toByteCode(String filename) throws IOException {
+    public static String toByteCode(String filename) throws IOException, LexOrParseException {
         return new Compiler("Tours").toStringTemplate(filename).render();
     }
 
@@ -77,7 +81,7 @@ public class CompilerTools {
      * @param destination the location of the Bytecode file
      * @throws IOException
      */
-    public static void toByteCode(String filename, String destination) throws IOException {
+    public static void toByteCode(String filename, String destination) throws IOException, LexOrParseException {
         Compiler compiler = new Compiler("Tours");
         compiler.toStringTemplate(filename).write(new File(destination), null);
     }
