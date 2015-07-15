@@ -23,7 +23,16 @@ Usage
 * Execute *Tours* file:
   * `gradle execute -Psrc filename`
 
-Tours examples
-==============
+Hello World!
+============
+```java
+func main() {
+    print("Hello World!");
+}
+```
 
-* Can be found in the [examples directory](https://github.com/jipspel/tours/tree/master/src/test/java/tours/examples/compiler)
+More examples
+=============
+
+* [Type checker examples](https://github.com/jipspel/tours/tree/master/src/test/java/tours/examples/typechecker)
+* [Compiler examples](https://github.com/jipspel/tours/tree/master/src/test/java/tours/examples/compiler)
