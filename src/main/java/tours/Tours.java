@@ -17,12 +17,14 @@ public class Tours {
         try {
             TypeChecker typeChecker = CompilerTools.typeCheck(args[0]);
             if (typeChecker.getErrors().size() > 0) {
-                System.err.println("Error typechecking: " + args[0]);
+                System.err.println("Error while type checking: " + args[0]);
                 System.err.println(typeChecker.getErrors());
                 System.exit(1);
             }
         } catch (IOException e) {
             System.err.println("Error while reading: " + args[0]);
+            e.printStackTrace();
+            System.exit(1);
         }
 
         boolean execute = false;
@@ -45,6 +47,8 @@ public class Tours {
                 System.out.println(CompilerTools.toByteCode(args[0]));
             } catch (IOException e) {
                 System.err.println("Error while reading: " + args[0]);
+                e.printStackTrace();
+                System.exit(1);
             }
             System.out.println(">>>");
         }
