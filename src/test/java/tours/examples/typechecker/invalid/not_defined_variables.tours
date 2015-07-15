@@ -7,7 +7,7 @@ func main() {
     scope();
     z;
 
-    i = addOneWithArgument(35);
+    i = add_one_with_argument(35);
 
     do_nothing(33);
     j;
