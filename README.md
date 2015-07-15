@@ -22,6 +22,10 @@ Usage
   * `gradle generateAndSave -Psrc filename.tours -Pdir directory`
 * Execute *Tours* file:
   * `gradle execute -Psrc filename.tours`
+* Run all tests:
+  * `gradle test`
+* Run all tests with coverage report:
+  * `gradle test jacocoTestReport`
 
 Hello World!
 ============
